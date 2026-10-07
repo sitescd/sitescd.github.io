@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Massa Bella na internet hoje</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --escura:#2a1a12; --media:#5a3420; --destaque:#c8873a; --clara:#f7efe4; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: var(--clara); color: var(--escura); line-height: 1.55; }
+  header {
+    background: linear-gradient(rgba(42,26,18,.78), rgba(42,26,18,.9)),
+      url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1200') center/cover;
+    color: var(--clara); text-align: center; padding: 56px 20px 48px;
+  }
+  header h1 { font-family: 'Pacifico', cursive; font-weight: 400; font-size: 2.6rem; color: var(--destaque); }
+  header p { opacity: .9; margin-top: 6px; }
+  main { max-width: 720px; margin: 0 auto; padding: 28px 18px 48px; }
+  h2 { color: var(--media); font-size: 1.35rem; margin: 30px 0 14px; }
+  .hoje { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .hoje div { background: #fff; border-radius: 14px; padding: 14px; box-shadow: 0 2px 8px rgba(42,26,18,.07); }
+  .hoje b { display: block; font-size: 1.05rem; }
+  .hoje span { font-size: .88rem; color: #7a6555; }
+  .ok b::before { content: "✅ "; }
+  .nao b::before { content: "❌ "; }
+  .meio b::before { content: "⚠️ "; }
+  .item { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(42,26,18,.08); }
+  .item .falta { padding: 16px 18px; border-left: 5px solid #c0533a; }
+  .item .resolve { padding: 14px 18px; background: #fbf4ea; border-left: 5px solid var(--destaque); }
+  .item h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .rot { font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+  .falta .rot { color: #c0533a; }
+  .resolve .rot { color: var(--media); }
+  .fim { margin-top: 30px; background: var(--escura); color: var(--clara); border-radius: 18px; padding: 24px 20px; text-align: center; }
+  .fim strong { color: var(--destaque); }
+  footer { text-align: center; font-size: .78rem; color: #9a8676; margin-top: 24px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Massa Bella</h1>
+  <p>Como a sua padaria aparece na internet hoje</p>
+</header>
+<main>
+  <h2>O que encontramos</h2>
+  <div class="hoje">
+    <div class="ok"><b>Google Maps</b><span>Sua padaria aparece, com nota 4,5 ⭐</span></div>
+    <div class="ok"><b>Telefone</b><span>(13) 99660-2438 está na ficha</span></div>
+    <div class="meio"><b>Horário</b><span>Só aparece o de terça-feira</span></div>
+    <div class="nao"><b>Instagram</b><span>Não encontramos</span></div>
+    <div class="nao"><b>Facebook</b><span>Não encontramos</span></div>
+    <div class="nao"><b>Site</b><span>Não tem</span></div>
+    <div class="nao"><b>Fotos</b><span>Quase nenhuma dos seus produtos</span></div>
+  </div>
+
+  <h2>O que está faltando e como o site resolve</h2>
+
+  <div class="item">
+    <div class="falta">
+      <div class="rot">Hoje</div>
+      <h3>Quem procura pelo nome não acha quase nada</h3>
+      <p>Não tem Instagram, Facebook nem site. A pessoa pesquisa "Massa Bella Mongaguá" e não vê seus pães, seus bolos, nem se você está aberto.</p>
+    </div>
+    <div class="resolve">
+      <div class="rot">Com o site</div>
+      <p>Uma página só sua, com nome, endereço, telefone e fotos, que aparece quando procuram a padaria e que você pode mandar pra qualquer cliente.</p>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="falta">
+      <div class="rot">Hoje</div>
+      <h3>Ninguém vê o que você vende</h3>
+      <p>Não existe uma lista dos seus produtos nem foto dos bolos de festa. Quem quer encomendar precisa ir até a padaria pra saber.</p>
+    </div>
+    <div class="resolve">
+      <div class="rot">Com o site</div>
+      <p>Mostra pães, bolos, doces e lanches com foto, e tem um passo a passo simples pra encomendar o bolo pelo WhatsApp.</p>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="falta">
+      <div class="rot">Hoje</div>
+      <h3>Pra falar com você, só ligando</h3>
+      <p>Não tem um botão que já abre o WhatsApp da padaria. Muita gente desiste de ligar.</p>
+    </div>
+    <div class="resolve">
+      <div class="rot">Com o site</div>
+      <p>Um botão grande de WhatsApp: um toque e o cliente já está falando com você, com a mensagem pronta.</p>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="falta">
+      <div class="rot">Hoje</div>
+      <h3>Ficha do Google incompleta</h3>
+      <p>O horário aparece só de um dia, tem poucas fotos e as avaliações dos clientes ficam sem resposta.</p>
+    </div>
+    <div class="resolve">
+      <div class="rot">Com o site</div>
+      <p>O horário completo fica no site, com mapa pra chegar. E dá pra aproveitar e arrumar a ficha do Google junto, com horário certo e fotos de verdade.</p>
+    </div>
+  </div>
+
+  <div class="fim">
+    Seus clientes já gostam de você: <strong>nota 4,5</strong> no Google.<br>
+    Falta só a internet mostrar isso pra quem ainda não conhece.
+  </div>
+
+  <footer>Fotos ilustrativas. Pesquisa feita em outubro de 2026.<br>Feito por: Claude Code (Opus 5.5)</footer>
+</main>
+</body>
+</html>
