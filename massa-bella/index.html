@@ -128,6 +128,7 @@
   footer { background: var(--escura); color: #fff9; text-align: center; padding: 34px 16px 96px; font-size: .9rem; }
   footer b { color: #fff; font-family: var(--titulo); font-size: 1.1rem; display: block; margin-bottom: 4px; }
   footer .prop { margin-top: 10px; font-size: .78rem; opacity: .6; }
+  footer .cd { margin-top: 8px; font-size: .74rem; opacity: .6; } footer .cd a { color: inherit; text-underline-offset: 3px; } footer .cd strong { font-weight: 700; }
 
   .zap-fixo { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 60px; height: 60px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 10px 28px #0005; animation: pulsa 2.6s infinite; }
   .zap-fixo svg { width: 32px; height: 32px; fill: #fff; }
@@ -188,7 +189,7 @@
   <div class="mapa aparece"></div>
 </div></section>
 
-<footer><b></b><span class="end"></span><div class="prop">Proposta de site</div></footer>
+<footer><b></b><span class="end"></span><div class="prop">Proposta de site</div><div class="cd">Site feito por <strong>Sites CD</strong> · <a class="cd-zap" target="_blank" rel="noopener">Quer um site assim?</a><span class="cd-d"> · <a class="cd-dono" rel="nofollow">🔒 Área do dono</a></span></div></footer>
 <a class="zap-fixo" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp" hidden></a>
 
 <script>
@@ -304,6 +305,12 @@
 
   $("footer b").textContent = nome;
   $("footer .end").textContent = endereco || D.cidade || "";
+
+  // 09/10 rodapé da Sites CD (Caio): crédito discreto + "Quer um site assim?" (WhatsApp do Caio, não é botão: o verde é o
+  // da loja) + "Área do dono" (porteiro com PIN; só aparece no endereço publicado sitescd.github.io/<slug>/)
+  { const cd = $("footer .cd"), slug = location.hostname === "sitescd.github.io" ? location.pathname.split("/")[1] : "";
+    cd.querySelector(".cd-zap").href = "https://wa.me/5513996485501?text=" + encodeURIComponent("Olá! Vi o site " + nome + " e quero um site assim.");
+    if (slug) cd.querySelector(".cd-dono").href = "https://claude-maestro.tail8a0b99.ts.net:8443/d/" + slug; else cd.querySelector(".cd-d").remove(); }
   if (zapUrl) { const z = $(".zap-fixo"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP; }
 
   // topo escurece ao rolar; blocos aparecem suave

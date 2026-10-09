@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Carregando…</title>
+<!-- 08/10 (Caio): MODELO PREMIUM dos sites de comércio, no jeito do CheckMulta (fundo claro, título serifado com a palavra
+     em destaque, etiquetas em letra de máquina, cartões com sombra em camadas, blocos que surgem, "como pedir" que anda
+     com a rolagem). Lê o MESMO dados.json do Modelo 1 (nada novo pra IA preencher): o servidor monta premium.html junto
+     com o site.html. Campo vazio = a seção some. Nome, logo e cores são sempre do cliente; nada do CheckMulta aparece. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --fundo: #fafaf9; --branco: #fff; --tinta: #1c1917; --texto: #44403c; --cinza: #78716c; --linha: #e7e5e4;
+    --ac: #0f766e; --ac-forte: #0f766e; --ac-suave: #ccfbf1; --ac-tinta: #0f766e; --escura: #1c1917;
+    --serif: "Source Serif 4", Georgia, serif; --corpo: "Inter", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+    --sombra: rgba(0,0,0,.02) 0 140px 56px, rgba(0,0,0,.07) 0 78px 47px, rgba(0,0,0,.1) 0 7px 14px, rgba(0,0,0,.12) 0 9px 19px;
+    --sombra-leve: 0 1px 2px #0000000d, 0 8px 24px #0000000f; --sobre-ac: #fff;
+    --legenda: #fffffff0; --chat: #efeae2; --msg-eu: #d9fdd3; --msg-loja: #fff; --msg-txt: #111; --msg-hora: #667781; }
+  /* 08/10 (Caio: "hamburgueria é escuro, churrascaria"): PREMIUM ESCURO = o mesmo modelo com outras cores de base.
+     Liga sozinho pelo ramo (ver ESCURO no script) ou pelo campo tema: "escuro" / "claro" no dados.json */
+  :root.escuro { --fundo: #0e0e10; --branco: #17171a; --tinta: #fafaf9; --texto: #d4d4d8; --cinza: #a1a1aa; --linha: #ffffff1f;
+    --sombra: 0 40px 80px #000a, 0 10px 24px #0008; --sombra-leve: 0 10px 28px #0009;
+    --legenda: #17171aee; --chat: #0b141a; --msg-eu: #005c4b; --msg-loja: #202c33; --msg-txt: #e9edef; --msg-hora: #8696a0; color-scheme: dark; }
+  :root.escuro .capa { background: radial-gradient(ellipse 70% 60% at 85% 10%, color-mix(in srgb, var(--ac) 16%, transparent), transparent 70%); }
+  :root.escuro .frase { background: radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--ac) 22%, var(--fundo)), var(--fundo) 75%); }
+  :root.escuro footer { background: #000; border-top: 1px solid var(--linha); }
+  :root.escuro .tels small { color: #4ade80; background: #052e16; }
+  :root.escuro .bt-ac { box-shadow: 0 8px 26px color-mix(in srgb, var(--ac) 28%, transparent); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--corpo); color: var(--texto); background: var(--fundo); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  [hidden] { display: none !important; }
+  .caixa { width: min(1160px, 100% - 32px); margin-inline: auto; }
+  .eti { display: inline-block; font: 600 .72rem/1.4 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ac-tinta); }
+  h1, h2, h3.serif { font-family: var(--serif); color: var(--tinta); font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+  h1 em, h2 em { font-style: normal; color: var(--ac-tinta); }
+  h2 { font-size: clamp(1.9rem, 3.6vw, 2.75rem); line-height: 1.12; }
+  .cabeca { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .cabeca h2 { margin-top: 10px; }
+  .cabeca p { margin-top: 12px; color: var(--cinza); font-size: 1.05rem; }
+  section { padding: clamp(72px, 10vw, 120px) 0; }
+  section + section { border-top: 1px solid var(--linha); }
+  .branco { background: var(--branco); }
+
+  /* surgir (o "bloco vai surgindo" do CheckMulta) */
+  .rv { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; transition-delay: var(--d, 0s); }
+  .rv.vista { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* botões */
+  .bt { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 22px; border-radius: 12px; font: 600 .98rem var(--corpo); text-decoration: none; border: 1px solid transparent; transition: transform .15s, box-shadow .2s, background .2s; cursor: pointer; }
+  .bt:hover { transform: translateY(-2px); }
+  .bt svg { width: 19px; height: 19px; flex: none; }
+  .bt-ac { background: var(--ac-forte); color: var(--sobre-ac); box-shadow: 0 8px 22px color-mix(in srgb, var(--ac-forte) 32%, transparent); }
+  .bt-ac:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--ac-forte) 42%, transparent); }
+  .bt-borda { background: var(--branco); border-color: var(--linha); color: var(--tinta); }
+  .bt-borda:hover { border-color: var(--ac); }
+
+  /* topo */
+  .topo { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--fundo) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s, box-shadow .3s; }
+  .topo.rolou { border-color: var(--linha); box-shadow: 0 6px 20px #0000000a; }
+  .topo .caixa { display: flex; align-items: center; gap: 18px; height: 70px; }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
+  .marca img { height: 42px; width: auto; border-radius: 8px; }
+  .marca img.clara { background: var(--escura); padding: 5px 9px; }
+  .chat .av img.clara { background: var(--escura); padding: 4px; object-fit: contain; }
+  .marca img.escura { background: #f5f5f4; padding: 5px 9px; }
+  .chat .av img.escura { background: #f5f5f4; padding: 4px; object-fit: contain; }
+  .marca .recorte { height: 42px; aspect-ratio: var(--prop, 2.4); border-radius: 8px; background-repeat: no-repeat; box-shadow: 0 0 0 1px var(--linha); flex: none; }
+  .marca .nome { font: 700 1.22rem var(--serif); color: var(--tinta); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .marca .nome em { font-style: normal; color: var(--ac-tinta); }
+  .menu { margin-left: auto; display: flex; gap: 26px; }
+  .menu a { text-decoration: none; font-size: .93rem; color: var(--texto); }
+  .menu a:hover { color: var(--ac-tinta); }
+  .topo .bt { padding: 9px 16px; font-size: .9rem; border-radius: 10px; }
+  .topo .bt svg { width: 17px; height: 17px; }
+  @media (max-width: 820px) { .menu { display: none; } .topo .bt { margin-left: auto; } }
+
+  /* capa */
+  .capa { padding: clamp(40px, 7vw, 88px) 0 clamp(56px, 8vw, 96px); border-top: 0; overflow: hidden; }
+  .capa .caixa { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .capa h1 { font-size: clamp(2.4rem, 5.4vw, 4.1rem); line-height: 1.06; margin: 14px 0 18px; }
+  .capa h1 .p { display: inline-block; opacity: 0; transform: translateY(.4em); animation: sobe .6s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 55ms + .1s); }
+  @keyframes sobe { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .capa h1 .p { opacity: 1; transform: none; animation: none; } }
+  .capa .sub { font-size: 1.1rem; color: var(--texto); max-width: 52ch; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .selos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .selos span { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 9px; border: 1px solid color-mix(in srgb, var(--ac) 35%, var(--linha)); border-radius: 999px; background: var(--branco); font: 600 .68rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--tinta); }
+  .selos b { font-weight: inherit; }
+  .selos svg { width: 13px; height: 13px; color: var(--ac-tinta); flex: none; }
+  .vitrine { position: relative; }
+  .vitrine .foto { aspect-ratio: 4 / 4.4; border-radius: 28px; overflow: hidden; box-shadow: var(--sombra); border: 1px solid var(--linha); background: var(--branco); }
+  .vitrine .foto i { display: block; width: 100%; height: 100%; background-size: cover; background-position: var(--foco, 50% 50%); transform: scale(var(--zoom, 1)); transform-origin: var(--foco, 50% 50%); animation: respira 18s ease-in-out infinite alternate; }
+  @keyframes respira { to { transform: scale(calc(var(--zoom, 1) * 1.06)); } }
+  .vitrine.sem-foto .foto { display: grid; place-items: center; background: radial-gradient(circle at 30% 20%, var(--ac-suave), var(--branco) 70%); }
+  .vitrine.sem-foto .foto b { font: 700 clamp(2rem, 5vw, 3.4rem)/1.1 var(--serif); color: var(--tinta); text-align: center; padding: 24px; }
+  .flutua { position: absolute; background: var(--branco); border: 1px solid var(--linha); border-radius: 16px; box-shadow: var(--sombra-leve); padding: 14px 16px; animation: boia 5s ease-in-out infinite alternate; }
+  @keyframes boia { to { transform: translateY(-8px); } }
+  .flutua.a { left: -28px; bottom: 34px; display: flex; align-items: center; gap: 12px; max-width: 260px; }
+  .flutua.a b { font: 700 1.9rem/1 var(--serif); color: var(--tinta); }
+  .flutua.a small { display: block; font-size: .78rem; color: var(--cinza); line-height: 1.35; }
+  .estrelas { color: #f5a524; letter-spacing: 2px; font-size: .9rem; }
+  .flutua.b { right: -18px; top: 30px; animation-delay: -2.5s; display: flex; align-items: center; gap: 8px; font: 600 .68rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--tinta); }
+  .flutua.b i { width: 8px; height: 8px; border-radius: 50%; background: var(--ac); box-shadow: 0 0 0 4px var(--ac-suave); }
+  @media (max-width: 900px) {
+    .capa .caixa { grid-template-columns: 1fr; }
+    .selos { justify-content: center; }   /* 08/10 (Caio): no celular os selos ficam no meio, senão pendem pra um lado */
+    .vitrine { max-width: 520px; width: 100%; margin: 8px auto 0; }
+    .vitrine .foto { aspect-ratio: 4 / 3.4; }
+    .flutua.a { left: 12px; bottom: -22px; } .flutua.b { right: 12px; top: -14px; }
+  }
+
+  /* faixa que corre (o que tem) */
+  .faixa { border-block: 1px solid var(--linha); background: var(--branco); overflow: hidden; padding: 16px 0; }
+  .faixa .trilho { display: flex; width: max-content; animation: corre 38s linear infinite; }
+  .faixa span { display: inline-flex; align-items: center; gap: 14px; padding-right: 40px; font: 600 .78rem var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--tinta); white-space: nowrap; }
+  .faixa span::after { content: ""; width: 7px; height: 7px; transform: rotate(45deg); background: var(--ac); margin-left: 26px; }
+  @keyframes corre { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .faixa .trilho { animation: none; } }
+
+  /* produtos */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .card { position: relative; background: var(--branco); border: 1px solid var(--linha); border-radius: 18px; padding: 24px 22px 20px; display: flex; flex-direction: column; transition: transform .2s, box-shadow .25s, border-color .25s; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--sombra-leve); border-color: color-mix(in srgb, var(--ac) 45%, var(--linha)); }
+  .card .ic { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: var(--ac-suave); font-size: 1.4rem; }
+  .card .seta { position: absolute; right: 20px; top: 24px; color: var(--cinza); transition: transform .2s, color .2s; }
+  .card:hover .seta { transform: translateX(3px); color: var(--ac-tinta); }
+  .card h3 { margin: 18px 0 6px; font-size: 1.05rem; color: var(--tinta); }
+  .card p { color: var(--cinza); font-size: .95rem; flex: 1; }
+  .card .num { margin-top: 18px; font: 600 .68rem var(--mono); letter-spacing: .14em; color: var(--cinza); }
+
+  /* sobre */
+  .sobre .caixa { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .sobre .foto { aspect-ratio: 5 / 4; border-radius: 24px; overflow: hidden; box-shadow: var(--sombra); border: 1px solid var(--linha); }
+  .sobre .foto i { display: block; width: 100%; height: 100%; background-size: cover; background-position: var(--foco, 50% 50%); transform: scale(var(--zoom, 1)); transform-origin: var(--foco, 50% 50%); }
+  .sobre h2 { margin: 10px 0 16px; }
+  .sobre p { font-size: 1.06rem; }
+  .sobre .dados { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--linha); }
+  .sobre .dados b { display: block; font: 700 1.6rem var(--serif); color: var(--tinta); }
+  .sobre .dados small { font: 600 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--cinza); }
+  @media (max-width: 860px) { .sobre .caixa { grid-template-columns: 1fr; } }
+
+  /* galeria */
+  .galeria { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px; gap: 14px; }
+  .galeria figure { position: relative; border-radius: 18px; overflow: hidden; background: var(--linha); cursor: zoom-in; }
+  .galeria figure { grid-column: var(--c, auto); grid-row: var(--r, auto); }
+  .galeria img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .galeria figure:hover img { transform: scale(1.05); }
+  .galeria figcaption { position: absolute; left: 10px; bottom: 10px; right: 10px; width: fit-content; max-width: calc(100% - 20px); background: var(--legenda); color: var(--tinta); font-size: .8rem; font-weight: 500; padding: 6px 10px; border-radius: 8px; }
+  @media (max-width: 760px) { .galeria { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; } .galeria figure { grid-column: var(--cm, auto); grid-row: var(--rm, auto); } }
+  .zoom { position: fixed; inset: 0; z-index: 60; background: #0c0a09e6; display: grid; place-items: center; padding: 20px; cursor: zoom-out; }
+  .zoom img { max-height: 86vh; border-radius: 12px; }
+  .zoom p { color: #fff; margin-top: 12px; text-align: center; font-size: .9rem; }
+
+  /* frase */
+  .frase { background: var(--ac-suave); }
+  .frase p { font: 600 italic clamp(1.7rem, 3.6vw, 2.6rem)/1.25 var(--serif); color: var(--tinta); text-align: center; max-width: 24ch; margin: 0 auto; text-wrap: balance; }
+  .frase p::before, .frase p::after { color: var(--ac-tinta); }
+  .frase p::before { content: "“"; } .frase p::after { content: "”"; }
+
+  /* como pedir (passos que andam com a rolagem) */
+  .pedir .caixa { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); }
+  .pedir .lado h2 { margin: 10px 0 36px; }
+  .linha-passos { position: relative; display: grid; gap: 34px; }
+  .linha-passos::before { content: ""; position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; background: var(--linha); }
+  .linha-passos .enche { position: absolute; left: 21px; top: 22px; width: 2px; height: 0; background: var(--ac); transition: height .5s ease; }
+  .passo { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 18px; opacity: .38; transition: opacity .4s; }
+  .passo.on, .passo.feito { opacity: 1; }
+  .passo .selo { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--branco); border: 2px solid var(--linha); color: var(--cinza); font: 600 .8rem var(--mono); z-index: 1; transition: all .35s; }
+  .passo.on .selo, .passo.feito .selo { background: var(--ac-forte); border-color: var(--ac-forte); color: var(--sobre-ac); }
+  .passo .n { font: 600 .68rem var(--mono); letter-spacing: .14em; color: var(--ac-tinta); }
+  .passo h3 { font: 600 1.35rem var(--serif); color: var(--tinta); margin: 2px 0 4px; }
+  .passo p { color: var(--cinza); }
+  .pedir .tela { position: sticky; top: 110px; align-self: start; }
+  .chat { border-radius: 24px; overflow: hidden; border: 1px solid var(--linha); box-shadow: var(--sombra); background: var(--chat); }
+  .chat .cab { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--branco); border-bottom: 1px solid var(--linha); }
+  .chat .av { width: 40px; height: 40px; border-radius: 50%; background: var(--ac-forte); color: var(--sobre-ac); display: grid; place-items: center; font: 700 1.05rem var(--serif); overflow: hidden; flex: none; }
+  .chat .av img { width: 100%; height: 100%; object-fit: cover; }
+  .chat .cab b { display: block; color: var(--tinta); font-size: .95rem; }
+  .chat .cab small { color: #16a34a; font-size: .78rem; }
+  .chat .msgs { padding: 22px 16px; min-height: 300px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 82%; padding: 9px 12px 18px; border-radius: 12px; font-size: .92rem; color: var(--msg-txt); position: relative; box-shadow: 0 1px 1px #0000001a; opacity: 0; transform: translateY(8px) scale(.98); transition: opacity .35s, transform .35s; }
+  .msg.vista { opacity: 1; transform: none; }
+  .msg small { position: absolute; right: 9px; bottom: 3px; font-size: .66rem; color: var(--msg-hora); }
+  .msg.eu { align-self: flex-end; background: var(--msg-eu); border-top-right-radius: 4px; }
+  .msg.loja { align-self: flex-start; background: var(--msg-loja); border-top-left-radius: 4px; }
+  .pedir .leg { margin-top: 12px; font-size: .78rem; color: var(--cinza); text-align: center; }
+  .pedir .centro { margin-top: 36px; }
+  @media (max-width: 900px) { .pedir .caixa { grid-template-columns: 1fr; } .pedir .tela { position: static; } .passo { opacity: 1; } .passo .selo { background: var(--ac-forte); border-color: var(--ac-forte); color: var(--sobre-ac); } .msg { opacity: 1; transform: none; } }
+
+  /* avaliações */
+  .nota { display: flex; align-items: center; justify-content: center; gap: 16px; margin: -18px 0 40px; }
+  .nota b { font: 700 3.4rem/1 var(--serif); color: var(--tinta); }
+  .nota small { color: var(--cinza); font-size: .9rem; }
+  .depo { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .depo figure { background: var(--branco); border: 1px solid var(--linha); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .depo blockquote { font: 500 1.08rem/1.5 var(--serif); color: var(--tinta); flex: 1; }
+  .depo figcaption { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--cinza); }
+  .depo figcaption i { width: 32px; height: 32px; border-radius: 50%; background: var(--ac-suave); color: var(--ac-tinta); display: grid; place-items: center; font: 700 .85rem var(--corpo); font-style: normal; }
+
+  /* visite */
+  .visita .caixa { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; align-items: stretch; }
+  .info { display: grid; gap: 14px; align-content: start; }
+  .info > div { background: var(--branco); border: 1px solid var(--linha); border-radius: 18px; padding: 20px 22px; }
+  .info h3 { font: 600 .68rem var(--mono); letter-spacing: .16em; color: var(--ac-tinta); margin-bottom: 8px; }
+  .info .linha { color: var(--tinta); font-weight: 500; }
+  .info table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .info td { padding: 5px 0; border-bottom: 1px dashed var(--linha); } .info tr:last-child td { border: 0; }
+  .info td + td { text-align: right; color: var(--tinta); font-weight: 500; }
+  .info tr.hoje td { color: var(--ac-tinta); font-weight: 700; }
+  .tels a { display: flex; align-items: center; justify-content: space-between; gap: 10px; text-decoration: none; color: var(--tinta); font-weight: 600; padding: 6px 0; }
+  .tels small { font: 600 .62rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #15803d; background: #dcfce7; padding: 3px 8px; border-radius: 999px; }
+  .redes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .redes a { text-decoration: none; padding: 7px 14px; border: 1px solid var(--linha); border-radius: 999px; font-size: .88rem; font-weight: 500; }
+  .redes a:hover { border-color: var(--ac); color: var(--ac-tinta); }
+  .mapa { border-radius: 24px; overflow: hidden; border: 1px solid var(--linha); box-shadow: var(--sombra); min-height: 380px; }
+  .mapa iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+  @media (max-width: 860px) { .visita .caixa { grid-template-columns: 1fr; } }
+
+  footer { background: var(--escura); color: #d6d3d1; padding: 40px 0 96px; }
+  footer .caixa { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: baseline; }
+  footer b { font: 700 1.3rem var(--serif); color: #fff; }
+  footer .prop { width: 100%; margin-top: 18px; padding-top: 16px; border-top: 1px solid #ffffff1f; font: 600 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #a8a29e; }
+  footer .cd { width: 100%; font-size: .76rem; color: #a8a29e; } footer .cd a { color: inherit; text-underline-offset: 3px; } footer .cd strong { color: #d6d3d1; font-weight: 600; }
+  .zap-fixo { position: fixed; right: 18px; bottom: 18px; z-index: 40; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 26px #0000003d; transition: transform .2s; }
+  .zap-fixo:hover { transform: scale(1.07); }
+  .zap-fixo svg { width: 30px; height: 30px; }
+</style>
+</head>
+<body>
+<script id="dados" type="application/json">{"nome":"Massa Bella","ramo":"Padaria & Confeitaria","cidade":"Mongaguá · SP","slogan":"Pão quentinho cedo e *doce bom* o dia inteiro.","subtitulo":"Padaria e confeitaria do bairro na Av. Monteiro Lobato, no Balneário Itaguaí. Pão fresquinho de manhã, bolos e docinhos pra adoçar a tarde.","destaques":["Abre às 6h","Pão saindo do forno","Bolos e doces"],"whatsapp":"5513996602438","whatsapp_msg":"Olá, Massa Bella! Vi o site e quero fazer um pedido.","telefones":[{"numero":"(13) 99660-2438","whatsapp":true}],"endereco":"Av. Monteiro Lobato, 10654 – Balneário Itaguaí, Mongaguá/SP","horario":[],"instagram":"","facebook":"","produtos_chapeu":"Do forno pro balcão","produtos_titulo":"O que você encontra aqui","produtos_texto":"O de todo dia e o de ocasião especial, sempre fresquinho.","produtos":[{"icone":"🥖","titulo":"Pães fresquinhos","texto":"Pão francês e pães variados saindo do forno, pro café da manhã da família."},{"icone":"🎂","titulo":"Bolos","texto":"Bolo pro café da tarde e bolo de festa pra aniversário e comemoração."},{"icone":"🧁","titulo":"Doces de confeitaria","texto":"Docinhos, tortas e aquela vontade de levar uma coisa gostosa pra casa."},{"icone":"☕","titulo":"Café e lanches","texto":"Um cafezinho com pão na chapa ou um lanche rápido no meio do dia."}],"sobre_titulo":"A padaria do bairro, do jeito que tem que ser","sobre":"A Massa Bella é aquela parada de todo dia no Balneário Itaguaí: logo cedo tem pão quentinho pro café, e ao longo do dia tem bolo, doce e lanche pra quem passa pela Monteiro Lobato. Lugar simples, de atendimento perto, com nota 4,5 no Google.","frase":"Pão quentinho de manhã, doce gostoso à tarde","encomenda":{"titulo":"Encomende seu bolo","passos":[{"titulo":"Chame no WhatsApp","texto":"Conte a data, quantas pessoas e o sabor que você quer."},{"titulo":"Combine os detalhes","texto":"Tamanho, recheio e cobertura do jeito da sua festa."},{"titulo":"Retire fresquinho","texto":"Seu bolo fica pronto no dia combinado, aqui na padaria."}]},"avaliacoes":null,"cores":{"escura":"#2a1a12","media":"#5a3420","destaque":"#c8873a","clara":"#f7efe4"},"estilo_titulo":"script","foto_capa":"https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600","foto_capa_foco":"55% 50%","foto_capa_zoom":1,"foto_sobre":"https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?w=1200","foto_sobre_foco":"50% 60%","foto_sobre_zoom":1.2,"logo":null,"galeria":[{"url":"https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=1200","legenda":"Pão fresquinho, fatiado na hora","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200","legenda":"Bolos de festa sob encomenda","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?w=1200","legenda":"Folhados e doces no balcão","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=1200","legenda":"Docinhos pra adoçar a tarde","ilustrativa":true}],"galeria_titulo":"Pra dar água na boca"}</script>
+
+<header class="topo"><div class="caixa">
+  <a class="marca" href="#inicio"></a>
+  <nav class="menu"></nav>
+  <a class="bt bt-ac zap-mini" target="_blank" rel="noopener" hidden></a>
+</div></header>
+
+<section class="capa" id="inicio"><div class="caixa">
+  <div>
+    <span class="eti rv"></span>
+    <h1></h1>
+    <p class="sub rv" style="--d:.25s"></p>
+    <div class="acoes rv" style="--d:.35s"></div>
+    <div class="selos rv" style="--d:.45s"></div>
+  </div>
+  <div class="vitrine rv" style="--d:.2s"><div class="foto"></div></div>
+</div></section>
+
+<div class="faixa" hidden><div class="trilho"></div></div>
+
+<section class="branco" id="produtos" hidden><div class="caixa">
+  <div class="cabeca rv"><span class="eti"></span><h2></h2><p></p></div>
+  <div class="cards"></div>
+</div></section>
+
+<section class="sobre" id="sobre" hidden><div class="caixa">
+  <div class="foto rv"></div>
+  <div class="rv" style="--d:.1s"><span class="eti">Quem somos</span><h2></h2><p></p><div class="dados" hidden></div></div>
+</div></section>
+
+<section class="branco" id="fotos" hidden><div class="caixa">
+  <div class="cabeca rv"><span class="eti">Galeria</span><h2></h2></div>
+  <div class="galeria"></div>
+</div></section>
+
+<section class="frase" hidden><div class="caixa"><p class="rv"></p></div></section>
+
+<section class="pedir" id="encomendas" hidden><div class="caixa">
+  <div class="lado">
+    <span class="eti rv">Como pedir</span>
+    <h2 class="rv"></h2>
+    <div class="linha-passos"><span class="enche"></span></div>
+    <div class="centro rv"></div>
+  </div>
+  <div class="tela rv"><div class="chat"><div class="cab"><span class="av"></span><div><b></b><small>online</small></div></div><div class="msgs"></div></div><p class="leg">Ilustração de como funciona o pedido</p></div>
+</div></section>
+
+<section class="branco" id="avaliacoes" hidden><div class="caixa">
+  <div class="cabeca rv"><span class="eti">Quem já foi recomenda</span><h2>O que dizem no <em>Google</em></h2></div>
+  <div class="nota rv"></div>
+  <div class="depo"></div>
+</div></section>
+
+<section class="visita" id="visite"><div class="caixa">
+  <div class="info"></div>
+  <div class="mapa rv" style="--d:.1s"></div>
+</div></section>
+
+<footer><div class="caixa"><b></b><span class="end"></span><div class="prop">Proposta de site</div><div class="cd">Site feito por <strong>Sites CD</strong> · <a class="cd-zap" target="_blank" rel="noopener">Quer um site assim?</a><span class="cd-d"> · <a class="cd-dono" rel="nofollow">🔒 Área do dono</a></span></div></div></footer>
+<a class="zap-fixo" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp" hidden></a>
+
+<script>
+(function () {
+  let D = {};
+  try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
+  const $ = (s) => document.querySelector(s);
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const tem = (x) => Array.isArray(x) ? x.length > 0 : x != null && String(x).trim() !== "";
+  const ZAP = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+  const FONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>';
+  const MAPA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+  const OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  const SETA = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  // cores do cliente. O destaque dele pode ser claro (dourado, amarelo): pro texto e pro botão escurece até ler bem no fundo claro
+  const hex = (h) => { h = String(h || "").replace("#", ""); if (h.length === 3) h = h.replace(/./g, "$&$&"); const n = parseInt(h, 16); return isNaN(n) || h.length !== 6 ? null : [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const lum = (c) => { const f = (v) => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; return .2126 * f(c[0]) + .7152 * f(c[1]) + .0722 * f(c[2]); };
+  const contraste = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+  const css = (c) => "rgb(" + c.map(Math.round).join(",") + ")";
+  const escurece = (c, alvo, fundo) => { let k = 0, r = c; while (contraste(r, fundo) < alvo && k < 1) { k += .05; r = c.map((v) => v * (1 - k)); } return r; };
+  const clareia = (c, alvo, fundo) => { let k = 0, r = c; while (contraste(r, fundo) < alvo && k < 1) { k += .05; r = c.map((v) => v + (255 - v) * k); } return r; };
+  const cores = D.cores || {}, ac = hex(cores.destaque) || hex(cores.media) || [15, 118, 110], s = document.documentElement.style;
+  // escuro: pelo campo tema (o dono troca no editor) ou, sem ele, pelo ramo da loja
+  const ESCURO = /hamb[uú]rg|burger|churrasc|steak|grill|parrilla|\bbar\b|bares|pub\b|boteco|choperia|cervej|adega|tabacaria|lounge|barbearia|barber|tattoo|tatuag|balada|night|rock|games?\b/i;
+  const escuro = D.tema === "escuro" || (D.tema !== "claro" && ESCURO.test([D.ramo, D.nome].join(" ")));
+  const esc1 = hex(cores.escura);
+  if (escuro) {
+    document.documentElement.classList.add("escuro");
+    const fundo = esc1 && lum(esc1) < .02 ? esc1 : [14, 14, 16];   // o escuro da marca, se for escuro de verdade
+    s.setProperty("--fundo", css(fundo)); s.setProperty("--branco", css(fundo.map((v) => v + (255 - v) * .055)));
+    s.setProperty("--ac", css(ac)); s.setProperty("--ac-forte", css(ac));
+    s.setProperty("--sobre-ac", contraste([255, 255, 255], ac) >= 3 ? "#fff" : "#111");   // botão amarelo = letra escura
+    s.setProperty("--ac-tinta", css(clareia(ac, 4.6, fundo)));
+    s.setProperty("--ac-suave", css(ac.map((v, k) => v * .16 + fundo[k] * .84)));
+  } else {
+    s.setProperty("--ac", css(ac));
+    s.setProperty("--ac-forte", css(escurece(ac, 4.5, [255, 255, 255])));
+    s.setProperty("--ac-tinta", css(escurece(ac, 4.6, [250, 250, 249])));
+    s.setProperty("--ac-suave", css(ac.map((v) => v * .13 + 255 * .87)));
+    if (esc1 && lum(esc1) < .05) s.setProperty("--escura", css(esc1));
+  }
+
+  const nome = D.nome || "Nosso espaço";
+  document.title = nome + (D.ramo ? " · " + D.ramo : "");
+  const zapNum = String(D.whatsapp || "").replace(/\D/g, "");
+  const zapUrl = zapNum ? "https://wa.me/" + zapNum + "?text=" + encodeURIComponent(D.whatsapp_msg || "Olá! Vi o site e quero fazer um pedido.") : "";
+  const tel1 = (D.telefones || [])[0];
+  const telUrl = tel1 ? "tel:+55" + String(tel1.numero).replace(/\D/g, "").replace(/^55/, "") : "";
+  const endereco = D.endereco || "";
+  const mapsUrl = D.maps || (endereco ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(nome + " " + endereco) : "");
+  // título no jeito do CheckMulta: a última palavra na cor de destaque (se a IA já marcou com *asteriscos*, vale a marca dela)
+  const destacaFim = (t) => { t = esc(t); if (/\*.+?\*/.test(t)) return t.replace(/\*(.+?)\*/g, "<em>$1</em>"); const i = t.lastIndexOf(" "); return i > 0 ? t.slice(0, i + 1) + "<em>" + t.slice(i + 1) + "</em>" : t; };
+
+  // marca: logo (arquivo), recorte da foto, ou o nome escrito
+  const marca = $(".marca");
+  if (D.logo?.arquivo) marca.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="${esc(nome)}" data-foto="logo.arquivo">`;
+  else if (D.logo?.recorte) {
+    const k = D.logo.recorte, el = document.createElement("span");
+    el.className = "recorte";
+    el.style.backgroundImage = `url("${k.foto || D.foto_capa}")`;
+    el.style.backgroundSize = `${(100 / k.w) * 100}% ${(100 / k.h) * 100}%`;
+    el.style.backgroundPosition = `${k.w >= 100 ? 0 : (k.x / (100 - k.w)) * 100}% ${k.h >= 100 ? 0 : (k.y / (100 - k.h)) * 100}%`;
+    if (k.proporcao) el.style.setProperty("--prop", k.proporcao);
+    marca.append(el);
+  } else {
+    const p = nome.split(" ");
+    marca.innerHTML = `<span class="nome">${p.length > 1 ? esc(p.slice(0, -1).join(" ")) + " <em>" + esc(p[p.length - 1]) + "</em>" : esc(nome)}</span>`;
+  }
+  // logo que some no fundo: branca no claro ganha plaquinha escura; preta no escuro ganha plaquinha clara
+  const brilho = (img) => { try { const c = document.createElement("canvas"); c.width = c.height = 40; const x = c.getContext("2d"); x.drawImage(img, 0, 0, 40, 40); const d = x.getImageData(0, 0, 40, 40).data; let soma = 0, n = 0; for (let k = 0; k < d.length; k += 4) if (d[k + 3] > 60) { soma += (d[k] * .3 + d[k + 1] * .59 + d[k + 2] * .11) / 255; n++; } return n ? soma / n : null; } catch { return null; } };
+  const olhaLogo = (img) => { const f = () => { const b = brilho(img); if (b == null) return; if (!escuro && b > .72) img.classList.add("clara"); if (escuro && b < .28) img.classList.add("escura"); }; img.complete && img.naturalWidth ? f() : img.addEventListener("load", f); };
+  if (marca.querySelector("img")) olhaLogo(marca.querySelector("img"));
+  const menu = [["produtos", D.produtos_titulo_menu || "O que temos", tem(D.produtos)], ["sobre", "Quem somos", tem(D.sobre)], ["encomendas", "Como pedir", tem(D.encomenda?.passos)], ["avaliacoes", "Avaliações", tem(D.avaliacoes?.lista)], ["visite", "Onde estamos", true]];
+  $(".menu").innerHTML = menu.filter((m) => m[2]).map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join("");
+  if (zapUrl) { const z = $(".zap-mini"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP + "<span>Pedir</span>"; }
+
+  // capa: título entra palavra por palavra
+  $(".capa .eti").textContent = [D.ramo, D.cidade].filter(tem).join(" · ");
+  let i = 0;
+  const pal = (w, forte) => `<span class="p" style="--i:${i++}">${forte ? "<em>" + esc(w) + "</em>" : esc(w)}</span>`;
+  let h1 = "";   // pontuação colada continua colada ("*bairro*," não ganha espaço antes da vírgula)
+  String(D.slogan || nome).trim().replace(/\*([^*]+)\*|(\S+)|(\s+)/g, (m, forte, w, sp) => { h1 += sp ? " " : forte ? forte.trim().split(/\s+/).map((x) => pal(x, true)).join(" ") : pal(w, false); return m; });
+  $(".capa h1").innerHTML = h1; $(".capa h1").dataset.campo = "slogan";
+  $(".capa .sub").textContent = D.subtitulo || ""; $(".capa .sub").dataset.campo = "subtitulo";
+  $(".acoes").innerHTML = (zapUrl ? `<a class="bt bt-ac" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Pedir pelo WhatsApp</a>` : "") +
+    (telUrl ? `<a class="bt bt-borda" href="${telUrl}">${FONE}Ligar agora</a>` : "") +
+    (mapsUrl && !(zapUrl && telUrl) ? `<a class="bt bt-borda" href="${mapsUrl}" target="_blank" rel="noopener">${MAPA}Como chegar</a>` : "");
+  $(".selos").innerHTML = (D.destaques || []).slice(0, 4).map((x, k) => `<span>${OK}<b data-campo="destaques.${k}">${esc(x)}</b></span>`).join("");
+  const vit = $(".vitrine"), av = D.avaliacoes, nota = av?.nota ? Number(String(av.nota).replace(",", ".")).toFixed(1).replace(".", ",") : "";
+  if (D.foto_capa) {
+    $(".vitrine .foto").innerHTML = "<i></i>"; const f = $(".vitrine .foto i"); f.dataset.foto = "foto_capa";
+    f.style.backgroundImage = `url("${D.foto_capa}")`;
+    if (D.foto_capa_foco) f.style.setProperty("--foco", D.foto_capa_foco);
+    if (D.foto_capa_zoom) f.style.setProperty("--zoom", D.foto_capa_zoom);
+  } else { vit.classList.add("sem-foto"); $(".vitrine .foto").innerHTML = `<b>${esc(nome)}</b>`; }
+  // cartões que flutuam sobre a foto: nota do Google (se achou) e a cidade
+  if (av?.nota) vit.insertAdjacentHTML("beforeend", `<div class="flutua a"><b>${esc(nota)}</b><div><div class="estrelas">${"★".repeat(Math.round(av.nota))}</div><small>${av.total ? esc(av.total) + " avaliações" : "avaliação"} no Google</small></div></div>`);
+  else if (tem(D.destaques)) vit.insertAdjacentHTML("beforeend", `<div class="flutua a"><div><small>${esc(D.ramo || "")}</small><b style="font-size:1.05rem">${esc(D.destaques[0])}</b></div></div>`);
+  if (tem(D.cidade)) vit.insertAdjacentHTML("beforeend", `<div class="flutua b"><i></i>${esc(D.cidade)}</div>`);
+
+  // faixa que corre com o que ele vende
+  const itens = [...(D.produtos || []).map((p) => p.titulo), ...(D.destaques || [])].filter(tem);
+  if (itens.length >= 3) { const fx = $(".faixa"); fx.hidden = false; const um = itens.map((t) => `<span>${esc(t)}</span>`).join(""); $(".faixa .trilho").innerHTML = um + um; }
+
+  // produtos
+  if (tem(D.produtos)) {
+    $("#produtos").hidden = false;
+    $("#produtos .eti").textContent = D.produtos_chapeu || "Feito com carinho"; $("#produtos .eti").dataset.campo = "produtos_chapeu";
+    $("#produtos h2").innerHTML = destacaFim(D.produtos_titulo || "O que você encontra aqui"); $("#produtos h2").dataset.campo = "produtos_titulo";
+    $("#produtos .cabeca p").textContent = D.produtos_texto || ""; $("#produtos .cabeca p").dataset.campo = "produtos_texto";
+    $("#produtos .cards").innerHTML = D.produtos.slice(0, 6).map((p, k) => `<a class="card rv" style="--d:${k * .07}s; text-decoration:none" href="${zapUrl ? zapUrl : "#visite"}" ${zapUrl ? 'target="_blank" rel="noopener"' : ""}><span class="seta">${SETA}</span><div class="ic" data-campo="produtos.${k}.icone">${esc(p.icone || "✨")}</div><h3 data-campo="produtos.${k}.titulo">${esc(p.titulo)}</h3><p data-campo="produtos.${k}.texto">${esc(p.texto || "")}</p><span class="num">${String(k + 1).padStart(2, "0")}</span></a>`).join("");
+  }
+  // sobre (+ números de verdade, se tiver)
+  if (tem(D.sobre)) {
+    $("#sobre").hidden = false;
+    $("#sobre h2").innerHTML = destacaFim(D.sobre_titulo || "Um cantinho pra você"); $("#sobre h2").dataset.campo = "sobre_titulo";
+    $("#sobre p").textContent = D.sobre; $("#sobre p").dataset.campo = "sobre";
+    const f = $("#sobre .foto"), foto = D.foto_sobre || D.foto_capa;
+    if (foto) { f.innerHTML = "<i data-foto=\"foto_sobre\"></i>"; f.firstChild.style.backgroundImage = `url("${foto}")`; f.style.setProperty("--foco", D.foto_sobre_foco || "50% 50%"); if (D.foto_sobre_zoom) f.style.setProperty("--zoom", D.foto_sobre_zoom); }
+    else { f.remove(); $("#sobre .caixa").style.gridTemplateColumns = "1fr"; }
+    const nums = [av?.nota && [nota + " ★", "no Google"], av?.total && [av.total, "avaliações"], tem(D.produtos) && [D.produtos.length, "especialidades"]].filter(Boolean);
+    if (nums.length >= 2) { const d = $("#sobre .dados"); d.hidden = false; d.innerHTML = nums.map(([b, t]) => `<div><b>${esc(b)}</b><small>${esc(t)}</small></div>`).join(""); }
+  }
+  // galeria (clicar amplia)
+  const gal = (D.galeria || []).filter((g) => g && g.url).slice(0, 7);
+  if (gal.length) {
+    $("#fotos").hidden = false; $("#fotos h2").innerHTML = destacaFim(D.galeria_titulo || "Um pouco do nosso dia a dia"); $("#fotos h2").dataset.campo = "galeria_titulo";
+    $("#fotos .galeria").innerHTML = gal.map((g, k) => `<figure class="rv" style="--d:${k * .05}s"><img loading="lazy" data-foto="galeria.${D.galeria.indexOf(g)}.url" src="${esc(g.url)}" alt="${esc(g.legenda || nome)}" onerror="this.closest('figure').remove()">${g.legenda ? `<figcaption data-campo="galeria.${D.galeria.indexOf(g)}.legenda">${esc(g.legenda)}</figcaption>` : ""}</figure>`).join("");
+    // tamanhos pra nunca sobrar buraco: no PC 4 colunas (1ª foto grande), no celular 2
+    const figs = [...document.querySelectorAll("#fotos figure")], n = figs.length;
+    const pc = n === 1 ? [["span 4", "span 2"]] : n === 2 ? [["span 2", "span 2"], ["span 2", "span 2"]] : n === 3 ? [["span 2", "span 2"], ["span 2", ""], ["span 2", ""]]
+      : n === 4 ? [["span 2", "span 2"], ["span 2", ""], ["", ""], ["", ""]] : [["span 2", "span 2"], ...Array(n - 1).fill(["", ""])];
+    if (n === 6) pc[5] = ["span 4", ""]; if (n === 7) { pc[5] = ["span 2", ""]; pc[6] = ["span 2", ""]; }
+    figs.forEach((f, k) => { const [c, r] = pc[k] || ["", ""]; if (c) f.style.setProperty("--c", c); if (r) f.style.setProperty("--r", r);
+      if (k === 0) { f.style.setProperty("--cm", "span 2"); f.style.setProperty("--rm", "span 2"); } else if (k === n - 1 && n % 2 === 0) f.style.setProperty("--cm", "span 2"); });
+    $("#fotos .galeria").addEventListener("click", (e) => {
+      const fig = e.target.closest("figure"); if (!fig) return;
+      const z = document.createElement("div"); z.className = "zoom";
+      z.innerHTML = `<div><img src="${fig.querySelector("img").src}" alt=""><p>${esc(fig.querySelector("figcaption")?.textContent || "")}</p></div>`;
+      z.onclick = () => z.remove(); document.body.append(z);
+    });
+  }
+  if (gal.some((g) => g.ilustrativa) || D.fotos_ilustrativas) $("footer .prop").textContent = "Proposta de site · fotos ilustrativas";
+  if (tem(D.frase)) { $(".frase").hidden = false; $(".frase p").textContent = D.frase; $(".frase p").dataset.campo = "frase"; }
+
+  // como pedir: os passos acendem com a rolagem e a conversa do WhatsApp vai aparecendo do lado
+  const passos = (D.encomenda?.passos || []).slice(0, 4).map((p) => typeof p === "string" ? { titulo: p, texto: "" } : p);
+  if (passos.length) {
+    $("#encomendas").hidden = false;
+    $("#encomendas h2").innerHTML = destacaFim(D.encomenda.titulo || "Faça seu pedido"); $("#encomendas h2").dataset.campo = "encomenda.titulo";
+    $(".linha-passos").insertAdjacentHTML("beforeend", passos.map((p, k) => `<div class="passo"><span class="selo">${String(k + 1).padStart(2, "0")}</span><div><span class="n">PASSO ${String(k + 1).padStart(2, "0")}</span><h3 data-campo="encomenda.passos.${k}.titulo">${esc(p.titulo)}</h3><p data-campo="encomenda.passos.${k}.texto">${esc(p.texto || "")}</p></div></div>`).join(""));
+    if (zapUrl) $("#encomendas .centro").innerHTML = `<a class="bt bt-ac" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}${esc(passos.length ? "Fazer meu pedido" : "Chamar no WhatsApp")}</a>`;
+    const avt = $(".chat .av");
+    if (D.logo?.arquivo) { avt.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="">`; olhaLogo(avt.firstChild); } else avt.textContent = nome.trim()[0] || "•";
+    $(".chat .cab b").textContent = nome;
+    const hora = (m) => `${String(9 + Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+    const falas = [["eu", D.whatsapp_msg || "Olá! Vi o site e quero fazer um pedido."], ["loja", "Oi! Que bom que você chamou 😊 Me conta o que você precisa?"], ["eu", passos[1]?.texto ? "Perfeito, vamos combinar os detalhes!" : "Combinado!"], ["loja", "Fechado! Fica tudo certinho pra você. Obrigado pela preferência!"]];
+    $(".chat .msgs").innerHTML = falas.map(([q, t], k) => `<div class="msg ${q}">${esc(t)}<small>${hora(k * 2)}</small></div>`).join("");
+    const msgs = [...document.querySelectorAll(".msg")], els = [...document.querySelectorAll(".passo")], enche = $(".linha-passos .enche");
+    const marcar = (n) => {
+      els.forEach((e, k) => { e.classList.toggle("on", k === n); e.classList.toggle("feito", k < n); });
+      const ver = n < 0 ? 0 : Math.ceil((n + 1) / passos.length * msgs.length);   // o último passo mostra a conversa inteira
+      msgs.forEach((m, k) => m.classList.toggle("vista", k < ver));
+      enche.style.height = (els[n] ? els[n].offsetTop : 0) + "px";
+    };
+    let atual = -1;
+    const olhar = () => {
+      const meio = innerHeight * .55; let n = -1;
+      els.forEach((e, k) => { if (e.getBoundingClientRect().top < meio) n = k; });
+      if (n !== atual) { atual = n; marcar(n); }
+    };
+    addEventListener("scroll", olhar, { passive: true }); olhar();
+  }
+
+  // avaliações (só as reais, que a IA achou)
+  if (tem(av?.lista)) {
+    $("#avaliacoes").hidden = false;
+    if (av.nota) $("#avaliacoes .nota").innerHTML = `<b data-n="${Number(String(av.nota).replace(",", "."))}">0</b><div><div class="estrelas">${"★".repeat(Math.round(av.nota))}</div><small>${av.total ? esc(av.total) + " avaliações no Google" : "no Google"}</small></div>`;
+    $("#avaliacoes .depo").innerHTML = av.lista.slice(0, 3).map((a, k) => `<figure class="rv" style="--d:${k * .08}s"><div class="estrelas">${"★".repeat(a.estrelas || 5)}</div><blockquote>“${esc(a.texto)}”</blockquote><figcaption><i>${esc((a.autor || "C").trim()[0])}</i>${esc(a.autor || "Cliente")}</figcaption></figure>`).join("");
+  }
+
+  // visite: endereço, horário (hoje em destaque), telefones, redes e mapa
+  const tels = (D.telefones || []).map((t) => { const n = String(t.numero).replace(/\D/g, "").replace(/^55/, ""); return `<a href="${t.whatsapp ? "https://wa.me/55" + n : "tel:+55" + n}" ${t.whatsapp ? 'target="_blank" rel="noopener"' : ""}><span>${esc(t.numero)}</span>${t.whatsapp ? "<small>WhatsApp</small>" : ""}</a>`; }).join("");
+  const redes = [["Instagram", D.instagram], ["Facebook", D.facebook], ["Google Maps", mapsUrl]].filter((x) => tem(x[1]));
+  const dia = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"][new Date().getDay()];
+  const ehHoje = (d) => { d = String(d).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); const h = dia.normalize("NFD").replace(/[̀-ͯ]/g, ""); return d.startsWith(h) || d === "hoje"; };
+  $(".info").innerHTML =
+    (endereco ? `<div class="rv"><h3>ENDEREÇO</h3><div class="linha">${esc(endereco)}</div></div>` : "") +
+    (tem(D.horario) ? `<div class="rv"><h3>HORÁRIO</h3><table>${D.horario.map((h) => `<tr${ehHoje(h.dias) ? ' class="hoje"' : ""}><td>${esc(h.dias)}</td><td>${esc(h.horas)}</td></tr>`).join("")}</table></div>` : "") +
+    (tels ? `<div class="tels rv"><h3>FALE COM A GENTE</h3>${tels}</div>` : "") +
+    (redes.length ? `<div class="rv"><h3>SIGA E ENCONTRE</h3><div class="redes">${redes.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>` : "");
+  if (endereco) $(".mapa").innerHTML = `<iframe loading="lazy" title="Mapa" src="https://www.google.com/maps?q=${encodeURIComponent(nome + ", " + endereco)}&output=embed"></iframe>`;
+  else { $(".mapa").remove(); $(".visita .caixa").style.gridTemplateColumns = "1fr"; }
+
+  $("footer b").textContent = nome;
+  $("footer .end").textContent = endereco || D.cidade || "";
+
+  // 09/10 rodapé da Sites CD (Caio): crédito discreto + "Quer um site assim?" (WhatsApp do Caio, não é botão: o verde é o
+  // da loja) + "Área do dono" (porteiro com PIN; só aparece no endereço publicado sitescd.github.io/<slug>/)
+  { const cd = $("footer .cd"), slug = location.hostname === "sitescd.github.io" ? location.pathname.split("/")[1] : "";
+    cd.querySelector(".cd-zap").href = "https://wa.me/5513996485501?text=" + encodeURIComponent("Olá! Vi o site " + nome + " e quero um site assim.");
+    if (slug) cd.querySelector(".cd-dono").href = "https://claude-maestro.tail8a0b99.ts.net:8443/d/" + slug; else cd.querySelector(".cd-d").remove(); }
+  if (zapUrl) { const z = $(".zap-fixo"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP; }
+
+  // topo ganha linha ao rolar; blocos surgem; nota do Google conta até o valor
+  const topo = $(".topo"), rolar = () => topo.classList.toggle("rolou", scrollY > 10);
+  addEventListener("scroll", rolar, { passive: true }); rolar();
+  const conta = (b) => { const alvo = +b.dataset.n, t0 = performance.now(); const passo = (t) => { const p = Math.min((t - t0) / 1100, 1); b.textContent = (alvo * (1 - (1 - p) ** 3)).toFixed(1).replace(".", ","); if (p < 1) requestAnimationFrame(passo); }; requestAnimationFrame(passo); };
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; e.target.classList.add("vista"); const b = e.target.querySelector?.("b[data-n]"); if (b) conta(b); io.unobserve(e.target); }), { threshold: .12 }) : null;
+  document.querySelectorAll(".rv").forEach((el) => (io ? io.observe(el) : el.classList.add("vista")));
+  if (!io) document.querySelectorAll("b[data-n]").forEach((b) => (b.textContent = String(b.dataset.n).replace(".", ",")));
+})();
+</script>
+</body>
+</html>
