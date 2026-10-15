@@ -1,2 +1,5 @@
 User-agent: *
+Allow: /cafeteria-maddy/
 Disallow: /
+
+Sitemap: https://sitescd.github.io/sitemap.xml
