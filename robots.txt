@@ -1,6 +1,3 @@
 User-agent: *
-Allow: /barbearia-do-teste/
 Allow: /$
 Disallow: /
-
-Sitemap: https://sitescd.com.br/sitemap.xml
