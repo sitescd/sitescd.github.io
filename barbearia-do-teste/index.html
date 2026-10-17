@@ -2,332 +2,478 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Barbearia do Teste · Barbearia em Praia Grande</title>
-<!-- 06/10 (Caio): MODELO 1 dos sites de comércio. A IA só preenche os DADOS (o JSON abaixo); o visual é sempre este.
-     Campo vazio = a seção some. Feito pelo Claude Code juntando o melhor dos 4 testes (capa do Copilot + identidade do Opus 5.5). -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- 17/10 (Caio: "fazer um modelo desse tipo de site super premium pra galera"): MODELO SUPER PREMIUM. Mesmos dados dos
+     outros modelos (o JSON do bloco "dados"), sem IA: capa cheia com a foto, títulos grandes, movimento ao rolar, nota contando,
+     depoimentos, passos, galeria com zoom, "aberto agora" pelo horário, mapa e botão de WhatsApp fixo.
+     Contrato com previas.js: <title>, footer .prop / .cd, links wa.me / tel: / maps (contador). Editor: data-campo / data-foto. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --escura: #1c1410; --media: #4a2e1f; --destaque: #d9a441; --clara: #f6eadb; --texto: #2a1d16; --branco: #fffdf9;
-    --titulo: "Playfair Display", Georgia, serif; --enfeite: "Dancing Script", cursive; --corpo: "Nunito", system-ui, sans-serif; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--corpo); color: var(--texto); background: var(--branco); line-height: 1.6; overflow-x: hidden; }
-  img { max-width: 100%; display: block; }
-  a { color: inherit; }
-  .caixa { width: min(1120px, 100% - 32px); margin-inline: auto; }
-  [hidden] { display: none !important; }
+:root{--escura:#14110f;--media:#3a2b20;--destaque:#d9a441;--clara:#f6efe4;--fundo:#f6efe4;--tinta:#14110f;--tinta2:#5b4f45;--linha:rgba(20,17,15,.12);--cartao:#fffaf2;--sobre-destaque:#1a1208;--ease:cubic-bezier(.16,1,.3,1)}
+.escuro{--fundo:#0f0d0c;--tinta:#f3ece2;--tinta2:#b5a999;--linha:rgba(255,255,255,.1);--cartao:#181513}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fundo);color:var(--tinta);font:400 17px/1.6 Figtree,system-ui,sans-serif;overflow-x:hidden}
+::selection{background:var(--destaque);color:var(--sobre-destaque)}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--destaque);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:0;text-wrap:balance}
+h1 em,h2 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--destaque)}
+p{margin:0}
+.box{max-width:1180px;margin:0 auto;padding:0 20px}
+svg.i{width:20px;height:20px;flex:none}
+[hidden]{display:none!important}
 
-  /* topo */
-  .topo { position: fixed; inset: 0 0 auto 0; z-index: 20; transition: background .3s, box-shadow .3s; }
-  .topo.rolou { background: color-mix(in srgb, var(--escura) 94%, transparent); box-shadow: 0 6px 24px #0004; backdrop-filter: blur(6px); }
-  .topo .caixa { display: flex; align-items: center; gap: 16px; height: 68px; }
-  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; min-width: 0; }
-  .marca .recorte { height: 44px; aspect-ratio: var(--prop, 2.4); border-radius: 8px; background-repeat: no-repeat; box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--destaque) 70%, transparent); flex: none; }
-  .marca img { height: 44px; width: auto; border-radius: 8px; }
-  .marca .nome { font-family: var(--titulo); font-weight: 700; font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .marca .nome em { font-family: var(--enfeite); font-style: normal; color: var(--destaque); font-weight: 700; margin-right: 4px; }
-  .menu { margin-left: auto; display: flex; gap: 22px; }
-  .menu a { color: #fff; text-decoration: none; font-weight: 600; font-size: .95rem; opacity: .9; }
-  .menu a:hover { opacity: 1; color: var(--destaque); }
-  .topo .zap-mini { margin-left: 8px; }
-  @media (max-width: 760px) { .menu { display: none; } .topo .zap-mini { margin-left: auto; } }
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font:700 16px Figtree,sans-serif;text-decoration:none;padding:16px 26px;border:0;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.bt-forte{background:var(--destaque);color:var(--sobre-destaque);box-shadow:0 12px 30px -12px color-mix(in srgb,var(--destaque) 80%,transparent)}
+.bt-forte:hover{transform:translateY(-3px)}
+.bt-vidro{background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.bt-vidro:hover{background:rgba(255,255,255,.2)}
+.bt-linha{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--linha)}
+.bt-linha:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
 
-  /* botões */
-  .bt { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 24px; border-radius: 999px; font: 700 1rem var(--corpo); text-decoration: none; border: 2px solid transparent; transition: transform .15s, box-shadow .15s; cursor: pointer; }
-  .bt:hover { transform: translateY(-2px); box-shadow: 0 10px 24px #0003; }
-  .bt svg { width: 20px; height: 20px; flex: none; }
-  .bt-zap { background: #25d366; color: #fff; }
-  .bt-borda { border-color: var(--destaque); color: #fff; background: #0003; }
-  .bt-escuro { background: var(--media); color: #fff; }
-  .zap-mini { padding: 9px 16px; font-size: .9rem; }
+/* topo */
+.topo{position:fixed;inset:0 0 auto;z-index:30;transition:background .35s,box-shadow .35s,color .35s;color:#fff}
+.topo.rolou{background:color-mix(in srgb,var(--fundo) 88%,transparent);backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--linha);color:var(--tinta)}
+.topo .box{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;font:800 20px "Bricolage Grotesque";letter-spacing:-.02em;min-width:0}
+.marca .av{width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;background:var(--destaque);color:var(--sobre-destaque);font:800 18px "Bricolage Grotesque";overflow:hidden;background-repeat:no-repeat}
+.marca .av img{width:100%;height:100%;object-fit:contain;background:#fff}
+.marca .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topo nav{display:flex;align-items:center;gap:24px;font-weight:600;font-size:15px}
+.topo nav a.lk{text-decoration:none;opacity:.8}
+.topo nav a.lk:hover{opacity:1}
+.topo .bt{padding:11px 18px;font-size:15px}
 
-  /* capa */
-  .capa { position: relative; min-height: min(92vh, 760px); display: grid; align-items: end; color: #fff; overflow: hidden; isolation: isolate; }
-  .capa .fundo { position: absolute; inset: -8%; background-size: cover; background-position: var(--foco, 50% 45%); transform: scale(var(--zoom, 1.12)); transform-origin: var(--foco, 50% 45%); z-index: -2; filter: saturate(1.05); }
-  .capa::after { content: ""; position: absolute; inset: 0; z-index: -1;
-    background: linear-gradient(90deg, color-mix(in srgb, var(--escura) 88%, transparent) 0%, color-mix(in srgb, var(--escura) 62%, transparent) 55%, color-mix(in srgb, var(--escura) 25%, transparent) 100%),
-      linear-gradient(180deg, color-mix(in srgb, var(--escura) 40%, transparent) 0%, transparent 40%, var(--escura) 100%); }
-  @media (max-width: 760px) { .capa::after { background: linear-gradient(180deg, color-mix(in srgb, var(--escura) 60%, transparent), color-mix(in srgb, var(--escura) 82%, transparent) 50%, var(--escura)); } }
-  .capa.sem-foto .fundo { display: none; }
-  .capa.sem-foto { background: radial-gradient(ellipse at 30% 20%, var(--media), var(--escura) 70%); }
-  .capa .caixa { padding: 140px 0 72px; }
-  .chapeu { display: inline-block; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; font-size: .78rem; color: var(--destaque); margin-bottom: 14px; }
-  .capa h1 { font-family: var(--titulo); font-size: clamp(2.5rem, 6.4vw, 4.8rem); line-height: 1.04; font-weight: 800; max-width: 15ch; text-wrap: balance; }
-  .capa h1 em { font-family: var(--enfeite); font-style: normal; color: var(--destaque); font-weight: 700; }
-  .capa p.sub { font-size: clamp(1.05rem, 2.2vw, 1.25rem); max-width: 46ch; margin: 18px 0 30px; opacity: .92; }
-  .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
-  .selos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 34px; }
-  .selos span { background: #ffffff14; border: 1px solid #ffffff2e; padding: 7px 14px; border-radius: 999px; font-size: .88rem; font-weight: 600; backdrop-filter: blur(4px); }
+/* capa */
+.capa{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;isolation:isolate}
+.capa .fundo-foto{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:var(--foco,50% 50%);transform:scale(calc(var(--zoom,1) * 1.08));animation:respira 18s ease-in-out infinite alternate}
+@keyframes respira{to{transform:scale(calc(var(--zoom,1) * 1.16)) translateY(-1.5%)}}
+.capa::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.78) 100%),linear-gradient(90deg,color-mix(in srgb,var(--escura) 70%,transparent),transparent 70%)}
+.capa .box{width:100%;padding-bottom:72px;padding-top:140px}
+.capa .local{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);padding:8px 14px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.capa .local .ponto{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.25)}
+.capa .local .ponto.fechado{background:#ff6b5e;box-shadow:0 0 0 4px rgba(255,107,94,.25)}
+.capa h1{font-size:clamp(46px,7.6vw,104px);max-width:14ch;margin:22px 0 22px}
+.capa .sub{font-size:clamp(18px,1.8vw,21px);max-width:46ch;color:rgba(255,255,255,.86)}
+.capa .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.capa .nota-capa{position:absolute;right:20px;bottom:72px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border-radius:22px;padding:16px 20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);text-align:center}
+.capa .nota-capa b{display:block;font:800 40px/1 "Bricolage Grotesque"}
+.capa .nota-capa small{opacity:.85;font-size:13px}
+.estrelas{color:#ffc84a;letter-spacing:2px}
+.entra{opacity:0;transform:translateY(26px);animation:entra 1.1s var(--ease) forwards}
+@keyframes entra{to{opacity:1;transform:none}}
 
-  /* seções */
-  section.bloco { padding: clamp(64px, 9vw, 104px) 0; }
-  .cabeca { text-align: center; max-width: 640px; margin: 0 auto 44px; }
-  .cabeca .chapeu { margin-bottom: 8px; }
-  .cabeca h2 { font-family: var(--titulo); font-size: clamp(1.9rem, 4vw, 2.7rem); line-height: 1.15; color: var(--media); }
-  .cabeca p { color: #6b5a4f; margin-top: 10px; }
-  .claro { background: var(--clara); }
+/* faixa dos destaques */
+.faixa{background:var(--destaque);color:var(--sobre-destaque);overflow:hidden;padding:18px 0}
+.faixa .trilho{display:flex;gap:46px;width:max-content;animation:corre 30s linear infinite}
+.faixa:hover .trilho{animation-play-state:paused}
+@keyframes corre{to{transform:translateX(-50%)}}
+.faixa span{display:inline-flex;align-items:center;gap:14px;font:700 21px "Bricolage Grotesque";letter-spacing:-.02em;white-space:nowrap}
+.faixa span::before{content:"✦";font-size:14px}
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
-  .card { background: var(--branco); border-radius: 20px; padding: 30px 24px; text-align: center; box-shadow: 0 10px 30px #3a221214; border-top: 4px solid var(--destaque); transition: transform .2s; }
-  .card:hover { transform: translateY(-4px); }
-  .card .ic { font-size: 2.6rem; line-height: 1; margin-bottom: 14px; }
-  .card h3 { font-family: var(--enfeite); font-size: 1.75rem; color: var(--media); margin-bottom: 6px; }
-  .card p { color: #6b5a4f; font-size: .98rem; }
+section{padding:110px 0}
+.chapeu{font-weight:700;font-size:15px;color:var(--destaque);margin-bottom:14px}
+.titulo{max-width:760px;margin-bottom:54px}
+.titulo h2{font-size:clamp(34px,5vw,64px)}
+.titulo p{font-size:19px;color:var(--tinta2);margin-top:18px;max-width:56ch}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.visto{opacity:1;transform:none}
 
-  .sobre .caixa { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-  .sobre .foto { border-radius: 24px; aspect-ratio: 4 / 3; overflow: hidden; position: relative; box-shadow: 0 24px 50px #2a160b33; outline: 6px solid var(--branco); }
-  .sobre h2 { font-family: var(--titulo); font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--media); line-height: 1.15; margin: 6px 0 14px; }
-  .sobre p { color: #5b4a40; font-size: 1.05rem; }
-  .sobre .foto i { position: absolute; inset: 0; background-size: cover; background-position: var(--foco, 50% 50%); transform: scale(var(--zoom, 1)); transform-origin: var(--foco, 50% 50%); }
-  @media (max-width: 760px) { .sobre .caixa { grid-template-columns: 1fr; } }
+/* produtos: lista grande com seta */
+.lista{border-top:1px solid var(--linha)}
+.item{display:grid;grid-template-columns:70px 1fr auto;gap:22px;align-items:center;padding:28px 6px;border-bottom:1px solid var(--linha);text-decoration:none;position:relative;transition:padding .45s var(--ease)}
+.item::before{content:"";position:absolute;inset:0;background:var(--cartao);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease);z-index:-1;border-radius:14px}
+.item:hover{padding-left:18px}
+.item:hover::before{transform:scaleY(1)}
+.item .ic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:30px;background:color-mix(in srgb,var(--destaque) 16%,transparent)}
+.item h3{font-size:clamp(22px,2.6vw,32px)}
+.item p{color:var(--tinta2);margin-top:4px;max-width:60ch}
+.item .seta{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--linha);transition:background .3s,transform .45s var(--ease)}
+.item:hover .seta{background:var(--destaque);color:var(--sobre-destaque);transform:rotate(-45deg);box-shadow:none}
 
-  .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-  .galeria figure { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--clara); box-shadow: 0 10px 26px #2a160b1f; }
-  .galeria img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-  .galeria figure:hover img { transform: scale(1.05); }
-  .galeria figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 14px 10px; color: #fff; font-weight: 700; font-size: .92rem; background: linear-gradient(transparent, #000a); }
-  @media (min-width: 900px) { .galeria figure:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; } }
-  .frase { background: var(--media); color: #fff; text-align: center; padding: 56px 16px; }
-  .frase p { font-family: var(--enfeite); font-size: clamp(1.8rem, 4.5vw, 2.8rem); color: var(--destaque); line-height: 1.25; }
+/* sobre */
+.sobre .box{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.sobre .foto{aspect-ratio:4/5;border-radius:32px;overflow:hidden;position:relative;box-shadow:0 50px 90px -50px rgba(0,0,0,.6)}
+.sobre .foto i{position:absolute;inset:0;background-size:cover;background-position:var(--foco,50% 50%);transform:scale(var(--zoom,1));transition:transform 1.4s var(--ease)}
+.sobre .foto:hover i{transform:scale(calc(var(--zoom,1) * 1.05))}
+.sobre h2{font-size:clamp(34px,4.6vw,58px)}
+.sobre .txt{font-size:19px;color:var(--tinta2);margin-top:22px}
+.frase{margin-top:34px;font:400 italic clamp(26px,3vw,36px)/1.15 "Instrument Serif",Georgia,serif;color:var(--tinta);padding-left:22px;box-shadow:inset 3px 0 0 var(--destaque)}
 
-  .passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; counter-reset: p; }
-  .passo { background: var(--branco); border-radius: 18px; padding: 26px 22px; position: relative; box-shadow: 0 8px 24px #3a221212; }
-  .passo::before { counter-increment: p; content: counter(p); position: absolute; top: -16px; left: 22px; width: 36px; height: 36px; border-radius: 50%; background: var(--destaque); color: var(--escura); font-weight: 800; display: grid; place-items: center; }
-  .passo h3 { font-family: var(--titulo); font-size: 1.15rem; color: var(--media); margin: 8px 0 4px; }
-  .passo p { color: #6b5a4f; }
-  .centro { text-align: center; margin-top: 34px; }
+/* avaliações */
+.aval{background:var(--escura);color:#f3ece2}
+.aval .titulo p{color:#b5a999}
+.aval .topo-aval{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:46px}
+.aval .grande{display:flex;align-items:center;gap:22px}
+.aval .grande b{font:800 clamp(72px,10vw,130px)/.9 "Bricolage Grotesque";letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.aval .grande small{display:block;color:#b5a999;font-size:15px;margin-top:6px}
+.depos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.depo{background:rgba(255,255,255,.05);border-radius:26px;padding:28px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);display:flex;flex-direction:column;gap:18px;margin:0}
+.depo blockquote{margin:0;font:400 italic 22px/1.35 "Instrument Serif",Georgia,serif;color:#f3ece2}
+.depo figcaption{display:flex;align-items:center;gap:12px;color:#b5a999;font-weight:600;margin-top:auto}
+.depo figcaption i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--destaque);color:var(--sobre-destaque);font:800 16px "Bricolage Grotesque";font-style:normal}
 
-  .nota { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 30px; font-weight: 700; color: var(--media); }
-  .nota b { font-size: 2.4rem; font-family: var(--titulo); }
-  .estrelas { color: #f2b01e; letter-spacing: 2px; }
-  .depo { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
-  .depo figure { background: var(--branco); border-radius: 18px; padding: 24px; box-shadow: 0 8px 24px #3a221212; }
-  .depo blockquote { color: #4d3d33; font-style: italic; margin: 8px 0 12px; }
-  .depo figcaption { font-weight: 700; color: var(--media); font-size: .92rem; }
+/* passos */
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;counter-reset:p}
+.passos::before{content:"";position:absolute;top:30px;left:30px;right:30px;height:2px;background:var(--linha)}
+.passos .linha{position:absolute;top:30px;left:30px;height:2px;width:0;background:var(--destaque);transition:width 2s var(--ease)}
+.passos.visto .linha{width:calc(100% - 60px)}
+.passo .n{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--fundo);box-shadow:inset 0 0 0 2px var(--linha);font:800 22px "Bricolage Grotesque";position:relative;z-index:1;transition:background .5s,color .5s,box-shadow .5s}
+.passos.visto .passo .n{background:var(--destaque);color:var(--sobre-destaque);box-shadow:0 0 0 8px color-mix(in srgb,var(--destaque) 18%,transparent)}
+.passos.visto .passo:nth-child(3) .n{transition-delay:.6s}.passos.visto .passo:nth-child(4) .n{transition-delay:1.2s}
+.passo h3{font-size:25px;margin:22px 0 8px}
+.passo p{color:var(--tinta2)}
 
-  .visita .caixa { display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: stretch; }
-  .info { background: var(--escura); color: #fff; border-radius: 24px; padding: 34px 30px; display: flex; flex-direction: column; gap: 22px; }
-  .info h3 { font-family: var(--titulo); color: var(--destaque); font-size: 1.05rem; letter-spacing: .04em; margin-bottom: 4px; }
-  .info .linha { opacity: .92; }
-  .info table { border-collapse: collapse; width: 100%; }
-  .info td { padding: 4px 0; border-bottom: 1px dashed #ffffff24; }
-  .info td + td { text-align: right; font-weight: 700; }
-  .tels a { display: block; text-decoration: none; font-weight: 700; font-size: 1.08rem; }
-  .tels a small { font-weight: 600; color: #25d366; margin-left: 6px; }
-  .redes { display: flex; gap: 10px; flex-wrap: wrap; }
-  .redes a { border: 1px solid #ffffff3a; border-radius: 999px; padding: 7px 14px; text-decoration: none; font-weight: 600; font-size: .92rem; }
-  .mapa { border-radius: 24px; overflow: hidden; min-height: 340px; box-shadow: 0 16px 40px #2a160b26; background: var(--clara); }
-  .mapa iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
-  @media (max-width: 760px) { .visita .caixa { grid-template-columns: 1fr; } }
+/* galeria */
+.galeria{columns:3 280px;column-gap:16px}
+.galeria figure{margin:0 0 16px;break-inside:avoid;border-radius:22px;overflow:hidden;position:relative;cursor:zoom-in}
+.galeria img{width:100%;transition:transform 1s var(--ease)}
+.galeria figure:hover img{transform:scale(1.05)}
+.galeria figcaption{position:absolute;left:12px;bottom:12px;right:12px;color:#fff;font-weight:600;font-size:14px;text-shadow:0 1px 8px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:all .4s var(--ease)}
+.galeria figure:hover figcaption{opacity:1;transform:none}
+.zoom{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.9);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+.zoom.on{opacity:1;pointer-events:auto}
+.zoom img{max-height:86vh;border-radius:16px;transform:scale(.94);transition:transform .45s var(--ease)}
+.zoom.on img{transform:none}
+.zoom button{position:absolute;top:18px;right:18px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:26px;cursor:pointer}
 
-  footer { background: var(--escura); color: #fff9; text-align: center; padding: 34px 16px 96px; font-size: .9rem; }
-  footer b { color: #fff; font-family: var(--titulo); font-size: 1.1rem; display: block; margin-bottom: 4px; }
-  footer .prop { margin-top: 10px; font-size: .78rem; opacity: .6; }
-  footer .cd { margin-top: 8px; font-size: .74rem; opacity: .6; } footer .cd a { color: inherit; text-underline-offset: 3px; } footer .cd strong { font-weight: 700; }
+/* visite */
+.visite .box{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:stretch}
+.info{display:grid;gap:26px;align-content:start}
+.info h3{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta2);font-family:Figtree;font-weight:700;margin-bottom:8px}
+.info .grande{font:700 22px/1.35 "Bricolage Grotesque";letter-spacing:-.01em}
+.info table{border-collapse:collapse;width:100%;max-width:420px}
+.info td{padding:8px 0;border-bottom:1px solid var(--linha)}
+.info td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.info tr.hoje td{font-weight:700;color:var(--destaque)}
+.info .tels{display:flex;flex-wrap:wrap;gap:10px}
+.info .tels a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;padding:10px 14px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--linha)}
+.info .tels a:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.info .redes{display:flex;gap:10px}
+.info .redes a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--linha)}
+.mapa{border-radius:28px;overflow:hidden;min-height:380px;box-shadow:0 0 0 1px var(--linha);background:var(--cartao)}
+.mapa iframe{width:100%;height:100%;min-height:380px;border:0;filter:saturate(.9)}
 
-  .zap-fixo { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 60px; height: 60px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 10px 28px #0005; animation: pulsa 2.6s infinite; }
-  .zap-fixo svg { width: 32px; height: 32px; fill: #fff; }
-  @keyframes pulsa { 0%, 100% { box-shadow: 0 10px 28px #0005, 0 0 0 0 #25d36680; } 50% { box-shadow: 0 10px 28px #0005, 0 0 0 14px #25d36600; } }
-  .aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
-  .aparece.vista { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .aparece { opacity: 1; transform: none; } .zap-fixo { animation: none; } }
+/* chamada final */
+.chamada{position:relative;overflow:hidden;background:var(--escura);color:#fff;text-align:center;padding:120px 0}
+.chamada::before{content:"";position:absolute;width:700px;height:700px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,color-mix(in srgb,var(--destaque) 40%,transparent),transparent 65%);animation:pulsa 8s ease-in-out infinite}
+@keyframes pulsa{50%{transform:translate(-50%,-50%) scale(1.15)}}
+.chamada .box{position:relative}
+.chamada h2{font-size:clamp(38px,6vw,78px);max-width:14ch;margin:0 auto}
+.chamada p{margin:20px auto 34px;color:rgba(255,255,255,.75);font-size:19px;max-width:44ch}
+
+footer{background:#0a0908;color:#9a8f83;padding:36px 0;font-size:14px}
+footer .box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center}
+footer a{color:#e8dfd4}
+.zapfixo{position:fixed;right:18px;bottom:18px;z-index:40;width:62px;height:62px;border-radius:50%;background:#1fa855;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);transform:scale(0);transition:transform .5s var(--ease)}
+.zapfixo.on{transform:none}
+.zapfixo svg{width:31px;height:31px;color:#fff}
+.zapfixo::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #1fa855;animation:onda 2.6s var(--ease) infinite}
+@keyframes onda{0%{opacity:.8;transform:scale(.9)}100%{opacity:0;transform:scale(1.3)}}
+
+@media (max-width:900px){
+  .topo nav a.lk{display:none}
+  .capa .nota-capa{position:static;display:inline-block;margin-top:26px}
+  .sobre .box,.visite .box{grid-template-columns:1fr;gap:40px}
+  .depos{grid-template-columns:1fr}
+  .passos{grid-template-columns:1fr;gap:30px}
+  .passos::before{top:30px;bottom:30px;left:29px;right:auto;width:2px;height:auto}
+  .passos .linha{left:29px;width:2px;height:0;transition:height 2s var(--ease)}
+  .passos.visto .linha{width:2px;height:calc(100% - 60px)}
+  .passo{display:grid;grid-template-columns:60px 1fr;gap:18px}
+  .passo h3{margin:12px 0 6px}
+  .item{grid-template-columns:56px 1fr;gap:16px}
+  .item .ic{width:52px;height:52px;font-size:25px}
+  .item .seta{display:none}
+  section{padding:80px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .entra,.rv{opacity:1;transform:none}
+}
 </style>
 
 <meta name="description" content="Corte, barba e bigode na Av. São Paulo, em Praia Grande. Ambiente climatizado, cerveja gelada e aquele atendimento de barbearia old school, desde 2015.">
-<link rel="canonical" href="https://sitescd.github.io/barbearia-do-teste/">
+<link rel="canonical" href="https://sitescd.com.br/barbearia-do-teste/">
 <meta property="og:title" content="Barbearia do Teste · Barbearia em Praia Grande">
 <meta property="og:description" content="Corte, barba e bigode na Av. São Paulo, em Praia Grande. Ambiente climatizado, cerveja gelada e aquele atendimento de barbearia old school, desde 2015.">
-<meta property="og:image" content="https://sitescd.github.io/barbearia-do-teste/maps-6.jpg">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Barbearia do Teste","url":"https://sitescd.github.io/barbearia-do-teste/","description":"Corte, barba e bigode na Av. São Paulo, em Praia Grande. Ambiente climatizado, cerveja gelada e aquele atendimento de barbearia old school, desde 2015.","image":"https://sitescd.github.io/barbearia-do-teste/maps-6.jpg","telephone":"(11) 97085-9360","address":{"@type":"PostalAddress","streetAddress":"Rua do Teste, 100 – Boqueirão, Praia Grande/SP (endereço de teste)","addressLocality":"Praia Grande","addressRegion":"SP","addressCountry":"BR"},"sameAs":[]}</script>
-<style>footer .prop{display:none!important}</style>
+<meta property="og:image" content="https://sitescd.com.br/barbearia-do-teste/maps-6.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Barbearia do Teste","url":"https://sitescd.com.br/barbearia-do-teste/","description":"Corte, barba e bigode na Av. São Paulo, em Praia Grande. Ambiente climatizado, cerveja gelada e aquele atendimento de barbearia old school, desde 2015.","image":"https://sitescd.com.br/barbearia-do-teste/maps-6.jpg","telephone":"(11) 97085-9360","address":{"@type":"PostalAddress","streetAddress":"Rua do Teste, 100 – Boqueirão, Praia Grande/SP (endereço de teste)","addressLocality":"Praia Grande","addressRegion":"SP","addressCountry":"BR"},"sameAs":[]}</script>
+<style>footer .prop{display:none!important}footer .cd{display:none!important}</style>
 </head>
 <body>
-<script id="dados" type="application/json">{"nome":"Barbearia do Teste","ramo":"Barbearia","cidade":"Praia Grande · SP","slogan":"A barbearia com os *melhores clientes*.","subtitulo":"Corte, barba e bigode na Av. São Paulo, em Praia Grande. Ambiente climatizado, cerveja gelada e aquele atendimento de barbearia old school, desde 2015.","destaques":["Desde 2015","Ambiente climatizado","Cerveja gelada"],"whatsapp":"5511970859360","whatsapp_msg":"Olá! Vi o site da Barbearia do Teste e quero marcar um horário.","telefones":[{"numero":"(11) 97085-9360","whatsapp":true}],"endereco":"Rua do Teste, 100 – Boqueirão, Praia Grande/SP (endereço de teste)","horario":[{"dias":"Terça a sábado","horas":"9h às 18h30"},{"dias":"Domingo e segunda","horas":"Fechado"}],"instagram":"","facebook":"","produtos_chapeu":"Barba, cabelo e bigode","produtos_titulo":"O que você encontra aqui","produtos_texto":"Do corte do dia a dia ao acabamento da barba, feito com calma e capricho.","produtos":[{"icone":"✂️","titulo":"Corte masculino","texto":"Degradê, social ou do jeito que você pedir, com acabamento caprichado."},{"icone":"🧔","titulo":"Barba e bigode","texto":"Barba desenhada, aparada e alinhada, do contorno ao bigode."},{"icone":"👦","titulo":"Corte infantil","texto":"A molecada também senta na cadeira e sai na régua."},{"icone":"🍺","titulo":"Cerveja gelada","texto":"Tem sempre uma geladinha pra acompanhar a espera."}],"sobre_titulo":"Barbearia de verdade, desde 2015","sobre":"A Barbearia do Teste é aquele lugar pra sentar na cadeira, trocar uma ideia e sair arrumado. Decoração de barbearia antiga, mesa de sinuca, ar-condicionado e cerveja gelada — e na cadeira, barbeiro experiente e gente boa, como os clientes contam no Google.","frase":"Barba, cabelo, bigode e uma boa conversa","encomenda":{"titulo":"Como garantir seu horário","passos":[{"titulo":"Chame no WhatsApp","texto":"Diga o que quer fazer: corte, barba ou os dois."},{"titulo":"Combine o horário","texto":"A gente vê o melhor horário pra você não esperar."},{"titulo":"Venha pro clube","texto":"Av. São Paulo, 2965, Loja 2 — a cerveja já está gelando."}]},"avaliacoes":{"nota":4.9,"total":87,"lista":[{"texto":"Avaliação de exemplo (site de teste).","autor":"Teste"},{"texto":"Atendimento ótimo — texto de teste.","autor":"Teste"},{"texto":"Recomendo — texto de teste.","autor":"Teste"}]},"cores":{"escura":"#121212","media":"#d47b0f","destaque":"#f2a541","clara":"#f4f1ec"},"estilo_titulo":"moderna","foto_capa":"maps-6.jpg","foto_capa_foco":"50% 45%","foto_capa_zoom":1.1,"foto_sobre":"maps-10.jpg","foto_sobre_foco":"50% 52%","foto_sobre_zoom":1.5,"logo":{"recorte":{"foto":"maps-6.jpg","x":64,"y":10.5,"w":31.5,"h":22,"proporcao":1.2}},"galeria":[{"url":"maps-11.jpg","legenda":"Degradê com a barba alinhada","ilustrativa":false},{"url":"maps-12.jpg","legenda":"Cervejas no balcão","ilustrativa":false},{"url":"https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&auto=format&q=80&fit=max","legenda":"Barba feita com capricho","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&auto=format&q=80&fit=max","legenda":"Ferramentas de barbeiro","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&auto=format&q=80&fit=max","legenda":"Clima de barbearia","ilustrativa":true}],"galeria_titulo":"Saiu daqui na régua"}</script>
+<script id="dados" type="application/json">{"nome":"Barbearia do Teste","ramo":"Barbearia","cidade":"Praia Grande · SP","slogan":"A barbearia com os *melhores clientes*.","subtitulo":"Corte, barba e bigode na Av. São Paulo, em Praia Grande. Ambiente climatizado, cerveja gelada e aquele atendimento de barbearia old school, desde 2015.","destaques":["Desde 2015","Ambiente climatizado","Cerveja gelada"],"whatsapp":"5511970859360","whatsapp_msg":"Olá! Vi o site da Barbearia do Teste e quero marcar um horário.","telefones":[{"numero":"(11) 97085-9360","whatsapp":true}],"endereco":"Rua do Teste, 100 – Boqueirão, Praia Grande/SP (endereço de teste)","horario":[{"dias":"Terça a sábado","horas":"9h às 18h30"},{"dias":"Domingo e segunda","horas":"Fechado"}],"instagram":"","facebook":"","produtos_chapeu":"Barba, cabelo e bigode","produtos_titulo":"O que você encontra aqui","produtos_texto":"Do corte do dia a dia ao acabamento da barba, feito com calma e capricho.","produtos":[{"icone":"✂️","titulo":"Corte masculino","texto":"Degradê, social ou do jeito que você pedir, com acabamento caprichado."},{"icone":"🧔","titulo":"Barba e bigode","texto":"Barba desenhada, aparada e alinhada, do contorno ao bigode."},{"icone":"👦","titulo":"Corte infantil","texto":"A molecada também senta na cadeira e sai na régua."},{"icone":"🍺","titulo":"Cerveja gelada","texto":"Tem sempre uma geladinha pra acompanhar a espera."}],"sobre_titulo":"Barbearia de verdade, desde 2015","sobre":"A Barbearia do Teste é aquele lugar pra sentar na cadeira, trocar uma ideia e sair arrumado. Decoração de barbearia antiga, mesa de sinuca, ar-condicionado e cerveja gelada — e na cadeira, barbeiro experiente e gente boa, como os clientes contam no Google.","frase":"Barba, cabelo, bigode e uma boa conversa","encomenda":{"titulo":"Como garantir seu horário","passos":[{"titulo":"Chame no WhatsApp","texto":"Diga o que quer fazer: corte, barba ou os dois."},{"titulo":"Combine o horário","texto":"A gente vê o melhor horário pra você não esperar."},{"titulo":"Venha pro clube","texto":"Av. São Paulo, 2965, Loja 2 — a cerveja já está gelando."}]},"avaliacoes":{"nota":4.9,"total":87,"lista":[{"texto":"Avaliação de exemplo (site de teste).","autor":"Teste"},{"texto":"Atendimento ótimo — texto de teste.","autor":"Teste"},{"texto":"Recomendo — texto de teste.","autor":"Teste"}]},"cores":{"escura":"#121212","media":"#d47b0f","destaque":"#f2a541","clara":"#f4f1ec"},"estilo_titulo":"moderna","foto_capa":"maps-6.jpg","foto_capa_foco":"50% 45%","foto_capa_zoom":1.1,"foto_sobre":"maps-10.jpg","foto_sobre_foco":"50% 52%","foto_sobre_zoom":1.5,"logo":{"recorte":{"foto":"maps-6.jpg","x":64,"y":10.5,"w":31.5,"h":22,"proporcao":1.2}},"galeria":[{"url":"maps-11.jpg","legenda":"Degradê com a barba alinhada","ilustrativa":false},{"url":"maps-6.jpg","legenda":"Nossa fachada na Av. São Paulo","ilustrativa":false},{"url":"maps-12.jpg","legenda":"Cervejas no balcão","ilustrativa":false},{"url":"https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&auto=format&q=80&fit=max","legenda":"Barba feita com capricho","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&auto=format&q=80&fit=max","legenda":"Ferramentas de barbeiro","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&auto=format&q=80&fit=max","legenda":"Clima de barbearia","ilustrativa":true}],"galeria_titulo":"Saiu daqui na régua"}</script>
 
-<header class="topo"><div class="caixa">
-  <a class="marca" href="#inicio"></a>
-  <nav class="menu"></nav>
-  <a class="bt bt-zap zap-mini" target="_blank" rel="noopener" hidden></a>
-</div></header>
+<header class="topo" id="topo">
+  <div class="box">
+    <a class="marca" href="#"><span class="av" id="av"></span><span class="nm" id="nm"></span></a>
+    <nav id="nav"></nav>
+  </div>
+</header>
 
-<section class="capa" id="inicio"><div class="fundo"></div><div class="caixa">
-  <span class="chapeu"></span>
-  <h1></h1>
-  <p class="sub"></p>
-  <div class="acoes"></div>
-  <div class="selos"></div>
-</div></section>
+<main>
+  <section class="capa" id="inicio" style="padding:0">
+    <div class="fundo-foto" id="capaFoto" data-foto="foto_capa"></div>
+    <div class="box">
+      <span class="local entra" id="local"><span class="ponto" id="ponto"></span><span id="localTxt"></span></span>
+      <h1 class="entra" style="animation-delay:.1s" id="slogan"></h1>
+      <p class="sub entra" style="animation-delay:.2s" id="subtitulo"></p>
+      <div class="acoes entra" style="animation-delay:.3s" id="acoes"></div>
+    </div>
+    <div class="nota-capa entra" style="animation-delay:.45s" id="notaCapa" hidden></div>
+  </section>
 
-<section class="bloco claro" id="produtos" hidden><div class="caixa">
-  <div class="cabeca aparece"><span class="chapeu"></span><h2></h2><p></p></div>
-  <div class="cards"></div>
-</div></section>
+  <div class="faixa" id="faixa" aria-hidden="true"><div class="trilho" id="trilho"></div></div>
 
-<section class="bloco sobre" id="sobre" hidden><div class="caixa">
-  <div class="foto aparece"></div>
-  <div class="aparece"><span class="chapeu">Quem somos</span><h2></h2><p></p></div>
-</div></section>
+  <section id="produtos" hidden>
+    <div class="box">
+      <div class="titulo rv"><div class="chapeu" id="prodChapeu"></div><h2 id="prodTitulo"></h2><p id="prodTexto"></p></div>
+      <div class="lista" id="lista"></div>
+    </div>
+  </section>
 
-<section class="bloco" id="fotos" hidden><div class="caixa">
-  <div class="cabeca aparece"><span class="chapeu">Galeria</span><h2></h2></div>
-  <div class="galeria"></div>
-</div></section>
+  <section class="sobre" id="sobre" hidden style="padding-top:20px">
+    <div class="box">
+      <div class="foto rv" id="sobreFoto"></div>
+      <div class="rv" style="--d:.1s">
+        <div class="chapeu">Quem somos</div>
+        <h2 id="sobreTitulo" data-campo="sobre_titulo"></h2>
+        <p class="txt" id="sobreTxt" data-campo="sobre"></p>
+        <p class="frase" id="frase" data-campo="frase"></p>
+      </div>
+    </div>
+  </section>
 
-<div class="frase" hidden><p></p></div>
+  <section class="aval" id="avaliacoes" hidden>
+    <div class="box">
+      <div class="topo-aval rv">
+        <div class="titulo" style="margin:0"><div class="chapeu">O que dizem</div><h2>Quem vem, <em>volta.</em></h2></div>
+        <div class="grande" id="notaGrande"></div>
+      </div>
+      <div class="depos" id="depos"></div>
+    </div>
+  </section>
 
-<section class="bloco claro" id="encomendas" hidden><div class="caixa">
-  <div class="cabeca aparece"><span class="chapeu">Como pedir</span><h2></h2></div>
-  <div class="passos"></div>
-  <div class="centro"></div>
-</div></section>
+  <section id="encomendas" hidden>
+    <div class="box">
+      <div class="titulo rv"><div class="chapeu">Como pedir</div><h2 id="encTitulo"></h2></div>
+      <div class="passos" id="passos"><span class="linha" aria-hidden="true"></span></div>
+    </div>
+  </section>
 
-<section class="bloco" id="avaliacoes" hidden><div class="caixa">
-  <div class="cabeca aparece"><span class="chapeu">Quem já foi recomenda</span><h2>O que dizem no Google</h2></div>
-  <div class="nota"></div>
-  <div class="depo"></div>
-</div></section>
+  <section id="fotos" hidden style="padding-top:20px">
+    <div class="box">
+      <div class="titulo rv"><div class="chapeu">Fotos</div><h2 id="galTitulo"></h2></div>
+      <div class="galeria" id="galeria"></div>
+    </div>
+  </section>
 
-<section class="bloco claro visita" id="visite"><div class="caixa">
-  <div class="info aparece"></div>
-  <div class="mapa aparece"></div>
-</div></section>
+  <section class="visite" id="visite">
+    <div class="box">
+      <div class="info rv" id="info"></div>
+      <div class="mapa rv" style="--d:.1s" id="mapa"></div>
+    </div>
+  </section>
 
-<footer><b></b><span class="end"></span><div class="prop">Proposta de site</div><div class="cd">Site feito por <strong>Sites CD</strong> · <a class="cd-zap" target="_blank" rel="noopener">Quer um site assim?</a><span class="cd-d"> · <a class="cd-dono" rel="nofollow">🔒 Área do dono</a></span></div></footer>
-<a class="zap-fixo" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp" hidden></a>
+  <section class="chamada">
+    <div class="box">
+      <h2 class="rv" id="chamTitulo"></h2>
+      <p class="rv" id="chamTexto"></p>
+      <div class="rv" id="chamBt"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="box">
+    <span id="rodNome"></span>
+    <span><span class="prop">Proposta de site · </span><a class="cd" href="https://sitescd.com.br" target="_blank" rel="noopener">Site feito pela Sites CD</a></span>
+  </div>
+</footer>
+<a class="zapfixo" id="zapfixo" hidden target="_blank" rel="noopener" aria-label="Chamar no WhatsApp"><svg viewBox="0 0 24 24"><use href="#zap"/></svg></a>
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Foto ampliada"><button type="button" aria-label="Fechar">×</button><img alt=""></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.31-1.96 1.36-.5.05-.98.24-3.3-.69-2.78-1.1-4.55-3.95-4.69-4.13-.13-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.25-.27.55-.34.73-.34l.52.01c.17 0 .39-.06.61.47.24.55.8 1.92.87 2.06.07.14.11.3.02.48-.09.18-.13.3-.27.46-.13.16-.28.36-.4.48-.13.13-.27.28-.12.55.15.27.68 1.12 1.46 1.81 1 .89 1.85 1.17 2.12 1.3.27.14.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.52.32.06.11.06.66-.18 1.34Z"/></symbol>
+  <symbol id="seta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+  <symbol id="pino" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+  <symbol id="insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></g></symbol>
+  <symbol id="face" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8Z"/></symbol>
+</svg>
 
 <script>
 (function () {
-  let D = {};
-  try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
-  const $ = (s) => document.querySelector(s);
-  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const tem = (x) => Array.isArray(x) ? x.length > 0 : x != null && String(x).trim() !== "";
-  const ZAP = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
-  const FONE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>';
-  const MAPA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>';
+  let D = {}; try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
+  const $ = (s) => document.querySelector(s), esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const tem = (x) => Array.isArray(x) ? x.length > 0 : !!(x && String(x).trim());
+  const marcado = (t) => esc(t).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  const nome = D.nome || "Nosso negócio", endereco = D.endereco || "";
 
-  // cores e estilo da letra
-  const r = document.documentElement.style, c = D.cores || {};
-  for (const k of ["escura", "media", "destaque", "clara"]) if (tem(c[k])) r.setProperty("--" + k, c[k]);
-  if (D.estilo_titulo === "moderna") { r.setProperty("--titulo", '"Poppins", system-ui, sans-serif'); r.setProperty("--enfeite", '"Poppins", system-ui, sans-serif'); }
-  if (D.estilo_titulo === "serif") r.setProperty("--enfeite", '"Playfair Display", Georgia, serif');
+  // cores e tema (claro/escuro), iguais aos outros modelos
+  const C = D.cores || {}, raiz = document.documentElement.style;
+  if (C.escura) raiz.setProperty("--escura", C.escura);
+  if (C.media) raiz.setProperty("--media", C.media);
+  if (C.destaque) raiz.setProperty("--destaque", C.destaque);
+  if (C.clara) { raiz.setProperty("--clara", C.clara); raiz.setProperty("--fundo", C.clara); }
+  const lum = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ""); if (!m) return .5; const n = parseInt(m[1], 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
+  raiz.setProperty("--sobre-destaque", lum(C.destaque) > .55 ? "#15110d" : "#ffffff");
+  const ESCURO = /barbear|barber|bar\b|pub|tatu|tattoo|academia|crossfit|oficina|mec[aâ]nic|lounge|tabacaria|hamburg|burger|pizzar|churrasc/i;
+  if (D.tema === "escuro" || (D.tema !== "claro" && ESCURO.test([D.ramo, D.nome].join(" ")))) document.body.classList.add("escuro");
 
-  const nome = D.nome || "Nosso espaço";
-  document.title = nome + (D.ramo ? " · " + D.ramo : "");
-  const zapNum = String(D.whatsapp || "").replace(/\D/g, "");
-  const zapUrl = zapNum ? "https://wa.me/" + zapNum + "?text=" + encodeURIComponent(D.whatsapp_msg || "Olá! Vi o site e quero fazer um pedido.") : "";
-  const tel1 = (D.telefones || [])[0];
-  const telUrl = tel1 ? "tel:+55" + String(tel1.numero).replace(/\D/g, "").replace(/^55/, "") : "";
-  const endereco = D.endereco || "";
+  // links que contam no resumo do mês (wa.me / tel: / maps)
+  const zap = String(D.whatsapp || (D.telefones || []).find((t) => t.whatsapp)?.numero || "").replace(/\D/g, "");
+  const zapNum = zap ? (zap.length <= 11 ? "55" + zap : zap) : "";
+  const zapUrl = zapNum ? "https://wa.me/" + zapNum + (D.whatsapp_msg ? "?text=" + encodeURIComponent(D.whatsapp_msg) : "") : "";
   const mapsUrl = D.maps || (endereco ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(nome + " " + endereco) : "");
+  const telPrinc = (D.telefones || [])[0]?.numero || "";
+  const ZAP = '<svg class="i"><use href="#zap"/></svg>';
 
-  // marca: logo (arquivo), recorte da foto, ou o nome escrito
-  const marca = $(".marca");
-  if (D.logo?.arquivo) marca.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="${esc(nome)}">`;
-  else if (D.logo?.recorte) {
-    const k = D.logo.recorte, el = document.createElement("span");
-    el.className = "recorte";
-    // recorte em % da foto: mostra só aquele pedaço, sem criar arquivo novo
-    el.style.backgroundImage = `url("${k.foto || D.foto_capa}")`;
-    el.style.backgroundSize = `${(100 / k.w) * 100}% ${(100 / k.h) * 100}%`;
-    el.style.backgroundPosition = `${k.w >= 100 ? 0 : (k.x / (100 - k.w)) * 100}% ${k.h >= 100 ? 0 : (k.y / (100 - k.h)) * 100}%`;
-    if (k.proporcao) el.style.setProperty("--prop", k.proporcao);
-    marca.append(el);
-  } else {
-    const p = nome.split(" ");
-    marca.innerHTML = `<span class="nome">${p.length > 1 ? `<em>${esc(p[0])}</em>${esc(p.slice(1).join(" "))}` : esc(nome)}</span>`;
-  }
-  const menu = [["produtos", D.produtos_titulo_menu || "O que temos", tem(D.produtos)], ["encomendas", "Encomendas", tem(D.encomenda?.passos)], ["avaliacoes", "Avaliações", tem(D.avaliacoes?.lista)], ["visite", "Onde estamos", true]];
-  $(".menu").innerHTML = menu.filter((m) => m[2]).map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join("");
-  if (zapUrl) { const z = $(".zap-mini"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP + "<span>Pedir</span>"; }
+  document.title = nome + (D.ramo ? " · " + D.ramo : "");
+  $("#nm").textContent = nome; $("#rodNome").textContent = "© " + new Date().getFullYear() + " " + nome;
+
+  // marca: logo enviado, recorte da foto ou a inicial
+  const av = $("#av");
+  if (D.logo?.arquivo) av.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="${esc(nome)}" data-foto="logo.arquivo">`;
+  else if (D.logo?.recorte?.foto) {
+    const r = D.logo.recorte; av.style.width = Math.min(120, 42 * (r.proporcao || 1)) + "px"; av.style.background = "#fff";
+    av.style.backgroundImage = `url("${r.foto}")`; av.style.backgroundSize = (100 / r.w * 100) + "% auto";
+    av.style.backgroundPosition = `${r.w >= 100 ? 0 : r.x / (100 - r.w) * 100}% ${r.h >= 100 ? 0 : r.y / (100 - r.h) * 100}%`;
+  } else av.textContent = nome.trim()[0] || "•";
+
+  // menu
+  const menu = [["produtos", D.produtos_titulo_menu || "O que temos", tem(D.produtos)], ["sobre", "Quem somos", tem(D.sobre)], ["avaliacoes", "Avaliações", tem(D.avaliacoes?.lista)], ["visite", "Onde estamos", true]];
+  $("#nav").innerHTML = menu.filter((m) => m[2]).map((m) => `<a class="lk" href="#${m[0]}">${esc(m[1])}</a>`).join("") + (zapUrl ? `<a class="bt bt-forte" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}WhatsApp</a>` : "");
 
   // capa
-  const capa = $(".capa");
-  // foco = ponto da foto que importa; zoom = aproxima pra cortar bordas feias (ex.: botões do Street View)
-  if (D.foto_capa) { $(".capa .fundo").style.backgroundImage = `url("${D.foto_capa}")`; if (D.foto_capa_foco) capa.style.setProperty("--foco", D.foto_capa_foco); if (D.foto_capa_zoom) capa.style.setProperty("--zoom", D.foto_capa_zoom); }
-  else capa.classList.add("sem-foto");
-  $(".capa .chapeu").textContent = [D.ramo, D.cidade].filter(tem).join(" · ");
-  const slogan = D.slogan || nome;
-  // a parte do slogan entre *asteriscos* sai na letra de enfeite, na cor de destaque
-  $(".capa h1").innerHTML = esc(slogan).replace(/\*(.+?)\*/g, "<em>$1</em>");
-  $(".capa .sub").textContent = D.subtitulo || "";
-  $(".acoes").innerHTML = (zapUrl ? `<a class="bt bt-zap" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Pedir pelo WhatsApp</a>` : "") +
-    (telUrl ? `<a class="bt bt-borda" href="${telUrl}">${FONE}Ligar agora</a>` : "") +
-    (!zapUrl && !telUrl && mapsUrl ? `<a class="bt bt-borda" href="${mapsUrl}" target="_blank" rel="noopener">${MAPA}Como chegar</a>` : "");
-  $(".selos").innerHTML = (D.destaques || []).slice(0, 4).map((s) => `<span>${esc(s)}</span>`).join("");
+  const capa = $("#capaFoto");
+  if (D.foto_capa) { capa.style.backgroundImage = `url("${D.foto_capa}")`; capa.style.setProperty("--foco", D.foto_capa_foco || "50% 50%"); if (D.foto_capa_zoom) capa.style.setProperty("--zoom", D.foto_capa_zoom); }
+  else capa.style.background = "radial-gradient(120% 80% at 70% 20%, var(--media), var(--escura))";
+  $("#localTxt").textContent = [D.ramo, D.cidade].filter(Boolean).join(" · ");
+  $("#slogan").innerHTML = marcado(D.slogan || nome);
+  $("#subtitulo").textContent = D.subtitulo || "";
+  $("#acoes").innerHTML = (zapUrl ? `<a class="bt bt-forte" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Chamar no WhatsApp</a>` : (telPrinc ? `<a class="bt bt-forte" href="tel:${telPrinc.replace(/\D/g, "")}"><svg class="i"><use href="#tel"/></svg>Ligar agora</a>` : ""))
+    + (mapsUrl ? `<a class="bt bt-vidro" href="${mapsUrl}" target="_blank" rel="noopener"><svg class="i"><use href="#pino"/></svg>Como chegar</a>` : "");
+
+  // aberto agora (pelo horário "Seg a Sex" / "08:00 – 18:00")
+  const DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"], hoje = new Date(), dHoje = hoje.getDay(), mins = hoje.getHours() * 60 + hoje.getMinutes();
+  const idx = (t) => DIAS.findIndex((d) => String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").startsWith(d.normalize("NFD").replace(/[̀-ͯ]/g, "")));
+  function ehHoje(dias) {
+    const t = String(dias || "").toLowerCase();
+    if (/todos|diariamente|todo dia/.test(t)) return true;
+    const faixa = /(\w{3})\w*\.?\s*(?:a|-|–|até)\s*(\w{3})/.exec(t);
+    if (faixa) { const a = idx(faixa[1]), b = idx(faixa[2]); if (a >= 0 && b >= 0) return a <= b ? dHoje >= a && dHoje <= b : dHoje >= a || dHoje <= b; }
+    return t.split(/[,e/]+/).some((x) => idx(x.trim()) === dHoje);
+  }
+  function abertoAgora() {
+    for (const h of D.horario || []) {
+      if (!ehHoje(h.dias)) continue;
+      if (/fechado/i.test(h.horas)) return false;
+      for (const [, a1, a2, b1, b2] of String(h.horas).matchAll(/(\d{1,2})[:h](\d{2})?\s*(?:às|a|-|–)\s*(\d{1,2})[:h](\d{2})?/g)) {
+        const ini = +a1 * 60 + +(a2 || 0), fim = +b1 * 60 + +(b2 || 0);
+        if (fim > ini ? mins >= ini && mins < fim : mins >= ini || mins < fim) return true;
+      }
+      return false;
+    }
+    return null;
+  }
+  const ab = abertoAgora();
+  if (ab === null) $("#ponto").hidden = true;
+  else { $("#ponto").classList.toggle("fechado", !ab); $("#localTxt").textContent = (ab ? "Aberto agora · " : "Fechado agora · ") + $("#localTxt").textContent; }
+
+  // nota na capa
+  const A = D.avaliacoes, nota = A?.nota ? Number(String(A.nota).replace(",", ".")) : 0;
+  if (nota) { const nc = $("#notaCapa"); nc.hidden = false; nc.innerHTML = `<b>${nota.toFixed(1).replace(".", ",")}</b><div class="estrelas">${"★".repeat(Math.round(nota))}</div><small>${A.total ? esc(A.total) + " avaliações" : "no Google"}</small>`; }
+
+  // faixa dos destaques
+  const dest = (D.destaques || []).filter(Boolean);
+  if (dest.length) $("#trilho").innerHTML = [...dest, ...dest, ...dest, ...dest].map((x, k) => `<span${k < dest.length ? ` data-campo="destaques.${k}"` : ""}>${esc(x)}</span>`).join("");
+  else $("#faixa").hidden = true;
 
   // produtos
   if (tem(D.produtos)) {
     $("#produtos").hidden = false;
-    $("#produtos .chapeu").textContent = D.produtos_chapeu || "Feito com carinho";
-    $("#produtos h2").textContent = D.produtos_titulo || "O que você encontra aqui";
-    $("#produtos .cabeca p").textContent = D.produtos_texto || "";
-    $("#produtos .cards").innerHTML = D.produtos.slice(0, 6).map((p) => `<div class="card aparece"><div class="ic">${esc(p.icone || "✨")}</div><h3>${esc(p.titulo)}</h3><p>${esc(p.texto || "")}</p></div>`).join("");
+    $("#prodChapeu").textContent = D.produtos_chapeu || "O que temos";
+    $("#prodTitulo").innerHTML = marcado(D.produtos_titulo || "O que você encontra aqui");
+    $("#prodTexto").textContent = D.produtos_texto || "";
+    $("#lista").innerHTML = D.produtos.slice(0, 8).map((p, k) => `<a class="item rv" style="--d:${k * .06}s" href="${zapUrl || "#visite"}" ${zapUrl ? 'target="_blank" rel="noopener"' : ""}>
+      <span class="ic">${esc(p.icone || "✦")}</span><div><h3 data-campo="produtos.${k}.titulo">${esc(p.titulo)}</h3><p data-campo="produtos.${k}.texto">${esc(p.texto || "")}</p></div><span class="seta"><svg class="i"><use href="#seta"/></svg></span></a>`).join("");
   }
+
   // sobre
   if (tem(D.sobre)) {
     $("#sobre").hidden = false;
-    $("#sobre h2").textContent = D.sobre_titulo || "Um cantinho pra você";
-    $("#sobre p").textContent = D.sobre;
-    const f = $("#sobre .foto"), foto = D.foto_sobre || D.foto_capa;
-    if (foto) { f.innerHTML = "<i></i>"; f.firstChild.style.backgroundImage = `url("${foto}")`; f.style.setProperty("--foco", D.foto_sobre_foco || "50% 50%"); if (D.foto_sobre_zoom) f.style.setProperty("--zoom", D.foto_sobre_zoom); }
-    else f.remove();
+    $("#sobreTitulo").innerHTML = marcado(D.sobre_titulo || "Quem somos");
+    $("#sobreTxt").textContent = D.sobre;
+    if (D.frase) $("#frase").textContent = D.frase; else $("#frase").hidden = true;
+    const f = $("#sobreFoto"), foto = D.foto_sobre || D.foto_capa;
+    if (foto) { f.innerHTML = '<i data-foto="foto_sobre"></i>'; f.firstChild.style.backgroundImage = `url("${foto}")`; f.style.setProperty("--foco", D.foto_sobre_foco || "50% 50%"); if (D.foto_sobre_zoom) f.style.setProperty("--zoom", D.foto_sobre_zoom); }
+    else f.hidden = true;
   }
-  // galeria: fotos reais e de banco (ilustrativa: true = troca fácil pela foto do dono depois)
-  const gal = (D.galeria || []).filter((g) => g && g.url).slice(0, 7);
-  if (gal.length) {
-    $("#fotos").hidden = false; $("#fotos h2").textContent = D.galeria_titulo || "Um pouco do nosso dia a dia";
-    $("#fotos .galeria").innerHTML = gal.map((g) => `<figure class="aparece"><img loading="lazy" src="${esc(g.url)}" alt="${esc(g.legenda || nome)}" onerror="this.closest('figure').remove()">${g.legenda ? `<figcaption>${esc(g.legenda)}</figcaption>` : ""}</figure>`).join("");
-  }
-  if (gal.some((g) => g.ilustrativa) || D.fotos_ilustrativas) $("footer .prop").textContent = "Proposta de site · fotos ilustrativas";
-  if (tem(D.frase)) { const fr = $(".frase"); fr.hidden = false; $(".frase p").textContent = D.frase; }
-  // encomendas
-  if (tem(D.encomenda?.passos)) {
-    $("#encomendas").hidden = false;
-    $("#encomendas h2").textContent = D.encomenda.titulo || "Faça sua encomenda";
-    $("#encomendas .passos").innerHTML = D.encomenda.passos.slice(0, 4).map((p) => typeof p === "string" ? `<div class="passo aparece"><p>${esc(p)}</p></div>` : `<div class="passo aparece"><h3>${esc(p.titulo)}</h3><p>${esc(p.texto || "")}</p></div>`).join("");
-    if (zapUrl) $("#encomendas .centro").innerHTML = `<a class="bt bt-zap" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Encomendar pelo WhatsApp</a>`;
-  }
-  // avaliações (só as reais, que a IA achou)
-  const av = D.avaliacoes;
-  if (tem(av?.lista)) {
+
+  // avaliações
+  if (tem(A?.lista)) {
     $("#avaliacoes").hidden = false;
-    if (av.nota) $("#avaliacoes .nota").innerHTML = `<b>${esc(String(av.nota).replace(".", ","))}</b><div><div class="estrelas">${"★".repeat(Math.round(av.nota))}</div>${av.total ? esc(av.total) + " avaliações no Google" : "no Google"}</div>`;
-    $("#avaliacoes .depo").innerHTML = av.lista.slice(0, 3).map((a) => `<figure class="aparece"><div class="estrelas">${"★".repeat(a.estrelas || 5)}</div><blockquote>“${esc(a.texto)}”</blockquote><figcaption>${esc(a.autor || "Cliente")}</figcaption></figure>`).join("");
+    if (nota) $("#notaGrande").innerHTML = `<b data-n="${nota}">0,0</b><div><div class="estrelas" style="font-size:22px">${"★".repeat(Math.round(nota))}</div><small>${A.total ? esc(A.total) + " avaliações no Google" : "no Google"}</small></div>`;
+    $("#depos").innerHTML = A.lista.slice(0, 3).map((a, k) => `<figure class="depo rv" style="--d:${k * .08}s"><div class="estrelas">${"★".repeat(a.estrelas || 5)}</div><blockquote>“${esc(a.texto)}”</blockquote><figcaption><i>${esc((a.autor || "C").trim()[0])}</i>${esc(a.autor || "Cliente")}</figcaption></figure>`).join("");
   }
-  // visite: endereço, horário, telefones, redes e mapa
-  const tels = (D.telefones || []).map((t) => { const n = String(t.numero).replace(/\D/g, "").replace(/^55/, ""); return `<a href="${t.whatsapp ? "https://wa.me/55" + n : "tel:+55" + n}" ${t.whatsapp ? 'target="_blank" rel="noopener"' : ""}>${esc(t.numero)}${t.whatsapp ? "<small>WhatsApp</small>" : ""}</a>`; }).join("");
-  const redes = [["Instagram", D.instagram], ["Facebook", D.facebook], ["Google Maps", mapsUrl]].filter((x) => tem(x[1]));
-  $(".info").innerHTML =
-    (endereco ? `<div><h3>ENDEREÇO</h3><div class="linha">${esc(endereco)}</div></div>` : "") +
-    (tem(D.horario) ? `<div><h3>HORÁRIO</h3><table>${D.horario.map((h) => `<tr><td>${esc(h.dias)}</td><td>${esc(h.horas)}</td></tr>`).join("")}</table></div>` : "") +
-    (tels ? `<div class="tels"><h3>FALE COM A GENTE</h3>${tels}</div>` : "") +
-    (redes.length ? `<div><h3>SIGA E ENCONTRE</h3><div class="redes">${redes.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>` : "");
-  if (endereco) $(".mapa").innerHTML = `<iframe loading="lazy" title="Mapa" src="https://www.google.com/maps?q=${encodeURIComponent(nome + ", " + endereco)}&output=embed"></iframe>`;
-  else $(".mapa").remove();
 
-  $("footer b").textContent = nome;
-  $("footer .end").textContent = endereco || D.cidade || "";
+  // como pedir
+  const passos = D.encomenda?.passos || [];
+  if (passos.length) {
+    $("#encomendas").hidden = false;
+    $("#encTitulo").innerHTML = marcado(D.encomenda.titulo || "Como pedir");
+    $("#passos").insertAdjacentHTML("beforeend", passos.slice(0, 3).map((p, k) => `<div class="passo"><span class="n">${k + 1}</span><div><h3 data-campo="encomenda.passos.${k}.titulo">${esc(p.titulo)}</h3><p data-campo="encomenda.passos.${k}.texto">${esc(p.texto || "")}</p></div></div>`).join(""));
+  }
 
-  // 09/10 rodapé da Sites CD (Caio): crédito discreto + "Quer um site assim?" (WhatsApp do Caio, não é botão: o verde é o
-  // da loja) + "Área do dono" (porteiro com PIN; só aparece no endereço publicado sitescd.github.io/<slug>/)
-  { const cd = $("footer .cd"), slug = location.hostname === "sitescd.github.io" ? location.pathname.split("/")[1] : "";
-    cd.querySelector(".cd-zap").href = "https://wa.me/5513996485501?text=" + encodeURIComponent("Olá! Vi o site " + nome + " e quero um site assim.");
-    if (slug) cd.querySelector(".cd-dono").href = "https://claude-maestro.tail8a0b99.ts.net:8443/d/" + slug; else cd.querySelector(".cd-d").remove(); }
-  if (zapUrl) { const z = $(".zap-fixo"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP; }
+  // galeria
+  const gal = (D.galeria || []).filter((g) => g && g.url);
+  if (gal.length) {
+    $("#fotos").hidden = false;
+    $("#galTitulo").innerHTML = marcado(D.galeria_titulo || "Um pouco do nosso dia a dia");
+    $("#galeria").innerHTML = gal.map((g, k) => `<figure class="rv" style="--d:${(k % 3) * .06}s"><img loading="lazy" data-foto="galeria.${D.galeria.indexOf(g)}.url" src="${esc(g.url)}" alt="${esc(g.legenda || nome)}" onerror="this.closest('figure').remove()">${g.legenda ? `<figcaption>${esc(g.legenda)}</figcaption>` : ""}</figure>`).join("");
+  }
+  if (gal.some((g) => g.ilustrativa) || D.fotos_ilustrativas) document.querySelector("footer .prop").textContent = "Proposta de site · fotos ilustrativas · ";
 
-  // topo escurece ao rolar; blocos aparecem suave
-  const topo = $(".topo"), rolar = () => topo.classList.toggle("rolou", scrollY > 40);
+  // onde estamos
+  const tels = (D.telefones || []).filter((t) => t.numero);
+  $("#info").innerHTML = `<div><div class="chapeu">Onde estamos</div><h2 style="font-size:clamp(32px,4vw,48px)">Vem pra cá.</h2></div>`
+    + (endereco ? `<div><h3>Endereço</h3><p class="grande">${esc(endereco)}</p>${mapsUrl ? `<p style="margin-top:10px"><a href="${mapsUrl}" target="_blank" rel="noopener" style="font-weight:700;color:var(--destaque)">Abrir no mapa →</a></p>` : ""}</div>` : "")
+    + (tem(D.horario) ? `<div><h3>Horário</h3><table>${D.horario.map((h) => `<tr${ehHoje(h.dias) ? ' class="hoje"' : ""}><td>${esc(h.dias)}</td><td>${esc(h.horas)}</td></tr>`).join("")}</table></div>` : "")
+    + (tels.length ? `<div><h3>Contato</h3><div class="tels">${tels.map((t) => t.whatsapp ? `<a href="https://wa.me/${(() => { const n = t.numero.replace(/\D/g, ""); return n.length <= 11 ? "55" + n : n; })()}" target="_blank" rel="noopener">${ZAP}${esc(t.numero)}</a>` : `<a href="tel:${t.numero.replace(/\D/g, "")}"><svg class="i"><use href="#tel"/></svg>${esc(t.numero)}</a>`).join("")}</div></div>` : "")
+    + ((D.instagram || D.facebook) ? `<div class="redes">${D.instagram ? `<a href="${esc(/^https?:/.test(D.instagram) ? D.instagram : "https://instagram.com/" + D.instagram.replace(/^@/, ""))}" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i"><use href="#insta"/></svg></a>` : ""}${D.facebook ? `<a href="${esc(D.facebook)}" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i"><use href="#face"/></svg></a>` : ""}</div>` : "");
+  if (endereco) $("#mapa").innerHTML = `<iframe loading="lazy" title="Mapa: ${esc(nome)}" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(nome + " " + endereco)}&output=embed"></iframe>`;
+  else $("#mapa").hidden = true;
+
+  // chamada final
+  $("#chamTitulo").innerHTML = marcado(D.frase ? D.frase.replace(/\.$/, "") + "." : "A gente te espera.");
+  $("#chamTexto").textContent = zapUrl ? "Chama no WhatsApp e a gente responde rapidinho." : "Passa aqui ou liga pra gente.";
+  $("#chamBt").innerHTML = zapUrl ? `<a class="bt bt-forte" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Chamar no WhatsApp</a>` : (telPrinc ? `<a class="bt bt-forte" href="tel:${telPrinc.replace(/\D/g, "")}"><svg class="i"><use href="#tel"/></svg>Ligar agora</a>` : "");
+  const zf = $("#zapfixo"); if (zapUrl) { zf.hidden = false; zf.href = zapUrl; }
+
+  // movimento: aparece ao rolar, nota contando, linha dos passos
+  const contar = (el) => { const fim = +el.dataset.n, t0 = performance.now(); const p = (t) => { const k = Math.min(1, (t - t0) / 1400); el.textContent = (fim * (1 - Math.pow(1 - k, 3))).toFixed(1).replace(".", ","); if (k < 1) requestAnimationFrame(p); }; requestAnimationFrame(p); };
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; e.target.classList.add("visto"); io.unobserve(e.target); e.target.querySelectorAll?.("[data-n]").forEach(contar); }), { threshold: .2 });
+  document.querySelectorAll(".rv, #passos").forEach((el) => io.observe(el));
+
+  // zoom na galeria
+  const zoom = $("#zoom");
+  $("#galeria").addEventListener("click", (e) => { const im = e.target.closest("img"); if (!im || document.body.classList.contains("editando")) return; zoom.querySelector("img").src = im.src; zoom.classList.add("on"); });
+  zoom.addEventListener("click", () => zoom.classList.remove("on"));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") zoom.classList.remove("on"); });
+
+  // topo e WhatsApp fixo
+  const topo = $("#topo");
+  const rolar = () => { topo.classList.toggle("rolou", scrollY > 40); zf.classList.toggle("on", scrollY > 500); };
   addEventListener("scroll", rolar, { passive: true }); rolar();
-  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("vista"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
-  document.querySelectorAll(".aparece").forEach((el) => (io ? io.observe(el) : el.classList.add("vista")));
 })();
 </script>
 
-<script>(function(){var u="https://claude-maestro.tail8a0b99.ts.net:8443/c/barbearia-do-teste/",M="Olá! Vi o site da Barbearia do Teste e quero atendimento.";function b(t){try{navigator.sendBeacon(u+t)}catch(e){}}
+<script>(function(){var u="https://area.sitescd.com.br/c/barbearia-do-teste/",M="Olá! Vi o site da Barbearia do Teste e quero atendimento.";function b(t){try{navigator.sendBeacon(u+t)}catch(e){}}
 try{if(!sessionStorage.getItem("v"))b("visita");sessionStorage.setItem("v",1)}catch(e){b("visita")}
 document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a||a.closest(".cd"))return;var h=a.href;
 if(/wa\.me\//.test(h)){if(h.indexOf("text=")<0)a.href=h+(h.indexOf("?")<0?"?":"&")+"text="+encodeURIComponent(M);b("zap")}
