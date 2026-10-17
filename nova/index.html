@@ -7,9 +7,9 @@
 <meta name="description" content="A gente monta o site do seu comércio com as suas fotos e avaliações do Google. Ver é grátis. Ativar custa R$ 9,90 no 1º mês. Praia Grande, Mongaguá, Itanhaém e Peruíbe.">
 <meta property="og:title" content="Sites CD · O site do seu comércio já está pronto">
 <meta property="og:description" content="Sites pra pequenos negócios do Litoral Sul de SP. Ver é grátis.">
-<meta property="og:image" content="https://sitescd.com.br/marca/logo-fundo-escuro.png">
+<meta property="og:image" content="https://sitescd.com.br/marca/icone.png">
 <meta name="robots" content="noindex">
-<link rel="icon" href="/marca/icone-transparente.png">
+<link rel="icon" href="/nova/icone.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -82,12 +82,11 @@ p{margin:0}
 .ex-premium .bts i:last-child{box-shadow:inset 0 0 0 1px #5a4a36}
 .ex-normal .bts i:first-child{background:var(--zap);color:#fff}
 .ex-normal .bts i:last-child{box-shadow:inset 0 0 0 1px #cfc6b6}
-.ex .foto{flex:1;margin:4px 12px 0;border-radius:16px 16px 0 0;background:
-  linear-gradient(180deg,transparent 40%,rgba(0,0,0,.45)),
-  repeating-linear-gradient(90deg,#c9372c 0 10px,#f5f0e6 10px 20px,#2b5aa8 20px 30px,#f5f0e6 30px 40px);
-  position:relative}
+.ex .foto{flex:1;margin:4px 12px 0;border-radius:16px 16px 0 0;position:relative;overflow:hidden;
+  background:radial-gradient(70% 55% at 30% 35%,#6b5236 0%,transparent 70%),radial-gradient(60% 50% at 75% 70%,#3d2b1c 0%,transparent 70%),linear-gradient(160deg,#2a1f16,#1a1410)}
+.ex .foto::before{content:"";position:absolute;right:18px;top:18px;width:14px;height:56px;border-radius:7px;background:repeating-linear-gradient(135deg,#c9372c 0 6px,#f5f0e6 6px 12px,#2b5aa8 12px 18px,#f5f0e6 18px 24px);box-shadow:0 0 0 2px #d9c7a5}
 .ex .foto::after{content:"★ 4,9 · 132 avaliações no Google";position:absolute;left:12px;bottom:12px;font-size:10.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.55);padding:5px 9px;border-radius:999px}
-.ex-normal .foto{background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.35)),linear-gradient(135deg,#d8cbb4,#a8957a)}
+.ex-normal .foto{background:radial-gradient(70% 55% at 30% 35%,#e7dccb 0%,transparent 70%),linear-gradient(160deg,#cdbfa8,#a8957a)}
 
 /* faixas */
 section{padding:84px 0}
@@ -183,7 +182,7 @@ footer a{color:#e9f1ee}
 
 <header class="topo">
   <div class="box">
-    <a class="marca" href="#"><img src="/marca/icone-transparente.png" alt="" width="32" height="32">Sites <b>CD</b></a>
+    <a class="marca" href="#"><img src="/nova/icone.png" alt="" width="32" height="32">Sites <b>CD</b></a>
     <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Vi%20o%20site%20da%20Sites%20CD%20e%20quero%20saber%20mais." target="_blank" rel="noopener"><svg><use href="#i-zap"/></svg><span>Falar no WhatsApp</span></a>
   </div>
 </header>
@@ -218,7 +217,7 @@ footer a{color:#e9f1ee}
           </div>
         </div>
       </div>
-      <img class="pin" src="/marca/icone-transparente.png" alt="" width="86" height="86">
+      <img class="pin" src="/nova/icone.png" alt="" width="86" height="86">
     </div>
   </div>
 </section>
