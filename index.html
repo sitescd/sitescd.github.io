@@ -2,37 +2,578 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sites CD · Sites pra pequenos negócios do Litoral Sul</title>
-<meta name="description" content="Montamos o site do seu comércio com as fotos e avaliações do Google. Você vê pronto antes de pagar. 1º mês R$ 9,90, sem fidelidade.">
-<link rel="icon" href="/marca/icone.png">
-<meta property="og:image" content="/marca/logo-preto.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sites CD · O site do seu negócio, pronto antes de você pagar</title>
+<meta name="description" content="A Sites CD monta o site do seu negócio com as fotos e avaliações que já estão no Google. Você vê de graça. Pra colocar no ar, R$ 9,90 no primeiro mês. Sem fidelidade.">
+<meta property="og:title" content="Sites CD · O site do seu negócio, pronto antes de você pagar">
+<meta property="og:description" content="Você vê de graça. Pra colocar no ar, R$ 9,90 no primeiro mês.">
+<meta property="og:image" content="https://sitescd.com.br/marca/icone.png">
+<link rel="icon" href="/marca/icone-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --verde: #2fd1b4; --fundo: #0b0d10; --texto: #f2f4f5; --apagado: #9aa4ab; }
-  * { box-sizing: border-box; margin: 0; }
-  body { min-height: 100vh; background: var(--fundo); color: var(--texto); font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-         display: flex; align-items: center; justify-content: center; padding: 32px 16px; text-align: center; }
-  main { max-width: 520px; }
-  img { width: min(320px, 80vw); height: auto; }
-  h1 { font-size: clamp(26px, 6vw, 34px); line-height: 1.2; margin: 28px 0 12px; }
-  h1 b { color: var(--verde); }
-  p { color: var(--apagado); margin-bottom: 10px; }
-  .preco { color: var(--texto); font-weight: 600; margin: 18px 0 28px; }
-  a.zap { display: inline-block; background: var(--verde); color: #04221d; font-weight: 700; text-decoration: none; padding: 15px 28px; border-radius: 999px; font-size: 18px; }
-  a.zap:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-  footer { margin-top: 32px; font-size: 14px; color: var(--apagado); }
-  footer a { color: var(--apagado); }
+:root{
+  --fundo:#f4f1ea; --papel:#fffdf9; --tinta:#0e1a17; --tinta2:#43524e; --linha:#e2dccf;
+  --verde:#0f7a6c; --verde-vivo:#2fd1b4; --noite:#0a1312; --noite2:#111e1b; --noite3:#1a2a26; --sol:#ffc65c;
+  --zap:#1fa855; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fundo);color:var(--tinta);font:400 17px/1.6 Figtree,system-ui,sans-serif;overflow-x:hidden}
+::selection{background:var(--verde-vivo);color:var(--noite)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde-vivo);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+.box{max-width:1180px;margin:0 auto;padding:0 20px}
+svg.i{width:20px;height:20px;flex:none}
+
+.bt{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font:700 16px Figtree,sans-serif;text-decoration:none;padding:16px 26px;border:0;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .25s}
+.bt-zap{background:var(--zap);color:#fff;box-shadow:0 10px 28px -10px rgba(31,168,85,.75)}
+.bt-zap:hover{transform:translateY(-3px);box-shadow:0 16px 34px -12px rgba(31,168,85,.85)}
+.bt-zap::after{content:"";position:absolute;inset:-4px;border-radius:inherit;border:2px solid var(--zap);opacity:0;animation:pulso 2.8s var(--ease) infinite 1.5s}
+@keyframes pulso{0%{opacity:.7;transform:scale(.96)}100%{opacity:0;transform:scale(1.14)}}
+.bt-claro{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1.5px rgba(14,26,23,.25)}
+.bt-claro:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+
+.topo{position:fixed;inset:0 0 auto;z-index:30;transition:background .3s,box-shadow .3s}
+.topo.rolou{background:color-mix(in srgb,var(--fundo) 86%,transparent);backdrop-filter:saturate(1.5) blur(14px);box-shadow:0 1px 0 var(--linha)}
+.topo .box{display:flex;align-items:center;justify-content:space-between;height:70px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 22px "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
+.marca img{width:34px;height:34px}
+.marca b{color:var(--verde)}
+.topo nav{display:flex;align-items:center;gap:26px;font-weight:600;font-size:15px}
+.topo nav a{text-decoration:none;color:var(--tinta2)}
+.topo nav a:hover{color:var(--tinta)}
+.topo .bt{padding:11px 18px;font-size:15px;color:#fff}
+.topo .bt::after{display:none}
+
+.abre{position:relative;padding:130px 0 0;overflow:hidden}
+.abre::before{content:"";position:absolute;width:900px;height:900px;right:-260px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(47,209,180,.28),transparent 62%);pointer-events:none}
+.abre .box{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.abre h1{font-size:clamp(44px,6.6vw,88px)}
+.abre h1 .troca{color:var(--verde)}
+.abre .sub{font-size:clamp(18px,1.9vw,21px);color:var(--tinta2);margin:26px 0 34px;max-width:38ch}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.garantias{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;font-weight:600;font-size:15px;color:var(--tinta2)}
+.garantias span{display:inline-flex;align-items:center;gap:8px}
+.garantias svg{width:18px;height:18px;color:var(--verde)}
+.entra{opacity:0;transform:translateY(24px);animation:entra 1s var(--ease) forwards}
+@keyframes entra{to{opacity:1;transform:none}}
+
+.palco{position:relative;height:640px;display:grid;place-items:center}
+.cel{position:relative;width:300px;aspect-ratio:9/19;border-radius:46px;background:#0a0d0c;padding:11px;box-shadow:0 50px 90px -40px rgba(14,26,23,.6),0 0 0 1px rgba(255,255,255,.06) inset;transform:rotate(-4deg);animation:flutua 7s ease-in-out infinite}
+@keyframes flutua{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-12px)}}
+.cel .tela{height:100%;border-radius:36px;overflow:hidden;position:relative;background:#111}
+.cel .ilha{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:86px;height:24px;border-radius:20px;background:#0a0d0c;z-index:5}
+.site{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:scale(1.04);transition:opacity .8s var(--ease),transform 1.2s var(--ease)}
+.site.on{opacity:1;transform:none}
+.site .barra{display:flex;justify-content:space-between;align-items:center;padding:54px 16px 10px}
+.site .logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font:800 13px "Bricolage Grotesque"}
+.site .chip{font-size:10.5px;font-weight:700;border-radius:999px;padding:6px 11px}
+.site .cab{padding:6px 16px 14px}
+.site .ramo{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;font-weight:600}
+.site h4{margin:8px 0;font-size:23px;line-height:1.05;letter-spacing:-.02em}
+.site .txt{font-size:11.5px;line-height:1.45;opacity:.82}
+.site .bts{display:flex;gap:6px;margin-top:12px}
+.site .bts i{font-style:normal;font-size:10.5px;font-weight:700;border-radius:10px;padding:8px 10px}
+.site .foto{flex:1;margin:2px 10px 0;border-radius:18px 18px 0 0;position:relative;overflow:hidden}
+.site .foto .nota{position:absolute;left:10px;bottom:10px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);padding:5px 10px;border-radius:999px}
+.site .foto .emo{position:absolute;inset:0;display:grid;place-items:center}
+.site .foto .emo svg{width:84px;height:84px}
+
+.bolha{position:absolute;z-index:6;background:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 18px 40px -18px rgba(14,26,23,.45);display:flex;gap:10px;align-items:center;font-size:13.5px;line-height:1.3;max-width:240px;opacity:0;transform:translateY(14px) scale(.96);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.bolha.on{opacity:1;transform:none}
+.bolha .av{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff}
+.bolha b{display:block;font-size:13px}
+.bolha small{color:var(--tinta2)}
+.b-zap{right:-8px;top:120px}.b-zap .av{background:var(--zap)}
+.b-google{left:-24px;bottom:150px}.b-google .av{background:#fff;box-shadow:inset 0 0 0 1px var(--linha)}
+.b-visita{right:10px;bottom:50px}.b-visita .av{background:var(--verde)}
+
+.ramos{border-block:1px solid var(--linha);background:var(--papel);overflow:hidden;padding:20px 0;margin-top:30px}
+.ramos .trilho{display:flex;gap:44px;width:max-content;animation:corre 38s linear infinite}
+.ramos:hover .trilho{animation-play-state:paused}
+@keyframes corre{to{transform:translateX(-50%)}}
+.ramos span{display:inline-flex;align-items:center;gap:12px;font:700 22px "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;color:var(--tinta2);white-space:nowrap}
+.ramos span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--verde-vivo)}
+
+section{padding:110px 0}
+.titulo{max-width:760px;margin-bottom:56px}
+.titulo h2{font-size:clamp(34px,4.8vw,60px)}
+.titulo p{font-size:19px;color:var(--tinta2);margin-top:18px;max-width:58ch}
+.centro{text-align:center;margin-inline:auto}
+.centro p{margin-inline:auto}
+.revela{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.revela.visto{opacity:1;transform:none}
+
+.problema .box{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+.busca{background:#fff;border-radius:26px;padding:22px;box-shadow:0 40px 80px -40px rgba(14,26,23,.4),0 0 0 1px var(--linha)}
+.busca .campo{display:flex;align-items:center;gap:12px;border-radius:999px;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.08),0 0 0 1px #eceae4;font-size:17px;min-height:54px}
+.busca .campo svg{width:20px;height:20px;color:#8a8f8d}
+.busca .digita::after{content:"";display:inline-block;width:2px;height:1.1em;background:var(--tinta);margin-left:2px;vertical-align:-3px;animation:pisca 1s steps(1) infinite}
+@keyframes pisca{50%{opacity:0}}
+.result{margin-top:16px;display:grid;gap:10px}
+.res{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:center;padding:14px 16px;border-radius:16px;background:#f7f6f2;opacity:0;transform:translateY(10px);transition:all .6s var(--ease)}
+.res.on{opacity:1;transform:none}
+.res b{font-size:16px}
+.res small{grid-column:1;color:#5f6b67;font-size:13.5px}
+.res .acs{grid-row:1/3;grid-column:2;display:flex;gap:6px}
+.res .acs i{font-style:normal;font-size:12.5px;font-weight:700;border-radius:999px;padding:7px 11px;background:#e8e6df;color:#8a8f8d}
+.res.tem{background:#e7f6f2;box-shadow:inset 0 0 0 2px var(--verde-vivo)}
+.res.tem .acs i{background:var(--verde);color:#fff}
+.res .falta{color:#b4513f;font-weight:600}
+.lista-dor{display:grid;gap:22px;margin-top:8px}
+.lista-dor>div{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start}
+.lista-dor .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#fbe9e4;color:#b4513f}
+.lista-dor h3{font-size:21px;margin-bottom:4px}
+.lista-dor p{color:var(--tinta2)}
+
+.como{background:var(--noite);color:#e8f1ee;position:relative;overflow:hidden}
+.como .titulo p{color:#a6b9b4}
+.como h2 em{font-style:normal;color:var(--verde-vivo)}
+.passos{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.passos::before{content:"";position:absolute;top:34px;left:34px;right:34px;height:2px;background:var(--noite3)}
+.passos .linha{position:absolute;top:34px;left:34px;height:2px;width:0;background:linear-gradient(90deg,var(--verde-vivo),#9ef0df);transition:width 2.2s var(--ease)}
+.passos.visto .linha{width:calc(100% - 68px)}
+.passo{position:relative}
+.passo .num{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:var(--noite2);box-shadow:inset 0 0 0 2px var(--noite3);font:800 26px "Bricolage Grotesque";color:#e8f1ee;position:relative;z-index:1;transition:background .5s,box-shadow .5s,color .5s}
+.passos.visto .passo .num{background:var(--verde-vivo);color:var(--noite);box-shadow:0 0 0 8px rgba(47,209,180,.12)}
+.passos.visto .passo:nth-child(3) .num{transition-delay:.6s}.passos.visto .passo:nth-child(4) .num{transition-delay:1.3s}
+.passo h3{font-size:27px;margin:26px 0 10px}
+.passo p{color:#a6b9b4;max-width:32ch}
+
+.vitrine .box{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.abas{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 26px}
+.abas button{font:700 15px Figtree;border:0;border-radius:999px;padding:11px 18px;background:#fff;color:var(--tinta2);box-shadow:0 0 0 1px var(--linha);cursor:pointer;transition:all .3s var(--ease)}
+.abas button:hover{color:var(--tinta);box-shadow:0 0 0 1px var(--tinta)}
+.abas button[aria-pressed="true"]{background:var(--tinta);color:#fff;box-shadow:none}
+.tem-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.tem-list li{display:flex;gap:12px;align-items:flex-start;color:var(--tinta2)}
+.tem-list svg{width:20px;height:20px;color:var(--verde);margin-top:3px;flex:none}
+.vitrine .palco{height:600px}
+.vitrine .cel{transform:none;animation:none;width:290px}
+
+.planos-sec{background:var(--papel)}
+.planos{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:960px;margin:0 auto}
+.plano{border-radius:30px;padding:36px;background:#fff;box-shadow:0 0 0 1px var(--linha);position:relative}
+.plano.top{background:var(--noite);color:#e8f1ee;box-shadow:0 30px 70px -30px rgba(15,122,108,.6)}
+.plano h3{font-size:30px}
+.plano .desc{color:var(--tinta2);margin-top:6px}
+.plano.top .desc{color:#a6b9b4}
+.plano .preco{display:flex;align-items:baseline;gap:6px;margin:26px 0 2px;font:800 56px/1 "Bricolage Grotesque";letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.plano .preco small{font:600 17px Figtree;letter-spacing:0;opacity:.7}
+.plano .pri{display:inline-block;margin-top:10px;font-weight:700;font-size:14.5px;background:#fff1cc;color:#6b4a00;border-radius:999px;padding:6px 12px}
+.plano.top .pri{background:var(--sol);color:#2b1d00}
+.plano ul{list-style:none;padding:0;margin:28px 0 30px;display:grid;gap:13px}
+.plano li{display:flex;gap:12px;align-items:flex-start}
+.plano li svg{width:20px;height:20px;color:var(--verde);margin-top:3px;flex:none}
+.plano.top li svg{color:var(--verde-vivo)}
+.plano .bt{width:100%}
+.plano .bt-claro{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.selo{position:absolute;top:-14px;right:28px;background:var(--verde-vivo);color:var(--noite);font-weight:800;font-size:13px;border-radius:999px;padding:7px 14px}
+.nota-planos{text-align:center;color:var(--tinta2);margin-top:30px}
+
+.depois .box{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.ganhos{display:grid;gap:26px}
+.ganho{display:grid;grid-template-columns:50px 1fr;gap:18px}
+.ganho .ic{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;background:#ddf1ec;color:var(--verde)}
+.ganho h3{font-size:22px;margin-bottom:4px}
+.ganho p{color:var(--tinta2)}
+.painel{background:var(--noite);color:#e8f1ee;border-radius:30px;padding:28px;box-shadow:0 50px 90px -40px rgba(14,26,23,.6)}
+.painel header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.painel header b{font:800 20px "Bricolage Grotesque"}
+.painel header small{background:var(--noite3);color:#a6b9b4;border-radius:999px;padding:5px 10px;font-weight:600;font-size:12px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.nums div{background:var(--noite2);border-radius:18px;padding:16px}
+.nums strong{display:block;font:800 34px/1 "Bricolage Grotesque";letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#fff}
+.nums span{font-size:13px;color:#a6b9b4}
+.barras{display:flex;align-items:flex-end;gap:8px;height:120px;margin-top:22px;padding:0 4px}
+.barras i{flex:1;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--verde-vivo),#13695d);height:0;transition:height 1.4s var(--ease)}
+.painel.visto .barras i{height:var(--h)}
+.barras i:nth-child(2){transition-delay:.08s}.barras i:nth-child(3){transition-delay:.16s}.barras i:nth-child(4){transition-delay:.24s}.barras i:nth-child(5){transition-delay:.32s}.barras i:nth-child(6){transition-delay:.4s}.barras i:nth-child(7){transition-delay:.48s}
+.painel .leg{display:flex;justify-content:space-between;color:#6f8681;font-size:12px;margin-top:8px;padding:0 4px}
+.painel .obs{margin-top:16px;font-size:12.5px;color:#6f8681}
+
+.perguntas{max-width:860px;margin:0 auto}
+.perguntas details{border-bottom:1px solid var(--linha)}
+.perguntas summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font:700 21px/1.3 "Bricolage Grotesque",sans-serif;letter-spacing:-.015em}
+.perguntas summary::-webkit-details-marker{display:none}
+.perguntas summary .mais{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;background:#fff;box-shadow:0 0 0 1px var(--linha);transition:transform .45s var(--ease),background .3s}
+.perguntas summary .mais svg{width:18px;height:18px}
+.perguntas details[open] .mais{transform:rotate(45deg);background:var(--verde-vivo);box-shadow:none}
+.perguntas .resp p{padding:0 0 24px;color:var(--tinta2);max-width:65ch;animation:abre .5s var(--ease)}
+@keyframes abre{from{opacity:0;transform:translateY(-6px)}}
+
+.final{position:relative;overflow:hidden;background:var(--noite);color:#fff;text-align:center;padding:130px 0}
+.final::before,.final::after{content:"";position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(20px);opacity:.5;pointer-events:none}
+.final::before{background:radial-gradient(circle,rgba(47,209,180,.55),transparent 65%);left:-200px;top:-260px;animation:orbita 14s ease-in-out infinite}
+.final::after{background:radial-gradient(circle,rgba(255,198,92,.35),transparent 65%);right:-220px;bottom:-300px;animation:orbita 17s ease-in-out infinite reverse}
+@keyframes orbita{50%{transform:translate(80px,60px)}}
+.final .box{position:relative}
+.final h2{font-size:clamp(38px,5.6vw,72px);max-width:15ch;margin:0 auto}
+.final h2 em{font-style:normal;color:var(--verde-vivo)}
+.final p{margin:22px auto 30px;font-size:19px;color:#b9cbc6;max-width:46ch}
+.mapa{list-style:none;padding:0;margin:0 auto 36px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:880px;text-align:left}
+.mapa li{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.05);border-radius:20px;padding:16px 18px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);color:#d6e4e0;font-size:15.5px;line-height:1.4}
+.mapa b{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verde-vivo);color:var(--noite);font:800 16px "Bricolage Grotesque"}
+.mapa strong{color:#fff}
+@media (max-width:920px){.mapa{grid-template-columns:1fr}}
+footer{background:#060d0c;color:#8ea39e;padding:44px 0;font-size:15px}
+footer .box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+footer a{color:#e8f1ee;text-underline-offset:3px}
+.zapfixo{position:fixed;right:18px;bottom:18px;z-index:40;width:60px;height:60px;border-radius:50%;background:var(--zap);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);transform:scale(0);transition:transform .5s var(--ease)}
+.zapfixo.on{transform:none}
+.zapfixo svg{width:30px;height:30px;color:#fff}
+
+@media (max-width:920px){
+  .topo nav a:not(.bt){display:none}
+  .abre{padding:100px 0 0}
+  .abre .box,.problema .box,.vitrine .box,.depois .box{grid-template-columns:1fr;gap:44px}
+  .palco{height:560px}
+  .cel{width:260px}
+  .b-zap{right:0;top:70px}.b-google{left:0;bottom:120px}.b-visita{right:0;bottom:20px}
+  .passos{grid-template-columns:1fr;gap:34px}
+  .passos::before{top:34px;bottom:34px;left:33px;right:auto;width:2px;height:auto}
+  .passos .linha{top:34px;left:33px;width:2px;height:0;transition:height 2.2s var(--ease)}
+  .passos.visto .linha{width:2px;height:calc(100% - 68px)}
+  .passo{display:grid;grid-template-columns:68px 1fr;gap:20px}
+  .passo h3{margin:14px 0 8px}
+  .planos{grid-template-columns:1fr}
+  .vitrine .palco{height:540px}
+  section{padding:80px 0}
+}
+@media (max-width:420px){
+  .bolha{max-width:200px;font-size:12.5px;padding:10px 12px}
+  .b-google{display:none}
+  .nums strong{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .entra,.revela,.res,.bolha{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.31-1.96 1.36-.5.05-.98.24-3.3-.69-2.78-1.1-4.55-3.95-4.69-4.13-.13-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.25-.27.55-.34.73-.34l.52.01c.17 0 .39-.06.61.47.24.55.8 1.92.87 2.06.07.14.11.3.02.48-.09.18-.13.3-.27.46-.13.16-.28.36-.4.48-.13.13-.27.28-.12.55.15.27.68 1.12 1.46 1.81 1 .89 1.85 1.17 2.12 1.3.27.14.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.52.32.06.11.06.66-.18 1.34Z"/></symbol>
+  <symbol id="ok" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="mais" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="lupa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></g></symbol>
+  <symbol id="relogio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="porta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h5v18h-5M10 17l5-5-5-5M15 12H3"/></g></symbol>
+  <symbol id="pergunta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-4-7.5"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"/></g></symbol>
+  <symbol id="lapis" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/></symbol>
+  <symbol id="qr" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></g></symbol>
+  <symbol id="grafico" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="olho" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+  <symbol id="g" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.3 3-4.1 5.6-4.1Z"/></symbol>
+</svg>
+
+<header class="topo" id="topo">
+  <div class="box">
+    <a class="marca" href="#"><img src="/marca/icone-192.png" alt="" width="34" height="34">Sites <b>CD</b></a>
+    <nav>
+      <a href="#como">Como funciona</a><a href="#ramos">Exemplos</a><a href="#planos">Preços</a><a href="#perguntas">Dúvidas</a>
+      <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Vi%20o%20site%20da%20Sites%20CD%20e%20quero%20saber%20mais." target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
 <main>
-  <img src="/marca/logo-preto.png" alt="Sites CD">
-  <h1>Seu comércio com site <b>pronto antes de pagar</b></h1>
-  <p>A gente monta o site do seu negócio com as fotos e as avaliações que você já tem no Google.</p>
-  <p>Praia Grande, Mongaguá, Itanhaém e Peruíbe.</p>
-  <p class="preco">1º mês R$ 9,90 · sem fidelidade</p>
-  <a class="zap" href="https://wa.me/5513997225693?text=Oi%2C%20vi%20o%20site%20da%20Sites%20CD">Falar no WhatsApp</a>
-  <footer>Caio · <a href="mailto:caio@sitescd.com.br">caio@sitescd.com.br</a></footer>
+<section class="abre" aria-labelledby="t1">
+  <div class="box">
+    <div>
+      <h1 id="t1" class="entra">O site do seu negócio, <span class="troca">pronto antes de você pagar.</span></h1>
+      <p class="sub entra" style="animation-delay:.12s">Manda o link do seu negócio no Google Maps. A gente monta o site com as suas fotos, o horário e as avaliações dos seus clientes. Você vê de graça. Se gostar, coloca no ar por <b style="color:var(--tinta)">R$&nbsp;9,90</b> no primeiro mês.</p>
+      <div class="acoes entra" style="animation-delay:.24s">
+        <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Quero%20ver%20o%20site%20do%20meu%20neg%C3%B3cio%20pronto.%20O%20link%20do%20Google%20Maps%20%C3%A9%3A%20" target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero ver o meu site</a>
+        <a class="bt bt-claro" href="#como">Como funciona</a>
+      </div>
+      <div class="garantias entra" style="animation-delay:.36s">
+        <span><svg><use href="#ok"/></svg>Ver é grátis</span>
+        <span><svg><use href="#ok"/></svg>Sem fidelidade</span>
+        <span><svg><use href="#ok"/></svg>Só precisa mandar um link</span>
+      </div>
+    </div>
+    <div class="palco entra" style="animation-delay:.2s" role="img" aria-label="Exemplos de sites no celular trocando sozinhos: restaurante, salão, pet shop, oficina, clínica, loja, academia e padaria">
+      <div class="cel"><div class="ilha"></div><div class="tela" id="tela1"></div></div>
+      <div class="bolha b-zap" id="bz"><span class="av"><svg class="i"><use href="#zap"/></svg></span><span><b>Nova mensagem</b><small id="bzt">Vocês abrem sábado?</small></span></div>
+      <div class="bolha b-google" id="bg"><span class="av"><svg class="i"><use href="#g"/></svg></span><span><b id="bgt">★ 4,9 no Google</b><small>aparece no site</small></span></div>
+      <div class="bolha b-visita" id="bv"><span class="av"><svg class="i" style="color:#fff"><use href="#olho"/></svg></span><span><b>+1 visita agora</b><small>veio do Google</small></span></div>
+    </div>
+  </div>
+  <div class="ramos" aria-hidden="true"><div class="trilho" id="trilho"></div></div>
+</section>
+
+<section class="problema" aria-labelledby="t2">
+  <div class="box">
+    <div class="revela">
+      <div class="titulo" style="margin-bottom:34px">
+        <h2 id="t2">Antes de ir, o cliente pesquisa.</h2>
+        <p>E quem não aparece direito perde a venda pro vizinho, mesmo sendo melhor.</p>
+      </div>
+      <div class="lista-dor">
+        <div><span class="ic"><svg class="i"><use href="#pergunta"/></svg></span><div><h3>Não acha preço nem horário</h3><p>Sem site, a pessoa precisa perguntar. Muita gente desiste antes de mandar mensagem.</p></div></div>
+        <div><span class="ic"><svg class="i"><use href="#porta"/></svg></span><div><h3>Só Instagram não basta</h3><p>Quem não te segue não vê seus serviços. O site aparece no Google e junta tudo num link só.</p></div></div>
+        <div><span class="ic"><svg class="i"><use href="#relogio"/></svg></span><div><h3>A mesma pergunta o dia todo</h3><p>"Quanto custa?", "Onde fica?", "Abre domingo?". O site responde sozinho e você ganha tempo.</p></div></div>
+      </div>
+    </div>
+    <div class="busca revela" id="busca" role="img" aria-label="Exemplo de pesquisa no Google: quem tem site aparece com botões de site e rota">
+      <div class="campo"><svg><use href="#lupa"/></svg><span class="digita" id="digita"></span></div>
+      <div class="result">
+        <div class="res"><b>Concorrente A</b><small>★ 4,1 · <span class="falta">sem site</span></small><span class="acs"><i>Ligar</i></span></div>
+        <div class="res tem"><b>O seu negócio</b><small>★ 4,9 · site, fotos, preços e horário</small><span class="acs"><i>Site</i><i>Rota</i></span></div>
+        <div class="res"><b>Concorrente B</b><small>★ 4,3 · <span class="falta">sem site</span></small><span class="acs"><i>Ligar</i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="como" id="como" aria-labelledby="t3">
+  <div class="box">
+    <div class="titulo revela">
+      <h2 id="t3">Você manda um link. <em>A gente faz o resto.</em></h2>
+      <p>Sem reunião, sem formulário, sem mandar foto. Você só decide depois de ver pronto.</p>
+    </div>
+    <div class="passos" id="passos">
+      <span class="linha" aria-hidden="true"></span>
+      <div class="passo"><span class="num">1</span><div><h3>Você manda o link</h3><p>No WhatsApp, o link do seu negócio no Google Maps. Com ele a gente pega fotos, horário, endereço e avaliações.</p></div></div>
+      <div class="passo"><span class="num">2</span><div><h3>A gente monta, você vê</h3><p>Em pouco tempo o seu site chega pronto no WhatsApp. Abre no celular, olha com calma, mostra pra quem quiser. É de graça.</p></div></div>
+      <div class="passo"><span class="num">3</span><div><h3>Entra no ar</h3><p>Gostou? Paga R$ 9,90 no primeiro mês pelo link seguro e o site aparece no Google.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="vitrine" id="ramos" aria-labelledby="t4">
+  <div class="box">
+    <div class="revela">
+      <div class="titulo" style="margin-bottom:0">
+        <h2 id="t4">Feito pro jeito do seu negócio.</h2>
+        <p>Cada ramo ganha um visual e os botões que fazem sentido pra ele: pedir, agendar, ligar, chegar.</p>
+      </div>
+      <div class="abas" id="abas" role="group" aria-label="Escolha um ramo pra ver o exemplo"></div>
+      <ul class="tem-list">
+        <li><svg><use href="#ok"/></svg><span>Suas fotos de verdade e as avaliações dos seus clientes</span></li>
+        <li><svg><use href="#ok"/></svg><span>Botão de WhatsApp, ligar e rota em todas as telas</span></li>
+        <li><svg><use href="#ok"/></svg><span>Rápido e feito pro celular, que é onde o cliente está</span></li>
+      </ul>
+    </div>
+    <div class="palco revela" role="img" aria-label="Exemplo do site do ramo escolhido">
+      <div class="cel"><div class="ilha"></div><div class="tela" id="tela2"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="planos-sec" id="planos" aria-labelledby="t5">
+  <div class="box">
+    <div class="titulo centro revela">
+      <h2 id="t5">Primeiro mês por R$ 9,90. Depois, você escolhe.</h2>
+      <p>Pix, boleto ou cartão. No cartão renova sozinho e você não precisa lembrar.</p>
+    </div>
+    <div class="planos">
+      <article class="plano revela">
+        <h3>Normal</h3>
+        <p class="desc">Tudo pra ser encontrado e chamado.</p>
+        <div class="preco">R$ 29,90<small>/mês</small></div>
+        <span class="pri">1º mês R$ 9,90</span>
+        <ul>
+          <li><svg><use href="#ok"/></svg>Site completo com fotos, serviços, horário e mapa</li>
+          <li><svg><use href="#ok"/></svg>WhatsApp, ligar e rota em todas as telas</li>
+          <li><svg><use href="#ok"/></svg>Endereço sitescd.com.br/seu-negocio</li>
+          <li><svg><use href="#ok"/></svg>Aparece nas buscas do Google</li>
+          <li><svg><use href="#ok"/></svg>Você muda textos e fotos pelo celular</li>
+        </ul>
+        <a class="bt bt-claro" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Normal." target="_blank" rel="noopener">Quero o Normal</a>
+      </article>
+      <article class="plano top revela" style="transition-delay:.12s">
+        <span class="selo">Endereço próprio</span>
+        <h3>Premium</h3>
+        <p class="desc">Com a cara e o nome do seu negócio.</p>
+        <div class="preco">R$ 59,90<small>/mês</small></div>
+        <span class="pri">1º mês R$ 9,90</span>
+        <ul>
+          <li><svg><use href="#ok"/></svg>Tudo do Normal, com visual mais caprichado</li>
+          <li><svg><use href="#ok"/></svg>Endereço próprio .com.br com o nome do seu negócio</li>
+          <li><svg><use href="#ok"/></svg>Registrado no seu CPF ou CNPJ: o endereço é seu</li>
+          <li><svg><use href="#ok"/></svg>Sem a marca da Sites CD no rodapé</li>
+        </ul>
+        <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Premium." target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero o Premium</a>
+      </article>
+    </div>
+    <p class="nota-planos revela">Sem fidelidade e sem multa. Cancela quando quiser, direto no WhatsApp.</p>
+  </div>
+</section>
+
+<section class="depois" aria-labelledby="t6">
+  <div class="box">
+    <div class="revela">
+      <div class="titulo" style="margin-bottom:38px"><h2 id="t6">Depois que entra no ar, ele trabalha por você.</h2></div>
+      <div class="ganhos">
+        <div class="ganho"><span class="ic"><svg class="i"><use href="#lapis"/></svg></span><div><h3>Você mesmo muda pelo celular</h3><p>Uma senha de 4 números. Toca no texto ou na foto e troca. Sem login e sem aplicativo.</p></div></div>
+        <div class="ganho"><span class="ic"><svg class="i"><use href="#qr"/></svg></span><div><h3>Plaquinha com QR code</h3><p>Pro balcão ou pra vitrine. O cliente aponta a câmera do celular e cai direto no seu site.</p></div></div>
+        <div class="ganho"><span class="ic"><svg class="i"><use href="#grafico"/></svg></span><div><h3>Resumo todo mês</h3><p>Quantas pessoas viram o site e quantas chamaram no WhatsApp ou ligaram. Você vê que funciona.</p></div></div>
+      </div>
+    </div>
+    <div class="painel revela" id="painel" role="img" aria-label="Exemplo ilustrativo de resumo mensal com visitas e cliques">
+      <header><b>Resumo do mês</b><small>exemplo</small></header>
+      <div class="nums">
+        <div><strong data-n="412">0</strong><span>visitas</span></div>
+        <div><strong data-n="58">0</strong><span>no WhatsApp</span></div>
+        <div><strong data-n="21">0</strong><span>pediram rota</span></div>
+      </div>
+      <div class="barras" aria-hidden="true"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:68%"></i><i style="--h:60%"></i><i style="--h:84%"></i><i style="--h:96%"></i></div>
+      <div class="leg" aria-hidden="true"><span>começo do mês</span><span>fim do mês</span></div>
+      <p class="obs">Números ilustrativos. O seu resumo mostra os números reais do seu site.</p>
+    </div>
+  </div>
+</section>
+
+<section id="perguntas" style="background:var(--papel)" aria-labelledby="t7">
+  <div class="box">
+    <div class="titulo centro revela"><h2 id="t7">Perguntas que todo mundo faz</h2></div>
+    <div class="perguntas revela" id="faq"></div>
+  </div>
+</section>
+
+<section class="final" aria-labelledby="t8">
+  <div class="box">
+    <h2 id="t8" class="revela">Quer ver o site do seu negócio <em>pronto?</em></h2>
+    <p class="revela">Manda o link do seu negócio no Google Maps pelo WhatsApp. A gente monta e te manda o site pronto, sem compromisso.</p>
+    <ol class="mapa revela" aria-label="Como pegar o link do Google Maps">
+      <li><b>1</b><span>Abra o <strong>Google Maps</strong> e procure o seu negócio</span></li>
+      <li><b>2</b><span>Toque em <strong>Compartilhar</strong> e depois em <strong>Copiar link</strong></span></li>
+      <li><b>3</b><span>Cole aqui no <strong>WhatsApp</strong> e mande pra gente</span></li>
+    </ol>
+    <a class="bt bt-zap revela" href="https://wa.me/5513997225693?text=Oi!%20Quero%20ver%20o%20site%20do%20meu%20neg%C3%B3cio%20pronto.%20O%20link%20do%20Google%20Maps%20%C3%A9%3A%20" target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Chamar no WhatsApp</a>
+  </div>
+</section>
 </main>
+
+<footer>
+  <div class="box">
+    <span><b style="color:#e8f1ee">Sites CD</b> · Sites pra pequenos negócios de todo o Brasil</span>
+    <span><a href="https://wa.me/5513997225693">WhatsApp (13) 99722-5693</a> · <a href="mailto:contato@sitescd.com.br">contato@sitescd.com.br</a></span>
+  </div>
+</footer>
+<a class="zapfixo" id="zapfixo" href="https://wa.me/5513997225693?text=Oi!%20Vi%20o%20site%20da%20Sites%20CD%20e%20quero%20saber%20mais." target="_blank" rel="noopener" aria-label="Chamar no WhatsApp"><svg><use href="#zap"/></svg></a>
+
+<script>
+// sites de exemplo FICTÍCIOS, desenhados aqui, um por ramo
+const ICONES = {
+  prato:'<path d="M3 11h18M5 11a7 7 0 0 1 14 0M12 4v1M4 15h16l-1.5 3h-13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+  tesoura:'<g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></g>',
+  pata:'<g fill="currentColor"><circle cx="7" cy="9" r="2"/><circle cx="17" cy="9" r="2"/><circle cx="10" cy="5.5" r="2"/><circle cx="14" cy="5.5" r="2"/><path d="M12 11c-3 0-6 4-6 6.5 0 2 1.7 2.5 3 2 1-.4 2-.8 3-.8s2 .4 3 .8c1.3.5 3 0 3-2C18 15 15 11 12 11Z"/></g>',
+  chave:'<path d="M14.5 6.5a4 4 0 0 0-5.3 5L4 16.7V20h3.3l5.2-5.2a4 4 0 0 0 5-5.3l-2.4 2.4-2.6-.6-.6-2.6 2.6-2.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+  dente:'<path d="M7 3c-2 0-4 1.5-4 4.5 0 3 1.5 4 2 7 .4 2.5.8 6.5 2.5 6.5s1.6-4 2.5-6c.4-1 .9-1.5 2-1.5s1.6.5 2 1.5c.9 2 .8 6 2.5 6s2.1-4 2.5-6.5c.5-3 2-4 2-7C21 4.5 19 3 17 3c-2.2 0-3 1-5 1S9.2 3 7 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+  sacola:'<path d="M5 8h14l-1 12H6L5 8Zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+  halter:'<path d="M3 10v4M6 8v8M18 8v8M21 10v4M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  pao:'<path d="M4 13c0-4 3.6-7 8-7s8 3 8 7v5H4v-5ZM9 9.5l-1 3M13 9l-1 3.5M17 10l-1 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
+};
+const SITES = [
+  { aba:"Restaurante", sig:"CP", ramo:"Restaurante · Comida caseira", tit:"Comida de vó, <em>todo dia.</em>", txt:"Almoço executivo, massas da casa e sobremesa inclusa. Delivery no bairro.", b1:"Pedir pelo WhatsApp", b2:"Ver cardápio", fundo:"#1b120d", tinta:"#f6ece0", ac:"#ff8a3d", foto:"linear-gradient(160deg,#5a2d15,#2a140a)", ic:"prato", zap:"Tem mesa pra 6 hoje?", nota:"4,8" },
+  { aba:"Salão de beleza", sig:"BF", ramo:"Salão de beleza", tit:"Seu cabelo do jeito <em>que você sonhou.</em>", txt:"Corte, coloração, escova e manicure com hora marcada.", b1:"Agendar horário", b2:"Ver serviços", fundo:"#fbf1f1", tinta:"#3a1f26", ac:"#c2456b", foto:"linear-gradient(160deg,#f2c9d3,#d9879e)", ic:"tesoura", zap:"Tem horário sexta à tarde?", nota:"4,9" },
+  { aba:"Pet shop", sig:"AP", ramo:"Pet shop · Banho e tosa", tit:"Banho e tosa com <em>carinho.</em>", txt:"Busca e entrega, ração e acessórios. Seu pet volta cheiroso.", b1:"Agendar banho", b2:"Como chegar", fundo:"#eef7f3", tinta:"#13322a", ac:"#14a37f", foto:"linear-gradient(160deg,#bfe8da,#7cc9b1)", ic:"pata", zap:"Vocês buscam em casa?", nota:"4,9" },
+  { aba:"Oficina", sig:"AS", ramo:"Oficina mecânica", tit:"Seu carro na mão <em>de quem entende.</em>", txt:"Revisão, freio, suspensão e injeção. Orçamento sem compromisso.", b1:"Pedir orçamento", b2:"Ligar agora", fundo:"#111418", tinta:"#eef1f4", ac:"#ffc020", foto:"linear-gradient(160deg,#2b3340,#14181e)", ic:"chave", zap:"Faz alinhamento hoje?", nota:"4,7" },
+  { aba:"Clínica", sig:"SL", ramo:"Clínica odontológica", tit:"Cuidar do sorriso <em>sem medo.</em>", txt:"Limpeza, clareamento e implante. Atendimento humanizado.", b1:"Marcar avaliação", b2:"Convênios", fundo:"#f2f7fd", tinta:"#14273d", ac:"#2f7bd8", foto:"linear-gradient(160deg,#cfe2f8,#8db7ea)", ic:"dente", zap:"Aceitam convênio?", nota:"5,0" },
+  { aba:"Loja", sig:"PC", ramo:"Loja de roupas", tit:"Moda que <em>veste bem.</em>", txt:"Peças novas toda semana. Reserva pelo WhatsApp e retira na loja.", b1:"Ver novidades", b2:"Chamar no Zap", fundo:"#f6f1ea", tinta:"#2a2118", ac:"#9a6b3f", foto:"linear-gradient(160deg,#e3d2bd,#b8956d)", ic:"sacola", zap:"Tem esse vestido no M?", nota:"4,8" },
+  { aba:"Academia", sig:"FT", ramo:"Academia", tit:"Treino de verdade, <em>sem frescura.</em>", txt:"Musculação, funcional e aula experimental grátis.", b1:"Aula grátis", b2:"Planos", fundo:"#0e0f12", tinta:"#f2f2f2", ac:"#ff3d57", foto:"linear-gradient(160deg,#3a1a20,#151012)", ic:"halter", zap:"Abre domingo?", nota:"4,8" },
+  { aba:"Padaria", sig:"TB", ramo:"Padaria e confeitaria", tit:"Pão quentinho <em>toda hora.</em>", txt:"Fornada às 6h e às 16h. Bolos sob encomenda.", b1:"Encomendar bolo", b2:"Horários", fundo:"#fbf5ea", tinta:"#3a2610", ac:"#c27a1e", foto:"linear-gradient(160deg,#f0d7a8,#c99a55)", ic:"pao", zap:"Faz bolo pra amanhã?", nota:"4,9" }
+];
+function htmlSite(s) {
+  const claro = parseInt(s.fundo.slice(1, 3), 16) > 128, tbt = claro ? "#fff" : "#111";
+  return `<div class="site" style="background:${s.fundo};color:${s.tinta}">
+    <div class="barra"><span class="logo" style="background:${s.ac};color:${tbt}">${s.sig}</span><span class="chip" style="background:${s.ac};color:${tbt}">${s.b1.split(" ")[0]}</span></div>
+    <div class="cab"><div class="ramo">${s.ramo}</div><h4 style="font-family:${claro ? "Georgia,serif" : "'Bricolage Grotesque',sans-serif"}">${s.tit.replace(/<em>/g, `<span style="color:${s.ac}">`).replace(/<\/em>/g, "</span>")}</h4>
+    <div class="txt">${s.txt}</div>
+    <div class="bts"><i style="background:${s.ac};color:${tbt}">${s.b1}</i><i style="box-shadow:inset 0 0 0 1px ${claro ? "rgba(0,0,0,.18)" : "rgba(255,255,255,.22)"}">${s.b2}</i></div></div>
+    <div class="foto" style="background:${s.foto}"><div class="emo"><svg viewBox="0 0 24 24" style="color:${claro ? "rgba(255,255,255,.9)" : s.ac}">${ICONES[s.ic]}</svg></div><span class="nota">★ ${s.nota} no Google</span></div>
+  </div>`;
+}
+const tela1 = document.getElementById("tela1"), tela2 = document.getElementById("tela2");
+tela1.innerHTML = tela2.innerHTML = SITES.map(htmlSite).join("");
+const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// abertura: o celular troca de ramo sozinho e as bolhas acompanham
+let atual = 0;
+const s1 = tela1.querySelectorAll(".site"), bz = document.getElementById("bz"), bg = document.getElementById("bg"), bv = document.getElementById("bv");
+function mostrar(i) {
+  s1.forEach((el, k) => el.classList.toggle("on", k === i));
+  [bz, bg, bv].forEach((b) => b.classList.remove("on"));
+  document.getElementById("bzt").textContent = SITES[i].zap;
+  document.getElementById("bgt").textContent = "★ " + SITES[i].nota + " no Google";
+  setTimeout(() => bg.classList.add("on"), 500);
+  setTimeout(() => bz.classList.add("on"), 1300);
+  setTimeout(() => bv.classList.add("on"), 2200);
+}
+mostrar(0);
+if (!calmo) setInterval(() => { atual = (atual + 1) % SITES.length; mostrar(atual); }, 4200);
+
+// faixa de ramos
+const RAMOS = ["Restaurantes", "Salões de beleza", "Pet shops", "Oficinas", "Clínicas", "Lojas", "Academias", "Padarias", "Barbearias", "Escritórios", "Pousadas", "Lanchonetes", "Estética", "Mercadinhos", "Autoescolas", "Floriculturas"];
+document.getElementById("trilho").innerHTML = [...RAMOS, ...RAMOS].map((r) => `<span>${r}</span>`).join("");
+
+// vitrine: abas por ramo
+const abas = document.getElementById("abas"), s2 = tela2.querySelectorAll(".site");
+abas.innerHTML = SITES.map((s, i) => `<button type="button" aria-pressed="${i === 0}" data-i="${i}">${s.aba}</button>`).join("");
+s2[0].classList.add("on");
+abas.onclick = (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  abas.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+  s2.forEach((el, k) => el.classList.toggle("on", k === +b.dataset.i));
+};
+
+// perguntas
+const FAQ = [
+  ["Onde vocês pegaram o meu número?", "Na ficha pública do seu negócio no Google Maps. É o número que aparece lá pros seus clientes. A gente não compra lista nem pega contato de outro lugar."],
+  ["Isso não é golpe?", "Pra ver o site você não paga nada e não passa dado nenhum. Se quiser ativar, o pagamento é pelo Asaas, uma empresa de pagamentos conhecida, e você mesmo preenche seus dados lá. A gente nunca pede senha nem número de cartão por mensagem."],
+  ["Como pego o link do Google Maps?", "Abra o Google Maps, procure o seu negócio, toque em Compartilhar e depois em Copiar link. Aí é só colar no WhatsApp e mandar pra gente. Se não conseguir, manda o nome e a cidade do negócio que a gente acha."],
+  ["Preciso mandar fotos ou textos?", "Não. A gente usa o que já está no Google do seu negócio. Se quiser trocar alguma coisa depois, você mesmo troca pelo celular."],
+  ["Tem fidelidade ou multa pra cancelar?", "Não. Cancela quando quiser, é só avisar no WhatsApp."],
+  ["E se eu quiser mudar alguma coisa?", "Textos e fotos você muda sozinho, com a sua senha de 4 números. Ajustes simples a gente faz de graça, é só pedir no WhatsApp."],
+  ["No Premium, o endereço .com.br é meu?", "É. Ele é registrado no seu CPF ou CNPJ, no registro.br."],
+  ["Atendem o meu tipo de negócio?", "Se o seu negócio aparece no Google Maps, dá pra fazer: comércio, serviço, clínica, escritório, restaurante e muito mais. Atendemos o Brasil todo. Se ainda não está no Maps, chama no WhatsApp que a gente vê o melhor jeito."]
+];
+document.getElementById("faq").innerHTML = FAQ.map(([p, r]) => `<details><summary>${p}<span class="mais"><svg><use href="#mais"/></svg></span></summary><div class="resp"><p>${r}</p></div></details>`).join("");
+
+// busca do google: digita, depois os resultados aparecem
+const BUSCAS = ["restaurante perto de mim", "salão de beleza aberto agora", "pet shop banho e tosa", "oficina mecânica perto"];
+let bi = 0, rodandoBusca = false;
+const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+async function digitar() {
+  if (rodandoBusca) return; rodandoBusca = true;
+  const alvo = document.getElementById("digita"), res = document.querySelectorAll(".res");
+  while (true) {
+    res.forEach((r) => r.classList.remove("on"));
+    const t = BUSCAS[bi++ % BUSCAS.length];
+    alvo.textContent = "";
+    for (const c of t) { alvo.textContent += c; if (!calmo) await espera(55); }
+    for (const r of res) { await espera(calmo ? 0 : 260); r.classList.add("on"); }
+    if (calmo) break;
+    await espera(3600);
+  }
+}
+
+// números do resumo contando
+function contar(el) {
+  const fim = +el.dataset.n, t0 = performance.now(), dur = 1400;
+  const passo = (t) => { const p = Math.min(1, (t - t0) / dur); el.textContent = Math.round(fim * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(passo); };
+  requestAnimationFrame(passo);
+}
+
+// revela ao rolar
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add("visto"); io.unobserve(e.target);
+  if (e.target.id === "busca") digitar();
+  if (e.target.id === "painel") e.target.querySelectorAll("[data-n]").forEach(contar);
+}), { threshold: .2 });
+document.querySelectorAll(".revela, #passos").forEach((el) => io.observe(el));
+
+// topo e botão fixo
+const topo = document.getElementById("topo"), zf = document.getElementById("zapfixo");
+addEventListener("scroll", () => { topo.classList.toggle("rolou", scrollY > 10); zf.classList.toggle("on", scrollY > 600); }, { passive: true });
+</script>
 </body>
 </html>
