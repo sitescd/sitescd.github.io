@@ -297,6 +297,14 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
 .dm-passos li.on::before{background:var(--verde-vivo);color:var(--noite)}
 .dm-passos b{color:var(--tinta)}
 #pedirForm{margin-top:18px}
+/* 18/10: atalhos pra abrir o Maps (dono logado cai direto no perfil do negócio) */
+.atalhos{display:flex;flex-wrap:wrap;gap:8px}
+.atalho{flex:1 1 200px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:700 15px Figtree,sans-serif;border-radius:14px;padding:13px 14px;background:#fff;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--tinta);transition:transform .3s var(--ease),background .25s}
+.atalho:hover{transform:translateY(-2px)}
+.atalho svg{width:18px;height:18px;color:#ea4335;flex:none}
+.atalho.dono{box-shadow:inset 0 0 0 1.5px var(--linha);font-weight:600;color:var(--tinta2)}
+.atalho-dica{font-size:13.5px;color:var(--tinta2);margin:10px 0 16px}
+.atalho-dica b{color:var(--tinta)}
 #pedirForm label{display:block;font-weight:700;font-size:15px;margin-bottom:8px}
 .campo-link{display:flex;gap:6px;align-items:center;background:#fff;border-radius:16px;padding:6px 6px 6px 16px;box-shadow:0 0 0 1.5px var(--linha);transition:box-shadow .3s}
 .campo-link:focus-within{box-shadow:0 0 0 2px var(--verde)}
@@ -400,6 +408,11 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
           </ol>
         </div>
         <form id="pedirForm" novalidate>
+          <div class="atalhos">
+            <a class="atalho" href="https://www.google.com/maps" target="_blank" rel="noopener"><svg><use href="#pino"/></svg>Abrir o Google Maps</a>
+            <a class="atalho dono" href="https://www.google.com/search?q=meu+neg%C3%B3cio" target="_blank" rel="noopener"><svg><use href="#g"/></svg>Sou dono: abrir meu negócio</a>
+          </div>
+          <p class="atalho-dica">Abra o seu negócio, toque em <b>Compartilhar</b>, copie o link e volte aqui.</p>
           <label for="linkMaps">Link do seu negócio no Google Maps</label>
           <div class="campo-link" id="campoLink">
             <input id="linkMaps" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="Cole aqui: maps.app.goo.gl/…">
@@ -701,7 +714,7 @@ addEventListener("scroll", () => { topo.classList.toggle("rolou", scrollY > 10);
   const $ = (id) => document.getElementById(id);
   const quero = $("quero"), acoes = $("acoes"), pedir = $("pedir"), demo = $("demo"), form = $("pedirForm"), campo = $("linkMaps"),
     caixa = $("campoLink"), erro = $("pedirErro"), res = $("pedirRes"), colar = $("colar"), dig = $("dmDig"), passos = demo.querySelectorAll(".dm-passos li");
-  const LINK = /https?:\/\/(?:maps\.app\.goo\.gl|goo\.gl\/maps|g\.co\/kgs|(?:www\.)?google\.[a-z.]+\/maps|maps\.google\.[a-z.]+)\S*/i;
+  const LINK = /https?:\/\/(?:maps\.app\.goo\.gl|g\.page|share\.google|goo\.gl\/maps|g\.co\/kgs|(?:www\.)?google\.[a-z.]+\/maps|maps\.google\.[a-z.]+)\S*/i;
   const API = location.hostname.endsWith("sitescd.com.br") ? "https://area.sitescd.com.br" : "", ZAP = "https://wa.me/5513997225693?text=", celular = matchMedia("(max-width:920px)").matches;
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   let rodando = false, tk = "", enviando = false, digitou = false;
