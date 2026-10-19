@@ -752,7 +752,7 @@ addEventListener("scroll", () => { topo.classList.toggle("rolou", scrollY > 10);
   async function acompanhar(t0) {
     let r = null;
     try { r = await fetch(API + "/pedir/estado?tk=" + encodeURIComponent(tk)).then((x) => x.json()); } catch {}
-    if (!r || r.estado === "lendo") {
+    if (!r || !r.estado || r.estado === "lendo") {   // sem resposta ou engasgo do servidor: pergunta de novo
       if (Date.now() - t0 > 240e3) return semServidor(campo.value, "Tá demorando mais que o normal pra abrir o Google Maps.");
       if (Date.now() - t0 > 30e3) res.querySelector("p").textContent = "O Google tá um pouco lento. Já já sai.";
       return setTimeout(() => acompanhar(t0), 2500);
