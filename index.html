@@ -18,6 +18,7 @@
   --zap:#1fa855; --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fundo);color:var(--tinta);font:400 17px/1.6 Figtree,system-ui,sans-serif;overflow-x:hidden}
 ::selection{background:var(--verde-vivo);color:var(--noite)}
@@ -248,6 +249,93 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
   .b-google{display:none}
   .nums strong{font-size:28px}
 }
+/* 18/10: "Quero ver o meu site" abre aqui mesmo: animação de como copiar o link do Maps + campo pra colar */
+.pedir{scroll-margin:90px 0 20px;margin-top:4px;max-width:560px;background:var(--papel);border-radius:28px;padding:20px;box-shadow:0 40px 80px -44px rgba(14,26,23,.45),0 0 0 1px var(--linha);animation:entra .7s var(--ease) both}
+.demo{display:grid;grid-template-columns:minmax(138px,190px) 1fr;gap:18px;align-items:center}
+.dm-tela{position:relative;height:250px;border-radius:24px;overflow:hidden;background:#e9efe9;box-shadow:inset 0 0 0 6px #0a0d0c,0 20px 40px -24px rgba(14,26,23,.6)}
+.dm-mapa{position:absolute;inset:0;background:linear-gradient(135deg,#e6ede4,#dbe7dc)}
+.dm-rua{position:absolute;background:#fff;border-radius:4px}
+.dm-rua.r1{left:-10%;right:-10%;top:42%;height:9px;transform:rotate(-14deg)}
+.dm-rua.r2{top:-10%;bottom:-10%;left:58%;width:8px;transform:rotate(10deg)}
+.dm-rua.r3{left:-10%;right:30%;top:70%;height:6px;transform:rotate(8deg);background:#f3e7b6}
+.dm-pino{position:absolute;left:50%;top:30%;width:30px;height:30px;margin-left:-15px;color:#ea4335;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25));opacity:0;transform:translateY(-30px)}
+.demo.p1 .dm-pino,.demo.p2 .dm-pino,.demo.p3 .dm-pino,.demo.p4 .dm-pino{opacity:1;transform:none;transition:all .5s var(--ease) .7s}
+.dm-busca{position:absolute;left:12px;right:12px;top:16px;height:32px;border-radius:999px;background:#fff;display:flex;align-items:center;gap:6px;padding:0 10px;font-size:11.5px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.dm-busca svg{width:13px;height:13px;color:#8a8f8d;flex:none}
+.dm-busca span::after{content:"";display:inline-block;width:1.5px;height:12px;background:var(--tinta);margin-left:1px;vertical-align:-2px;animation:pisca 1s steps(1) infinite}
+.dm-ficha{position:absolute;left:6px;right:6px;bottom:6px;border-radius:18px 18px 18px 18px;background:#fff;padding:12px 12px 12px;box-shadow:0 -6px 20px -8px rgba(0,0,0,.2);transform:translateY(110%);transition:transform .6s var(--ease)}
+.demo.p1 .dm-ficha,.demo.p2 .dm-ficha,.demo.p3 .dm-ficha,.demo.p4 .dm-ficha{transform:none;transition-delay:1.1s}
+.demo.p2 .dm-ficha,.demo.p3 .dm-ficha,.demo.p4 .dm-ficha{transition-delay:0s}
+.dm-ficha b{display:block;font:800 14px "Bricolage Grotesque",sans-serif}
+.dm-ficha small{font-size:10.5px;color:#5f6b67}
+.dm-bts{display:flex;gap:4px;margin-top:9px}
+.dm-bts i{font-style:normal;font-size:9.5px;font-weight:700;border-radius:999px;padding:6px 7px;background:#e8f0fe;color:#1a56c4;white-space:nowrap;transition:background .25s,color .25s,transform .25s}
+.demo.p2 .dm-comp{background:#1a56c4;color:#fff;transform:scale(1.06);transition-delay:.9s}
+.dm-folha{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:20px 20px 0 0;padding:12px 12px 16px;box-shadow:0 -10px 30px -10px rgba(0,0,0,.35);transform:translateY(105%);transition:transform .55s var(--ease)}
+.demo.p3 .dm-folha{transform:none}
+.dm-folha small{display:block;font-size:10.5px;font-weight:700;color:#5f6b67;margin-bottom:8px}
+.dm-copiar{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;border-radius:12px;padding:9px 10px;background:#f1f3f4;transition:background .25s}
+.dm-copiar svg{width:15px;height:15px;color:#1a56c4}
+.demo.p3 .dm-copiar{background:#d2e3fc;transition-delay:1.1s}
+.dm-apps{display:flex;gap:8px;margin-top:10px}
+.dm-apps i{width:24px;height:24px;border-radius:8px;background:#e8e6df}
+.dm-apps i:first-child{background:var(--zap)}
+.dm-aviso{position:absolute;left:50%;bottom:16px;display:flex;align-items:center;gap:6px;white-space:nowrap;background:#202124;color:#fff;font-size:11.5px;font-weight:700;border-radius:10px;padding:9px 12px;transform:translate(-50%,30px);opacity:0;transition:all .45s var(--ease)}
+.dm-aviso svg{width:14px;height:14px;color:var(--verde-vivo)}
+.demo.p4 .dm-aviso{transform:translate(-50%,0);opacity:1;transition-delay:.15s}
+.demo.p4 .dm-ficha{transform:translateY(110%)}
+.dm-dedo{position:absolute;z-index:3;width:26px;height:26px;border-radius:50%;background:rgba(14,26,23,.28);box-shadow:0 0 0 2px #fff;left:50%;top:115%;transition:left .7s var(--ease),top .7s var(--ease)}
+.demo.p2 .dm-dedo{left:96px;top:calc(100% - 40px)}
+.demo.p3 .dm-dedo{left:40px;top:calc(100% - 92px)}
+.dm-dedo::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(47,209,180,.8);opacity:0}
+.demo.p2 .dm-dedo::after,.demo.p3 .dm-dedo::after{animation:toque .6s var(--ease) .8s 1 both}
+@keyframes toque{0%{opacity:1;box-shadow:0 0 0 0 rgba(47,209,180,.8)}100%{opacity:0;box-shadow:0 0 0 18px rgba(47,209,180,0)}}
+.dm-passos{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:p}
+.dm-passos li{counter-increment:p;display:flex;gap:10px;align-items:center;font-size:15px;line-height:1.35;color:var(--tinta2);opacity:.45;transition:opacity .35s,color .35s}
+.dm-passos li::before{content:counter(p);flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:800 14px "Bricolage Grotesque";background:#ece8de;color:var(--tinta2);transition:background .35s,color .35s}
+.dm-passos li.on{opacity:1;color:var(--tinta)}
+.dm-passos li.on::before{background:var(--verde-vivo);color:var(--noite)}
+.dm-passos b{color:var(--tinta)}
+#pedirForm{margin-top:18px}
+#pedirForm label{display:block;font-weight:700;font-size:15px;margin-bottom:8px}
+.campo-link{display:flex;gap:6px;align-items:center;background:#fff;border-radius:16px;padding:6px 6px 6px 16px;box-shadow:0 0 0 1.5px var(--linha);transition:box-shadow .3s}
+.campo-link:focus-within{box-shadow:0 0 0 2px var(--verde)}
+.campo-link.chama{animation:chama 1.6s var(--ease) 1}
+@keyframes chama{0%,100%{box-shadow:0 0 0 1.5px var(--linha)}40%{box-shadow:0 0 0 3px var(--verde-vivo),0 0 0 9px rgba(47,209,180,.18)}}
+.campo-link input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 16px Figtree,sans-serif;color:var(--tinta);padding:10px 0}
+.campo-link input::placeholder{color:#97a19d}
+#colar{flex:none;border:0;border-radius:12px;background:var(--tinta);color:#fff;font:700 14px Figtree,sans-serif;padding:11px 14px;cursor:pointer}
+#pedirForm .bt{width:100%;margin-top:12px}
+.pedir-obs{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:13.5px;color:var(--tinta2)}
+.pedir-obs svg{width:16px;height:16px;color:var(--verde);flex:none;margin-top:2px}
+.pedir-erro{color:#b4513f;font-weight:600;font-size:14px;margin-top:8px}
+.pedir-erro:empty{display:none}
+.pedir-volta{display:block;margin:14px auto 0;border:0;background:none;font:600 14px Figtree,sans-serif;color:var(--tinta2);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.pedir-res{text-align:center;padding:10px 4px 4px;animation:entra .6s var(--ease) both}
+.pedir-res h3{font-size:26px;margin:14px 0 8px}
+.pedir-res p{color:var(--tinta2);max-width:40ch;margin:0 auto}
+.pedir-res p b{color:var(--tinta)}
+.pedir-res .bt{margin-top:16px}
+.pedir-res form{margin-top:18px;text-align:left}
+.pedir-res form .bt{width:100%}
+.selo-ok{width:64px;height:64px;margin:0 auto;border-radius:50%;display:grid;place-items:center;background:var(--verde-vivo);color:var(--noite);animation:pula .6s var(--ease) both}
+.selo-ok svg{width:32px;height:32px}
+@keyframes pula{from{transform:scale(.4);opacity:0}}
+.lendo{position:relative;width:64px;height:64px;margin:0 auto}
+.lendo svg{position:absolute;inset:0;width:64px;height:64px;color:#ea4335;animation:quica 1s ease-in-out infinite}
+.lendo::after{content:"";position:absolute;left:18px;right:18px;bottom:-6px;height:8px;border-radius:50%;background:rgba(14,26,23,.15);animation:sombra 1s ease-in-out infinite}
+@keyframes quica{50%{transform:translateY(-12px)}}
+@keyframes sombra{50%{transform:scale(.6);opacity:.6}}
+.outro{margin-top:16px;font-size:14.5px;color:var(--tinta2)}
+.outro button{border:0;background:none;font:700 14.5px Figtree,sans-serif;color:var(--verde);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
+@media (max-width:480px){
+  .pedir{padding:16px;border-radius:24px}
+  .demo{grid-template-columns:142px 1fr;gap:14px}
+  .dm-tela{height:226px}
+  .dm-passos li{font-size:13.5px;gap:8px}
+  .dm-passos li::before{width:24px;height:24px;font-size:12px}
+  .dm-bts i{font-size:8.5px;padding:5px 5px}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .entra,.revela,.res,.bolha{opacity:1;transform:none}
@@ -260,6 +348,8 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
   <symbol id="zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.31-1.96 1.36-.5.05-.98.24-3.3-.69-2.78-1.1-4.55-3.95-4.69-4.13-.13-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.25-.27.55-.34.73-.34l.52.01c.17 0 .39-.06.61.47.24.55.8 1.92.87 2.06.07.14.11.3.02.48-.09.18-.13.3-.27.46-.13.16-.28.36-.4.48-.13.13-.27.28-.12.55.15.27.68 1.12 1.46 1.81 1 .89 1.85 1.17 2.12 1.3.27.14.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.52.32.06.11.06.66-.18 1.34Z"/></symbol>
   <symbol id="ok" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
   <symbol id="mais" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="pino" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7.5 7.5 0 0 0-7.5 7.5c0 5.4 6.4 11.6 6.7 11.9a1.2 1.2 0 0 0 1.6 0c.3-.3 6.7-6.5 6.7-11.9A7.5 7.5 0 0 0 12 2Zm0 10.3a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"/></symbol>
+  <symbol id="corrente" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></g></symbol>
   <symbol id="lupa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></g></symbol>
   <symbol id="relogio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
   <symbol id="porta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h5v18h-5M10 17l5-5-5-5M15 12H3"/></g></symbol>
@@ -287,9 +377,40 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
     <div>
       <h1 id="t1" class="entra">O site do seu negócio, <span class="troca">pronto antes de você pagar.</span></h1>
       <p class="sub entra" style="animation-delay:.12s">Manda o link do seu negócio no Google Maps. A gente monta o site com as suas fotos, o horário e as avaliações dos seus clientes. Você vê de graça. Se gostar, coloca no ar por <b style="color:var(--tinta)">R$&nbsp;9,90</b> no primeiro mês.</p>
-      <div class="acoes entra" style="animation-delay:.24s">
-        <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Quero%20ver%20o%20site%20do%20meu%20neg%C3%B3cio%20pronto.%20O%20link%20do%20Google%20Maps%20%C3%A9%3A%20" target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero ver o meu site</a>
+      <div class="acoes entra" id="acoes" style="animation-delay:.24s">
+        <a class="bt bt-zap" id="quero" href="https://wa.me/5513997225693?text=Oi!%20Quero%20ver%20o%20site%20do%20meu%20neg%C3%B3cio%20pronto.%20O%20link%20do%20Google%20Maps%20%C3%A9%3A%20" target="_blank" rel="noopener"><svg class="i"><use href="#pino"/></svg>Quero ver o meu site</a>
         <a class="bt bt-claro" href="#como">Como funciona</a>
+      </div>
+      <div class="pedir" id="pedir" hidden>
+        <div class="demo" id="demo" data-p="1" aria-hidden="true">
+          <div class="dm-tela">
+            <div class="dm-mapa"><i class="dm-rua r1"></i><i class="dm-rua r2"></i><i class="dm-rua r3"></i><svg class="dm-pino"><use href="#pino"/></svg></div>
+            <div class="dm-busca"><svg><use href="#lupa"/></svg><span id="dmDig"></span></div>
+            <div class="dm-ficha"><b>Seu negócio</b><small>★ 4,9 · Aberto agora</small>
+              <div class="dm-bts"><i>Rotas</i><i class="dm-comp">Compartilhar</i></div></div>
+            <div class="dm-folha"><small>Compartilhar</small><div class="dm-copiar"><svg><use href="#corrente"/></svg>Copiar link</div><div class="dm-apps"><i></i><i></i><i></i><i></i></div></div>
+            <div class="dm-aviso"><svg><use href="#ok"/></svg>Link copiado</div>
+            <i class="dm-dedo"></i>
+          </div>
+          <ol class="dm-passos">
+            <li><span>Abra o <b>Google Maps</b> e procure o seu negócio</span></li>
+            <li><span>Toque em <b>Compartilhar</b></span></li>
+            <li><span>Toque em <b>Copiar link</b></span></li>
+            <li><span>Volte aqui e <b>cole embaixo</b></span></li>
+          </ol>
+        </div>
+        <form id="pedirForm" novalidate>
+          <label for="linkMaps">Link do seu negócio no Google Maps</label>
+          <div class="campo-link" id="campoLink">
+            <input id="linkMaps" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="Cole aqui: maps.app.goo.gl/…">
+            <button type="button" id="colar" hidden>Colar</button>
+          </div>
+          <p class="pedir-erro" id="pedirErro" role="alert"></p>
+          <button class="bt bt-zap" type="submit">Montar meu site</button>
+          <p class="pedir-obs"><svg><use href="#ok"/></svg>Grátis e sem compromisso. O site chega no WhatsApp que está no seu Google.</p>
+        </form>
+        <div class="pedir-res" id="pedirRes" hidden aria-live="polite"></div>
+        <button type="button" class="pedir-volta" id="pedirVolta">Voltar</button>
       </div>
       <div class="garantias entra" style="animation-delay:.36s">
         <span><svg><use href="#ok"/></svg>Ver é grátis</span>
@@ -574,6 +695,108 @@ document.querySelectorAll(".revela, #passos").forEach((el) => io.observe(el));
 // topo e botão fixo
 const topo = document.getElementById("topo"), zf = document.getElementById("zapfixo");
 addEventListener("scroll", () => { topo.classList.toggle("rolou", scrollY > 10); zf.classList.toggle("on", scrollY > 600); }, { passive: true });
+
+// 18/10: "Quero ver o meu site" abre aqui mesmo: a pessoa cola o link do Maps e o site chega no WhatsApp do Google dela
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const quero = $("quero"), acoes = $("acoes"), pedir = $("pedir"), demo = $("demo"), form = $("pedirForm"), campo = $("linkMaps"),
+    caixa = $("campoLink"), erro = $("pedirErro"), res = $("pedirRes"), colar = $("colar"), dig = $("dmDig"), passos = demo.querySelectorAll(".dm-passos li");
+  const LINK = /https?:\/\/(?:maps\.app\.goo\.gl|goo\.gl\/maps|g\.co\/kgs|(?:www\.)?google\.[a-z.]+\/maps|maps\.google\.[a-z.]+)\S*/i;
+  const API = location.hostname.endsWith("sitescd.com.br") ? "https://area.sitescd.com.br" : "", ZAP = "https://wa.me/5513997225693?text=", celular = matchMedia("(max-width:920px)").matches;
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  let rodando = false, tk = "", enviando = false, digitou = false;
+
+  // animação: 1 procura, 2 toca em Compartilhar, 3 toca em Copiar link, 4 link copiado → o campo chama atenção
+  async function animar() {
+    if (rodando) return; rodando = true;
+    while (!pedir.hidden) {
+      for (let p = 1; p <= 4 && !pedir.hidden; p++) {
+        demo.className = "demo p" + p; passos.forEach((li, i) => li.classList.toggle("on", i === p - 1));
+        if (p === 1) { dig.textContent = ""; for (const c of "Seu negócio") { dig.textContent += c; await espera(calmo ? 0 : 70); } }
+        if (p === 4) { caixa.classList.remove("chama"); void caixa.offsetWidth; caixa.classList.add("chama"); }
+        await espera(calmo ? 0 : p === 1 ? 1800 : p === 4 ? 2800 : 2100);
+      }
+      if (calmo) { demo.className = "demo p4"; passos.forEach((li) => li.classList.add("on")); break; }
+    }
+    rodando = false;
+  }
+  function abrir(e) {
+    e.preventDefault();
+    acoes.hidden = true; pedir.hidden = false; animar();
+    if (navigator.clipboard?.readText) colar.hidden = false;
+    pedir.scrollIntoView({ behavior: calmo ? "auto" : "smooth", block: "nearest" }); if (!celular) campo.focus({ preventScroll: true });
+  }
+  quero.addEventListener("click", abrir);
+  $("pedirVolta").onclick = () => { pedir.hidden = true; acoes.hidden = false; res.hidden = true; form.hidden = false; demo.hidden = false; campo.value = ""; erro.textContent = ""; tk = ""; digitou = false; enviando = false; quero.focus(); };
+
+  const mostrarErro = (t) => { erro.textContent = t; caixa.classList.remove("chama"); void caixa.offsetWidth; caixa.classList.add("chama"); };
+  colar.onclick = async () => {   // o celular pergunta "permitir colar?" na primeira vez
+    try { const t = await navigator.clipboard.readText(); campo.value = t.trim(); erro.textContent = ""; if (LINK.test(t)) mandar(); else if (t) mostrarErro("O que está copiado não é um link do Google Maps. Copie o link lá no Maps e toque em Colar de novo."); }
+    catch { colar.hidden = true; mostrarErro("Este celular não deixou colar pelo botão. Toque e segure no campo e escolha Colar."); }
+  };
+  campo.addEventListener("paste", () => setTimeout(() => { if (LINK.test(campo.value)) mandar(); }, 60));   // colou = já vai
+  form.onsubmit = (e) => { e.preventDefault(); mandar(); };
+
+  async function mandar() {
+    if (enviando) return;
+    const link = (campo.value.match(LINK) || [])[0];
+    if (!link) return mostrarErro(campo.value.trim() ? "Isso não parece um link do Google Maps. No Maps, toque em Compartilhar e depois em Copiar link." : "Cole aqui o link do seu negócio no Google Maps.");
+    enviando = true; erro.textContent = ""; campo.value = link;
+    tela(`<div class="lendo"><svg><use href="#pino"/></svg></div><h3>Abrindo o seu negócio no Google…</h3><p>Leva uns segundinhos.</p>`);
+    try {
+      const r = await fetch(API + "/pedir", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ link }) }).then((x) => x.json());
+      if (r.erro || !r.tk) { voltarForm(r.erro || "Não deu certo agora. Tente de novo."); return; }
+      tk = r.tk; acompanhar(Date.now());
+    } catch { semServidor(link); }
+  }
+  async function acompanhar(t0) {
+    let r = null;
+    try { r = await fetch(API + "/pedir/estado?tk=" + encodeURIComponent(tk)).then((x) => x.json()); } catch {}
+    if (!r || r.estado === "lendo") {
+      if (Date.now() - t0 > 240e3) return semServidor(campo.value, "Tá demorando mais que o normal pra abrir o Google Maps.");
+      if (Date.now() - t0 > 30e3) res.querySelector("p").textContent = "O Google tá um pouco lento. Já já sai.";
+      return setTimeout(() => acompanhar(t0), 2500);
+    }
+    if (r.estado === "erro") return voltarForm(r.erro);
+    mostrar(r);
+  }
+  function mostrar(r) {
+    enviando = false;
+    const nome = r.nome ? `<b>${esc(r.nome)}</b>` : "do seu negócio";
+    if (r.estado === "numero") {
+      tela(`<div class="selo-ok"><svg><use href="#pino"/></svg></div><h3>Achamos ${nome}!</h3>
+        <p>${r.tinhaFixo ? "O telefone que está no seu Google é fixo." : "O seu Google não tem telefone."} Pra qual WhatsApp a gente manda o site?</p>${formNumero("Mandar pra esse WhatsApp")}`);
+      return;
+    }
+    const ja = r.ja ? `<p>A gente já tinha o seu pedido. O site vai pro WhatsApp <b>${esc(r.telefone)}</b>.</p>` : `<p>Já estamos montando o site ${r.nome ? "da " + nome : nome}. Em breve ele chega no WhatsApp <b>${esc(r.telefone)}</b>${digitou ? "" : ", que está no seu Google"}.</p>`;
+    tela(`<div class="selo-ok"><svg><use href="#ok"/></svg></div><h3>Pronto, recebemos! 🎉</h3>${ja}
+      ${r.ja ? "" : `<p class="outro" id="outroTxt">${digitou ? "Errou o número?" : "Quer receber em outro número?"} <button type="button" id="outroBt">Digite aqui</button></p><div id="outroForm" hidden>${formNumero("Trocar o número")}</div>`}`);
+    const bt = $("outroBt"); if (bt) bt.onclick = () => { $("outroTxt").hidden = true; $("outroForm").hidden = false; $("numZap").focus(); };
+  }
+  function formNumero(rotulo) {
+    setTimeout(() => {
+      const f = $("formNum"); if (!f) return;
+      f.onsubmit = async (e) => {
+        e.preventDefault(); const n = $("numZap").value, er = $("numErro"); digitou = true;
+        if (n.replace(/\D/g, "").length < 10) { er.textContent = "Digite o WhatsApp com DDD, tipo (11) 91234-5678."; return; }
+        er.textContent = ""; f.querySelector("button").disabled = true;
+        try { const r = await fetch(API + "/pedir/numero", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ tk, numero: n }) }).then((x) => x.json());
+          if (r.erro) { er.textContent = r.erro; f.querySelector("button").disabled = false; return; } mostrar(r); }
+        catch { er.textContent = "Não deu pra mandar agora. Tente de novo."; f.querySelector("button").disabled = false; }
+      };
+    });
+    return `<form id="formNum"><label for="numZap" style="display:block;font-weight:700;font-size:15px;margin-bottom:8px">Seu WhatsApp</label>
+      <div class="campo-link"><input id="numZap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 91234-5678"></div>
+      <p class="pedir-erro" id="numErro" role="alert"></p><button class="bt bt-zap" type="submit">${rotulo}</button></form>`;
+  }
+  function tela(html) { form.hidden = true; demo.hidden = true; res.hidden = false; res.innerHTML = html; }
+  function voltarForm(t) { enviando = false; res.hidden = true; form.hidden = false; demo.hidden = false; mostrarErro(t); }
+  function semServidor(link, motivo) {   // sem resposta daqui: manda pelo WhatsApp, já com o link
+    enviando = false;
+    tela(`<h3>Vamos pelo WhatsApp?</h3><p>${motivo || "Não deu pra mandar o pedido por aqui agora."} Toque abaixo e é só enviar: o link já vai junto.</p>
+      <a class="bt bt-zap" href="${ZAP + encodeURIComponent("Oi! Quero ver o site do meu negócio pronto. O link do Google Maps é: " + link)}" target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Mandar pelo WhatsApp</a>`);
+  }
+})();
 </script>
 </body>
 </html>
