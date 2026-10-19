@@ -334,6 +334,14 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
 .lendo::after{content:"";position:absolute;left:18px;right:18px;bottom:-6px;height:8px;border-radius:50%;background:rgba(14,26,23,.15);animation:sombra 1s ease-in-out infinite}
 @keyframes quica{50%{transform:translateY(-12px)}}
 @keyframes sombra{50%{transform:scale(.6);opacity:.6}}
+.aguarda{display:flex;gap:14px;align-items:center;text-align:left;margin:20px auto 0;max-width:400px;background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 0 0 1px var(--linha);font-size:14.5px;line-height:1.45;color:var(--tinta2)}
+.aguarda b{color:var(--tinta)}
+.relogio{position:relative;flex:none;width:42px;height:42px;border-radius:50%;background:#ddf1ec;box-shadow:inset 0 0 0 3px var(--verde)}
+.relogio::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--verde)}
+.ponteiro{position:absolute;left:50%;bottom:50%;width:3px;margin-left:-1.5px;border-radius:3px;background:var(--verde);transform-origin:50% 100%}
+.ponteiro.m{height:14px;animation:gira 2.4s linear infinite}
+.ponteiro.h{height:9px;animation:gira 28.8s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
 .outro{margin-top:16px;font-size:14.5px;color:var(--tinta2)}
 .outro button{border:0;background:none;font:700 14.5px Figtree,sans-serif;color:var(--verde);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
 @media (max-width:480px){
@@ -783,6 +791,8 @@ addEventListener("scroll", () => { topo.classList.toggle("rolou", scrollY > 10);
     }
     const ja = r.ja ? `<p>A gente já tinha o seu pedido. O site vai pro WhatsApp <b>${esc(r.telefone)}</b>.</p>` : `<p>Já estamos montando o site ${r.nome ? "da " + nome : nome}. Em breve ele chega no WhatsApp <b>${esc(r.telefone)}</b>${digitou ? "" : ", que está no seu Google"}.</p>`;
     tela(`<div class="selo-ok"><svg><use href="#ok"/></svg></div><h3>Pronto, recebemos! 🎉</h3>${ja}
+      <div class="aguarda"><span class="relogio" aria-hidden="true"><i class="ponteiro h"></i><i class="ponteiro m"></i></span>
+        <span><b>Leva alguns minutos.</b> Pode fechar esta página: o site chega sozinho no seu WhatsApp.</span></div>
       ${r.ja ? "" : `<p class="outro" id="outroTxt">${digitou ? "Errou o número?" : "Quer receber em outro número?"} <button type="button" id="outroBt">Digite aqui</button></p><div id="outroForm" hidden>${formNumero("Trocar o número")}</div>`}`);
     const bt = $("outroBt"); if (bt) bt.onclick = () => { $("outroTxt").hidden = true; $("outroForm").hidden = false; $("numZap").focus(); };
   }
@@ -802,8 +812,23 @@ addEventListener("scroll", () => { topo.classList.toggle("rolou", scrollY > 10);
       <div class="campo-link"><input id="numZap" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 91234-5678"></div>
       <p class="pedir-erro" id="numErro" role="alert"></p><button class="bt bt-zap" type="submit">${rotulo}</button></form>`;
   }
-  function tela(html) { form.hidden = true; demo.hidden = true; res.hidden = false; res.innerHTML = html; }
-  function voltarForm(t) { enviando = false; res.hidden = true; form.hidden = false; demo.hidden = false; mostrarErro(t); }
+  // 18/10 (Caio: "quando colo, a janela diminui e a página pula pra cima"): o quadro encolhe devagar e fica no meio da tela
+  function trocar(fazer) {
+    const antes = pedir.offsetHeight; pedir.style.transition = "none"; pedir.style.height = "";
+    fazer();
+    const depois = pedir.offsetHeight;
+    if (calmo || Math.abs(antes - depois) < 4) return centralizar();
+    pedir.style.height = antes + "px"; pedir.style.overflow = "hidden"; void pedir.offsetHeight;
+    pedir.style.transition = "height .7s var(--ease)"; pedir.style.height = depois + "px";
+    setTimeout(() => { pedir.style.height = ""; pedir.style.overflow = ""; pedir.style.transition = ""; }, 750);
+    centralizar();
+  }
+  function centralizar() {
+    const r = pedir.getBoundingClientRect(), alvo = scrollY + r.top - Math.max(80, (innerHeight - Math.min(r.height, innerHeight - 100)) / 2);
+    scrollTo({ top: Math.max(0, alvo), behavior: calmo ? "auto" : "smooth" });
+  }
+  function tela(html) { trocar(() => { form.hidden = true; demo.hidden = true; res.hidden = false; res.innerHTML = html; }); }
+  function voltarForm(t) { enviando = false; trocar(() => { res.hidden = true; form.hidden = false; demo.hidden = false; }); mostrarErro(t); }
   function semServidor(link, motivo) {   // sem resposta daqui: manda pelo WhatsApp, já com o link
     enviando = false;
     tela(`<h3>Vamos pelo WhatsApp?</h3><p>${motivo || "Não deu pra mandar o pedido por aqui agora."} Toque abaixo e é só enviar: o link já vai junto.</p>
