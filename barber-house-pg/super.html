@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<script>try{if(!sessionStorage.getItem("ab")){navigator.sendBeacon("https://area.sitescd.com.br/c/barber-house-pg/abriu");sessionStorage.setItem("ab",1)}}catch(e){}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Carregando…</title>
+<!-- 17/10 (Caio: "fazer um modelo desse tipo de site super premium pra galera"): MODELO SUPER PREMIUM. Mesmos dados dos
+     outros modelos (o JSON do bloco "dados"), sem IA: capa cheia com a foto, títulos grandes, movimento ao rolar, nota contando,
+     depoimentos, passos, galeria com zoom, "aberto agora" pelo horário, mapa e botão de WhatsApp fixo.
+     Contrato com previas.js: <title>, footer .prop / .cd, links wa.me / tel: / maps (contador). Editor: data-campo / data-foto. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--escura:#14110f;--media:#3a2b20;--destaque:#d9a441;--clara:#f6efe4;--fundo:#f6efe4;--tinta:#14110f;--tinta2:#5b4f45;--linha:rgba(20,17,15,.12);--cartao:#fffaf2;--sobre-destaque:#1a1208;--ease:cubic-bezier(.16,1,.3,1)}
+.escuro{--fundo:#0f0d0c;--tinta:#f3ece2;--tinta2:#b5a999;--linha:rgba(255,255,255,.1);--cartao:#181513}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fundo);color:var(--tinta);font:400 17px/1.6 Figtree,system-ui,sans-serif;overflow-x:hidden}
+::selection{background:var(--destaque);color:var(--sobre-destaque)}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--destaque);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:0;text-wrap:balance}
+h1 em,h2 em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--destaque)}
+p{margin:0}
+.box{max-width:1180px;margin:0 auto;padding:0 20px}
+svg.i{width:20px;height:20px;flex:none}
+[hidden]{display:none!important}
+
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font:700 16px Figtree,sans-serif;text-decoration:none;padding:16px 26px;border:0;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.bt-forte{background:var(--destaque);color:var(--sobre-destaque);box-shadow:0 12px 30px -12px color-mix(in srgb,var(--destaque) 80%,transparent)}
+.bt-forte:hover{transform:translateY(-3px)}
+.bt-vidro{background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.bt-vidro:hover{background:rgba(255,255,255,.2)}
+.bt-linha{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--linha)}
+.bt-linha:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+
+/* topo */
+.topo{position:fixed;inset:0 0 auto;z-index:30;transition:background .35s,box-shadow .35s,color .35s;color:#fff}
+.topo.rolou{background:color-mix(in srgb,var(--fundo) 88%,transparent);backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--linha);color:var(--tinta)}
+.topo .box{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;font:800 20px "Bricolage Grotesque";letter-spacing:-.02em;min-width:0}
+.marca .av{width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;background:var(--destaque);color:var(--sobre-destaque);font:800 18px "Bricolage Grotesque";overflow:hidden;background-repeat:no-repeat}
+.marca .av img{width:100%;height:100%;object-fit:contain;background:#fff}
+.marca .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topo nav{display:flex;align-items:center;gap:24px;font-weight:600;font-size:15px}
+.topo nav a.lk{text-decoration:none;opacity:.8}
+.topo nav a.lk:hover{opacity:1}
+.topo .bt{padding:11px 18px;font-size:15px}
+
+/* capa */
+.capa{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;isolation:isolate}
+.capa .fundo-foto{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:var(--foco,50% 50%);transform:scale(calc(var(--zoom,1) * 1.08));animation:respira 18s ease-in-out infinite alternate}
+@keyframes respira{to{transform:scale(calc(var(--zoom,1) * 1.16)) translateY(-1.5%)}}
+.capa::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.15) 35%,rgba(0,0,0,.78) 100%),linear-gradient(90deg,color-mix(in srgb,var(--escura) 70%,transparent),transparent 70%)}
+.capa .box{width:100%;padding-bottom:72px;padding-top:140px}
+.capa .local{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);padding:8px 14px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.capa .local .ponto{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 4px rgba(61,220,132,.25)}
+.capa .local .ponto.fechado{background:#ff6b5e;box-shadow:0 0 0 4px rgba(255,107,94,.25)}
+.capa h1{font-size:clamp(46px,7.6vw,104px);max-width:14ch;margin:22px 0 22px}
+.capa .sub{font-size:clamp(18px,1.8vw,21px);max-width:46ch;color:rgba(255,255,255,.86)}
+.capa .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.capa .nota-capa{position:absolute;right:20px;bottom:72px;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);border-radius:22px;padding:16px 20px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);text-align:center}
+.capa .nota-capa b{display:block;font:800 40px/1 "Bricolage Grotesque"}
+.capa .nota-capa small{opacity:.85;font-size:13px}
+.estrelas{color:#ffc84a;letter-spacing:2px}
+.entra{opacity:0;transform:translateY(26px);animation:entra 1.1s var(--ease) forwards}
+@keyframes entra{to{opacity:1;transform:none}}
+
+/* faixa dos destaques */
+.faixa{background:var(--destaque);color:var(--sobre-destaque);overflow:hidden;padding:18px 0}
+.faixa .trilho{display:flex;gap:46px;width:max-content;animation:corre 30s linear infinite}
+.faixa:hover .trilho{animation-play-state:paused}
+@keyframes corre{to{transform:translateX(-50%)}}
+.faixa span{display:inline-flex;align-items:center;gap:14px;font:700 21px "Bricolage Grotesque";letter-spacing:-.02em;white-space:nowrap}
+.faixa span::before{content:"✦";font-size:14px}
+
+section{padding:110px 0}
+.chapeu{font-weight:700;font-size:15px;color:var(--destaque);margin-bottom:14px}
+.titulo{max-width:760px;margin-bottom:54px}
+.titulo h2{font-size:clamp(34px,5vw,64px)}
+.titulo p{font-size:19px;color:var(--tinta2);margin-top:18px;max-width:56ch}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.visto{opacity:1;transform:none}
+
+/* produtos: lista grande com seta */
+.lista{border-top:1px solid var(--linha)}
+.item{display:grid;grid-template-columns:70px 1fr auto;gap:22px;align-items:center;padding:28px 6px;border-bottom:1px solid var(--linha);text-decoration:none;position:relative;transition:padding .45s var(--ease)}
+.item::before{content:"";position:absolute;inset:0;background:var(--cartao);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease);z-index:-1;border-radius:14px}
+.item:hover{padding-left:18px}
+.item:hover::before{transform:scaleY(1)}
+.item .ic{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:30px;background:color-mix(in srgb,var(--destaque) 16%,transparent)}
+.item h3{font-size:clamp(22px,2.6vw,32px)}
+.item p{color:var(--tinta2);margin-top:4px;max-width:60ch}
+.item .seta{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--linha);transition:background .3s,transform .45s var(--ease)}
+.item:hover .seta{background:var(--destaque);color:var(--sobre-destaque);transform:rotate(-45deg);box-shadow:none}
+
+/* sobre */
+.sobre .box{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.sobre .foto{aspect-ratio:4/5;border-radius:32px;overflow:hidden;position:relative;box-shadow:0 50px 90px -50px rgba(0,0,0,.6)}
+.sobre .foto i{position:absolute;inset:0;background-size:cover;background-position:var(--foco,50% 50%);transform:scale(var(--zoom,1));transition:transform 1.4s var(--ease)}
+.sobre .foto:hover i{transform:scale(calc(var(--zoom,1) * 1.05))}
+.sobre h2{font-size:clamp(34px,4.6vw,58px)}
+.sobre .txt{font-size:19px;color:var(--tinta2);margin-top:22px}
+.frase{margin-top:34px;font:400 italic clamp(26px,3vw,36px)/1.15 "Instrument Serif",Georgia,serif;color:var(--tinta);padding-left:22px;box-shadow:inset 3px 0 0 var(--destaque)}
+
+/* avaliações */
+.aval{background:var(--escura);color:#f3ece2}
+.aval .titulo p{color:#b5a999}
+.aval .topo-aval{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:46px}
+.aval .grande{display:flex;align-items:center;gap:22px}
+.aval .grande b{font:800 clamp(72px,10vw,130px)/.9 "Bricolage Grotesque";letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.aval .grande small{display:block;color:#b5a999;font-size:15px;margin-top:6px}
+.depos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.depo{background:rgba(255,255,255,.05);border-radius:26px;padding:28px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);display:flex;flex-direction:column;gap:18px;margin:0}
+.depo blockquote{margin:0;font:400 italic 22px/1.35 "Instrument Serif",Georgia,serif;color:#f3ece2}
+.depo figcaption{display:flex;align-items:center;gap:12px;color:#b5a999;font-weight:600;margin-top:auto}
+.depo figcaption i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--destaque);color:var(--sobre-destaque);font:800 16px "Bricolage Grotesque";font-style:normal}
+
+/* passos */
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;counter-reset:p}
+.passos::before{content:"";position:absolute;top:30px;left:30px;right:30px;height:2px;background:var(--linha)}
+.passos .linha{position:absolute;top:30px;left:30px;height:2px;width:0;background:var(--destaque);transition:width 2s var(--ease)}
+.passos.visto .linha{width:calc(100% - 60px)}
+.passo .n{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--fundo);box-shadow:inset 0 0 0 2px var(--linha);font:800 22px "Bricolage Grotesque";position:relative;z-index:1;transition:background .5s,color .5s,box-shadow .5s}
+.passos.visto .passo .n{background:var(--destaque);color:var(--sobre-destaque);box-shadow:0 0 0 8px color-mix(in srgb,var(--destaque) 18%,transparent)}
+.passos.visto .passo:nth-child(3) .n{transition-delay:.6s}.passos.visto .passo:nth-child(4) .n{transition-delay:1.2s}
+.passo h3{font-size:25px;margin:22px 0 8px}
+.passo p{color:var(--tinta2)}
+
+/* galeria */
+.galeria{columns:3 280px;column-gap:16px}
+.galeria figure{margin:0 0 16px;break-inside:avoid;border-radius:22px;overflow:hidden;position:relative;cursor:zoom-in}
+.galeria img{width:100%;transition:transform 1s var(--ease)}
+.galeria figure:hover img{transform:scale(1.05)}
+.galeria figcaption{position:absolute;left:12px;bottom:12px;right:12px;color:#fff;font-weight:600;font-size:14px;text-shadow:0 1px 8px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:all .4s var(--ease)}
+.galeria figure:hover figcaption{opacity:1;transform:none}
+.zoom{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.9);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+.zoom.on{opacity:1;pointer-events:auto}
+.zoom img{max-height:86vh;border-radius:16px;transform:scale(.94);transition:transform .45s var(--ease)}
+.zoom.on img{transform:none}
+.zoom button{position:absolute;top:18px;right:18px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:26px;cursor:pointer}
+
+/* visite */
+.visite .box{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:stretch}
+.info{display:grid;gap:26px;align-content:start}
+.info h3{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta2);font-family:Figtree;font-weight:700;margin-bottom:8px}
+.info .grande{font:700 22px/1.35 "Bricolage Grotesque";letter-spacing:-.01em}
+.info table{border-collapse:collapse;width:100%;max-width:420px}
+.info td{padding:8px 0;border-bottom:1px solid var(--linha)}
+.info td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.info tr.hoje td{font-weight:700;color:var(--destaque)}
+.info .tels{display:flex;flex-wrap:wrap;gap:10px}
+.info .tels a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;padding:10px 14px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--linha)}
+.info .tels a:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.info .redes{display:flex;gap:10px}
+.info .redes a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--linha)}
+.mapa{border-radius:28px;overflow:hidden;min-height:380px;box-shadow:0 0 0 1px var(--linha);background:var(--cartao)}
+.mapa iframe{width:100%;height:100%;min-height:380px;border:0;filter:saturate(.9)}
+
+/* chamada final */
+.chamada{position:relative;overflow:hidden;background:var(--escura);color:#fff;text-align:center;padding:120px 0}
+.chamada::before{content:"";position:absolute;width:700px;height:700px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,color-mix(in srgb,var(--destaque) 40%,transparent),transparent 65%);animation:pulsa 8s ease-in-out infinite}
+@keyframes pulsa{50%{transform:translate(-50%,-50%) scale(1.15)}}
+.chamada .box{position:relative}
+.chamada h2{font-size:clamp(38px,6vw,78px);max-width:14ch;margin:0 auto}
+.chamada p{margin:20px auto 34px;color:rgba(255,255,255,.75);font-size:19px;max-width:44ch}
+
+footer{background:#0a0908;color:#9a8f83;padding:36px 0;font-size:14px}
+footer .box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center}
+footer a{color:#e8dfd4}
+.zapfixo{position:fixed;right:18px;bottom:18px;z-index:40;width:62px;height:62px;border-radius:50%;background:#1fa855;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);transform:scale(0);transition:transform .5s var(--ease)}
+.zapfixo.on{transform:none}
+.zapfixo svg{width:31px;height:31px;color:#fff}
+.zapfixo::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #1fa855;animation:onda 2.6s var(--ease) infinite}
+@keyframes onda{0%{opacity:.8;transform:scale(.9)}100%{opacity:0;transform:scale(1.3)}}
+
+@media (max-width:900px){
+  .topo nav a.lk{display:none}
+  .capa .nota-capa{position:static;display:inline-block;margin-top:26px}
+  .sobre .box,.visite .box{grid-template-columns:1fr;gap:40px}
+  .depos{grid-template-columns:1fr}
+  .passos{grid-template-columns:1fr;gap:30px}
+  .passos::before{top:30px;bottom:30px;left:29px;right:auto;width:2px;height:auto}
+  .passos .linha{left:29px;width:2px;height:0;transition:height 2s var(--ease)}
+  .passos.visto .linha{width:2px;height:calc(100% - 60px)}
+  .passo{display:grid;grid-template-columns:60px 1fr;gap:18px}
+  .passo h3{margin:12px 0 6px}
+  .item{grid-template-columns:56px 1fr;gap:16px}
+  .item .ic{width:52px;height:52px;font-size:25px}
+  .item .seta{display:none}
+  section{padding:80px 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .entra,.rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script id="dados" type="application/json">{"nome":"Barber House PG","ramo":"Barbearia","cidade":"Praia Grande · SP","slogan":"Corte bem feito, *com paciência e carinho*.","subtitulo":"Corte, barba e acabamento no Boqueirão, em Praia Grande. Lugar limpo, de família, com atendimento para adultos e crianças. Aberto todos os dias.","destaques":["Nota 5,0 no Google","Atende crianças","Aberto todos os dias"],"whatsapp":"5513997494433","whatsapp_msg":"Olá, Barber House! Vi o site e quero marcar um horário.","telefones":[{"numero":"(13) 99749-4433","whatsapp":true}],"endereco":"R. Dair Borges, 36 – Boqueirão, Praia Grande/SP","horario":[{"dias":"Segunda a sexta","horas":"7h às 20h"},{"dias":"Sábado","horas":"9h às 20h"},{"dias":"Domingo","horas":"9h às 17h"}],"instagram":"","facebook":"","produtos_chapeu":"Na cadeira","produtos_titulo":"O que a gente faz","produtos_texto":"Do corte do dia a dia ao acabamento caprichado, pra você sair do jeito que gosta.","produtos":[{"icone":"💈","titulo":"Corte","texto":"Degradê, risquinho ou social, feito com calma e atenção ao detalhe."},{"icone":"🧔","titulo":"Barba","texto":"Barba alinhada na navalha, sozinha ou junto com o corte."},{"icone":"✂️","titulo":"Acabamento","texto":"Pezinho e contorno pra manter o corte em dia entre uma visita e outra."},{"icone":"🧒","titulo":"Corte infantil","texto":"Os pequenos são atendidos com toda a paciência, no tempo deles."}],"sobre_titulo":"Uma barbearia com cara de casa","sobre":"A Barber House fica no Boqueirão e é daquelas barbearias onde o cliente volta por anos. O salão é limpo e aconchegante, e a equipe trata cada um com educação e cuidado, dos adultos às crianças, inclusive as que precisam de um atendimento com mais calma.","frase":"Aqui cada cliente é atendido no seu tempo","encomenda":{"titulo":"Marque seu horário","passos":[{"titulo":"Chame no WhatsApp","texto":"Diga o serviço que você quer: corte, barba ou os dois."},{"titulo":"Escolha o horário","texto":"A gente combina o dia e a hora que ficam melhor pra você."},{"titulo":"É só chegar","texto":"R. Dair Borges, 36, no Boqueirão. Sua cadeira estará te esperando."}]},"avaliacoes":{"nota":"5,0","total":328,"lista":[{"texto":"Faz exatamente 1 ano que o meu filho está cortando cabelo com os meninos. Nicolas é autista, e os meninos têm toda a paciência do mundo com ele. Somos muito gratos pelo carinho. Recomendo muito!","autor":"","estrelas":5},{"texto":"Meu marido corta o cabelo e faz a barba aqui há 4 anos. Lugar super limpo, familiar, aconchegante, com profissionais educados e prestativos.","autor":"","estrelas":5},{"texto":"É surreal como o meu pequeno fica quieto. Ele é autista, tem 4 anos e só corta com o Jean. Agradeço a todos!","autor":"","estrelas":5}]},"cores":{"escura":"#111111","media":"#1c1c1c","destaque":"#f39a1e","clara":"#f4f1ec"},"estilo_titulo":"moderna","foto_capa":"maps-2.jpg","foto_capa_foco":"55% 45%","foto_capa_zoom":1,"foto_sobre":"maps-6.jpg","foto_sobre_foco":"45% 50%","foto_sobre_zoom":1,"logo":{"recorte":{"foto":"maps-3.jpg","x":27,"y":34,"w":28.5,"h":9.5,"proporcao":2.25}},"galeria":[{"url":"maps-2.jpg","legenda":"Recepção e cadeiras do salão","ilustrativa":false},{"url":"maps-6.jpg","legenda":"Corte em andamento","ilustrativa":false},{"url":"maps-5.jpg","legenda":"Acabamento na navalha","ilustrativa":false},{"url":"maps-3.jpg","legenda":"Nossa fachada na R. Dair Borges, 36","ilustrativa":false},{"url":"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&auto=format&q=80&fit=max","legenda":"Barba feita com cuidado","ilustrativa":true}],"galeria_titulo":"Por dentro da Barber House"}</script>
+
+<header class="topo" id="topo">
+  <div class="box">
+    <a class="marca" href="#"><span class="av" id="av"></span><span class="nm" id="nm"></span></a>
+    <nav id="nav"></nav>
+  </div>
+</header>
+
+<main>
+  <section class="capa" id="inicio" style="padding:0">
+    <div class="fundo-foto" id="capaFoto" data-foto="foto_capa"></div>
+    <div class="box">
+      <span class="local entra" id="local"><span class="ponto" id="ponto"></span><span id="localTxt"></span></span>
+      <h1 class="entra" style="animation-delay:.1s" id="slogan"></h1>
+      <p class="sub entra" style="animation-delay:.2s" id="subtitulo"></p>
+      <div class="acoes entra" style="animation-delay:.3s" id="acoes"></div>
+    </div>
+    <div class="nota-capa entra" style="animation-delay:.45s" id="notaCapa" hidden></div>
+  </section>
+
+  <div class="faixa" id="faixa" aria-hidden="true"><div class="trilho" id="trilho"></div></div>
+
+  <section id="produtos" hidden>
+    <div class="box">
+      <div class="titulo rv"><div class="chapeu" id="prodChapeu"></div><h2 id="prodTitulo"></h2><p id="prodTexto"></p></div>
+      <div class="lista" id="lista"></div>
+    </div>
+  </section>
+
+  <section class="sobre" id="sobre" hidden style="padding-top:20px">
+    <div class="box">
+      <div class="foto rv" id="sobreFoto"></div>
+      <div class="rv" style="--d:.1s">
+        <div class="chapeu">Quem somos</div>
+        <h2 id="sobreTitulo" data-campo="sobre_titulo"></h2>
+        <p class="txt" id="sobreTxt" data-campo="sobre"></p>
+        <p class="frase" id="frase" data-campo="frase"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="aval" id="avaliacoes" hidden>
+    <div class="box">
+      <div class="topo-aval rv">
+        <div class="titulo" style="margin:0"><div class="chapeu">O que dizem</div><h2>Quem vem, <em>volta.</em></h2></div>
+        <div class="grande" id="notaGrande"></div>
+      </div>
+      <div class="depos" id="depos"></div>
+    </div>
+  </section>
+
+  <section id="encomendas" hidden>
+    <div class="box">
+      <div class="titulo rv"><div class="chapeu">Como pedir</div><h2 id="encTitulo"></h2></div>
+      <div class="passos" id="passos"><span class="linha" aria-hidden="true"></span></div>
+    </div>
+  </section>
+
+  <section id="fotos" hidden style="padding-top:20px">
+    <div class="box">
+      <div class="titulo rv"><div class="chapeu">Fotos</div><h2 id="galTitulo"></h2></div>
+      <div class="galeria" id="galeria"></div>
+    </div>
+  </section>
+
+  <section class="visite" id="visite">
+    <div class="box">
+      <div class="info rv" id="info"></div>
+      <div class="mapa rv" style="--d:.1s" id="mapa"></div>
+    </div>
+  </section>
+
+  <section class="chamada">
+    <div class="box">
+      <h2 class="rv" id="chamTitulo"></h2>
+      <p class="rv" id="chamTexto"></p>
+      <div class="rv" id="chamBt"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="box">
+    <span id="rodNome"></span>
+    <span><span class="prop">Proposta de site · </span><a class="cd" href="https://sitescd.com.br" target="_blank" rel="noopener">Site feito pela Sites CD</a></span>
+  </div>
+</footer>
+<a class="zapfixo" id="zapfixo" hidden target="_blank" rel="noopener" aria-label="Chamar no WhatsApp"><svg viewBox="0 0 24 24"><use href="#zap"/></svg></a>
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Foto ampliada"><button type="button" aria-label="Fechar">×</button><img alt=""></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.31-1.96 1.36-.5.05-.98.24-3.3-.69-2.78-1.1-4.55-3.95-4.69-4.13-.13-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.25-.27.55-.34.73-.34l.52.01c.17 0 .39-.06.61.47.24.55.8 1.92.87 2.06.07.14.11.3.02.48-.09.18-.13.3-.27.46-.13.16-.28.36-.4.48-.13.13-.27.28-.12.55.15.27.68 1.12 1.46 1.81 1 .89 1.85 1.17 2.12 1.3.27.14.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.58.75 1.85.88.27.14.45.2.52.32.06.11.06.66-.18 1.34Z"/></symbol>
+  <symbol id="seta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+  <symbol id="pino" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+  <symbol id="insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></g></symbol>
+  <symbol id="face" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8Z"/></symbol>
+</svg>
+
+<script>
+(function () {
+  let D = {}; try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
+  const $ = (s) => document.querySelector(s), esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const tem = (x) => Array.isArray(x) ? x.length > 0 : !!(x && String(x).trim());
+  const marcado = (t) => esc(t).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  const nome = D.nome || "Nosso negócio", endereco = D.endereco || "";
+
+  // cores e tema (claro/escuro), iguais aos outros modelos
+  const C = D.cores || {}, raiz = document.documentElement.style;
+  if (C.escura) raiz.setProperty("--escura", C.escura);
+  if (C.media) raiz.setProperty("--media", C.media);
+  if (C.destaque) raiz.setProperty("--destaque", C.destaque);
+  if (C.clara) { raiz.setProperty("--clara", C.clara); raiz.setProperty("--fundo", C.clara); }
+  const lum = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ""); if (!m) return .5; const n = parseInt(m[1], 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
+  raiz.setProperty("--sobre-destaque", lum(C.destaque) > .55 ? "#15110d" : "#ffffff");
+  const ESCURO = /barbear|barber|bar\b|pub|tatu|tattoo|academia|crossfit|oficina|mec[aâ]nic|lounge|tabacaria|hamburg|burger|pizzar|churrasc/i;
+  if (D.tema === "escuro" || (D.tema !== "claro" && ESCURO.test([D.ramo, D.nome].join(" ")))) document.body.classList.add("escuro");
+
+  // links que contam no resumo do mês (wa.me / tel: / maps)
+  const zap = String(D.whatsapp || (D.telefones || []).find((t) => t.whatsapp)?.numero || "").replace(/\D/g, "");
+  const zapNum = zap ? (zap.length <= 11 ? "55" + zap : zap) : "";
+  const zapUrl = zapNum ? "https://wa.me/" + zapNum + (D.whatsapp_msg ? "?text=" + encodeURIComponent(D.whatsapp_msg) : "") : "";
+  const mapsUrl = D.maps || (endereco ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(nome + " " + endereco) : "");
+  const telPrinc = (D.telefones || [])[0]?.numero || "";
+  const ZAP = '<svg class="i"><use href="#zap"/></svg>';
+
+  document.title = nome + (D.ramo ? " · " + D.ramo : "");
+  $("#nm").textContent = nome; $("#rodNome").textContent = "© " + new Date().getFullYear() + " " + nome;
+
+  // marca: logo enviado, recorte da foto ou a inicial
+  const av = $("#av");
+  if (D.logo?.arquivo) av.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="${esc(nome)}" data-foto="logo.arquivo">`;
+  else if (D.logo?.recorte?.foto) {
+    const r = D.logo.recorte; av.style.width = Math.min(120, 42 * (r.proporcao || 1)) + "px"; av.style.background = "#fff";
+    av.style.backgroundImage = `url("${r.foto}")`; av.style.backgroundSize = (100 / r.w * 100) + "% auto";
+    av.style.backgroundPosition = `${r.w >= 100 ? 0 : r.x / (100 - r.w) * 100}% ${r.h >= 100 ? 0 : r.y / (100 - r.h) * 100}%`;
+  } else av.textContent = nome.trim()[0] || "•";
+
+  // menu
+  const menu = [["produtos", D.produtos_titulo_menu || "O que temos", tem(D.produtos)], ["sobre", "Quem somos", tem(D.sobre)], ["avaliacoes", "Avaliações", tem(D.avaliacoes?.lista)], ["visite", "Onde estamos", true]];
+  $("#nav").innerHTML = menu.filter((m) => m[2]).map((m) => `<a class="lk" href="#${m[0]}">${esc(m[1])}</a>`).join("") + (zapUrl ? `<a class="bt bt-forte" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}WhatsApp</a>` : "");
+
+  // capa
+  const capa = $("#capaFoto");
+  if (D.foto_capa) { capa.style.backgroundImage = `url("${D.foto_capa}")`; capa.style.setProperty("--foco", D.foto_capa_foco || "50% 50%"); if (D.foto_capa_zoom) capa.style.setProperty("--zoom", D.foto_capa_zoom); }
+  else capa.style.background = "radial-gradient(120% 80% at 70% 20%, var(--media), var(--escura))";
+  $("#localTxt").textContent = [D.ramo, D.cidade].filter(Boolean).join(" · ");
+  $("#slogan").innerHTML = marcado(D.slogan || nome);
+  $("#subtitulo").textContent = D.subtitulo || "";
+  $("#acoes").innerHTML = (zapUrl ? `<a class="bt bt-forte" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Chamar no WhatsApp</a>` : (telPrinc ? `<a class="bt bt-forte" href="tel:${telPrinc.replace(/\D/g, "")}"><svg class="i"><use href="#tel"/></svg>Ligar agora</a>` : ""))
+    + (mapsUrl ? `<a class="bt bt-vidro" href="${mapsUrl}" target="_blank" rel="noopener"><svg class="i"><use href="#pino"/></svg>Como chegar</a>` : "");
+
+  // aberto agora (pelo horário "Seg a Sex" / "08:00 – 18:00")
+  const DIAS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"], hoje = new Date(), dHoje = hoje.getDay(), mins = hoje.getHours() * 60 + hoje.getMinutes();
+  const idx = (t) => DIAS.findIndex((d) => String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").startsWith(d.normalize("NFD").replace(/[̀-ͯ]/g, "")));
+  function ehHoje(dias) {
+    const t = String(dias || "").toLowerCase();
+    if (/todos|diariamente|todo dia/.test(t)) return true;
+    const faixa = /(\w{3})\w*\.?\s*(?:a|-|–|até)\s*(\w{3})/.exec(t);
+    if (faixa) { const a = idx(faixa[1]), b = idx(faixa[2]); if (a >= 0 && b >= 0) return a <= b ? dHoje >= a && dHoje <= b : dHoje >= a || dHoje <= b; }
+    return t.split(/[,e/]+/).some((x) => idx(x.trim()) === dHoje);
+  }
+  function abertoAgora() {
+    for (const h of D.horario || []) {
+      if (!ehHoje(h.dias)) continue;
+      if (/fechado/i.test(h.horas)) return false;
+      for (const [, a1, a2, b1, b2] of String(h.horas).matchAll(/(\d{1,2})[:h](\d{2})?\s*(?:às|a|-|–)\s*(\d{1,2})[:h](\d{2})?/g)) {
+        const ini = +a1 * 60 + +(a2 || 0), fim = +b1 * 60 + +(b2 || 0);
+        if (fim > ini ? mins >= ini && mins < fim : mins >= ini || mins < fim) return true;
+      }
+      return false;
+    }
+    return null;
+  }
+  const ab = abertoAgora();
+  if (ab === null) $("#ponto").hidden = true;
+  else { $("#ponto").classList.toggle("fechado", !ab); $("#localTxt").textContent = (ab ? "Aberto agora · " : "Fechado agora · ") + $("#localTxt").textContent; }
+
+  // nota na capa
+  const A = D.avaliacoes, nota = A?.nota ? Number(String(A.nota).replace(",", ".")) : 0;
+  if (nota) { const nc = $("#notaCapa"); nc.hidden = false; nc.innerHTML = `<b>${nota.toFixed(1).replace(".", ",")}</b><div class="estrelas">${"★".repeat(Math.round(nota))}</div><small>${A.total ? esc(A.total) + " avaliações" : "no Google"}</small>`; }
+
+  // faixa dos destaques
+  const dest = (D.destaques || []).filter(Boolean);
+  if (dest.length) $("#trilho").innerHTML = [...dest, ...dest, ...dest, ...dest].map((x, k) => `<span${k < dest.length ? ` data-campo="destaques.${k}"` : ""}>${esc(x)}</span>`).join("");
+  else $("#faixa").hidden = true;
+
+  // produtos
+  if (tem(D.produtos)) {
+    $("#produtos").hidden = false;
+    $("#prodChapeu").textContent = D.produtos_chapeu || "O que temos";
+    $("#prodTitulo").innerHTML = marcado(D.produtos_titulo || "O que você encontra aqui");
+    $("#prodTexto").textContent = D.produtos_texto || "";
+    $("#lista").innerHTML = D.produtos.slice(0, 8).map((p, k) => `<a class="item rv" style="--d:${k * .06}s" href="${zapUrl || "#visite"}" ${zapUrl ? 'target="_blank" rel="noopener"' : ""}>
+      <span class="ic">${esc(p.icone || "✦")}</span><div><h3 data-campo="produtos.${k}.titulo">${esc(p.titulo)}</h3><p data-campo="produtos.${k}.texto">${esc(p.texto || "")}</p></div><span class="seta"><svg class="i"><use href="#seta"/></svg></span></a>`).join("");
+  }
+
+  // sobre
+  if (tem(D.sobre)) {
+    $("#sobre").hidden = false;
+    $("#sobreTitulo").innerHTML = marcado(D.sobre_titulo || "Quem somos");
+    $("#sobreTxt").textContent = D.sobre;
+    if (D.frase) $("#frase").textContent = D.frase; else $("#frase").hidden = true;
+    const f = $("#sobreFoto"), foto = D.foto_sobre || D.foto_capa;
+    if (foto) { f.innerHTML = '<i data-foto="foto_sobre"></i>'; f.firstChild.style.backgroundImage = `url("${foto}")`; f.style.setProperty("--foco", D.foto_sobre_foco || "50% 50%"); if (D.foto_sobre_zoom) f.style.setProperty("--zoom", D.foto_sobre_zoom); }
+    else f.hidden = true;
+  }
+
+  // avaliações
+  if (tem(A?.lista)) {
+    $("#avaliacoes").hidden = false;
+    if (nota) $("#notaGrande").innerHTML = `<b data-n="${nota}">0,0</b><div><div class="estrelas" style="font-size:22px">${"★".repeat(Math.round(nota))}</div><small>${A.total ? esc(A.total) + " avaliações no Google" : "no Google"}</small></div>`;
+    $("#depos").innerHTML = A.lista.slice(0, 3).map((a, k) => `<figure class="depo rv" style="--d:${k * .08}s"><div class="estrelas">${"★".repeat(a.estrelas || 5)}</div><blockquote>“${esc(a.texto)}”</blockquote><figcaption><i>${esc((a.autor || "C").trim()[0])}</i>${esc(a.autor || "Cliente")}</figcaption></figure>`).join("");
+  }
+
+  // como pedir
+  const passos = D.encomenda?.passos || [];
+  if (passos.length) {
+    $("#encomendas").hidden = false;
+    $("#encTitulo").innerHTML = marcado(D.encomenda.titulo || "Como pedir");
+    $("#passos").insertAdjacentHTML("beforeend", passos.slice(0, 3).map((p, k) => `<div class="passo"><span class="n">${k + 1}</span><div><h3 data-campo="encomenda.passos.${k}.titulo">${esc(p.titulo)}</h3><p data-campo="encomenda.passos.${k}.texto">${esc(p.texto || "")}</p></div></div>`).join(""));
+  }
+
+  // galeria
+  const gal = (D.galeria || []).filter((g) => g && g.url);
+  if (gal.length) {
+    $("#fotos").hidden = false;
+    $("#galTitulo").innerHTML = marcado(D.galeria_titulo || "Um pouco do nosso dia a dia");
+    $("#galeria").innerHTML = gal.map((g, k) => `<figure class="rv" style="--d:${(k % 3) * .06}s"><img loading="lazy" data-foto="galeria.${D.galeria.indexOf(g)}.url" src="${esc(g.url)}" alt="${esc(g.legenda || nome)}" onerror="this.closest('figure').remove()">${g.legenda ? `<figcaption>${esc(g.legenda)}</figcaption>` : ""}</figure>`).join("");
+  }
+  if (gal.some((g) => g.ilustrativa) || D.fotos_ilustrativas) document.querySelector("footer .prop").textContent = "Proposta de site · fotos ilustrativas · ";
+
+  // onde estamos
+  const tels = (D.telefones || []).filter((t) => t.numero);
+  $("#info").innerHTML = `<div><div class="chapeu">Onde estamos</div><h2 style="font-size:clamp(32px,4vw,48px)">Vem pra cá.</h2></div>`
+    + (endereco ? `<div><h3>Endereço</h3><p class="grande">${esc(endereco)}</p>${mapsUrl ? `<p style="margin-top:10px"><a href="${mapsUrl}" target="_blank" rel="noopener" style="font-weight:700;color:var(--destaque)">Abrir no mapa →</a></p>` : ""}</div>` : "")
+    + (tem(D.horario) ? `<div><h3>Horário</h3><table>${D.horario.map((h) => `<tr${ehHoje(h.dias) ? ' class="hoje"' : ""}><td>${esc(h.dias)}</td><td>${esc(h.horas)}</td></tr>`).join("")}</table></div>` : "")
+    + (tels.length ? `<div><h3>Contato</h3><div class="tels">${tels.map((t) => t.whatsapp ? `<a href="https://wa.me/${(() => { const n = t.numero.replace(/\D/g, ""); return n.length <= 11 ? "55" + n : n; })()}" target="_blank" rel="noopener">${ZAP}${esc(t.numero)}</a>` : `<a href="tel:${t.numero.replace(/\D/g, "")}"><svg class="i"><use href="#tel"/></svg>${esc(t.numero)}</a>`).join("")}</div></div>` : "")
+    + ((D.instagram || D.facebook) ? `<div class="redes">${D.instagram ? `<a href="${esc(/^https?:/.test(D.instagram) ? D.instagram : "https://instagram.com/" + D.instagram.replace(/^@/, ""))}" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i"><use href="#insta"/></svg></a>` : ""}${D.facebook ? `<a href="${esc(D.facebook)}" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i"><use href="#face"/></svg></a>` : ""}</div>` : "");
+  if (endereco) $("#mapa").innerHTML = `<iframe loading="lazy" title="Mapa: ${esc(nome)}" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(nome + " " + endereco)}&output=embed"></iframe>`;
+  else $("#mapa").hidden = true;
+
+  // chamada final
+  $("#chamTitulo").innerHTML = marcado(D.frase ? D.frase.replace(/\.$/, "") + "." : "A gente te espera.");
+  $("#chamTexto").textContent = zapUrl ? "Chama no WhatsApp e a gente responde rapidinho." : "Passa aqui ou liga pra gente.";
+  $("#chamBt").innerHTML = zapUrl ? `<a class="bt bt-forte" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Chamar no WhatsApp</a>` : (telPrinc ? `<a class="bt bt-forte" href="tel:${telPrinc.replace(/\D/g, "")}"><svg class="i"><use href="#tel"/></svg>Ligar agora</a>` : "");
+  const zf = $("#zapfixo"); if (zapUrl) { zf.hidden = false; zf.href = zapUrl; }
+
+  // movimento: aparece ao rolar, nota contando, linha dos passos
+  const contar = (el) => { const fim = +el.dataset.n, t0 = performance.now(); const p = (t) => { const k = Math.min(1, (t - t0) / 1400); el.textContent = (fim * (1 - Math.pow(1 - k, 3))).toFixed(1).replace(".", ","); if (k < 1) requestAnimationFrame(p); }; requestAnimationFrame(p); };
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; e.target.classList.add("visto"); io.unobserve(e.target); e.target.querySelectorAll?.("[data-n]").forEach(contar); }), { threshold: .2 });
+  document.querySelectorAll(".rv, #passos").forEach((el) => io.observe(el));
+
+  // zoom na galeria
+  const zoom = $("#zoom");
+  $("#galeria").addEventListener("click", (e) => { const im = e.target.closest("img"); if (!im || document.body.classList.contains("editando")) return; zoom.querySelector("img").src = im.src; zoom.classList.add("on"); });
+  zoom.addEventListener("click", () => zoom.classList.remove("on"));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") zoom.classList.remove("on"); });
+
+  // topo e WhatsApp fixo
+  const topo = $("#topo");
+  const rolar = () => { topo.classList.toggle("rolou", scrollY > 40); zf.classList.toggle("on", scrollY > 500); };
+  addEventListener("scroll", rolar, { passive: true }); rolar();
+})();
+</script>
+</body>
+</html>
