@@ -321,5 +321,169 @@
   document.querySelectorAll(".aparece").forEach((el) => (io ? io.observe(el) : el.classList.add("vista")));
 })();
 </script>
+
+<style id="scd-vit">
+.scd-v{--a:#2fd1b4;--at:#062b25;--g:rgba(18,20,22,.74);--gt:#fff;--gs:rgba(255,255,255,.72);--gl:rgba(255,255,255,.16);--f:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.scd-v,.scd-v *{box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;letter-spacing:normal;text-transform:none}
+.scd-v .scd-tt{font-family:var(--f);font-weight:700}
+.scd-vidro{background:var(--g);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);color:var(--gt);border:1px solid var(--gl);box-shadow:0 18px 44px -14px rgba(0,0,0,.5)}
+.scd-bal{position:absolute;z-index:2147483600;left:16px;right:16px;max-width:340px;margin:0 auto;padding:18px 18px 16px;border-radius:20px;text-align:center;
+ opacity:0;transform:translateY(12px) scale(.97);transition:opacity .5s,transform .5s;pointer-events:none}
+.scd-bal.on{opacity:1;transform:none;pointer-events:auto}
+.scd-bal .scd-tt{display:block;font-size:19px;line-height:1.2;margin:0 22px 6px;color:var(--gt)}
+.scd-bal p{margin:0 0 14px;font-size:14.5px;line-height:1.45;color:var(--gs)}
+.scd-bal .scd-seta{position:absolute;left:var(--sx,50%);width:14px;height:14px;background:var(--a);transform:translateX(-50%) rotate(45deg);border-radius:3px}
+.scd-bal.cima .scd-seta{top:-7px}.scd-bal.baixo .scd-seta{bottom:-7px}
+.scd-x{position:absolute;top:8px;right:8px;width:32px;height:32px;border:0;border-radius:50%;background:var(--gl);color:var(--gt);font-size:18px;line-height:32px;padding:0;cursor:pointer}
+.scd-ok{display:inline-block;border:0;border-radius:999px;background:var(--a);color:var(--at);font-weight:700;font-size:15px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 18px -6px var(--a)}
+.scd-no{border:0;border-radius:999px;background:var(--gl);color:var(--gt);font-size:14px;padding:10px 14px;cursor:pointer}
+.scd-alvo{outline:2px dashed var(--scd-a,#2fd1b4)!important;outline-offset:5px;border-radius:6px}
+html.scd-ed [data-scd-t]{outline:1.5px dashed var(--scd-a,#2fd1b4);outline-offset:4px;border-radius:4px;cursor:text}
+html.scd-ed [data-scd-t]:focus{outline:2px solid var(--scd-a,#2fd1b4)}
+html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:-6px;cursor:pointer}
+.scd-ed-bar{position:fixed;z-index:2147483620;left:50%;top:10px;transform:translate(-50%,-140%);transition:transform .35s;width:calc(100% - 20px);max-width:520px;border-radius:18px;padding:10px 10px 10px 14px;display:flex;align-items:center;gap:8px}
+.scd-ed-bar.on{transform:translate(-50%,0)}
+.scd-ed-bar span{flex:1;font-size:13px;line-height:1.3;color:var(--gs)}.scd-ed-bar span b{color:var(--gt)}
+.scd-ed-bar button{flex:none;padding:9px 12px;font-size:13.5px}
+.scd-bar{position:fixed;z-index:2147483500;left:0;right:0;bottom:0;padding:12px 48px 12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom));border-width:1px 0 0;border-top:3px solid var(--a);
+ display:flex;gap:10px 14px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;transform:translateY(110%);transition:transform .5s;border-radius:0;box-shadow:0 -10px 30px -12px rgba(0,0,0,.35)}
+.scd-bar.on{transform:none}.scd-bar span{color:var(--gt)}.scd-bar .scd-tt{display:block;font-size:16px;line-height:1.25}
+.scd-bar small{display:block;color:var(--gs);font-size:12.5px;margin-top:3px}
+.scd-bar a{text-decoration:none;white-space:nowrap}
+.scd-bar .scd-x{top:12px;right:8px}
+.scd-fo{position:fixed;inset:0;z-index:2147483640;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s}
+.scd-fo.on{opacity:1}
+.scd-cx{width:100%;max-width:520px;border-radius:22px 22px 0 0;border-width:1px 1px 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s}
+.scd-fo.on .scd-cx{transform:none}
+.scd-cx .scd-tt{font-size:17px;color:var(--gt)}.scd-cx small{display:block;color:var(--gs);margin:4px 0 12px;font-size:13px}
+.scd-fontes{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:46vh;overflow:auto}
+.scd-v .scd-fontes button{border:1px solid var(--gl);background:var(--gl);color:var(--gt);border-radius:14px;padding:12px 10px;font-size:19px;line-height:1.1;cursor:pointer;text-align:left;font-family:var(--ff)}
+.scd-fontes button small{display:block;font-size:11px;color:var(--gs);margin:4px 0 0}
+.scd-fontes button.sel{border-color:var(--a);box-shadow:inset 0 0 0 1px var(--a)}
+.scd-cx .scd-bt{display:flex;justify-content:center;margin-top:14px}
+.scd-toast{position:fixed;z-index:2147483645;left:50%;top:76px;transform:translate(-50%,-14px);opacity:0;transition:all .3s;border-radius:999px;padding:10px 16px;font-size:14px;max-width:calc(100% - 32px);text-align:center}
+.scd-toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.scd-bal,.scd-bar,.scd-fo,.scd-cx,.scd-toast,.scd-ed-bar{transition:none}}
+</style>
+<script>
+(function(){
+if (window.self !== window.top) return;   // miniatura da página "escolha a sua versão": sem balões
+var C={"ramo":"barbearia","wa":"https://area.sitescd.com.br/c/barbearia-roots/assinar?p=normal","preco":"\u003cb class=\"scd-tt\">Site pronto por R$ 9,90? Você não acha em lugar nenhum.\u003c/b>\u003csmall>1º mês R$ 9,90 · depois R$ 29,90/mês · sem fidelidade\u003c/small>\u003csmall>📲 Ativou, recebe tudo no WhatsApp: senha pra editar, manual com dicas e plaquinha com QR Code\u003c/small>"}, fechado={}, ed=false, tema=null;
+var FONTES=[["Poppins","moderna"],["Montserrat","forte"],["Playfair Display","elegante"],["Bebas Neue","impacto"],["Oswald","esportiva"],["Lora","clássica"],["DM Serif Display","sofisticada"],["Archivo Black","marcante"],["Raleway","leve"],["Pacifico","descontraída"]];
+try{fechado=JSON.parse(sessionStorage.getItem("scd-v")||"{}")}catch(e){}
+function guarda(k){fechado[k]=1;try{sessionStorage.setItem("scd-v",JSON.stringify(fechado))}catch(e){}}
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function ui(e){return e.closest&&e.closest(".scd-v")}
+function visivel(e){var r=e.getBoundingClientRect();return r.width>40&&r.height>14&&getComputedStyle(e).visibility!=="hidden"}
+function temFundo(e){return /url\(/.test(getComputedStyle(e).backgroundImage||"")}
+function rgb(c){var m=String(c).match(/[\d.]+/g);if(!m||m.length<3||(m.length>3&&+m[3]<.5))return null;return m.slice(0,3).map(Number)}
+function lum(c){return (.299*c[0]+.587*c[1]+.114*c[2])/255}
+// COR DO SITE: a cor viva que mais aparece (botões, destaques, bordas), sem o verde do WhatsApp; fundo claro ou escuro
+function lerTema(){
+  if(tema)return tema;var conta={},melhor=null,mx=0;
+  function soma(c,p){c=rgb(c);if(!c)return;var a=Math.max.apply(0,c),b=Math.min.apply(0,c);if(a<70||(a-b)/a<.35)return;
+    if(Math.abs(c[0]-37)<20&&Math.abs(c[1]-211)<25&&Math.abs(c[2]-102)<25)return;
+    var k=c.map(function(v){return v>>4}).join(",");conta[k]=conta[k]||{n:0,c:c};conta[k].n+=p;if(conta[k].n>mx){mx=conta[k].n;melhor=conta[k].c}}
+  document.querySelectorAll("a,button,span,em,strong,small,i,b,h1,h2,h3,div,section,li").forEach(function(e,i){if(i>1500||ui(e))return;var s=getComputedStyle(e);
+    soma(s.backgroundColor,e.matches("a,button")?3:1);soma(s.color,e.matches("span,em,b,strong,small,i")?2:1);if(parseFloat(s.borderTopWidth)>=2)soma(s.borderTopColor,2)});
+  var fb=rgb(getComputedStyle(document.body).backgroundColor)||rgb(getComputedStyle(document.documentElement).backgroundColor)||[255,255,255];
+  var a=melhor||[47,209,180],h=document.querySelector("h2,h1");
+  tema={a:"rgb("+a+")",at:lum(a)>.6?"#161616":"#fff",claro:lum(fb)>.55,f:h?getComputedStyle(h).fontFamily:""};
+  document.documentElement.style.setProperty("--scd-a",tema.a);return tema;
+}
+function pinta(e){var t=lerTema(),s=e.style;s.setProperty("--a",t.a);s.setProperty("--at",t.at);if(t.f)s.setProperty("--f",t.f);
+  if(t.claro){s.setProperty("--g","rgba(255,255,255,.82)");s.setProperty("--gt","#17191b");s.setProperty("--gs","rgba(23,25,27,.68)");s.setProperty("--gl","rgba(0,0,0,.08)")}
+  return e}
+function vidro(t,c,h){var e=pinta(el(t,"scd-v scd-vidro "+c,h));document.body.appendChild(e);return e}
+// marca o que dá pra trocar: textos (títulos, parágrafos, itens) e fotos (img ou fundo com foto)
+function marcar(){
+  document.querySelectorAll("h1,h2,h3,h4,p,li,blockquote,figcaption").forEach(function(e){
+    if(ui(e)||e.hasAttribute("data-scd-t")||e.closest("a,button,nav,form,footer")||!e.textContent.trim()||e.querySelector("h1,h2,h3,p,li,img,a,button"))return;
+    e.setAttribute("data-scd-t","")});
+  document.querySelectorAll("img,section,header,div,figure").forEach(function(e){
+    if(ui(e)||e.hasAttribute("data-scd-f")||e.closest("a,button,nav"))return;
+    if(e.tagName==="IMG"?(e.naturalWidth>60||e.width>60):(temFundo(e)&&e.offsetWidth>120))e.setAttribute("data-scd-f","")});
+  if(ed)document.querySelectorAll("[data-scd-t]").forEach(function(e){e.contentEditable="true";e.spellcheck=false});
+}
+function toast(t){var x=vidro("div","scd-toast",t);requestAnimationFrame(function(){x.classList.add("on")});
+  setTimeout(function(){x.classList.remove("on");setTimeout(function(){x.remove()},400)},2600)}
+// MODO TESTE = igual ao editor do dono: escreve por cima, toca na foto, troca a fonte
+var edBar=null;
+function ligarEd(){
+  if(ed)return;ed=true;document.documentElement.classList.add("scd-ed");marcar();
+  edBar=vidro("div","scd-ed-bar","<span><b>✏️ Modo teste.</b> Toque num texto e escreva por cima. Toque numa foto pra trocar.</span><button class='scd-no' data-a='fonte'>Aa Fonte</button><button class='scd-ok' data-a='pronto'>Pronto</button>");
+  requestAnimationFrame(function(){edBar.classList.add("on")});
+  edBar.onclick=function(v){var a=v.target.closest("[data-a]");if(!a)return;if(a.dataset.a==="fonte")escolherFonte();else desligarEd()};
+}
+function desligarEd(){ed=false;document.documentElement.classList.remove("scd-ed");document.querySelectorAll("[data-scd-t]").forEach(function(e){e.removeAttribute("contenteditable")});
+  if(edBar){edBar.classList.remove("on");var b=edBar;edBar=null;setTimeout(function(){b.remove()},400)}
+  toast("Gostou? Você faz isso sozinho, quantas vezes quiser ✨")}
+var mexeu=false;
+document.addEventListener("input",function(v){if(v.target.closest&&v.target.closest("[data-scd-t]"))mexeu=true},true);
+document.addEventListener("focusout",function(v){if(mexeu&&v.target.closest&&v.target.closest("[data-scd-t]")){mexeu=false;if(!fechado.dica1){guarda("dica1");toast("Pronto! Troque quantas vezes quiser 😉")}}},true);
+function editarFoto(e){
+  var i=el("input");i.type="file";i.accept="image/*";i.style.display="none";document.body.appendChild(i);
+  i.onchange=function(){var f=i.files&&i.files[0];i.remove();if(!f)return;var u=URL.createObjectURL(f);
+    if(e.tagName==="IMG"){e.removeAttribute("srcset");e.src=u}else e.style.backgroundImage=(getComputedStyle(e).backgroundImage.match(/linear-gradient\([^)]*\)\s*,\s*/)||[""])[0]+'url("'+u+'")';
+    toast("Foto trocada! 📸 É só um teste, nada foi salvo")};
+  i.click();
+}
+var fonteAtual="";
+function escolherFonte(){
+  if(!document.getElementById("scd-gf")){var l=el("link");l.id="scd-gf";l.rel="stylesheet";
+    l.href="https://fonts.googleapis.com/css2?"+FONTES.map(function(f){return "family="+f[0].replace(/ /g,"+")+(/Bebas|Pacifico|Archivo|DM Serif/.test(f[0])?"":":wght@700")}).join("&")+"&display=swap";document.head.appendChild(l)}
+  var fo=el("div","scd-v scd-fo"),cx=pinta(el("div","scd-vidro scd-cx","<span class='scd-tt'>Aa Fonte dos títulos</span><small>Toque numa e veja no site na hora.</small>")),g=el("div","scd-fontes"),bt=el("div","scd-bt"),ok=el("button","scd-ok","Pronto");
+  FONTES.forEach(function(f){var b=el("button",f[0]===fonteAtual?"sel":"",f[0]+"<small>"+f[1]+"</small>");b.style.setProperty("--ff","'"+f[0]+"',sans-serif");
+    b.onclick=function(){fonteAtual=f[0];var s=document.getElementById("scd-fonte")||document.head.appendChild(el("style"));s.id="scd-fonte";
+      s.textContent="h1,h2,h3,h1 *,h2 *,h3 *{font-family:'"+f[0]+"',sans-serif!important}";g.querySelectorAll(".sel").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")};g.appendChild(b)});
+  bt.appendChild(ok);cx.append(g,bt);fo.appendChild(cx);document.body.appendChild(fo);requestAnimationFrame(function(){fo.classList.add("on")});
+  function sai(){fo.classList.remove("on");setTimeout(function(){fo.remove()},250)}ok.onclick=sai;fo.onclick=function(v){if(v.target===fo)sai()};
+}
+document.addEventListener("click",function(v){
+  if(ui(v.target)||v.target.closest("a,button"))return;
+  var t=v.target.closest&&v.target.closest("[data-scd-t]"),f=v.target.closest&&v.target.closest("[data-scd-f]");
+  if(!ed&&t&&fechado.bal){ligarEd();t.focus();return}
+  if(t)return;   // escrevendo por cima (ou ainda sem o balão: o site funciona normal)
+  if(f&&ed){v.preventDefault();v.stopPropagation();editarFoto(f)}
+},true);
+// escolhe um texto já na tela (de preferência com foto perto) pro balão apontar
+function acharAlvo(){
+  marcar();var h=innerHeight,fs=[].slice.call(document.querySelectorAll("[data-scd-f]")),ts=[].slice.call(document.querySelectorAll("[data-scd-t]"));
+  for(var k=0;k<ts.length;k++){var t=ts[k],r=t.getBoundingClientRect();if(r.top<h*.1||r.bottom>h*.6||!visivel(t))continue;
+    for(var j=0;j<fs.length;j++){var q=fs[j].getBoundingClientRect();if(q.bottom>0&&q.top<h&&Math.abs(q.top-r.top)<h*.6)return t}}
+  for(k=0;k<ts.length;k++){r=ts[k].getBoundingClientRect();if(r.top>h*.1&&r.bottom<h*.6&&visivel(ts[k]))return ts[k]}
+  return null;
+}
+var bal=null;
+function balao(){
+  if(bal||fechado.bal||ed)return;var a=acharAlvo();if(!a)return;
+  bal=vidro("div","scd-bal","<span class='scd-seta'></span><button class='scd-x' aria-label='Fechar'>×</button><span class='scd-tt'>Deixe do seu jeito</span><p>"+(C.ramo?"Modelo pensado pra "+C.ramo.replace(/[<>&]/g,"")+". ":"")+
+    "Toque num texto ou numa foto e troque pelo celular, quantas vezes quiser.</p><button class='scd-ok'>✏️ Testar agora</button>");
+  a.classList.add("scd-alvo");
+  var r=a.getBoundingClientRect(),abaixo=r.bottom+bal.offsetHeight+24<innerHeight;
+  bal.classList.add(abaixo?"cima":"baixo");bal.style.top=(scrollY+(abaixo?r.bottom+16:Math.max(12,r.top-bal.offsetHeight-16)))+"px";
+  var b=bal.getBoundingClientRect();bal.style.setProperty("--sx",Math.min(b.width-24,Math.max(24,r.left+Math.min(r.width,200)/2-b.left))+"px");
+  requestAnimationFrame(function(){bal.classList.add("on")});
+  function fecha(){guarda("bal");a.classList.remove("scd-alvo");bal.classList.remove("on");removeEventListener("scroll",some);setTimeout(function(){bal&&bal.remove()},500)}
+  var y0=scrollY;function some(){if(Math.abs(scrollY-y0)>innerHeight*.7)fecha()}
+  bal.querySelector(".scd-x").onclick=fecha;bal.querySelector(".scd-ok").onclick=function(){fecha();ligarEd();a.focus();try{var g=getSelection(),rg=document.createRange();rg.selectNodeContents(a);rg.collapse(false);g.removeAllRanges();g.addRange(rg)}catch(e){}};
+  setTimeout(function(){addEventListener("scroll",some,{passive:true})},800);
+}
+var bar=null;
+function barra(){
+  if(bar||fechado.bar)return;
+  bar=vidro("div","scd-bar","<span>"+C.preco+"</span><a class='scd-ok' href='"+C.wa+"'>Quero este site</a><button class='scd-x' aria-label='Fechar'>×</button>");
+  requestAnimationFrame(function(){bar.classList.add("on")});
+  bar.querySelector(".scd-x").onclick=function(){guarda("bar");bar.classList.remove("on");var b=bar;bar=null;setTimeout(function(){b.remove()},500)};
+}
+// ritmo (Caio: "se for direto na cara ele nem vê"): balão quando chega perto do MEIO e para de rolar por um instante;
+// a barra do preço só perto do FIM
+var parou=0;
+function rolou(){var y=scrollY,tot=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=y/tot;clearTimeout(parou);
+  if(p>.3&&y>innerHeight*.8)parou=setTimeout(balao,1200);if(p>.75)barra()}
+addEventListener("scroll",rolou,{passive:true});
+addEventListener("load",function(){setTimeout(marcar,800)});
+})();
+</script>
 </body>
 </html>
