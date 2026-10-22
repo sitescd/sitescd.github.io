@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta name="robots" content="noindex, nofollow">
-<script>try{if(!sessionStorage.getItem("ab")){navigator.sendBeacon("https://area.sitescd.com.br/c/barbearia-muniz/abriu");sessionStorage.setItem("ab",1)}}catch(e){}</script>
+<script>(function(){try{if(window.top!==window)return;var C="https://area.sitescd.com.br/c/barbearia-muniz/",Q="normal",ls=localStorage,ss=sessionStorage;if(/caio/.test(location.hash))ls.setItem("souCaio","1");if(ls.getItem("souCaio"))return;function b(t,u){if(u){if(ss.getItem(u))return;ss.setItem(u,1)}try{navigator.sendBeacon(C+t)}catch(e){}}b("abriu","ab");if(Q)b("ver-"+Q,"v-"+Q);setTimeout(function(){if(!document.hidden)b("t30","t30")},30000);function f(){var d=document.documentElement,h=d.scrollHeight;if(h>innerHeight*1.5&&scrollY+innerHeight>=h*0.85){removeEventListener("scroll",f);if(Q)b("fim-"+Q,"fim-"+Q)}}addEventListener("scroll",f,{passive:true});document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a");if(a&&/\/assinar/.test(a.href))b("quero")},true)}catch(e){}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
@@ -485,5 +485,7 @@ addEventListener("scroll",rolou,{passive:true});
 addEventListener("load",function(){setTimeout(marcar,800)});
 })();
 </script>
+<a href="modelos.html" id="scd-om" style="position:fixed;z-index:2147483400;left:16px;bottom:calc(18px + env(safe-area-inset-bottom));background:rgba(18,20,22,.84);color:#fff;font:600 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:normal;text-transform:none;padding:12px 20px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px -6px rgba(0,0,0,.45);white-space:nowrap;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">🎨 Ver os outros modelos</a>
+<script>if(window.top!==window)document.getElementById("scd-om").remove()</script>
 </body>
 </html>
