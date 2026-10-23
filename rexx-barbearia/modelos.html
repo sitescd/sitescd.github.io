@@ -1,0 +1,43 @@
+<!doctype html><html lang="pt-BR"><head>
+<meta name="robots" content="noindex, nofollow">
+<script>(function(){try{if(window.top!==window)return;var C="https://area.sitescd.com.br/c/rexx-barbearia/",Q="modelos",ls=localStorage,ss=sessionStorage;if(/caio/.test(location.hash))ls.setItem("souCaio","1");if(ls.getItem("souCaio"))return;function b(t,u){if(u){if(ss.getItem(u))return;ss.setItem(u,1)}try{navigator.sendBeacon(C+t)}catch(e){}}b("abriu","ab");if(Q)b("ver-"+Q,"v-"+Q);setTimeout(function(){if(!document.hidden)b("t30","t30")},30000);function f(){var d=document.documentElement,h=d.scrollHeight;if(h>innerHeight*1.5&&scrollY+innerHeight>=h*0.85){removeEventListener("scroll",f);if(Q)b("fim-"+Q,"fim-"+Q)}}addEventListener("scroll",f,{passive:true});document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a");if(a&&/\/assinar/.test(a.href))b("quero")},true)}catch(e){}})();</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REXX Barbearia · escolha a sua versão</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f4f1ec;color:#1d1b19;padding:24px 16px 40px}
+h1{font-size:1.5rem;margin:0 0 6px;text-align:center}p.s{margin:0 auto 22px;text-align:center;color:#5d5750;max-width:520px}
+.g{display:grid;gap:22px;max-width:1100px;margin:0 auto;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+a.c{display:block;text-decoration:none;color:inherit;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 30px -8px rgba(0,0,0,.18);transition:transform .3s,box-shadow .3s}
+a.c:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(0,0,0,.25)}
+.v{position:relative;width:100%;aspect-ratio:390/640;overflow:hidden;background:#eee}
+.v iframe{position:absolute;left:0;top:0;border:0;width:390px;transform-origin:0 0;pointer-events:none}
+.v::after{content:"";position:absolute;inset:auto 0 0;height:56px;background:linear-gradient(transparent,rgba(0,0,0,.18));pointer-events:none}
+.t{padding:14px 16px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}.t b{font-size:1.1rem}
+.t span{background:#1d1b19;color:#fff;border-radius:999px;padding:9px 15px;font-size:.92rem;white-space:nowrap}.p .t span{background:#b8860b}
+</style></head><body><h1>REXX Barbearia</h1><p class="s">Preparamos três versões do seu site. Toque em cada uma para ver inteira e escolha a que mais combina com você.</p>
+<div class="g"><a class="c" href="normal.html"><div class="v"><iframe src="normal.html" tabindex="-1" title="Versão Normal"></iframe></div><div class="t"><b>Versão Normal</b><span>Ver inteira</span></div></a>
+<a class="c p" href="premium.html"><div class="v"><iframe src="premium.html" tabindex="-1" title="Versão Premium"></iframe></div><div class="t"><b>✨ Versão Premium</b><span>Ver inteira</span></div></a><a class="c p" href="super.html"><div class="v"><iframe src="super.html" tabindex="-1" title="Versão Premium 2"></iframe></div><div class="t"><b>💎 Versão Premium 2</b><span>Ver inteira</span></div></a></div>
+<script>
+(function () {
+  var toque = matchMedia("(hover: none)").matches, calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".v").forEach(function (v) {
+    var f = v.querySelector("iframe"), y = 0, ativo = false, ult = 0, pausa = 0;
+    function ajusta() { var k = v.clientWidth / 390; f.style.transform = "scale(" + k + ")"; f.style.height = Math.ceil(v.clientHeight / k) + "px"; }
+    function win() { try { return f.contentWindow; } catch (e) { return null; } }
+    function passo(t) {
+      if (!ativo) return; var w = win(); if (!w || !w.document.documentElement) return;
+      var dt = ult ? Math.min(60, t - ult) : 16; ult = t;
+      var max = w.document.documentElement.scrollHeight - w.innerHeight;
+      if (pausa > 0) pausa -= dt;
+      else if (y >= max) { if (toque) { pausa = 1500; y = -1; } }
+      else if (y < 0) { y = 0; w.scrollTo(0, 0); pausa = 1200; }
+      else { y = Math.min(max, y + dt * 0.12); w.scrollTo({ top: y, behavior: "instant" }); }
+      requestAnimationFrame(passo);
+    }
+    function liga() { if (calmo || ativo) return; ativo = true; ult = 0; requestAnimationFrame(passo); }
+    function desliga(volta) { ativo = false; var w = win(); if (volta && w) { y = 0; w.scrollTo({ top: 0, behavior: "smooth" }); } }
+    ajusta(); addEventListener("resize", ajusta);
+    f.addEventListener("load", function () { ajusta(); try { f.contentDocument.documentElement.style.scrollBehavior = "auto"; } catch (e) {} });
+    if (toque) new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? liga() : desliga(false); }); }, { threshold: 0.6 }).observe(v);
+    else { v.parentNode.addEventListener("mouseenter", liga); v.parentNode.addEventListener("mouseleave", function () { desliga(true); }); }
+  });
+})();
+</script></body></html>
