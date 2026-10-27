@@ -222,7 +222,7 @@
   // marca: logo (arquivo), recorte da foto, ou o nome escrito
   const marca = $(".marca");
   if (D.logo?.arquivo) marca.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="${esc(nome)}">`;
-  else if (D.logo?.recorte) {
+  else if (D.logo?.recorte?.usar) {
     const k = D.logo.recorte, el = document.createElement("span");
     el.className = "recorte";
     // recorte em % da foto: mostra só aquele pedaço, sem criar arquivo novo
@@ -345,12 +345,22 @@ html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:
 .scd-ed-bar.on{transform:translate(-50%,0)}
 .scd-ed-bar span{flex:1;font-size:13px;line-height:1.3;color:var(--gs)}.scd-ed-bar span b{color:var(--gt)}
 .scd-ed-bar button{flex:none;padding:9px 12px;font-size:13.5px}
-.scd-bar{position:fixed;z-index:2147483500;left:0;right:0;bottom:0;padding:12px 48px 12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom));border-width:1px 0 0;border-top:3px solid var(--a);
+.scd-bar{position:fixed;z-index:2147483500;left:0;right:0;bottom:0;padding:16px 12px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom));border-width:1px 0 0;border-top:3px solid var(--a);
  display:flex;gap:10px 14px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;transform:translateY(110%);transition:transform .5s;border-radius:0;box-shadow:0 -10px 30px -12px rgba(0,0,0,.35)}
 .scd-bar.on{transform:none}.scd-bar span{color:var(--gt)}.scd-bar .scd-tt{display:block;font-size:16px;line-height:1.25}
 .scd-bar small{display:block;color:var(--gs);font-size:12.5px;margin-top:3px}
 .scd-bar a{text-decoration:none;white-space:nowrap}
 .scd-bar .scd-x{top:12px;right:8px}
+.scd-bw{width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.scd-bar .scd-tt{font-size:16px}.scd-big{display:inline-block;font-size:28px;line-height:1;color:var(--a);vertical-align:-3px;margin-left:2px}
+.scd-pl{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:6px;width:100%;margin:10px 0 10px}
+.scd-bar a.scd-p{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 4px 8px;border-radius:12px;border:1px solid var(--gl);background:var(--gl);color:var(--gt);white-space:normal;min-width:0}
+.scd-bar a.scd-p.sel{border-color:var(--a);box-shadow:inset 0 0 0 1px var(--a)}
+.scd-p b{font-size:13px}.scd-p em{font-style:normal;font-weight:700;font-size:14px;color:var(--gt)}.scd-p em small{display:inline;margin:0;font-size:11px;font-weight:400}
+.scd-bar .scd-p .scd-end{font-size:9.5px;line-height:1.2;margin:2px 0 0;word-break:break-all;max-width:100%}
+.scd-p span{font-size:11.5px;font-weight:600;color:var(--a);margin-top:3px}
+.scd-mais{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-style:normal;font-size:9.5px;font-weight:700;white-space:nowrap;padding:2px 7px;border-radius:999px;background:var(--a);color:var(--at)}
+.scd-bar .scd-quero{width:100%;text-align:center;font-size:15.5px}
 .scd-fo{position:fixed;inset:0;z-index:2147483640;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s}
 .scd-fo.on{opacity:1}
 .scd-cx{width:100%;max-width:520px;border-radius:22px 22px 0 0;border-width:1px 1px 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s}
@@ -368,7 +378,7 @@ html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:
 <script>
 (function(){
 if (window.self !== window.top) return;   // miniatura da página "escolha a sua versão": sem balões
-var C={"ramo":"barbearia","wa":"https://area.sitescd.com.br/c/brutu-s-barber-club/assinar?p=normal","preco":"\u003cb class=\"scd-tt\">Site pronto por R$ 9,90? Você não acha em lugar nenhum.\u003c/b>\u003csmall>1º mês R$ 9,90 · depois R$ 29,90/mês · sem fidelidade\u003c/small>\u003csmall>📲 Ativou, recebe tudo no WhatsApp: senha pra editar, manual com dicas e plaquinha com QR Code\u003c/small>"}, fechado={}, ed=false, tema=null;
+var C={"ramo":"barbearia","wa":"https://area.sitescd.com.br/c/brutu-s-barber-club/assinar?p=normal","barra":"\u003cdiv class=\"scd-bw\">\u003cb class=\"scd-tt\">Seu site no ar por \u003cspan class=\"scd-big\">R$ 9,90\u003c/span>\u003c/b>\u003csmall>no 1º mês · sem fidelidade · cancela quando quiser\u003c/small>\u003cdiv class=\"scd-pl\">\u003ca class=\"scd-p sel\" href=\"normal.html\">\u003cb>Simples\u003c/b>\u003cem>R$ 29,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">sitescd.com.br/brutu-s-barber-club\u003c/small>\u003cspan>✓ Você está vendo\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"./\">\u003ci class=\"scd-mais\">mais escolhido\u003c/i>\u003cb>Profissional\u003c/b>\u003cem>R$ 39,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">brutusbarberclub.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"super.html\">\u003cb>Completo\u003c/b>\u003cem>R$ 49,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">brutusbarberclub.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003c/div>\u003ca class=\"scd-ok scd-quero\" href=\"https://area.sitescd.com.br/c/brutu-s-barber-club/assinar?p=normal\">Quero o Simples por R$ 9,90\u003c/a>\u003csmall>📲 Ativou, recebe tudo no WhatsApp: senha pra editar, manual e plaquinha com QR Code\u003c/small>\u003c/div>"}, fechado={}, ed=false, tema=null;
 var FONTES=[["Poppins","moderna"],["Montserrat","forte"],["Playfair Display","elegante"],["Bebas Neue","impacto"],["Oswald","esportiva"],["Lora","clássica"],["DM Serif Display","sofisticada"],["Archivo Black","marcante"],["Raleway","leve"],["Pacifico","descontraída"]];
 try{fechado=JSON.parse(sessionStorage.getItem("scd-v")||"{}")}catch(e){}
 function guarda(k){fechado[k]=1;try{sessionStorage.setItem("scd-v",JSON.stringify(fechado))}catch(e){}}
@@ -472,7 +482,7 @@ function balao(){
 var bar=null;
 function barra(){
   if(bar||fechado.bar)return;
-  bar=vidro("div","scd-bar","<span>"+C.preco+"</span><a class='scd-ok' href='"+C.wa+"'>Quero este site</a><button class='scd-x' aria-label='Fechar'>×</button>");
+  bar=vidro("div","scd-bar",C.barra+"<button class='scd-x' aria-label='Fechar'>×</button>");
   requestAnimationFrame(function(){bar.classList.add("on")});
   bar.querySelector(".scd-x").onclick=function(){guarda("bar");bar.classList.remove("on");var b=bar;bar=null;setTimeout(function(){b.remove()},500)};
 }
