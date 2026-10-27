@@ -156,8 +156,8 @@ section{padding:110px 0}
 .vitrine .cel{transform:none;animation:none;width:290px}
 
 .planos-sec{background:var(--papel)}
-.planos{display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:960px;margin:0 auto}
-.plano{border-radius:30px;padding:36px;background:#fff;box-shadow:0 0 0 1px var(--linha);position:relative}
+.planos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:0 auto}
+.plano{border-radius:30px;padding:32px;background:#fff;box-shadow:0 0 0 1px var(--linha);position:relative}
 .plano.top{background:var(--noite);color:#e8f1ee;box-shadow:0 30px 70px -30px rgba(15,122,108,.6)}
 .plano h3{font-size:30px}
 .plano .desc{color:var(--tinta2);margin-top:6px}
@@ -514,9 +514,10 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
       <h2 id="t5">Primeiro mês por R$ 9,90. Depois, você escolhe.</h2>
       <p>Pix, boleto ou cartão. No cartão renova sozinho e você não precisa lembrar.</p>
     </div>
+    <!-- 27/10 (Caio: "é lá no sitescd.com.br que tem que trocar"): 3 planos iguais ao robô e à barra das amostras (cobranca.js PRECOS) -->
     <div class="planos">
       <article class="plano revela">
-        <h3>Normal</h3>
+        <h3>Simples</h3>
         <p class="desc">Tudo pra ser encontrado e chamado.</p>
         <div class="preco">R$ 29,90<small>/mês</small></div>
         <span class="pri">1º mês R$ 9,90</span>
@@ -527,21 +528,34 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
           <li><svg><use href="#ok"/></svg>Aparece nas buscas do Google</li>
           <li><svg><use href="#ok"/></svg>Você muda textos e fotos pelo celular</li>
         </ul>
-        <a class="bt bt-claro" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Normal." target="_blank" rel="noopener">Quero o Normal</a>
+        <a class="bt bt-claro" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Simples." target="_blank" rel="noopener">Quero o Simples</a>
       </article>
       <article class="plano top revela" style="transition-delay:.12s">
-        <span class="selo">Endereço próprio</span>
-        <h3>Premium</h3>
+        <span class="selo">Mais escolhido</span>
+        <h3>Profissional</h3>
         <p class="desc">Com a cara e o nome do seu negócio.</p>
-        <div class="preco">R$ 59,90<small>/mês</small></div>
+        <div class="preco">R$ 39,90<small>/mês</small></div>
         <span class="pri">1º mês R$ 9,90</span>
         <ul>
-          <li><svg><use href="#ok"/></svg>Tudo do Normal, com visual mais caprichado</li>
+          <li><svg><use href="#ok"/></svg>Tudo do Simples, com visual mais caprichado</li>
           <li><svg><use href="#ok"/></svg>Endereço próprio .com.br com o nome do seu negócio</li>
           <li><svg><use href="#ok"/></svg>Registrado no seu CPF ou CNPJ: o endereço é seu</li>
           <li><svg><use href="#ok"/></svg>Sem a marca da Sites CD no rodapé</li>
         </ul>
-        <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Premium." target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero o Premium</a>
+        <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Profissional." target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero o Profissional</a>
+      </article>
+      <article class="plano revela" style="transition-delay:.24s">
+        <h3>Completo</h3>
+        <p class="desc">O visual mais completo pro seu negócio.</p>
+        <div class="preco">R$ 49,90<small>/mês</small></div>
+        <span class="pri">1º mês R$ 9,90</span>
+        <ul>
+          <li><svg><use href="#ok"/></svg>Tudo do Profissional</li>
+          <li><svg><use href="#ok"/></svg>O modelo de site mais completo e animado</li>
+          <li><svg><use href="#ok"/></svg>Endereço próprio .com.br com o nome do seu negócio</li>
+          <li><svg><use href="#ok"/></svg>Sem a marca da Sites CD no rodapé</li>
+        </ul>
+        <a class="bt bt-claro" href="https://wa.me/5513997225693?text=Oi!%20Tenho%20interesse%20no%20plano%20Completo." target="_blank" rel="noopener">Quero o Completo</a>
       </article>
     </div>
     <p class="nota-planos revela">Sem fidelidade e sem multa. Cancela quando quiser, direto no WhatsApp.</p>
@@ -674,7 +688,7 @@ const FAQ = [
   ["Preciso mandar fotos ou textos?", "Não. A gente usa o que já está no Google do seu negócio. Se quiser trocar alguma coisa depois, você mesmo troca pelo celular."],
   ["Tem fidelidade ou multa pra cancelar?", "Não. Cancela quando quiser, é só avisar no WhatsApp."],
   ["E se eu quiser mudar alguma coisa?", "Textos e fotos você muda sozinho, com a sua senha de 4 números. Ajustes simples a gente faz de graça, é só pedir no WhatsApp."],
-  ["No Premium, o endereço .com.br é meu?", "É. Ele é registrado no seu CPF ou CNPJ, no registro.br."],
+  ["No Profissional e no Completo, o endereço .com.br é meu?", "É. Ele é registrado no seu CPF ou CNPJ, no registro.br."],
   ["Atendem o meu tipo de negócio?", "Se o seu negócio aparece no Google Maps, dá pra fazer: comércio, serviço, clínica, escritório, restaurante e muito mais. Atendemos o Brasil todo. Se ainda não está no Maps, chama no WhatsApp que a gente vê o melhor jeito."]
 ];
 document.getElementById("faq").innerHTML = FAQ.map(([p, r]) => `<details><summary>${p}<span class="mais"><svg><use href="#mais"/></svg></span></summary><div class="resp"><p>${r}</p></div></details>`).join("");
