@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<script>(function(){try{if(window.top!==window)return;var C="https://area.sitescd.com.br/c/central-do-corte-barbearia/",Q="normal",ls=localStorage,ss=sessionStorage;if(/caio/.test(location.hash))ls.setItem("souCaio","1");if(ls.getItem("souCaio"))return;function b(t,u){if(u){if(ss.getItem(u))return;ss.setItem(u,1)}try{navigator.sendBeacon(C+t)}catch(e){}}b("abriu","ab");if(Q)b("ver-"+Q,"v-"+Q);setTimeout(function(){if(!document.hidden)b("t30","t30")},30000);function f(){var d=document.documentElement,h=d.scrollHeight;if(h>innerHeight*1.5&&scrollY+innerHeight>=h*0.85){removeEventListener("scroll",f);if(Q)b("fim-"+Q,"fim-"+Q)}}addEventListener("scroll",f,{passive:true});document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a");if(a&&/\/assinar/.test(a.href))b("quero")},true)}catch(e){}})();</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Carregando…</title>
+<!-- 06/10 (Caio): MODELO 1 dos sites de comércio. A IA só preenche os DADOS (o JSON abaixo); o visual é sempre este.
+     Campo vazio = a seção some. Feito pelo Claude Code juntando o melhor dos 4 testes (capa do Copilot + identidade do Opus 5.5). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --escura: #1c1410; --media: #4a2e1f; --destaque: #d9a441; --clara: #f6eadb; --texto: #2a1d16; --branco: #fffdf9;
+    --titulo: "Playfair Display", Georgia, serif; --enfeite: "Dancing Script", cursive; --corpo: "Nunito", system-ui, sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--corpo); color: var(--texto); background: var(--branco); line-height: 1.6; overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .caixa { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  [hidden] { display: none !important; }
+
+  /* topo */
+  .topo { position: fixed; inset: 0 0 auto 0; z-index: 20; transition: background .3s, box-shadow .3s; }
+  .topo.rolou { background: color-mix(in srgb, var(--escura) 94%, transparent); box-shadow: 0 6px 24px #0004; backdrop-filter: blur(6px); }
+  .topo .caixa { display: flex; align-items: center; gap: 16px; height: 68px; }
+  .marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; min-width: 0; }
+  .marca .recorte { height: 44px; aspect-ratio: var(--prop, 2.4); border-radius: 8px; background-repeat: no-repeat; box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--destaque) 70%, transparent); flex: none; }
+  .marca img { height: 44px; width: auto; border-radius: 8px; }
+  .marca .nome { font-family: var(--titulo); font-weight: 700; font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .marca .nome em { font-family: var(--enfeite); font-style: normal; color: var(--destaque); font-weight: 700; margin-right: 4px; }
+  .menu { margin-left: auto; display: flex; gap: 22px; }
+  .menu a { color: #fff; text-decoration: none; font-weight: 600; font-size: .95rem; opacity: .9; }
+  .menu a:hover { opacity: 1; color: var(--destaque); }
+  .topo .zap-mini { margin-left: 8px; }
+  @media (max-width: 760px) { .menu { display: none; } .topo .zap-mini { margin-left: auto; } }
+
+  /* botões */
+  .bt { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 24px; border-radius: 999px; font: 700 1rem var(--corpo); text-decoration: none; border: 2px solid transparent; transition: transform .15s, box-shadow .15s; cursor: pointer; }
+  .bt:hover { transform: translateY(-2px); box-shadow: 0 10px 24px #0003; }
+  .bt svg { width: 20px; height: 20px; flex: none; }
+  .bt-zap { background: #25d366; color: #fff; }
+  .bt-borda { border-color: var(--destaque); color: #fff; background: #0003; }
+  .bt-escuro { background: var(--media); color: #fff; }
+  .zap-mini { padding: 9px 16px; font-size: .9rem; }
+
+  /* capa */
+  .capa { position: relative; min-height: min(92vh, 760px); display: grid; align-items: end; color: #fff; overflow: hidden; isolation: isolate; }
+  .capa .fundo { position: absolute; inset: -8%; background-size: cover; background-position: var(--foco, 50% 45%); transform: scale(var(--zoom, 1.12)); transform-origin: var(--foco, 50% 45%); z-index: -2; filter: saturate(1.05); }
+  .capa::after { content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--escura) 88%, transparent) 0%, color-mix(in srgb, var(--escura) 62%, transparent) 55%, color-mix(in srgb, var(--escura) 25%, transparent) 100%),
+      linear-gradient(180deg, color-mix(in srgb, var(--escura) 40%, transparent) 0%, transparent 40%, var(--escura) 100%); }
+  @media (max-width: 760px) { .capa::after { background: linear-gradient(180deg, color-mix(in srgb, var(--escura) 60%, transparent), color-mix(in srgb, var(--escura) 82%, transparent) 50%, var(--escura)); } }
+  .capa.sem-foto .fundo { display: none; }
+  .capa.sem-foto { background: radial-gradient(ellipse at 30% 20%, var(--media), var(--escura) 70%); }
+  .capa .caixa { padding: 140px 0 72px; }
+  .chapeu { display: inline-block; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; font-size: .78rem; color: var(--destaque); margin-bottom: 14px; }
+  .capa h1 { font-family: var(--titulo); font-size: clamp(2.5rem, 6.4vw, 4.8rem); line-height: 1.04; font-weight: 800; max-width: 15ch; text-wrap: balance; }
+  .capa h1 em { font-family: var(--enfeite); font-style: normal; color: var(--destaque); font-weight: 700; }
+  .capa p.sub { font-size: clamp(1.05rem, 2.2vw, 1.25rem); max-width: 46ch; margin: 18px 0 30px; opacity: .92; }
+  .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+  .selos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 34px; }
+  .selos span { background: #ffffff14; border: 1px solid #ffffff2e; padding: 7px 14px; border-radius: 999px; font-size: .88rem; font-weight: 600; backdrop-filter: blur(4px); }
+
+  /* seções */
+  section.bloco { padding: clamp(64px, 9vw, 104px) 0; }
+  .cabeca { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+  .cabeca .chapeu { margin-bottom: 8px; }
+  .cabeca h2 { font-family: var(--titulo); font-size: clamp(1.9rem, 4vw, 2.7rem); line-height: 1.15; color: var(--media); }
+  .cabeca p { color: #6b5a4f; margin-top: 10px; }
+  .claro { background: var(--clara); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+  .card { background: var(--branco); border-radius: 20px; padding: 30px 24px; text-align: center; box-shadow: 0 10px 30px #3a221214; border-top: 4px solid var(--destaque); transition: transform .2s; }
+  .card:hover { transform: translateY(-4px); }
+  .card .ic { font-size: 2.6rem; line-height: 1; margin-bottom: 14px; }
+  .card h3 { font-family: var(--enfeite); font-size: 1.75rem; color: var(--media); margin-bottom: 6px; }
+  .card p { color: #6b5a4f; font-size: .98rem; }
+
+  .sobre .caixa { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .sobre .foto { border-radius: 24px; aspect-ratio: 4 / 3; overflow: hidden; position: relative; box-shadow: 0 24px 50px #2a160b33; outline: 6px solid var(--branco); }
+  .sobre h2 { font-family: var(--titulo); font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--media); line-height: 1.15; margin: 6px 0 14px; }
+  .sobre p { color: #5b4a40; font-size: 1.05rem; }
+  .sobre .foto i { position: absolute; inset: 0; background-size: cover; background-position: var(--foco, 50% 50%); transform: scale(var(--zoom, 1)); transform-origin: var(--foco, 50% 50%); }
+  @media (max-width: 760px) { .sobre .caixa { grid-template-columns: 1fr; } }
+
+  .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .galeria figure { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--clara); box-shadow: 0 10px 26px #2a160b1f; }
+  .galeria img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+  .galeria figure:hover img { transform: scale(1.05); }
+  .galeria figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 14px 10px; color: #fff; font-weight: 700; font-size: .92rem; background: linear-gradient(transparent, #000a); }
+  @media (min-width: 900px) { .galeria figure:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; } }
+  .frase { background: var(--media); color: #fff; text-align: center; padding: 56px 16px; }
+  .frase p { font-family: var(--enfeite); font-size: clamp(1.8rem, 4.5vw, 2.8rem); color: var(--destaque); line-height: 1.25; }
+
+  .passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; counter-reset: p; }
+  .passo { background: var(--branco); border-radius: 18px; padding: 26px 22px; position: relative; box-shadow: 0 8px 24px #3a221212; }
+  .passo::before { counter-increment: p; content: counter(p); position: absolute; top: -16px; left: 22px; width: 36px; height: 36px; border-radius: 50%; background: var(--destaque); color: var(--escura); font-weight: 800; display: grid; place-items: center; }
+  .passo h3 { font-family: var(--titulo); font-size: 1.15rem; color: var(--media); margin: 8px 0 4px; }
+  .passo p { color: #6b5a4f; }
+  .centro { text-align: center; margin-top: 34px; }
+
+  .nota { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 30px; font-weight: 700; color: var(--media); }
+  .nota b { font-size: 2.4rem; font-family: var(--titulo); }
+  .estrelas { color: #f2b01e; letter-spacing: 2px; }
+  .depo { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .depo figure { background: var(--branco); border-radius: 18px; padding: 24px; box-shadow: 0 8px 24px #3a221212; }
+  .depo blockquote { color: #4d3d33; font-style: italic; margin: 8px 0 12px; }
+  .depo figcaption { font-weight: 700; color: var(--media); font-size: .92rem; }
+
+  .visita .caixa { display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: stretch; }
+  .info { background: var(--escura); color: #fff; border-radius: 24px; padding: 34px 30px; display: flex; flex-direction: column; gap: 22px; }
+  .info h3 { font-family: var(--titulo); color: var(--destaque); font-size: 1.05rem; letter-spacing: .04em; margin-bottom: 4px; }
+  .info .linha { opacity: .92; }
+  .info table { border-collapse: collapse; width: 100%; }
+  .info td { padding: 4px 0; border-bottom: 1px dashed #ffffff24; }
+  .info td + td { text-align: right; font-weight: 700; }
+  .tels a { display: block; text-decoration: none; font-weight: 700; font-size: 1.08rem; }
+  .tels a small { font-weight: 600; color: #25d366; margin-left: 6px; }
+  .redes { display: flex; gap: 10px; flex-wrap: wrap; }
+  .redes a { border: 1px solid #ffffff3a; border-radius: 999px; padding: 7px 14px; text-decoration: none; font-weight: 600; font-size: .92rem; }
+  .mapa { border-radius: 24px; overflow: hidden; min-height: 340px; box-shadow: 0 16px 40px #2a160b26; background: var(--clara); }
+  .mapa iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
+  @media (max-width: 760px) { .visita .caixa { grid-template-columns: 1fr; } }
+
+  footer { background: var(--escura); color: #fff9; text-align: center; padding: 34px 16px 96px; font-size: .9rem; }
+  footer b { color: #fff; font-family: var(--titulo); font-size: 1.1rem; display: block; margin-bottom: 4px; }
+  footer .prop { margin-top: 10px; font-size: .78rem; opacity: .6; }
+  footer .cd { margin-top: 8px; font-size: .74rem; opacity: .6; } footer .cd a { color: inherit; text-underline-offset: 3px; } footer .cd strong { font-weight: 700; }
+
+  .zap-fixo { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 60px; height: 60px; border-radius: 50%; background: #25d366; display: grid; place-items: center; box-shadow: 0 10px 28px #0005; animation: pulsa 2.6s infinite; }
+  .zap-fixo svg { width: 32px; height: 32px; fill: #fff; }
+  @keyframes pulsa { 0%, 100% { box-shadow: 0 10px 28px #0005, 0 0 0 0 #25d36680; } 50% { box-shadow: 0 10px 28px #0005, 0 0 0 14px #25d36600; } }
+  .aparece { opacity: 0; transform: translateY(18px); transition: opacity .7s, transform .7s; }
+  .aparece.vista { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .aparece { opacity: 1; transform: none; } .zap-fixo { animation: none; } }
+</style>
+</head>
+<body>
+<script id="dados" type="application/json">{"nome":"Central do Corte Barbearia","ramo":"Barbearia","cidade":"Itanhaém · SP","slogan":"Corte com capricho, *cola na Central*.","subtitulo":"Corte, barba e sobrancelha na R. Ana Maria Martins Rivera, em Itanhaém. Ambiente climatizado, equipe de barbeiros e atendimento pra adulto e criança.","destaques":["Nota 5,0 no Google","Ar-condicionado","Corte infantil"],"whatsapp":"","whatsapp_msg":"Olá, Central do Corte! Vi o site e quero marcar um horário.","telefones":[{"numero":"(13) 99638-6586","whatsapp":false}],"endereco":"R. Ana Maria Martins Rivera, 171 – Corumbá, Itanhaém/SP","horario":["Terça a sábado: 9h às 18h30","Domingo: fechado"],"instagram":"https://www.instagram.com/centraldocorte001/","facebook":"","produtos_chapeu":"Na cadeira da Central","produtos_titulo":"Nossos serviços","produtos_texto":"Do corte rápido ao combo completo, feito com calma e acabamento caprichado.","produtos":[{"icone":"✂️","titulo":"Corte","texto":"Do corte simples ao degradê bem acabado, do jeito que você pedir."},{"icone":"🧔","titulo":"Barba","texto":"Barba desenhada e alinhada, com acabamento caprichado."},{"icone":"💈","titulo":"Corte + barba","texto":"O combo completo pra sair renovado de uma vez só."},{"icone":"👦","titulo":"Corte infantil","texto":"A molecada também tem vez, com paciência e cuidado."}],"sobre_titulo":"A barbearia do bairro","sobre":"A Central do Corte fica no Corumbá, em Itanhaém: fachada preta, porta de vidro com as faixas de barbeiro e, lá dentro, ambiente climatizado com a equipe uniformizada atendendo. Quem vai, volta — cliente antigo elogia o capricho no corte e na barba e o preço justo. Aceita PIX, cartão e dinheiro.","frase":"#colanacentral","encomenda":{"titulo":"Como marcar seu horário","passos":[{"titulo":"Chame a gente","texto":"Ligue dizendo o serviço que você quer."},{"titulo":"Escolha o horário","texto":"De terça a sábado, das 9h às 18h30."},{"titulo":"Cola na Central","texto":"É só chegar na R. Ana Maria Martins Rivera, 171."}]},"avaliacoes":{"nota":5,"total":12,"lista":[{"texto":"Profissionais top!!! Corte ou barba com muito capricho e esmero, valores super justos. Já sou cliente antigo e super recomendo!!!","autor":"Cliente no Google"},{"texto":"O atendimento é excelente, com profissionais atenciosos e bem qualificados. O ambiente é descontraído. Mais uma vez saí muito satisfeito com o corte e o cuidado que recebi.","autor":"Cliente no Google"},{"texto":"Tratamento vip. Os meninos são bons 🙏","autor":"Cliente no Google"}]},"cores":{"escura":"#141416","media":"#222428","destaque":"#c8202f","clara":"#f3f1ee"},"estilo_titulo":"script","foto_capa":"maps-3.jpg","foto_capa_foco":"58% 36%","foto_capa_zoom":1.3,"foto_sobre":"maps-1.jpg","foto_sobre_foco":"48% 45%","foto_sobre_zoom":1.1,"logo":{"recorte":{"foto":"maps-3.jpg","x":14.5,"y":29.5,"w":74.5,"h":10.8,"proporcao":5.17}},"galeria":[{"url":"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&auto=format&q=80&fit=max","legenda":"Acabamento na máquina","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1200&auto=format&q=80&fit=max","legenda":"Ferramentas do ofício","ilustrativa":true},{"url":"https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&auto=format&q=80&fit=max","legenda":"Bancada pronta pro atendimento","ilustrativa":true}],"galeria_titulo":"Por dentro da Central"}</script>
+
+<header class="topo"><div class="caixa">
+  <a class="marca" href="#inicio"></a>
+  <nav class="menu"></nav>
+  <a class="bt bt-zap zap-mini" target="_blank" rel="noopener" hidden></a>
+</div></header>
+
+<section class="capa" id="inicio"><div class="fundo"></div><div class="caixa">
+  <span class="chapeu"></span>
+  <h1></h1>
+  <p class="sub"></p>
+  <div class="acoes"></div>
+  <div class="selos"></div>
+</div></section>
+
+<section class="bloco claro" id="produtos" hidden><div class="caixa">
+  <div class="cabeca aparece"><span class="chapeu"></span><h2></h2><p></p></div>
+  <div class="cards"></div>
+</div></section>
+
+<section class="bloco sobre" id="sobre" hidden><div class="caixa">
+  <div class="foto aparece"></div>
+  <div class="aparece"><span class="chapeu">Quem somos</span><h2></h2><p></p></div>
+</div></section>
+
+<section class="bloco" id="fotos" hidden><div class="caixa">
+  <div class="cabeca aparece"><span class="chapeu">Galeria</span><h2></h2></div>
+  <div class="galeria"></div>
+</div></section>
+
+<div class="frase" hidden><p></p></div>
+
+<section class="bloco claro" id="encomendas" hidden><div class="caixa">
+  <div class="cabeca aparece"><span class="chapeu">Como pedir</span><h2></h2></div>
+  <div class="passos"></div>
+  <div class="centro"></div>
+</div></section>
+
+<section class="bloco" id="avaliacoes" hidden><div class="caixa">
+  <div class="cabeca aparece"><span class="chapeu">Quem já foi recomenda</span><h2>O que dizem no Google</h2></div>
+  <div class="nota"></div>
+  <div class="depo"></div>
+</div></section>
+
+<section class="bloco claro visita" id="visite"><div class="caixa">
+  <div class="info aparece"></div>
+  <div class="mapa aparece"></div>
+</div></section>
+
+<footer><b></b><span class="end"></span><div class="prop">Proposta de site</div><div class="cd">Site feito por <strong>Sites CD</strong> · <a class="cd-zap" target="_blank" rel="noopener">Quer um site assim?</a><span class="cd-d"> · <a class="cd-dono" rel="nofollow">🔒 Área do dono</a></span></div></footer>
+<a class="zap-fixo" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp" hidden></a>
+
+<script>
+(function () {
+  let D = {};
+  try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
+  // 20/10: fonte dos títulos escolhida pelo dono no editor ("Aa Fonte"); vazio = a do modelo
+  if (["Poppins","Montserrat","Playfair Display","Bebas Neue","Oswald","Lora","DM Serif Display","Archivo Black","Raleway","Pacifico"].indexOf(D.fonte_titulo) >= 0) { var fl = document.createElement("link"); fl.rel = "stylesheet";
+    fl.href = "https://fonts.googleapis.com/css2?family=" + D.fonte_titulo.replace(/ /g, "+") + (/Bebas|Pacifico|Archivo|DM Serif/.test(D.fonte_titulo) ? "" : ":wght@500;700;800") + "&display=swap"; document.head.appendChild(fl);
+    var fs2 = document.createElement("style"); fs2.textContent = "h1,h2,h3,h1 *,h2 *,h3 *{font-family:'" + D.fonte_titulo + "',sans-serif!important}"; document.head.appendChild(fs2); }
+  const $ = (s) => document.querySelector(s);
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const tem = (x) => Array.isArray(x) ? x.length > 0 : x != null && String(x).trim() !== "";
+  const ZAP = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>';
+  const FONE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>';
+  const MAPA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>';
+
+  // cores e estilo da letra
+  const r = document.documentElement.style, c = D.cores || {};
+  for (const k of ["escura", "media", "destaque", "clara"]) if (tem(c[k])) r.setProperty("--" + k, c[k]);
+  if (D.estilo_titulo === "moderna") { r.setProperty("--titulo", '"Poppins", system-ui, sans-serif'); r.setProperty("--enfeite", '"Poppins", system-ui, sans-serif'); }
+  if (D.estilo_titulo === "serif") r.setProperty("--enfeite", '"Playfair Display", Georgia, serif');
+
+  const nome = D.nome || "Nosso espaço";
+  document.title = nome + (D.ramo ? " · " + D.ramo : "");
+  const zapNum = String(D.whatsapp || "").replace(/\D/g, "");
+  const zapUrl = zapNum ? "https://wa.me/" + zapNum + "?text=" + encodeURIComponent(D.whatsapp_msg || "Olá! Vi o site e quero fazer um pedido.") : "";
+  const tel1 = (D.telefones || [])[0];
+  const telUrl = tel1 ? "tel:+55" + String(tel1.numero).replace(/\D/g, "").replace(/^55/, "") : "";
+  const endereco = D.endereco || "";
+  const mapsUrl = D.maps || (endereco ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(nome + " " + endereco) : "");
+
+  // marca: logo (arquivo), recorte da foto, ou o nome escrito
+  const marca = $(".marca");
+  if (D.logo?.arquivo) marca.innerHTML = `<img src="${esc(D.logo.arquivo)}" alt="${esc(nome)}">`;
+  else if (D.logo?.recorte?.usar) {
+    const k = D.logo.recorte, el = document.createElement("span");
+    el.className = "recorte";
+    // recorte em % da foto: mostra só aquele pedaço, sem criar arquivo novo
+    el.style.backgroundImage = `url("${k.foto || D.foto_capa}")`;
+    el.style.backgroundSize = `${(100 / k.w) * 100}% ${(100 / k.h) * 100}%`;
+    el.style.backgroundPosition = `${k.w >= 100 ? 0 : (k.x / (100 - k.w)) * 100}% ${k.h >= 100 ? 0 : (k.y / (100 - k.h)) * 100}%`;
+    if (k.proporcao) el.style.setProperty("--prop", k.proporcao);
+    marca.append(el);
+  } else {
+    const p = nome.split(" ");
+    marca.innerHTML = `<span class="nome">${p.length > 1 ? `<em>${esc(p[0])}</em>${esc(p.slice(1).join(" "))}` : esc(nome)}</span>`;
+  }
+  const menu = [["produtos", D.produtos_titulo_menu || "O que temos", tem(D.produtos)], ["encomendas", "Encomendas", tem(D.encomenda?.passos)], ["avaliacoes", "Avaliações", tem(D.avaliacoes?.lista)], ["visite", "Onde estamos", true]];
+  $(".menu").innerHTML = menu.filter((m) => m[2]).map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join("");
+  if (zapUrl) { const z = $(".zap-mini"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP + "<span>Pedir</span>"; }
+
+  // capa
+  const capa = $(".capa");
+  // foco = ponto da foto que importa; zoom = aproxima pra cortar bordas feias (ex.: botões do Street View)
+  if (D.foto_capa) { $(".capa .fundo").style.backgroundImage = `url("${D.foto_capa}")`; if (D.foto_capa_foco) capa.style.setProperty("--foco", D.foto_capa_foco); if (D.foto_capa_zoom) capa.style.setProperty("--zoom", D.foto_capa_zoom); }
+  else capa.classList.add("sem-foto");
+  $(".capa .chapeu").textContent = [D.ramo, D.cidade].filter(tem).join(" · ");
+  const slogan = D.slogan || nome;
+  // a parte do slogan entre *asteriscos* sai na letra de enfeite, na cor de destaque
+  $(".capa h1").innerHTML = esc(slogan).replace(/\*(.+?)\*/g, "<em>$1</em>");
+  $(".capa .sub").textContent = D.subtitulo || "";
+  $(".acoes").innerHTML = (zapUrl ? `<a class="bt bt-zap" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Pedir pelo WhatsApp</a>` : "") +
+    (telUrl ? `<a class="bt bt-borda" href="${telUrl}">${FONE}Ligar agora</a>` : "") +
+    (!zapUrl && !telUrl && mapsUrl ? `<a class="bt bt-borda" href="${mapsUrl}" target="_blank" rel="noopener">${MAPA}Como chegar</a>` : "");
+  $(".selos").innerHTML = (D.destaques || []).slice(0, 4).map((s) => `<span>${esc(s)}</span>`).join("");
+
+  // produtos
+  if (tem(D.produtos)) {
+    $("#produtos").hidden = false;
+    $("#produtos .chapeu").textContent = D.produtos_chapeu || "Feito com carinho";
+    $("#produtos h2").textContent = D.produtos_titulo || "O que você encontra aqui";
+    $("#produtos .cabeca p").textContent = D.produtos_texto || "";
+    $("#produtos .cards").innerHTML = D.produtos.slice(0, 6).map((p) => `<div class="card aparece"><div class="ic">${esc(p.icone || "✨")}</div><h3>${esc(p.titulo)}</h3><p>${esc(p.texto || "")}</p></div>`).join("");
+  }
+  // sobre
+  if (tem(D.sobre)) {
+    $("#sobre").hidden = false;
+    $("#sobre h2").textContent = D.sobre_titulo || "Um cantinho pra você";
+    $("#sobre p").textContent = D.sobre;
+    const f = $("#sobre .foto"), foto = D.foto_sobre || D.foto_capa;
+    if (foto) { f.innerHTML = "<i></i>"; f.firstChild.style.backgroundImage = `url("${foto}")`; f.style.setProperty("--foco", D.foto_sobre_foco || "50% 50%"); if (D.foto_sobre_zoom) f.style.setProperty("--zoom", D.foto_sobre_zoom); }
+    else f.remove();
+  }
+  // galeria: fotos reais e de banco (ilustrativa: true = troca fácil pela foto do dono depois)
+  const gal = (D.galeria || []).filter((g) => g && g.url).slice(0, 7);
+  if (gal.length) {
+    $("#fotos").hidden = false; $("#fotos h2").textContent = D.galeria_titulo || "Um pouco do nosso dia a dia";
+    $("#fotos .galeria").innerHTML = gal.map((g) => `<figure class="aparece"><img loading="lazy" src="${esc(g.url)}" alt="${esc(g.legenda || nome)}" onerror="this.closest('figure').remove()">${g.legenda ? `<figcaption>${esc(g.legenda)}</figcaption>` : ""}</figure>`).join("");
+  }
+  if (gal.some((g) => g.ilustrativa) || D.fotos_ilustrativas) $("footer .prop").textContent = "Proposta de site · fotos ilustrativas";
+  if (tem(D.frase)) { const fr = $(".frase"); fr.hidden = false; $(".frase p").textContent = D.frase; }
+  // encomendas
+  if (tem(D.encomenda?.passos)) {
+    $("#encomendas").hidden = false;
+    $("#encomendas h2").textContent = D.encomenda.titulo || "Faça sua encomenda";
+    $("#encomendas .passos").innerHTML = D.encomenda.passos.slice(0, 4).map((p) => typeof p === "string" ? `<div class="passo aparece"><p>${esc(p)}</p></div>` : `<div class="passo aparece"><h3>${esc(p.titulo)}</h3><p>${esc(p.texto || "")}</p></div>`).join("");
+    if (zapUrl) $("#encomendas .centro").innerHTML = `<a class="bt bt-zap" href="${zapUrl}" target="_blank" rel="noopener">${ZAP}Encomendar pelo WhatsApp</a>`;
+  }
+  // avaliações (só as reais, que a IA achou)
+  const av = D.avaliacoes;
+  if (tem(av?.lista)) {
+    $("#avaliacoes").hidden = false;
+    if (av.nota) $("#avaliacoes .nota").innerHTML = `<b>${esc(String(av.nota).replace(".", ","))}</b><div><div class="estrelas">${"★".repeat(Math.round(av.nota))}</div>${av.total ? esc(av.total) + " avaliações no Google" : "no Google"}</div>`;
+    $("#avaliacoes .depo").innerHTML = av.lista.slice(0, 3).map((a) => `<figure class="aparece"><div class="estrelas">${"★".repeat(a.estrelas || 5)}</div><blockquote>“${esc(a.texto)}”</blockquote><figcaption>${esc(a.autor || "Cliente")}</figcaption></figure>`).join("");
+  }
+  // visite: endereço, horário, telefones, redes e mapa
+  const tels = (D.telefones || []).map((t) => { const n = String(t.numero).replace(/\D/g, "").replace(/^55/, ""); return `<a href="${t.whatsapp ? "https://wa.me/55" + n : "tel:+55" + n}" ${t.whatsapp ? 'target="_blank" rel="noopener"' : ""}>${esc(t.numero)}${t.whatsapp ? "<small>WhatsApp</small>" : ""}</a>`; }).join("");
+  const redes = [["Instagram", D.instagram], ["Facebook", D.facebook], ["Google Maps", mapsUrl]].filter((x) => tem(x[1]));
+  $(".info").innerHTML =
+    (endereco ? `<div><h3>ENDEREÇO</h3><div class="linha">${esc(endereco)}</div></div>` : "") +
+    (tem(D.horario) ? `<div><h3>HORÁRIO</h3><table>${D.horario.map((h) => `<tr><td>${esc(h.dias)}</td><td>${esc(h.horas)}</td></tr>`).join("")}</table></div>` : "") +
+    (tels ? `<div class="tels"><h3>FALE COM A GENTE</h3>${tels}</div>` : "") +
+    (redes.length ? `<div><h3>SIGA E ENCONTRE</h3><div class="redes">${redes.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${n}</a>`).join("")}</div></div>` : "");
+  if (endereco) $(".mapa").innerHTML = `<iframe loading="lazy" title="Mapa" src="https://www.google.com/maps?q=${encodeURIComponent(nome + ", " + endereco)}&output=embed"></iframe>`;
+  else $(".mapa").remove();
+
+  $("footer b").textContent = nome;
+  $("footer .end").textContent = endereco || D.cidade || "";
+
+  // 09/10 rodapé da Sites CD (Caio): crédito discreto + "Quer um site assim?" (WhatsApp do Caio, não é botão: o verde é o
+  // da loja) + "Área do dono" (porteiro com PIN; só aparece no endereço publicado sitescd.github.io/<slug>/)
+  { const cd = $("footer .cd"), slug = location.hostname === "sitescd.github.io" ? location.pathname.split("/")[1] : "";
+    cd.querySelector(".cd-zap").href = "https://wa.me/5513996485501?text=" + encodeURIComponent("Olá! Vi o site " + nome + " e quero um site assim.");
+    if (slug) cd.querySelector(".cd-dono").href = "https://area.sitescd.com.br/d/" + slug; else cd.querySelector(".cd-d").remove(); }
+  if (zapUrl) { const z = $(".zap-fixo"); z.hidden = false; z.href = zapUrl; z.innerHTML = ZAP; }
+
+  // topo escurece ao rolar; blocos aparecem suave
+  const topo = $(".topo"), rolar = () => topo.classList.toggle("rolou", scrollY > 40);
+  addEventListener("scroll", rolar, { passive: true }); rolar();
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("vista"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".aparece").forEach((el) => (io ? io.observe(el) : el.classList.add("vista")));
+})();
+</script>
+
+<style id="scd-vit">
+.scd-v{--a:#2fd1b4;--at:#062b25;--g:rgba(18,20,22,.74);--gt:#fff;--gs:rgba(255,255,255,.72);--gl:rgba(255,255,255,.16);--f:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.scd-v,.scd-v *{box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;letter-spacing:normal;text-transform:none}
+.scd-v .scd-tt{font-family:var(--f);font-weight:700}
+.scd-vidro{background:var(--g);-webkit-backdrop-filter:blur(16px) saturate(1.5);backdrop-filter:blur(16px) saturate(1.5);color:var(--gt);border:1px solid var(--gl);box-shadow:0 18px 44px -14px rgba(0,0,0,.5)}
+.scd-bal{position:absolute;z-index:2147483600;left:16px;right:16px;max-width:340px;margin:0 auto;padding:18px 18px 16px;border-radius:20px;text-align:center;
+ opacity:0;transform:translateY(12px) scale(.97);transition:opacity .5s,transform .5s;pointer-events:none}
+.scd-bal.on{opacity:1;transform:none;pointer-events:auto}
+.scd-bal .scd-tt{display:block;font-size:19px;line-height:1.2;margin:0 22px 6px;color:var(--gt)}
+.scd-bal p{margin:0 0 14px;font-size:14.5px;line-height:1.45;color:var(--gs)}
+.scd-bal .scd-seta{position:absolute;left:var(--sx,50%);width:14px;height:14px;background:var(--a);transform:translateX(-50%) rotate(45deg);border-radius:3px}
+.scd-bal.cima .scd-seta{top:-7px}.scd-bal.baixo .scd-seta{bottom:-7px}
+.scd-x{position:absolute;top:8px;right:8px;width:32px;height:32px;border:0;border-radius:50%;background:var(--gl);color:var(--gt);font-size:18px;line-height:32px;padding:0;cursor:pointer}
+.scd-ok{display:inline-block;border:0;border-radius:999px;background:var(--a);color:var(--at);font-weight:700;font-size:15px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 18px -6px var(--a)}
+.scd-no{border:0;border-radius:999px;background:var(--gl);color:var(--gt);font-size:14px;padding:10px 14px;cursor:pointer}
+.scd-alvo{outline:2px dashed var(--scd-a,#2fd1b4)!important;outline-offset:5px;border-radius:6px}
+html.scd-ed [data-scd-t]{outline:1.5px dashed var(--scd-a,#2fd1b4);outline-offset:4px;border-radius:4px;cursor:text}
+html.scd-ed [data-scd-t]:focus{outline:2px solid var(--scd-a,#2fd1b4)}
+html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:-6px;cursor:pointer}
+.scd-ed-bar{position:fixed;z-index:2147483620;left:50%;top:10px;transform:translate(-50%,-140%);transition:transform .35s;width:calc(100% - 20px);max-width:520px;border-radius:18px;padding:10px 10px 10px 14px;display:flex;align-items:center;gap:8px}
+.scd-ed-bar.on{transform:translate(-50%,0)}
+.scd-ed-bar span{flex:1;font-size:13px;line-height:1.3;color:var(--gs)}.scd-ed-bar span b{color:var(--gt)}
+.scd-ed-bar button{flex:none;padding:9px 12px;font-size:13.5px}
+.scd-bar{position:fixed;z-index:2147483500;left:0;right:0;bottom:0;padding:16px 12px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom));border-width:1px 0 0;border-top:3px solid var(--a);
+ display:flex;gap:10px 14px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;transform:translateY(110%);transition:transform .5s;border-radius:0;box-shadow:0 -10px 30px -12px rgba(0,0,0,.35)}
+.scd-bar.on{transform:none}.scd-bar span{color:var(--gt)}.scd-bar .scd-tt{display:block;font-size:16px;line-height:1.25}
+.scd-bar small{display:block;color:var(--gs);font-size:12.5px;margin-top:3px}
+.scd-bar a{text-decoration:none;white-space:nowrap}
+.scd-bar .scd-x{top:12px;right:8px}
+.scd-bw{width:100%;max-width:520px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.scd-bar .scd-tt{font-size:16px}.scd-big{display:inline-block;font-size:28px;line-height:1;color:var(--a);vertical-align:-3px;margin-left:2px}
+.scd-pl{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:6px;width:100%;margin:10px 0 10px}
+.scd-bar a.scd-p{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 4px 8px;border-radius:12px;border:1px solid var(--gl);background:var(--gl);color:var(--gt);white-space:normal;min-width:0}
+.scd-bar a.scd-p.sel{border-color:var(--a);box-shadow:inset 0 0 0 1px var(--a)}
+.scd-p b{font-size:13px}.scd-p em{font-style:normal;font-weight:700;font-size:14px;color:var(--gt)}.scd-p em small{display:inline;margin:0;font-size:11px;font-weight:400}
+.scd-bar .scd-p .scd-end{font-size:9.5px;line-height:1.2;margin:2px 0 0;word-break:break-all;max-width:100%}
+.scd-p span{font-size:11.5px;font-weight:600;color:var(--a);margin-top:3px}
+.scd-mais{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-style:normal;font-size:9.5px;font-weight:700;white-space:nowrap;padding:2px 7px;border-radius:999px;background:var(--a);color:var(--at)}
+.scd-bar .scd-quero{width:100%;text-align:center;font-size:15.5px}
+.scd-fo{position:fixed;inset:0;z-index:2147483640;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s}
+.scd-fo.on{opacity:1}
+.scd-cx{width:100%;max-width:520px;border-radius:22px 22px 0 0;border-width:1px 1px 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s}
+.scd-fo.on .scd-cx{transform:none}
+.scd-cx .scd-tt{font-size:17px;color:var(--gt)}.scd-cx small{display:block;color:var(--gs);margin:4px 0 12px;font-size:13px}
+.scd-fontes{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:46vh;overflow:auto}
+.scd-v .scd-fontes button{border:1px solid var(--gl);background:var(--gl);color:var(--gt);border-radius:14px;padding:12px 10px;font-size:19px;line-height:1.1;cursor:pointer;text-align:left;font-family:var(--ff)}
+.scd-fontes button small{display:block;font-size:11px;color:var(--gs);margin:4px 0 0}
+.scd-fontes button.sel{border-color:var(--a);box-shadow:inset 0 0 0 1px var(--a)}
+.scd-cx .scd-bt{display:flex;justify-content:center;margin-top:14px}
+.scd-toast{position:fixed;z-index:2147483645;left:50%;top:76px;transform:translate(-50%,-14px);opacity:0;transition:all .3s;border-radius:999px;padding:10px 16px;font-size:14px;max-width:calc(100% - 32px);text-align:center}
+.scd-toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.scd-bal,.scd-bar,.scd-fo,.scd-cx,.scd-toast,.scd-ed-bar{transition:none}}
+</style>
+<script>
+(function(){
+if (window.self !== window.top) return;   // miniatura da página "escolha a sua versão": sem balões
+var C={"ramo":"barbearia","wa":"https://area.sitescd.com.br/c/central-do-corte-barbearia/assinar?p=normal","barra":"\u003cdiv class=\"scd-bw\">\u003cb class=\"scd-tt\">Seu site no ar por \u003cspan class=\"scd-big\">R$ 9,90\u003c/span>\u003c/b>\u003csmall>no 1º mês · sem fidelidade · cancela quando quiser\u003c/small>\u003cdiv class=\"scd-pl\">\u003ca class=\"scd-p sel\" href=\"normal.html\">\u003cb>Simples\u003c/b>\u003cem>R$ 29,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">sitescd.com.br/central-do-corte-barbearia\u003c/small>\u003cspan>✓ Você está vendo\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"./\">\u003ci class=\"scd-mais\">mais escolhido\u003c/i>\u003cb>Profissional\u003c/b>\u003cem>R$ 39,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">centraldocortebarbearia.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"super.html\">\u003cb>Completo\u003c/b>\u003cem>R$ 49,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">centraldocortebarbearia.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003c/div>\u003ca class=\"scd-ok scd-quero\" href=\"https://area.sitescd.com.br/c/central-do-corte-barbearia/assinar?p=normal\">Quero o Simples por R$ 9,90\u003c/a>\u003csmall>📲 Ativou, recebe tudo no WhatsApp: senha pra editar, manual e plaquinha com QR Code\u003c/small>\u003c/div>"}, fechado={}, ed=false, tema=null;
+var FONTES=[["Poppins","moderna"],["Montserrat","forte"],["Playfair Display","elegante"],["Bebas Neue","impacto"],["Oswald","esportiva"],["Lora","clássica"],["DM Serif Display","sofisticada"],["Archivo Black","marcante"],["Raleway","leve"],["Pacifico","descontraída"]];
+try{fechado=JSON.parse(sessionStorage.getItem("scd-v")||"{}")}catch(e){}
+function guarda(k){fechado[k]=1;try{sessionStorage.setItem("scd-v",JSON.stringify(fechado))}catch(e){}}
+function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
+function ui(e){return e.closest&&e.closest(".scd-v")}
+function visivel(e){var r=e.getBoundingClientRect();return r.width>40&&r.height>14&&getComputedStyle(e).visibility!=="hidden"}
+function temFundo(e){return /url\(/.test(getComputedStyle(e).backgroundImage||"")}
+function rgb(c){var m=String(c).match(/[\d.]+/g);if(!m||m.length<3||(m.length>3&&+m[3]<.5))return null;return m.slice(0,3).map(Number)}
+function lum(c){return (.299*c[0]+.587*c[1]+.114*c[2])/255}
+// COR DO SITE: a cor viva que mais aparece (botões, destaques, bordas), sem o verde do WhatsApp; fundo claro ou escuro
+function lerTema(){
+  if(tema)return tema;var conta={},melhor=null,mx=0;
+  function soma(c,p){c=rgb(c);if(!c)return;var a=Math.max.apply(0,c),b=Math.min.apply(0,c);if(a<70||(a-b)/a<.35)return;
+    if(Math.abs(c[0]-37)<20&&Math.abs(c[1]-211)<25&&Math.abs(c[2]-102)<25)return;
+    var k=c.map(function(v){return v>>4}).join(",");conta[k]=conta[k]||{n:0,c:c};conta[k].n+=p;if(conta[k].n>mx){mx=conta[k].n;melhor=conta[k].c}}
+  document.querySelectorAll("a,button,span,em,strong,small,i,b,h1,h2,h3,div,section,li").forEach(function(e,i){if(i>1500||ui(e))return;var s=getComputedStyle(e);
+    soma(s.backgroundColor,e.matches("a,button")?3:1);soma(s.color,e.matches("span,em,b,strong,small,i")?2:1);if(parseFloat(s.borderTopWidth)>=2)soma(s.borderTopColor,2)});
+  var fb=rgb(getComputedStyle(document.body).backgroundColor)||rgb(getComputedStyle(document.documentElement).backgroundColor)||[255,255,255];
+  var a=melhor||[47,209,180],h=document.querySelector("h2,h1");
+  tema={a:"rgb("+a+")",at:lum(a)>.6?"#161616":"#fff",claro:lum(fb)>.55,f:h?getComputedStyle(h).fontFamily:""};
+  document.documentElement.style.setProperty("--scd-a",tema.a);return tema;
+}
+function pinta(e){var t=lerTema(),s=e.style;s.setProperty("--a",t.a);s.setProperty("--at",t.at);if(t.f)s.setProperty("--f",t.f);
+  if(t.claro){s.setProperty("--g","rgba(255,255,255,.82)");s.setProperty("--gt","#17191b");s.setProperty("--gs","rgba(23,25,27,.68)");s.setProperty("--gl","rgba(0,0,0,.08)")}
+  return e}
+function vidro(t,c,h){var e=pinta(el(t,"scd-v scd-vidro "+c,h));document.body.appendChild(e);return e}
+// marca o que dá pra trocar: textos (títulos, parágrafos, itens) e fotos (img ou fundo com foto)
+function marcar(){
+  document.querySelectorAll("h1,h2,h3,h4,p,li,blockquote,figcaption").forEach(function(e){
+    if(ui(e)||e.hasAttribute("data-scd-t")||e.closest("a,button,nav,form,footer")||!e.textContent.trim()||e.querySelector("h1,h2,h3,p,li,img,a,button"))return;
+    e.setAttribute("data-scd-t","")});
+  document.querySelectorAll("img,section,header,div,figure").forEach(function(e){
+    if(ui(e)||e.hasAttribute("data-scd-f")||e.closest("a,button,nav"))return;
+    if(e.tagName==="IMG"?(e.naturalWidth>60||e.width>60):(temFundo(e)&&e.offsetWidth>120))e.setAttribute("data-scd-f","")});
+  if(ed)document.querySelectorAll("[data-scd-t]").forEach(function(e){e.contentEditable="true";e.spellcheck=false});
+}
+function toast(t){var x=vidro("div","scd-toast",t);requestAnimationFrame(function(){x.classList.add("on")});
+  setTimeout(function(){x.classList.remove("on");setTimeout(function(){x.remove()},400)},2600)}
+// MODO TESTE = igual ao editor do dono: escreve por cima, toca na foto, troca a fonte
+var edBar=null;
+function ligarEd(){
+  if(ed)return;ed=true;document.documentElement.classList.add("scd-ed");marcar();
+  edBar=vidro("div","scd-ed-bar","<span><b>✏️ Modo teste.</b> Toque num texto e escreva por cima. Toque numa foto pra trocar.</span><button class='scd-no' data-a='fonte'>Aa Fonte</button><button class='scd-ok' data-a='pronto'>Pronto</button>");
+  requestAnimationFrame(function(){edBar.classList.add("on")});
+  edBar.onclick=function(v){var a=v.target.closest("[data-a]");if(!a)return;if(a.dataset.a==="fonte")escolherFonte();else desligarEd()};
+}
+function desligarEd(){ed=false;document.documentElement.classList.remove("scd-ed");document.querySelectorAll("[data-scd-t]").forEach(function(e){e.removeAttribute("contenteditable")});
+  if(edBar){edBar.classList.remove("on");var b=edBar;edBar=null;setTimeout(function(){b.remove()},400)}
+  toast("Gostou? Você faz isso sozinho, quantas vezes quiser ✨")}
+var mexeu=false;
+document.addEventListener("input",function(v){if(v.target.closest&&v.target.closest("[data-scd-t]"))mexeu=true},true);
+document.addEventListener("focusout",function(v){if(mexeu&&v.target.closest&&v.target.closest("[data-scd-t]")){mexeu=false;if(!fechado.dica1){guarda("dica1");toast("Pronto! Troque quantas vezes quiser 😉")}}},true);
+function editarFoto(e){
+  var i=el("input");i.type="file";i.accept="image/*";i.style.display="none";document.body.appendChild(i);
+  i.onchange=function(){var f=i.files&&i.files[0];i.remove();if(!f)return;var u=URL.createObjectURL(f);
+    if(e.tagName==="IMG"){e.removeAttribute("srcset");e.src=u}else e.style.backgroundImage=(getComputedStyle(e).backgroundImage.match(/linear-gradient\([^)]*\)\s*,\s*/)||[""])[0]+'url("'+u+'")';
+    toast("Foto trocada! 📸 É só um teste, nada foi salvo")};
+  i.click();
+}
+var fonteAtual="";
+function escolherFonte(){
+  if(!document.getElementById("scd-gf")){var l=el("link");l.id="scd-gf";l.rel="stylesheet";
+    l.href="https://fonts.googleapis.com/css2?"+FONTES.map(function(f){return "family="+f[0].replace(/ /g,"+")+(/Bebas|Pacifico|Archivo|DM Serif/.test(f[0])?"":":wght@700")}).join("&")+"&display=swap";document.head.appendChild(l)}
+  var fo=el("div","scd-v scd-fo"),cx=pinta(el("div","scd-vidro scd-cx","<span class='scd-tt'>Aa Fonte dos títulos</span><small>Toque numa e veja no site na hora.</small>")),g=el("div","scd-fontes"),bt=el("div","scd-bt"),ok=el("button","scd-ok","Pronto");
+  FONTES.forEach(function(f){var b=el("button",f[0]===fonteAtual?"sel":"",f[0]+"<small>"+f[1]+"</small>");b.style.setProperty("--ff","'"+f[0]+"',sans-serif");
+    b.onclick=function(){fonteAtual=f[0];var s=document.getElementById("scd-fonte")||document.head.appendChild(el("style"));s.id="scd-fonte";
+      s.textContent="h1,h2,h3,h1 *,h2 *,h3 *{font-family:'"+f[0]+"',sans-serif!important}";g.querySelectorAll(".sel").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")};g.appendChild(b)});
+  bt.appendChild(ok);cx.append(g,bt);fo.appendChild(cx);document.body.appendChild(fo);requestAnimationFrame(function(){fo.classList.add("on")});
+  function sai(){fo.classList.remove("on");setTimeout(function(){fo.remove()},250)}ok.onclick=sai;fo.onclick=function(v){if(v.target===fo)sai()};
+}
+document.addEventListener("click",function(v){
+  if(ui(v.target)||v.target.closest("a,button"))return;
+  var t=v.target.closest&&v.target.closest("[data-scd-t]"),f=v.target.closest&&v.target.closest("[data-scd-f]");
+  if(!ed&&t&&fechado.bal){ligarEd();t.focus();return}
+  if(t)return;   // escrevendo por cima (ou ainda sem o balão: o site funciona normal)
+  if(f&&ed){v.preventDefault();v.stopPropagation();editarFoto(f)}
+},true);
+// escolhe um texto já na tela (de preferência com foto perto) pro balão apontar
+function acharAlvo(){
+  marcar();var h=innerHeight,fs=[].slice.call(document.querySelectorAll("[data-scd-f]")),ts=[].slice.call(document.querySelectorAll("[data-scd-t]"));
+  for(var k=0;k<ts.length;k++){var t=ts[k],r=t.getBoundingClientRect();if(r.top<h*.1||r.bottom>h*.6||!visivel(t))continue;
+    for(var j=0;j<fs.length;j++){var q=fs[j].getBoundingClientRect();if(q.bottom>0&&q.top<h&&Math.abs(q.top-r.top)<h*.6)return t}}
+  for(k=0;k<ts.length;k++){r=ts[k].getBoundingClientRect();if(r.top>h*.1&&r.bottom<h*.6&&visivel(ts[k]))return ts[k]}
+  return null;
+}
+var bal=null;
+function balao(){
+  if(bal||fechado.bal||ed)return;var a=acharAlvo();if(!a)return;
+  bal=vidro("div","scd-bal","<span class='scd-seta'></span><button class='scd-x' aria-label='Fechar'>×</button><span class='scd-tt'>Deixe do seu jeito</span><p>"+(C.ramo?"Modelo pensado pra "+C.ramo.replace(/[<>&]/g,"")+". ":"")+
+    "Toque num texto ou numa foto e troque pelo celular, quantas vezes quiser.</p><button class='scd-ok'>✏️ Testar agora</button>");
+  a.classList.add("scd-alvo");
+  var r=a.getBoundingClientRect(),abaixo=r.bottom+bal.offsetHeight+24<innerHeight;
+  bal.classList.add(abaixo?"cima":"baixo");bal.style.top=(scrollY+(abaixo?r.bottom+16:Math.max(12,r.top-bal.offsetHeight-16)))+"px";
+  var b=bal.getBoundingClientRect();bal.style.setProperty("--sx",Math.min(b.width-24,Math.max(24,r.left+Math.min(r.width,200)/2-b.left))+"px");
+  requestAnimationFrame(function(){bal.classList.add("on")});
+  function fecha(){guarda("bal");a.classList.remove("scd-alvo");bal.classList.remove("on");removeEventListener("scroll",some);setTimeout(function(){bal&&bal.remove()},500)}
+  var y0=scrollY;function some(){if(Math.abs(scrollY-y0)>innerHeight*.7)fecha()}
+  bal.querySelector(".scd-x").onclick=fecha;bal.querySelector(".scd-ok").onclick=function(){fecha();ligarEd();a.focus();try{var g=getSelection(),rg=document.createRange();rg.selectNodeContents(a);rg.collapse(false);g.removeAllRanges();g.addRange(rg)}catch(e){}};
+  setTimeout(function(){addEventListener("scroll",some,{passive:true})},800);
+}
+var bar=null;
+function barra(){
+  if(bar||fechado.bar)return;
+  bar=vidro("div","scd-bar",C.barra+"<button class='scd-x' aria-label='Fechar'>×</button>");
+  requestAnimationFrame(function(){bar.classList.add("on")});
+  bar.querySelector(".scd-x").onclick=function(){guarda("bar");bar.classList.remove("on");var b=bar;bar=null;setTimeout(function(){b.remove()},500)};
+}
+// ritmo (Caio: "se for direto na cara ele nem vê"): balão quando chega perto do MEIO e para de rolar por um instante;
+// a barra do preço só perto do FIM
+var parou=0;
+function rolou(){var y=scrollY,tot=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=y/tot;clearTimeout(parou);
+  if(p>.3&&y>innerHeight*.8)parou=setTimeout(balao,1200);if(p>.75)barra()}
+addEventListener("scroll",rolou,{passive:true});
+addEventListener("load",function(){setTimeout(marcar,800)});
+})();
+</script>
+<a href="modelos.html" id="scd-om" style="position:fixed;z-index:2147483400;left:16px;bottom:calc(18px + env(safe-area-inset-bottom));background:rgba(18,20,22,.84);color:#fff;font:600 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:normal;text-transform:none;padding:12px 20px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px -6px rgba(0,0,0,.45);white-space:nowrap;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">🎨 Ver os outros modelos</a>
+<script>if(window.top!==window)document.getElementById("scd-om").remove()</script>
+</body>
+</html>
