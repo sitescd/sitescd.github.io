@@ -211,12 +211,12 @@
     <div><label for="ag-nome">Seu nome</label><input id="ag-nome" autocomplete="given-name" placeholder="Como podemos te chamar?"></div>
     <p class="falta" hidden></p>
     <a class="bt bt-ac bt-zap" href="#" id="ag-ir">Agendar pelo WhatsApp</a>
-    <p class="aviso">O horário fica confirmado quando a barbearia responder.</p>
+    <p class="aviso">Ao tocar, o horário fica reservado pra você e some pros outros clientes.</p>
   </div>
 </div></section>
 <script>
 (function () {
-  var ZAP = "5513991803315", D = {};
+  var ZAP = "5513991803315", SLUG = "barbearia-lincoln", D = {};
   try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
   var nome = D.nome || "Barbearia Lincoln";
   // terça a sábado 9h-19h, domingo 10h-15h, segunda fechado (horário do Google)
@@ -237,25 +237,40 @@
   var dias = [], hoje = new Date(); hoje.setHours(0, 0, 0, 0);
   for (var i = 0; dias.length < 8 && i < 14; i++) { var d = new Date(hoje); d.setDate(d.getDate() + i); if (ABRE[d.getDay()]) dias.push(d); }
   var rotDia = function (d) { var dd = Math.round((d - hoje) / 864e5); return dd === 0 ? "Hoje" : dd === 1 ? "Amanhã" : SEM[d.getDay()] + " " + ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2); };
+  var API = "https://area.sitescd.com.br/ag/" + SLUG, ocupados = [];
+  var iso = function (d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); };
+  function atualiza() { return fetch(API, { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (o) { ocupados = o.ocupados || []; }).catch(function () {}); }
   function horas() {
     esc.hora = ""; var d = esc.dia; if (!d) { box("hora").innerHTML = "<small>Escolha o dia primeiro</small>"; return; }
     var h = ABRE[d.getDay()], agora = new Date(), lista = [];
     for (var m = h[0] * 60; m <= h[1] * 60 - 30; m += 30) {
-      var t = new Date(d); t.setMinutes(m);
-      if (t - agora > 30 * 60e3) lista.push(Math.floor(m / 60) + "h" + (m % 60 ? "30" : ""));
+      var t = new Date(d), hh = Math.floor(m / 60) + "h" + (m % 60 ? "30" : ""); t.setMinutes(m);
+      if (t - agora > 30 * 60e3 && ocupados.indexOf(iso(d) + " " + hh) < 0) lista.push(hh);
     }
     if (!lista.length) { box("hora").innerHTML = "<small>Sem horário livre nesse dia, escolha outro</small>"; return; }
     chips("hora", lista);
   }
   chips("dia", dias, rotDia); horas();
+  atualiza().then(function () { if (esc.dia) horas(); });
+  var indo = false;
   document.getElementById("ag-ir").onclick = function (ev) {
-    ev.preventDefault();
+    ev.preventDefault(); if (indo) return;
     var falta = document.querySelector("#agendar .falta"), n = document.getElementById("ag-nome").value.trim();
-    var f = !esc.servico ? "o serviço" : !esc.dia ? "o dia" : !esc.hora ? "o horário" : "";
-    if (f) { falta.textContent = "Falta escolher " + f + "."; falta.hidden = false; return; }
-    falta.hidden = true;
-    var txt = "Olá! Quero agendar pelo site da " + nome + ":\n✂️ Serviço: " + esc.servico + "\n📅 Dia: " + rotDia(esc.dia) + " (" + ("0" + esc.dia.getDate()).slice(-2) + "/" + ("0" + (esc.dia.getMonth() + 1)).slice(-2) + ")\n🕐 Horário: " + esc.hora + (n ? "\n👤 Nome: " + n : "") + "\nPode confirmar?";
-    window.open("https://wa.me/" + ZAP + "?text=" + encodeURIComponent(txt), "_blank");
+    var f = !esc.servico ? "Falta escolher o serviço." : !esc.dia ? "Falta escolher o dia." : !esc.hora ? "Falta escolher o horário." : !n ? "Falta o seu nome." : "";
+    if (f) { falta.textContent = f; falta.hidden = false; return; }
+    falta.hidden = true; indo = true; var bt = this, rot = bt.textContent; bt.textContent = "Reservando...";
+    var dia = esc.dia, hora = esc.hora;
+    fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ dia: iso(dia), hora: hora, servico: esc.servico, nome: n }) })
+      .then(function (r) { return r.json().then(function (o) { return { ok: r.ok, o: o }; }); })
+      .then(function (x) {
+        indo = false; bt.textContent = rot;
+        if (!x.ok) { if (x.o.ocupados) { ocupados = x.o.ocupados; horas(); } falta.textContent = x.o.erro || "Não deu pra reservar, tenta de novo."; falta.hidden = false; return; }
+        var txt = "Olá! Agendei pelo site da " + nome + ":\n✂️ Serviço: " + esc.servico + "\n📅 Dia: " + rotDia(dia) + " (" + ("0" + dia.getDate()).slice(-2) + "/" + ("0" + (dia.getMonth() + 1)).slice(-2) + ")\n🕐 Horário: " + hora + "\n👤 Nome: " + n + "\nPode confirmar?";
+        ocupados.push(iso(dia) + " " + hora); horas();
+        falta.textContent = "✅ Horário reservado! Abrindo o WhatsApp pra confirmar..."; falta.style.color = "inherit"; falta.hidden = false;
+        location.href = "https://wa.me/" + ZAP + "?text=" + encodeURIComponent(txt);
+      })
+      .catch(function () { indo = false; bt.textContent = rot; falta.textContent = "Sem conexão agora. Tenta de novo em instantes."; falta.hidden = false; });
   };
   // botões do topo e da capa levam pro agendamento
   addEventListener("load", function () {
