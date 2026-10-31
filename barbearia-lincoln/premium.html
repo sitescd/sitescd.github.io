@@ -236,7 +236,7 @@
 </style>
 </head>
 <body>
-<script id="dados" type="application/json">{"nome":"Barbearia Lincoln","ramo":"Barbearia","cidade":"Itanhaém · SP","slogan":"Corte na régua e *risco no capricho*.","subtitulo":"Degradê, freestyle e sobrancelha na navalha, na Av. Albert Sabin, no Jardim Regina. Aberto de terça a domingo.","destaques":["Nota 4,9 no Google","Freestyle e desenhos","Aberto aos domingos"],"whatsapp":"","whatsapp_msg":"Olá, Lincoln! Vi o site e quero marcar um horário.","telefones":[{"numero":"(13) 99180-3315","whatsapp":false}],"endereco":"Av. Albert Sabin, 2205 – Jardim Regina, Itanhaém/SP","horario":["Terça a sábado: 9h às 19h","Domingo: 10h às 15h"],"instagram":"","facebook":"","produtos_chapeu":"Feito na navalha","produtos_titulo":"O que a gente faz aqui","produtos_texto":"Cada corte com acabamento limpo, do degradê ao desenho na nuca.","produtos":[{"icone":"💈","titulo":"Corte degradê","texto":"Degradê bem batido, do jeito que você pedir, com acabamento na navalha."},{"icone":"✂️","titulo":"Freestyle e riscos","texto":"Desenhos na nuca e na lateral, feitos à mão com traço firme."},{"icone":"🪒","titulo":"Sobrancelha na navalha","texto":"Sobrancelha alinhada pra fechar o visual."}],"sobre_titulo":"Atendimento que faz a gente voltar","sobre":"A Barbearia Lincoln fica na Av. Albert Sabin, no Jardim Regina. Quem passa pela cadeira fala do atendimento e do capricho: nota 4,9 no Google, com cliente dizendo que se encantou desde o primeiro contato. Aqui o forte é o degradê bem feito e o freestyle na nuca, pra adulto e pra criançada.","frase":"Corte e atendimento excelente, e preço bom","encomenda":null,"avaliacoes":null,"cores":{"escura":"#161616","media":"#1f1f22","destaque":"#d4a62a","clara":"#f4efe4"},"estilo_titulo":"","foto_capa":"maps-2.jpg","foto_capa_foco":"50% 35%","foto_capa_zoom":1.1,"foto_sobre":"maps-5.jpg","foto_sobre_foco":"50% 40%","foto_sobre_zoom":1.1,"logo":null,"galeria":[{"url":"maps-3.jpg","legenda":"Freestyle feito à mão","ilustrativa":false},{"url":"maps-6.jpg","legenda":"Acabamento do degradê","ilustrativa":false},{"url":"maps-8.jpg","legenda":"Corte pronto","ilustrativa":false},{"url":"maps-1.jpg","legenda":"Nossa bandeira na calçada da Av. Albert Sabin","ilustrativa":false}],"galeria_titulo":"Trabalhos da casa"}</script>
+<script id="dados" type="application/json">{"nome":"Barbearia Lincoln","ramo":"Barbearia","cidade":"Itanhaém · SP","slogan":"Corte na régua e *risco no capricho*.","subtitulo":"Degradê, freestyle e sobrancelha na navalha, na Av. Albert Sabin, no Jardim Regina. Aberto de terça a domingo.","destaques":["Nota 4,9 no Google","Freestyle e desenhos","Aberto aos domingos"],"whatsapp":"5513991803315","whatsapp_msg":"Olá, Lincoln! Vi o site e quero marcar um horário.","telefones":[{"numero":"(13) 99180-3315","whatsapp":true}],"endereco":"Av. Albert Sabin, 2205 – Jardim Regina, Itanhaém/SP","horario":["Terça a sábado: 9h às 19h","Domingo: 10h às 15h"],"instagram":"","facebook":"","produtos_chapeu":"Feito na navalha","produtos_titulo":"O que a gente faz aqui","produtos_texto":"Cada corte com acabamento limpo, do degradê ao desenho na nuca.","produtos":[{"icone":"💈","titulo":"Corte degradê","texto":"Degradê bem batido, do jeito que você pedir, com acabamento na navalha."},{"icone":"✂️","titulo":"Freestyle e riscos","texto":"Desenhos na nuca e na lateral, feitos à mão com traço firme."},{"icone":"🪒","titulo":"Sobrancelha na navalha","texto":"Sobrancelha alinhada pra fechar o visual."}],"sobre_titulo":"Atendimento que faz a gente voltar","sobre":"A Barbearia Lincoln fica na Av. Albert Sabin, no Jardim Regina. Quem passa pela cadeira fala do atendimento e do capricho: nota 4,9 no Google, com cliente dizendo que se encantou desde o primeiro contato. Aqui o forte é o degradê bem feito e o freestyle na nuca, pra adulto e pra criançada.","frase":"Corte e atendimento excelente, e preço bom","encomenda":null,"avaliacoes":null,"cores":{"escura":"#161616","media":"#1f1f22","destaque":"#d4a62a","clara":"#f4efe4"},"estilo_titulo":"","foto_capa":"maps-2.jpg","foto_capa_foco":"50% 35%","foto_capa_zoom":1.1,"foto_sobre":"maps-5.jpg","foto_sobre_foco":"50% 40%","foto_sobre_zoom":1.1,"logo":null,"galeria":[{"url":"maps-3.jpg","legenda":"Freestyle feito à mão","ilustrativa":false},{"url":"maps-6.jpg","legenda":"Acabamento do degradê","ilustrativa":false},{"url":"maps-8.jpg","legenda":"Corte pronto","ilustrativa":false},{"url":"maps-1.jpg","legenda":"Nossa bandeira na calçada da Av. Albert Sabin","ilustrativa":false}],"galeria_titulo":"Trabalhos da casa"}</script>
 
 <header class="topo"><div class="caixa">
   <a class="marca" href="#inicio"></a>
@@ -284,6 +284,81 @@
   <div class="tela rv"><div class="chat"><div class="cab"><span class="av"></span><div><b></b><small>online</small></div></div><div class="msgs"></div></div><p class="leg">Ilustração de como funciona o pedido</p></div>
 </div></section>
 
+
+<style>
+  #agendar .ag { max-width: 560px; margin: 0 auto; display: grid; gap: 18px; }
+  #agendar .ag label { display: block; font-weight: 600; margin: 0 0 8px; }
+  #agendar .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  #agendar .chips button { font: inherit; padding: 10px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); background: transparent; color: inherit; cursor: pointer; }
+  #agendar .chips button.on { background: var(--ac-forte, #d4a62a); border-color: var(--ac-forte, #d4a62a); color: var(--sobre-ac, #111); font-weight: 600; }
+  #agendar input { font: inherit; width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 25%, transparent); background: transparent; color: inherit; }
+  #agendar .ag .bt { width: 100%; }
+  #agendar .ag .aviso { font-size: .9rem; opacity: .75; text-align: center; margin: 0; }
+  #agendar .ag .falta { color: #c0392b; font-size: .9rem; text-align: center; margin: 0; }
+</style>
+<section class="branco" id="agendar"><div class="caixa">
+  <div class="cabeca rv"><span class="eti">Agendamento</span><h2>Agende seu <em>horário</em></h2><p>Escolha o serviço, o dia e o horário. O pedido chega pronto no nosso WhatsApp e a gente confirma.</p></div>
+  <div class="ag">
+    <div><label>Serviço</label><div class="chips" data-q="servico"></div></div>
+    <div><label>Dia</label><div class="chips" data-q="dia"></div></div>
+    <div><label>Horário</label><div class="chips" data-q="hora"></div></div>
+    <div><label for="ag-nome">Seu nome</label><input id="ag-nome" autocomplete="given-name" placeholder="Como podemos te chamar?"></div>
+    <p class="falta" hidden></p>
+    <a class="bt bt-ac bt-zap" href="#" id="ag-ir">Agendar pelo WhatsApp</a>
+    <p class="aviso">O horário fica confirmado quando a barbearia responder.</p>
+  </div>
+</div></section>
+<script>
+(function () {
+  var ZAP = "5513991803315", D = {};
+  try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
+  var nome = D.nome || "Barbearia Lincoln";
+  // terça a sábado 9h-19h, domingo 10h-15h, segunda fechado (horário do Google)
+  var ABRE = { 0: [10, 15], 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 19], 6: [9, 19] };
+  var SEM = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  var esc = { servico: "", dia: null, hora: "" };
+  var box = function (q) { return document.querySelector('#agendar .chips[data-q="' + q + '"]'); };
+  function chips(q, itens, rot) {
+    var b = box(q); b.innerHTML = "";
+    itens.forEach(function (v) {
+      var x = document.createElement("button"); x.type = "button"; x.textContent = rot ? rot(v) : v;
+      x.onclick = function () { esc[q] = v; [].forEach.call(b.children, function (c) { c.classList.remove("on"); }); x.classList.add("on"); if (q === "dia") horas(); };
+      b.appendChild(x);
+    });
+  }
+  var servs = (D.produtos || []).map(function (p) { return p.titulo; }).filter(Boolean);
+  chips("servico", servs.concat(["Outro"]));
+  var dias = [], hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  for (var i = 0; dias.length < 8 && i < 14; i++) { var d = new Date(hoje); d.setDate(d.getDate() + i); if (ABRE[d.getDay()]) dias.push(d); }
+  var rotDia = function (d) { var dd = Math.round((d - hoje) / 864e5); return dd === 0 ? "Hoje" : dd === 1 ? "Amanhã" : SEM[d.getDay()] + " " + ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2); };
+  function horas() {
+    esc.hora = ""; var d = esc.dia; if (!d) { box("hora").innerHTML = "<small>Escolha o dia primeiro</small>"; return; }
+    var h = ABRE[d.getDay()], agora = new Date(), lista = [];
+    for (var m = h[0] * 60; m <= h[1] * 60 - 30; m += 30) {
+      var t = new Date(d); t.setMinutes(m);
+      if (t - agora > 30 * 60e3) lista.push(Math.floor(m / 60) + "h" + (m % 60 ? "30" : ""));
+    }
+    if (!lista.length) { box("hora").innerHTML = "<small>Sem horário livre nesse dia, escolha outro</small>"; return; }
+    chips("hora", lista);
+  }
+  chips("dia", dias, rotDia); horas();
+  document.getElementById("ag-ir").onclick = function (ev) {
+    ev.preventDefault();
+    var falta = document.querySelector("#agendar .falta"), n = document.getElementById("ag-nome").value.trim();
+    var f = !esc.servico ? "o serviço" : !esc.dia ? "o dia" : !esc.hora ? "o horário" : "";
+    if (f) { falta.textContent = "Falta escolher " + f + "."; falta.hidden = false; return; }
+    falta.hidden = true;
+    var txt = "Olá! Quero agendar pelo site da " + nome + ":\n✂️ Serviço: " + esc.servico + "\n📅 Dia: " + rotDia(esc.dia) + " (" + ("0" + esc.dia.getDate()).slice(-2) + "/" + ("0" + (esc.dia.getMonth() + 1)).slice(-2) + ")\n🕐 Horário: " + esc.hora + (n ? "\n👤 Nome: " + n : "") + "\nPode confirmar?";
+    window.open("https://wa.me/" + ZAP + "?text=" + encodeURIComponent(txt), "_blank");
+  };
+  // botões do topo e da capa levam pro agendamento
+  addEventListener("load", function () {
+    var mini = document.querySelector(".zap-mini"); if (mini) { mini.hidden = false; mini.href = "#agendar"; mini.removeAttribute("target"); var s = mini.querySelector("span"); if (s) s.textContent = "Agendar"; }
+    var ac = document.querySelector(".acoes");
+    if (ac && !document.getElementById("ag-capa")) { var a = document.createElement("a"); a.id = "ag-capa"; a.className = "bt bt-ac bt-zap"; a.href = "#agendar"; a.textContent = "📅 Agendar horário"; ac.insertBefore(a, ac.firstChild); }
+  });
+})();
+</script>
 <section class="branco" id="avaliacoes" hidden><div class="caixa">
   <div class="cabeca rv"><span class="eti">Quem já foi recomenda</span><h2>O que dizem no <em>Google</em></h2></div>
   <div class="nota rv"></div>
