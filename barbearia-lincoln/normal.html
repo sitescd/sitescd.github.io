@@ -348,7 +348,7 @@
 html.scd-ed [data-scd-t]{outline:1.5px dashed var(--scd-a,#2fd1b4);outline-offset:4px;border-radius:4px;cursor:text}
 html.scd-ed [data-scd-t]:focus{outline:2px solid var(--scd-a,#2fd1b4)}
 html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:-6px;cursor:pointer}
-.scd-ed-bar{position:fixed;z-index:2147483620;left:50%;top:10px;transform:translate(-50%,-140%);transition:transform .35s;width:calc(100% - 20px);max-width:520px;border-radius:18px;padding:10px 10px 10px 14px;display:flex;align-items:center;gap:8px}
+.scd-ed-bar{position:fixed;z-index:2147483620;left:50%;bottom:calc(10px + env(safe-area-inset-bottom));transform:translate(-50%,140%);transition:transform .35s;width:calc(100% - 20px);max-width:520px;border-radius:18px;padding:10px 10px 10px 14px;display:flex;align-items:center;gap:8px}
 .scd-ed-bar.on{transform:translate(-50%,0)}
 .scd-ed-bar span{flex:1;font-size:13px;line-height:1.3;color:var(--gs)}.scd-ed-bar span b{color:var(--gt)}
 .scd-ed-bar button{flex:none;padding:9px 12px;font-size:13.5px}
@@ -368,6 +368,14 @@ html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:
 .scd-p span{font-size:11.5px;font-weight:600;color:var(--a);margin-top:3px}
 .scd-mais{position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-style:normal;font-size:9.5px;font-weight:700;white-space:nowrap;padding:2px 7px;border-radius:999px;background:var(--a);color:var(--at)}
 .scd-bar .scd-quero{width:100%;text-align:center;font-size:15.5px}
+.scd-dock{position:fixed;z-index:2147483400;left:10px;right:84px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:6px;pointer-events:none}
+.scd-dock>*{pointer-events:auto;flex:0 1 auto;border:0;border-radius:999px;background:rgba(18,20,22,.88);color:#fff;font-size:13.5px;font-weight:600;line-height:1.2;padding:12px 12px;white-space:nowrap;text-decoration:none;cursor:pointer;box-shadow:0 8px 24px -6px rgba(0,0,0,.45)}
+.scd-dock .scd-dp{background:var(--a);color:var(--at)}
+html.scd-ed .scd-dock,.scd-dock.off{display:none}
+html.scd-ed .marca{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:4px;border-radius:6px}
+.scd-dock i{font-style:normal}
+@media (max-width:420px){.scd-dock{gap:4px;left:6px;right:78px}.scd-dock>*{font-size:12px;padding:11px 8px}}
+@media (max-width:340px){.scd-dock i{display:none}.scd-dock>*{padding:11px 10px}}
 .scd-fo{position:fixed;inset:0;z-index:2147483640;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;opacity:0;transition:opacity .25s}
 .scd-fo.on{opacity:1}
 .scd-cx{width:100%;max-width:520px;border-radius:22px 22px 0 0;border-width:1px 1px 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(30px);transition:transform .25s}
@@ -385,7 +393,7 @@ html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:
 <script>
 (function(){
 if (window.self !== window.top) return;   // miniatura da página "escolha a sua versão": sem balões
-var C={"ramo":"barbearia","wa":"https://area.sitescd.com.br/c/barbearia-lincoln/assinar?p=normal","barra":"\u003cdiv class=\"scd-bw\">\u003cb class=\"scd-tt\">Seu site no ar por \u003cspan class=\"scd-big\">R$ 9,90\u003c/span>\u003c/b>\u003csmall>no 1º mês · sem fidelidade · cancela quando quiser\u003c/small>\u003cdiv class=\"scd-pl\">\u003ca class=\"scd-p sel\" href=\"normal.html\">\u003cb>Simples\u003c/b>\u003cem>R$ 29,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">sitescd.com.br/barbearia-lincoln\u003c/small>\u003cspan>✓ Você está vendo\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"./\">\u003ci class=\"scd-mais\">mais escolhido\u003c/i>\u003cb>Profissional\u003c/b>\u003cem>R$ 39,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">barbearialincoln.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"super.html\">\u003cb>Completo\u003c/b>\u003cem>R$ 49,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">barbearialincoln.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003c/div>\u003ca class=\"scd-ok scd-quero\" href=\"https://area.sitescd.com.br/c/barbearia-lincoln/assinar?p=normal\">Quero o Simples por R$ 9,90\u003c/a>\u003csmall>📲 Ativou, recebe tudo no WhatsApp: senha pra editar, manual e plaquinha com QR Code\u003c/small>\u003c/div>"}, fechado={}, ed=false, tema=null;
+var C={"ramo":"barbearia","wa":"https://area.sitescd.com.br/c/barbearia-lincoln/assinar?p=normal","modelos":true,"chip":"https://wa.me/5513997225693?text=Oi!%20Vi%20a%20amostra%20do%20site%20da%20Barbearia%20Lincoln%20e%20queria%20falar%20com%20voc%C3%AAs.","barra":"\u003cdiv class=\"scd-bw\">\u003cb class=\"scd-tt\">Seu site no ar por \u003cspan class=\"scd-big\">R$ 9,90\u003c/span>\u003c/b>\u003csmall>no 1º mês · sem fidelidade · cancela quando quiser\u003c/small>\u003cdiv class=\"scd-pl\">\u003ca class=\"scd-p sel\" href=\"normal.html\">\u003cb>Simples\u003c/b>\u003cem>R$ 29,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">sitescd.com.br/barbearia-lincoln\u003c/small>\u003cspan>✓ Você está vendo\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"./\">\u003ci class=\"scd-mais\">mais escolhido\u003c/i>\u003cb>Profissional\u003c/b>\u003cem>R$ 39,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">barbearialincoln.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003ca class=\"scd-p\" href=\"super.html\">\u003cb>Completo\u003c/b>\u003cem>R$ 49,90\u003csmall>/mês\u003c/small>\u003c/em>\u003csmall class=\"scd-end\">barbearialincoln.com.br\u003c/small>\u003cspan>Ver este ›\u003c/span>\u003c/a>\u003c/div>\u003ca class=\"scd-ok scd-quero\" href=\"https://area.sitescd.com.br/c/barbearia-lincoln/assinar?p=normal\">Quero o Simples por R$ 9,90\u003c/a>\u003csmall>📲 Ativou, recebe tudo no WhatsApp: senha pra editar, manual e plaquinha com QR Code\u003c/small>\u003c/div>"}, fechado={}, ed=false, tema=null;
 var FONTES=[["Poppins","moderna"],["Montserrat","forte"],["Playfair Display","elegante"],["Bebas Neue","impacto"],["Oswald","esportiva"],["Lora","clássica"],["DM Serif Display","sofisticada"],["Archivo Black","marcante"],["Raleway","leve"],["Pacifico","descontraída"]];
 try{fechado=JSON.parse(sessionStorage.getItem("scd-v")||"{}")}catch(e){}
 function guarda(k){fechado[k]=1;try{sessionStorage.setItem("scd-v",JSON.stringify(fechado))}catch(e){}}
@@ -428,7 +436,7 @@ function toast(t){var x=vidro("div","scd-toast",t);requestAnimationFrame(functio
 var edBar=null;
 function ligarEd(){
   if(ed)return;ed=true;document.documentElement.classList.add("scd-ed");marcar();
-  edBar=vidro("div","scd-ed-bar","<span><b>✏️ Modo teste.</b> Toque num texto e escreva por cima. Toque numa foto pra trocar.</span><button class='scd-no' data-a='fonte'>Aa Fonte</button><button class='scd-ok' data-a='pronto'>Pronto</button>");
+  edBar=vidro("div","scd-ed-bar","<span><b>✏️ Modo teste.</b> Toque num texto, numa foto ou no nome lá em cima pra trocar.</span><button class='scd-no' data-a='fonte'>Aa Fonte</button><button class='scd-ok' data-a='pronto'>Pronto</button>");
   requestAnimationFrame(function(){edBar.classList.add("on")});
   edBar.onclick=function(v){var a=v.target.closest("[data-a]");if(!a)return;if(a.dataset.a==="fonte")escolherFonte();else desligarEd()};
 }
@@ -445,6 +453,14 @@ function editarFoto(e){
     toast("Foto trocada! 📸 É só um teste, nada foi salvo")};
   i.click();
 }
+function trocarLogo(m){
+  var i=el("input");i.type="file";i.accept="image/*";i.style.display="none";document.body.appendChild(i);
+  i.onchange=function(){var f=i.files&&i.files[0];i.remove();if(!f)return;var u=URL.createObjectURL(f),av=m.querySelector("#av");
+    if(av){av.innerHTML="<img src='"+u+"' alt='' style='width:100%;height:100%;object-fit:contain'>";av.style.background="#fff"}
+    else m.innerHTML="<img src='"+u+"' alt='' style='display:block;height:44px;max-width:180px;object-fit:contain'>";
+    toast("Sua logo no lugar! 🎉 É só um teste, nada foi salvo")};
+  i.click();
+}
 var fonteAtual="";
 function escolherFonte(){
   if(!document.getElementById("scd-gf")){var l=el("link");l.id="scd-gf";l.rel="stylesheet";
@@ -457,6 +473,8 @@ function escolherFonte(){
   function sai(){fo.classList.remove("on");setTimeout(function(){fo.remove()},250)}ok.onclick=sai;fo.onclick=function(v){if(v.target===fo)sai()};
 }
 document.addEventListener("click",function(v){
+  var mc=ed&&!ui(v.target)&&v.target.closest&&v.target.closest(".marca");
+  if(mc){v.preventDefault();v.stopPropagation();trocarLogo(mc);return}
   if(ui(v.target)||v.target.closest("a,button"))return;
   var t=v.target.closest&&v.target.closest("[data-scd-t]"),f=v.target.closest&&v.target.closest("[data-scd-f]");
   if(!ed&&t&&fechado.bal){ligarEd();t.focus();return}
@@ -487,22 +505,34 @@ function balao(){
   setTimeout(function(){addEventListener("scroll",some,{passive:true})},800);
 }
 var bar=null;
+var barFechada=false,rolado=0,yAnt=scrollY,dock=null;
 function barra(){
-  if(bar||fechado.bar)return;
+  if(bar||barFechada)return;if(dock)dock.classList.add("off");
   bar=vidro("div","scd-bar",C.barra+"<button class='scd-x' aria-label='Fechar'>×</button>");
   requestAnimationFrame(function(){bar.classList.add("on")});
-  bar.querySelector(".scd-x").onclick=function(){guarda("bar");bar.classList.remove("on");var b=bar;bar=null;setTimeout(function(){b.remove()},500)};
+  bar.querySelector(".scd-x").onclick=function(){barFechada=true;rolado=0;if(dock)dock.classList.remove("off");bar.classList.remove("on");var b=bar;bar=null;setTimeout(function(){b.remove()},500)};
 }
 // ritmo (Caio: "se for direto na cara ele nem vê"): balão quando chega perto do MEIO e para de rolar por um instante;
 // a barra do preço só perto do FIM
 var parou=0;
 function rolou(){var y=scrollY,tot=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=y/tot;clearTimeout(parou);
+  if(barFechada){rolado+=Math.min(Math.abs(y-yAnt),innerHeight);if(rolado>=innerHeight*2.5){barFechada=false;barra()}}
+  yAnt=y;
   if(p>.3&&y>innerHeight*.8)parou=setTimeout(balao,1200);if(p>.75)barra()}
 addEventListener("scroll",rolou,{passive:true});
 addEventListener("load",function(){setTimeout(marcar,800)});
+function nossoZap(){var z=document.querySelector(".zap-fixo,#zapfixo");if(!z||!C.chip)return;
+  z.href=C.chip;z.target="_blank";z.hidden=false;z.setAttribute("aria-label","Falar com a Sites CD no WhatsApp");
+  if(!z.innerHTML.trim())z.innerHTML="<span style='font-size:28px;line-height:1'>💬</span>"}
+function botoes(){
+  var d=pinta(el("div","scd-v scd-dock off",(C.modelos?"<a href='modelos.html'><i>🎨 </i>Modelos</a>":"")+"<button class='scd-dp' data-a='planos'><i>💰 </i>Planos</button><button data-a='testar'><i>✏️ </i>Testar</button>"));
+  document.body.appendChild(d);dock=d;
+  d.onclick=function(v){var a=v.target.closest("[data-a]");if(!a)return;
+    if(a.dataset.a==="planos"){barFechada=false;barra()}
+    else{if(bal)bal.querySelector(".scd-x").click();guarda("bal");ligarEd()}};
+}
+nossoZap();botoes();addEventListener("load",nossoZap);
 })();
 </script>
-<a href="modelos.html" id="scd-om" style="position:fixed;z-index:2147483400;left:16px;bottom:calc(18px + env(safe-area-inset-bottom));background:rgba(18,20,22,.84);color:#fff;font:600 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:normal;text-transform:none;padding:12px 20px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px -6px rgba(0,0,0,.45);white-space:nowrap;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">🎨 Ver os outros modelos</a>
-<script>if(window.top!==window)document.getElementById("scd-om").remove()</script>
 </body>
 </html>
