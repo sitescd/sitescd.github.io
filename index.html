@@ -352,6 +352,56 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
   .dm-passos li::before{width:24px;height:24px;font-size:12px}
   .dm-bts i{font-size:8.5px;padding:5px 5px}
 }
+/* 03/11 (Caio: "tangibilizar o agendamento"): bolha de horário marcado na abertura + bloco da agenda */
+.b-agenda{left:-56px;top:34px}.b-agenda .av{background:var(--sol);color:#2b1d00}
+.agenda{background:var(--noite);color:#e8f1ee;position:relative;overflow:hidden}
+.agenda::before{content:"";position:absolute;width:760px;height:760px;left:-300px;bottom:-380px;border-radius:50%;background:radial-gradient(circle,rgba(47,209,180,.2),transparent 62%);pointer-events:none}
+.agenda .box{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.agenda .titulo p{color:#a6b9b4}
+.agenda h2 em{font-style:normal;color:var(--verde-vivo)}
+.agenda .ganho .ic{background:var(--noite3);color:var(--verde-vivo)}
+.agenda .ganho p{color:#a6b9b4}
+.agenda .so{display:inline-block;margin-top:30px;font-weight:700;font-size:14.5px;background:var(--sol);color:#2b1d00;border-radius:999px;padding:7px 14px}
+.ag-palco{position:relative;display:grid;place-items:center;padding:10px 0 40px}
+.ag-cel{position:relative;width:310px;background:#fff;color:var(--tinta);border-radius:30px;padding:22px 20px 20px;box-shadow:0 50px 90px -40px rgba(0,0,0,.8)}
+.ag-cel header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.ag-cel header b{font:800 19px "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
+.ag-cel header small{font-size:11.5px;color:var(--tinta2)}
+.ag-rot{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7c8784;margin:14px 0 8px}
+.ag-op{display:flex;flex-wrap:wrap;gap:6px}
+.ag-op i{font-style:normal;font-size:13px;font-weight:700;border-radius:12px;padding:8px 11px;background:#f1efe9;color:var(--tinta2);transition:background .35s,color .35s,transform .35s var(--ease)}
+.ag-op i small{display:block;font-size:10px;font-weight:600;opacity:.7;text-transform:uppercase}
+.ag-dias i{text-align:center;min-width:52px}
+.ag-op i.ocup{text-decoration:line-through;opacity:.45}
+.ag-op i.sel{background:var(--verde);color:#fff;transform:scale(1.06)}
+.ag-bt{display:block;margin-top:18px;text-align:center;border-radius:999px;padding:13px;font-weight:800;font-size:15px;background:#e3e1da;color:#8a8f8d;transition:background .35s,color .35s}
+.ag-cel.pronto .ag-bt{background:var(--zap);color:#fff}
+.ag-ok{position:absolute;inset:0;border-radius:inherit;background:#fff;display:grid;place-content:center;justify-items:center;text-align:center;gap:6px;padding:20px;opacity:0;transition:opacity .5s var(--ease)}
+.ag-ok .v{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#ddf1ec;color:var(--verde);transform:scale(.6);transition:transform .6s var(--ease)}
+.ag-ok .v svg{width:34px;height:34px}
+.ag-ok b{font:800 22px "Bricolage Grotesque",sans-serif;margin-top:8px}
+.ag-ok small{color:var(--tinta2);font-size:14px}
+.ag-ok .zapinho{margin-top:10px;display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:700;color:var(--zap)}
+.ag-ok .zapinho svg{width:18px;height:18px}
+.ag-cel.feito .ag-ok{opacity:1}
+.ag-cel.feito .ag-ok .v{transform:none}
+.ag-dedo{position:absolute;left:0;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(14,26,23,.28);box-shadow:0 0 0 3px rgba(255,255,255,.85);opacity:0;pointer-events:none;transition:transform .7s var(--ease),opacity .3s}
+.ag-dedo.on{opacity:1}
+.ag-dedo.toca{animation:toque .35s}
+@keyframes toque{50%{scale:.75}}
+.ag-dono{position:absolute;right:-26px;bottom:0;z-index:2;max-width:250px;background:var(--noite2);color:#e8f1ee;border-radius:18px;padding:12px 14px;box-shadow:0 18px 40px -16px rgba(0,0,0,.7),inset 0 0 0 1px var(--noite3);display:flex;gap:10px;align-items:center;font-size:13px;line-height:1.3;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.ag-dono.on{opacity:1;transform:none}
+.ag-dono .av{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--verde-vivo);color:var(--noite)}
+.ag-dono b{display:block}
+.ag-dono small{color:#a6b9b4}
+@media (max-width:920px){
+  .agenda .box{grid-template-columns:1fr;gap:44px}
+  .ag-dono{right:auto;left:0}
+}
+@media (max-width:420px){
+  .ag-cel{width:100%;max-width:310px}
+  .b-agenda{left:0;top:10px}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .entra,.revela,.res,.bolha{opacity:1;transform:none}
@@ -373,7 +423,8 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
   <symbol id="lapis" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/></symbol>
   <symbol id="qr" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></g></symbol>
   <symbol id="grafico" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
-  <symbol id="olho" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+  <symbol id="calendario" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17M9 15l2 2 4-4"/></g></symbol>
+  <symbol id="olho"viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></g></symbol>
   <symbol id="g" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.3Z"/><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 14c-.2-.6-.3-1.3-.3-2s.1-1.4.3-2V7.4H3.1a10 10 0 0 0 0 9.2L6.4 14Z"/><path fill="#EA4335" d="M12 5.9c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.4L6.4 10c.8-2.3 3-4.1 5.6-4.1Z"/></symbol>
 </svg>
 
@@ -381,7 +432,7 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
   <div class="box">
     <a class="marca" href="#"><img src="/marca/icone-192.png" alt="" width="34" height="34">Sites <b>CD</b></a>
     <nav>
-      <a href="#como">Como funciona</a><a href="#ramos">Exemplos</a><a href="#planos">Preços</a><a href="#perguntas">Dúvidas</a>
+      <a href="#como">Como funciona</a><a href="#ramos">Exemplos</a><a href="#agenda">Agendamento</a><a href="#planos">Preços</a><a href="#perguntas">Dúvidas</a>
       <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Vi%20o%20site%20da%20Sites%20CD%20e%20quero%20saber%20mais." target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>WhatsApp</a>
     </nav>
   </div>
@@ -439,8 +490,9 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
         <span><svg><use href="#ok"/></svg>Só precisa mandar um link</span>
       </div>
     </div>
-    <div class="palco entra" style="animation-delay:.2s" role="img" aria-label="Exemplos de sites no celular trocando sozinhos: restaurante, salão, pet shop, oficina, clínica, loja, academia e padaria">
+    <div class="palco entra" style="animation-delay:.2s" role="img" aria-label="Exemplos de sites no celular trocando sozinhos: barbearia, restaurante, salão, pet shop, oficina, clínica, loja, academia e padaria">
       <div class="cel"><div class="ilha"></div><div class="tela" id="tela1"></div></div>
+      <div class="bolha b-agenda" id="ba"><span class="av"><svg class="i"><use href="#calendario"/></svg></span><span><b>Horário marcado</b><small id="bat">Corte + barba · sáb 10h</small></span></div>
       <div class="bolha b-zap" id="bz"><span class="av"><svg class="i"><use href="#zap"/></svg></span><span><b>Nova mensagem</b><small id="bzt">Vocês abrem sábado?</small></span></div>
       <div class="bolha b-google" id="bg"><span class="av"><svg class="i"><use href="#g"/></svg></span><span><b id="bgt">★ 4,9 no Google</b><small>aparece no site</small></span></div>
       <div class="bolha b-visita" id="bv"><span class="av"><svg class="i" style="color:#fff"><use href="#olho"/></svg></span><span><b>+1 visita agora</b><small>veio do Google</small></span></div>
@@ -538,6 +590,7 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
         <span class="pri">1º mês R$ 9,90</span>
         <ul>
           <li><svg><use href="#ok"/></svg>Tudo do Simples, com visual mais caprichado</li>
+          <li><svg><use href="#ok"/></svg>Cliente marca horário direto pelo site</li>
           <li><svg><use href="#ok"/></svg>Endereço próprio .com.br com o nome do seu negócio</li>
           <li><svg><use href="#ok"/></svg>Registrado no seu CPF ou CNPJ: o endereço é seu</li>
           <li><svg><use href="#ok"/></svg>Sem a marca da Sites CD no rodapé</li>
@@ -586,6 +639,39 @@ footer a{color:#e8f1ee;text-underline-offset:3px}
   </div>
 </section>
 
+<!-- 03/11 (Caio): agendamento pelo site, mostrado funcionando. Só promete o que a agenda faz (agenda.js): sem aviso automático no WhatsApp do dono -->
+<section class="agenda" id="agenda" aria-labelledby="t9">
+  <div class="box">
+    <div class="revela">
+      <div class="titulo" style="margin-bottom:38px">
+        <h2 id="t9">O cliente marca o horário <em>sozinho, pelo site.</em></h2>
+        <p>Sem ficar trocando mensagem pra achar um horário. Ele escolhe o serviço, o dia e a hora livre, e pronto.</p>
+      </div>
+      <div class="ganhos">
+        <div class="ganho"><span class="ic"><svg class="i"><use href="#calendario"/></svg></span><div><h3>Só aparece horário livre</h3><p>Cada serviço com o seu tempo. Quando um horário é marcado, ele some pros outros clientes.</p></div></div>
+        <div class="ganho"><span class="ic"><svg class="i"><use href="#olho"/></svg></span><div><h3>Você vê a agenda no celular</h3><p>Todos os horários marcados numa tela só. Você muda serviços, tempos e dias de atendimento quando quiser.</p></div></div>
+        <div class="ganho"><span class="ic"><svg class="i"><use href="#lapis"/></svg></span><div><h3>Liga e desliga num toque</h3><p>Semana corrida ou férias? Desliga a agenda e o site volta a mostrar só o WhatsApp.</p></div></div>
+      </div>
+      <span class="so">Nos planos Profissional e Completo</span>
+    </div>
+    <div class="ag-palco revela" role="img" aria-label="Exemplo de cliente marcando horário pelo site: escolhe o serviço, o dia e a hora, e o horário aparece na agenda do dono">
+      <div class="ag-cel" id="agCel" aria-hidden="true">
+        <header><b>Agendar horário</b><small>exemplo</small></header>
+        <p class="ag-rot">Serviço</p>
+        <div class="ag-op" data-passo="0"><i>Corte</i><i data-alvo>Corte + barba</i><i>Barba</i></div>
+        <p class="ag-rot">Dia</p>
+        <div class="ag-op ag-dias" data-passo="1"><i><small>qui</small>06</i><i><small>sex</small>07</i><i data-alvo><small>sáb</small>08</i><i><small>seg</small>10</i></div>
+        <p class="ag-rot">Horário livre</p>
+        <div class="ag-op" data-passo="2"><i class="ocup">09:00</i><i>09:40</i><i data-alvo>10:20</i><i class="ocup">11:00</i><i>14:00</i><i>14:40</i></div>
+        <span class="ag-bt" id="agBt">Confirmar horário</span>
+        <div class="ag-ok"><span class="v"><svg><use href="#ok"/></svg></span><b>Horário marcado!</b><small>Sáb 08 · 10:20 · Corte + barba</small><span class="zapinho"><svg><use href="#zap"/></svg>Avisar a barbearia no WhatsApp</span></div>
+        <i class="ag-dedo" id="agDedo"></i>
+      </div>
+      <div class="ag-dono" id="agDono" aria-hidden="true"><span class="av"><svg class="i"><use href="#calendario"/></svg></span><span><b>Na sua agenda</b><small>Sáb 10:20 · Corte + barba</small></span></div>
+    </div>
+  </div>
+</section>
+
 <section id="perguntas" style="background:var(--papel)" aria-labelledby="t7">
   <div class="box">
     <div class="titulo centro revela"><h2 id="t7">Perguntas que todo mundo faz</h2></div>
@@ -627,14 +713,16 @@ const ICONES = {
   halter:'<path d="M3 10v4M6 8v8M18 8v8M21 10v4M6 12h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   pao:'<path d="M4 13c0-4 3.6-7 8-7s8 3 8 7v5H4v-5ZM9 9.5l-1 3M13 9l-1 3.5M17 10l-1 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
 };
+// ag = bolha "Horário marcado" (03/11): só nos ramos que trabalham com hora marcada
 const SITES = [
+  { aba:"Barbearia", sig:"VB", ramo:"Barbearia", tit:"Corte na régua, <em>barba no capricho.</em>", txt:"Corte, barba e sobrancelha. Marque seu horário pelo site e chegue na sua vez.", b1:"Agendar horário", b2:"Ver preços", fundo:"#14110f", tinta:"#f3ece4", ac:"#d9a35b", foto:"linear-gradient(160deg,#4a3526,#1c1410)", ic:"tesoura", zap:"Tem horário hoje?", nota:"4,9", ag:"Corte + barba · sáb 10h" },
   { aba:"Restaurante", sig:"CP", ramo:"Restaurante · Comida caseira", tit:"Comida de vó, <em>todo dia.</em>", txt:"Almoço executivo, massas da casa e sobremesa inclusa. Delivery no bairro.", b1:"Pedir pelo WhatsApp", b2:"Ver cardápio", fundo:"#1b120d", tinta:"#f6ece0", ac:"#ff8a3d", foto:"linear-gradient(160deg,#5a2d15,#2a140a)", ic:"prato", zap:"Tem mesa pra 6 hoje?", nota:"4,8" },
-  { aba:"Salão de beleza", sig:"BF", ramo:"Salão de beleza", tit:"Seu cabelo do jeito <em>que você sonhou.</em>", txt:"Corte, coloração, escova e manicure com hora marcada.", b1:"Agendar horário", b2:"Ver serviços", fundo:"#fbf1f1", tinta:"#3a1f26", ac:"#c2456b", foto:"linear-gradient(160deg,#f2c9d3,#d9879e)", ic:"tesoura", zap:"Tem horário sexta à tarde?", nota:"4,9" },
-  { aba:"Pet shop", sig:"AP", ramo:"Pet shop · Banho e tosa", tit:"Banho e tosa com <em>carinho.</em>", txt:"Busca e entrega, ração e acessórios. Seu pet volta cheiroso.", b1:"Agendar banho", b2:"Como chegar", fundo:"#eef7f3", tinta:"#13322a", ac:"#14a37f", foto:"linear-gradient(160deg,#bfe8da,#7cc9b1)", ic:"pata", zap:"Vocês buscam em casa?", nota:"4,9" },
-  { aba:"Oficina", sig:"AS", ramo:"Oficina mecânica", tit:"Seu carro na mão <em>de quem entende.</em>", txt:"Revisão, freio, suspensão e injeção. Orçamento sem compromisso.", b1:"Pedir orçamento", b2:"Ligar agora", fundo:"#111418", tinta:"#eef1f4", ac:"#ffc020", foto:"linear-gradient(160deg,#2b3340,#14181e)", ic:"chave", zap:"Faz alinhamento hoje?", nota:"4,7" },
-  { aba:"Clínica", sig:"SL", ramo:"Clínica odontológica", tit:"Cuidar do sorriso <em>sem medo.</em>", txt:"Limpeza, clareamento e implante. Atendimento humanizado.", b1:"Marcar avaliação", b2:"Convênios", fundo:"#f2f7fd", tinta:"#14273d", ac:"#2f7bd8", foto:"linear-gradient(160deg,#cfe2f8,#8db7ea)", ic:"dente", zap:"Aceitam convênio?", nota:"5,0" },
+  { aba:"Salão de beleza", sig:"BF", ramo:"Salão de beleza", tit:"Seu cabelo do jeito <em>que você sonhou.</em>", txt:"Corte, coloração, escova e manicure com hora marcada.", b1:"Agendar horário", b2:"Ver serviços", fundo:"#fbf1f1", tinta:"#3a1f26", ac:"#c2456b", foto:"linear-gradient(160deg,#f2c9d3,#d9879e)", ic:"tesoura", zap:"Tem horário sexta à tarde?", nota:"4,9", ag:"Escova · sex 15h" },
+  { aba:"Pet shop", sig:"AP", ramo:"Pet shop · Banho e tosa", tit:"Banho e tosa com <em>carinho.</em>", txt:"Busca e entrega, ração e acessórios. Seu pet volta cheiroso.", b1:"Agendar banho", b2:"Como chegar", fundo:"#eef7f3", tinta:"#13322a", ac:"#14a37f", foto:"linear-gradient(160deg,#bfe8da,#7cc9b1)", ic:"pata", zap:"Vocês buscam em casa?", nota:"4,9", ag:"Banho e tosa · sáb 9h" },
+  { aba:"Oficina", sig:"AS", ramo:"Oficina mecânica", tit:"Seu carro na mão <em>de quem entende.</em>", txt:"Revisão, freio, suspensão e injeção. Orçamento sem compromisso.", b1:"Pedir orçamento", b2:"Ligar agora", fundo:"#111418", tinta:"#eef1f4", ac:"#ffc020", foto:"linear-gradient(160deg,#2b3340,#14181e)", ic:"chave", zap:"Faz alinhamento hoje?", nota:"4,7", ag:"Revisão · qua 8h" },
+  { aba:"Clínica", sig:"SL", ramo:"Clínica odontológica", tit:"Cuidar do sorriso <em>sem medo.</em>", txt:"Limpeza, clareamento e implante. Atendimento humanizado.", b1:"Marcar avaliação", b2:"Convênios", fundo:"#f2f7fd", tinta:"#14273d", ac:"#2f7bd8", foto:"linear-gradient(160deg,#cfe2f8,#8db7ea)", ic:"dente", zap:"Aceitam convênio?", nota:"5,0", ag:"Avaliação · seg 10h" },
   { aba:"Loja", sig:"PC", ramo:"Loja de roupas", tit:"Moda que <em>veste bem.</em>", txt:"Peças novas toda semana. Reserva pelo WhatsApp e retira na loja.", b1:"Ver novidades", b2:"Chamar no Zap", fundo:"#f6f1ea", tinta:"#2a2118", ac:"#9a6b3f", foto:"linear-gradient(160deg,#e3d2bd,#b8956d)", ic:"sacola", zap:"Tem esse vestido no M?", nota:"4,8" },
-  { aba:"Academia", sig:"FT", ramo:"Academia", tit:"Treino de verdade, <em>sem frescura.</em>", txt:"Musculação, funcional e aula experimental grátis.", b1:"Aula grátis", b2:"Planos", fundo:"#0e0f12", tinta:"#f2f2f2", ac:"#ff3d57", foto:"linear-gradient(160deg,#3a1a20,#151012)", ic:"halter", zap:"Abre domingo?", nota:"4,8" },
+  { aba:"Academia", sig:"FT", ramo:"Academia", tit:"Treino de verdade, <em>sem frescura.</em>", txt:"Musculação, funcional e aula experimental grátis.", b1:"Aula grátis", b2:"Planos", fundo:"#0e0f12", tinta:"#f2f2f2", ac:"#ff3d57", foto:"linear-gradient(160deg,#3a1a20,#151012)", ic:"halter", zap:"Abre domingo?", nota:"4,8", ag:"Aula grátis · ter 19h" },
   { aba:"Padaria", sig:"TB", ramo:"Padaria e confeitaria", tit:"Pão quentinho <em>toda hora.</em>", txt:"Fornada às 6h e às 16h. Bolos sob encomenda.", b1:"Encomendar bolo", b2:"Horários", fundo:"#fbf5ea", tinta:"#3a2610", ac:"#c27a1e", foto:"linear-gradient(160deg,#f0d7a8,#c99a55)", ic:"pao", zap:"Faz bolo pra amanhã?", nota:"4,9" }
 ];
 function htmlSite(s) {
@@ -653,14 +741,16 @@ const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // abertura: o celular troca de ramo sozinho e as bolhas acompanham
 let atual = 0;
-const s1 = tela1.querySelectorAll(".site"), bz = document.getElementById("bz"), bg = document.getElementById("bg"), bv = document.getElementById("bv");
+const s1 = tela1.querySelectorAll(".site"), bz = document.getElementById("bz"), bg = document.getElementById("bg"), bv = document.getElementById("bv"), ba = document.getElementById("ba");
 function mostrar(i) {
   s1.forEach((el, k) => el.classList.toggle("on", k === i));
-  [bz, bg, bv].forEach((b) => b.classList.remove("on"));
+  [bz, bg, bv, ba].forEach((b) => b.classList.remove("on"));
   document.getElementById("bzt").textContent = SITES[i].zap;
   document.getElementById("bgt").textContent = "★ " + SITES[i].nota + " no Google";
+  if (SITES[i].ag) document.getElementById("bat").textContent = SITES[i].ag;
   setTimeout(() => bg.classList.add("on"), 500);
   setTimeout(() => bz.classList.add("on"), 1300);
+  if (SITES[i].ag) setTimeout(() => ba.classList.add("on"), 1800);
   setTimeout(() => bv.classList.add("on"), 2200);
 }
 mostrar(0);
@@ -688,6 +778,7 @@ const FAQ = [
   ["Preciso mandar fotos ou textos?", "Não. A gente usa o que já está no Google do seu negócio. Se quiser trocar alguma coisa depois, você mesmo troca pelo celular."],
   ["Tem fidelidade ou multa pra cancelar?", "Não. Cancela quando quiser, é só avisar no WhatsApp."],
   ["E se eu quiser mudar alguma coisa?", "Textos e fotos você muda sozinho, com a sua senha de 4 números. Ajustes simples a gente faz de graça, é só pedir no WhatsApp."],
+  ["O cliente consegue marcar horário pelo site?", "Sim, nos planos Profissional e Completo. Ele escolhe o serviço, o dia e um horário livre. Você vê tudo numa tela no celular, muda os serviços e os horários quando quiser e pode desligar a agenda a qualquer momento."],
   ["No Profissional e no Completo, o endereço .com.br é meu?", "É. Ele é registrado no seu CPF ou CNPJ, no registro.br."],
   ["Atendem o meu tipo de negócio?", "Se o seu negócio aparece no Google Maps, dá pra fazer: comércio, serviço, clínica, escritório, restaurante e muito mais. Atendemos o Brasil todo. Se ainda não está no Maps, chama no WhatsApp que a gente vê o melhor jeito."]
 ];
@@ -718,12 +809,40 @@ function contar(el) {
   requestAnimationFrame(passo);
 }
 
+// agenda: o "dedo" escolhe serviço, dia e hora, confirma, e o horário cai na agenda do dono
+const agCel = document.getElementById("agCel"), agDedo = document.getElementById("agDedo"), agDono = document.getElementById("agDono");
+function agFinal() {
+  agCel.querySelectorAll("[data-alvo]").forEach((el) => el.classList.add("sel"));
+  agCel.classList.add("pronto", "feito"); agDono.classList.add("on");
+}
+async function agendar() {
+  if (calmo) return agFinal();
+  const tocar = async (el) => {
+    const c = agCel.getBoundingClientRect(), r = el.getBoundingClientRect();
+    agDedo.style.transform = `translate(${r.left - c.left + r.width / 2}px,${r.top - c.top + r.height / 2}px)`;
+    agDedo.classList.add("on"); await espera(800);
+    agDedo.classList.remove("toca"); void agDedo.offsetWidth; agDedo.classList.add("toca"); await espera(200);
+  };
+  while (true) {
+    agCel.classList.remove("pronto", "feito"); agDono.classList.remove("on");
+    agCel.querySelectorAll(".sel").forEach((el) => el.classList.remove("sel"));
+    await espera(900);
+    for (const el of agCel.querySelectorAll("[data-alvo]")) { await tocar(el); el.classList.add("sel"); await espera(350); }
+    agCel.classList.add("pronto");
+    await tocar(document.getElementById("agBt"));
+    agDedo.classList.remove("on"); agCel.classList.add("feito");
+    await espera(900); agDono.classList.add("on");
+    await espera(4200);
+  }
+}
+
 // revela ao rolar
 const io = new IntersectionObserver((es) => es.forEach((e) => {
   if (!e.isIntersecting) return;
   e.target.classList.add("visto"); io.unobserve(e.target);
   if (e.target.id === "busca") digitar();
   if (e.target.id === "painel") e.target.querySelectorAll("[data-n]").forEach(contar);
+  if (e.target.classList.contains("ag-palco")) agendar();
 }), { threshold: .2 });
 document.querySelectorAll(".revela, #passos").forEach((el) => io.observe(el));
 
