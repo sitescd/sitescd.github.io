@@ -234,7 +234,7 @@
 </style>
 <meta name="robots" content="noindex,nofollow"><title>Modelo de agenda</title></head>
 <body>
-<script id="dados" type="application/json">{"nome":"Barbearia Exemplo","ramo":"Barbearia","cidade":"Modelo de teste","slogan":"Seu corte, *na sua hora*.","subtitulo":"Escolha o serviço e veja os horários que cabem nele.","destaques":["Modelo de teste","Negócio fictício"],"whatsapp":"","telefones":[],"endereco":"","horario":[],"produtos":[{"icone":"📅","titulo":"Corte","texto":"Serviço de exemplo."},{"icone":"📅","titulo":"Barba","texto":"Serviço de exemplo."},{"icone":"📅","titulo":"Sobrancelha","texto":"Serviço de exemplo."},{"icone":"📅","titulo":"Corte e barba","texto":"Serviço de exemplo."}],"produtos_titulo":"Serviços","sobre":"","avaliacoes":{"lista":[]},"cores":{},"agenda":{"servicos":[{"nome":"Corte","min":30},{"nome":"Barba","min":30},{"nome":"Sobrancelha","min":15},{"nome":"Corte e barba","min":60}],"abre":{"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["09:00","19:00"]},"paralelo":1,"exemplos":[["10:30",30],["15:00",60]]}}</script>
+<script id="dados" type="application/json">{"nome":"Barbearia Exemplo","ramo":"Barbearia","cidade":"Modelo de teste","slogan":"Seu corte, *na sua hora*.","subtitulo":"Escolha o serviço e veja os horários que cabem nele.","destaques":["Modelo de teste","Negócio fictício"],"whatsapp":"","telefones":[],"endereco":"","horario":[],"produtos":[],"produtos_titulo":"Serviços","sobre":"","avaliacoes":{"lista":[]},"cores":{},"agenda":{"servicos":[{"nome":"Corte","min":30},{"nome":"Barba","min":30},{"nome":"Sobrancelha","min":15},{"nome":"Corte e barba","min":60},{"nome":"Outro serviço","min":60,"outro":true}],"abre":{"2":["09:00","19:00"],"3":["09:00","19:00"],"4":["09:00","19:00"],"5":["09:00","19:00"],"6":["09:00","19:00"]},"paralelo":1,"fechados":[],"pausa":null,"exemplos":[["10:30",30],["15:00",60]]}}</script>
 
 <header class="topo"><div class="caixa">
   <a class="marca" href="#inicio"></a>
@@ -518,84 +518,168 @@
 </script>
 <script>window.AG_LINKS=[{"arq":"./","rotulo":"Barbearia"},{"arq":"petshop.html","rotulo":"Pet shop"},{"arq":"oficina.html","rotulo":"Oficina"},{"arq":"clinica.html","rotulo":"Consultório"}];window.AG_AQUI="Barbearia";</script>
 <script>(function () {
-  var D = JSON.parse(document.getElementById("dados").textContent), cfg = D.agenda, esc = { opcao: "", servico: null, dia: "", hora: null };
-  var SEM = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"], reservas = [];
+  var D = JSON.parse(document.getElementById("dados").textContent), cfg = D.agenda, reservas = [];
+  var esc = { servico: null, opcao: "", outro: "", dia: "", hora: null }, feito = null;
+  var SEM = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"], MES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"], LIMITE = 90;
+  var TEMPOS = [15, 30, 45, 60, 75, 90, 120, 150, 180, 240], HORAS = []; for (var h0 = 300; h0 <= 1410; h0 += 30) HORAS.push(h0);
   var p = function (s) { var m = /^(\d+):(\d+)/.exec(s); return +m[1] * 60 + +m[2]; };
+  var hhmm = function (m) { return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + m % 60).slice(-2); };
   var rot = function (m) { return Math.floor(m / 60) + "h" + (m % 60 ? ("0" + m % 60).slice(-2) : ""); };
-  var dur = function (m) { if (m < 60) return m + " min"; var h = Math.floor(m / 60), r = m % 60; return h + "h" + (r ? ("0" + r).slice(-2) : ""); };
+  var dur = function (m) { if (m < 60) return m + " min"; var r = m % 60; return Math.floor(m / 60) + "h" + (r ? ("0" + r).slice(-2) : ""); };
   var tempo = function (s) { return s.tempos ? s.tempos[esc.opcao] : s.min; };
   var agora = function () { var d = new Date(Date.now() - 108e5); return { dia: d.toISOString().slice(0, 10), min: d.getUTCHours() * 60 + d.getUTCMinutes() }; };
   var iso = function (n) { return new Date(Date.now() - 108e5 + n * 864e5).toISOString().slice(0, 10); };
-  var rotDia = function (d) { if (d === iso(0)) return "Hoje"; if (d === iso(1)) return "Amanhã"; return SEM[new Date(d + "T12:00:00Z").getUTCDay()] + " " + d.slice(8) + "/" + d.slice(5, 7); };
+  var diaSem = function (d) { return new Date(d + "T12:00:00Z").getUTCDay(); };
+  var rotDia = function (d) { return (d === iso(0) ? "Hoje" : d === iso(1) ? "Amanhã" : SEM[diaSem(d)]) + ", " + d.slice(8) + "/" + d.slice(5, 7); };
+  var el = function (t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
   // horários seguem o tamanho do serviço e começam logo depois de uma reserva, sem deixar buraco
   function livres(dia, min) {
-    var f = cfg.abre[new Date(dia + "T12:00:00Z").getUTCDay()]; if (!f) return [];
+    var f = cfg.abre[diaSem(dia)]; if (!f || cfg.fechados.indexOf(dia) >= 0) return [];
     var rs = cfg.exemplos.map(function (e) { return [p(e[0]), p(e[0]) + e[1]]; }).concat(reservas.filter(function (r) { return r.dia === dia; }).map(function (r) { return [r.ini, r.fim]; }));
-    var c = p(f[0]), fim = p(f[1]), a = agora(), lista = [], n = cfg.paralelo || 1;
+    var c = p(f[0]), fim = p(f[1]), a = agora(), lista = [], n = cfg.paralelo || 1, pz = cfg.pausa;
     if (dia === a.dia && c < a.min + 30) c = Math.ceil((a.min + 30) / 30) * 30;
     while (c + min <= fim) {
       var bate = null;
-      for (var t = c; t < c + min && bate === null; t += 5) { var v = rs.filter(function (x) { return x[0] <= t && t < x[1]; }); if (v.length >= n) bate = Math.min.apply(null, v.map(function (x) { return x[1]; })); }
+      for (var t = c; t < c + min && bate === null; t += 5) {
+        if (pz && p(pz[0]) <= t && t < p(pz[1])) { bate = p(pz[1]); break; }
+        var v = rs.filter(function (x) { return x[0] <= t && t < x[1]; }); if (v.length >= n) bate = Math.min.apply(null, v.map(function (x) { return x[1]; }));
+      }
       if (bate !== null) { c = bate; continue; }
       lista.push([c, c + min]); c += min;
     }
     return lista;
   }
-  var est = document.createElement("style");
-  est.textContent = "#agendar{padding:48px 20px 64px;scroll-margin-top:72px}#agendar .ag{max-width:560px;margin:0 auto;display:grid;gap:20px}#agendar h2{margin:0;text-align:center}#agendar .nota{text-align:center;opacity:.8;margin:0;font-size:.95rem}#agendar label{display:block;font-weight:700;margin:0 0 8px}#agendar .chips{display:flex;flex-wrap:wrap;gap:8px}#agendar .chips button{font:inherit;padding:10px 14px;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;text-align:left}#agendar .chips button small{display:block;opacity:.75;font-size:.8rem}#agendar .chips button.on{outline:3px solid currentColor;font-weight:700}#agendar input{font:inherit;width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit}#agendar .ir{font:inherit;font-weight:700;width:100%;padding:14px;border-radius:10px;border:0;cursor:pointer;background:#d4a62a;color:#111}#agendar .msg{text-align:center;margin:0;font-weight:600}#agendar .dono{border:1px dashed currentColor;border-radius:12px;padding:14px;display:grid;gap:12px}#agendar .dono h3{margin:0}#agendar .tr{font-size:.9rem;margin-bottom:6px;font-weight:600}#agendar .chips.pq button{padding:7px 10px;font-size:.85rem}.ag-tira{background:#d4a62a;color:#111;padding:10px 12px;text-align:center;font:600 14px system-ui,sans-serif}.ag-tira a{color:#111;margin:0 6px;white-space:nowrap}.ag-tira b{text-decoration:underline}";
+  var est = el("style");
+  est.textContent = ".ag-tira{background:#d4a62a;color:#111;padding:10px 12px;text-align:center;font:600 14px system-ui,sans-serif}.ag-tira a{color:#111;margin:0 5px;white-space:nowrap}.ag-tira b{text-decoration:underline;margin:0 5px}.ag-modos{display:flex;gap:6px;justify-content:center;margin-top:8px}.ag-modos button{font:700 14px system-ui,sans-serif;padding:8px 14px;border-radius:8px;border:1px solid #111;background:transparent;color:#111;cursor:pointer}.ag-modos button.on{background:#111;color:#fff}" +
+    "#agendar,#painel-dono{padding:44px 20px 60px;background:var(--fundo);color:var(--texto);font-family:var(--corpo);scroll-margin-top:72px}.ag{max-width:520px;margin:0 auto;display:grid;gap:22px}.ag h2{margin:0;text-align:center;font-family:var(--serif);color:var(--tinta)}.ag h3{margin:0 0 4px;font-family:var(--serif);color:var(--tinta);font-size:1.15rem}.ag .nota{margin:0;color:var(--cinza);font-size:.92rem}.ag .centro{text-align:center}.ag .rot{display:block;font-weight:700;color:var(--tinta);margin:0 0 10px}.ag .chips{display:flex;flex-wrap:wrap;gap:8px}.ag .chips button{font:inherit;padding:11px 14px;border-radius:10px;border:1px solid var(--linha);background:var(--branco);color:var(--tinta);cursor:pointer;text-align:left}.ag .chips button small{display:block;color:var(--cinza);font-size:.8rem}.ag .chips button.on{background:var(--ac-forte);color:var(--sobre-ac);border-color:var(--ac-forte);font-weight:700}.ag .chips button.on small{color:inherit}.ag input[type=text],.ag select{font:inherit;font-size:16px;box-sizing:border-box;padding:10px 11px;border-radius:10px;border:1px solid var(--linha);background:var(--branco);color:var(--tinta);min-width:0}.ag input[type=text]{width:100%}.ag .ir{font:inherit;font-weight:700;width:100%;padding:15px;border-radius:12px;border:0;cursor:pointer;background:var(--ac-forte);color:var(--sobre-ac)}.ag .sec{font:inherit;font-weight:600;padding:11px 14px;border-radius:10px;border:1px dashed var(--ac-tinta);background:transparent;color:var(--ac-tinta);cursor:pointer;width:100%}.ag .resumo{background:color-mix(in srgb,var(--ac) 16%,var(--branco));color:var(--tinta);border-radius:12px;padding:12px 14px;font-weight:600}.ag .msg{color:#b91c1c;font-weight:600;margin:0}" +
+    ".cal{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:14px}.cal-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-weight:700;color:var(--tinta)}.cal-top button{font:inherit;font-size:1.2rem;width:42px;height:42px;border-radius:10px;border:1px solid var(--linha);background:transparent;color:var(--tinta);cursor:pointer}.cal-top button:disabled{opacity:.3;cursor:default}.cal-grade{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.cal-sem{font-size:.75rem;color:var(--cinza);font-weight:700;padding:4px 0}.cal-grade button{font:inherit;aspect-ratio:1;min-height:38px;border-radius:10px;border:0;background:color-mix(in srgb,var(--ac) 16%,var(--branco));color:var(--tinta);font-weight:600;cursor:pointer;padding:0}.cal-grade button:disabled{background:transparent;color:var(--cinza);opacity:.45;font-weight:400;cursor:default;text-decoration:line-through}.cal-grade button.hoje{box-shadow:inset 0 0 0 2px var(--ac-forte)}.cal-grade button.on{background:var(--ac-forte);color:var(--sobre-ac)}.cal-grade button.fechado{background:#fee2e2;color:#991b1b}" +
+    ".d-caixa{text-align:left;background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:16px;display:grid;gap:12px}.d-sv{border-top:1px solid var(--linha);padding-top:12px;display:grid;gap:8px}.d-sv:first-of-type{border-top:0;padding-top:0}.d-lin{display:flex;gap:8px;align-items:center}.d-lin input[type=text]{flex:1}.d-lin label{flex:1;font-size:.92rem}.d-x{font:inherit;width:42px;height:42px;flex:none;border-radius:10px;border:1px solid var(--linha);background:transparent;color:var(--cinza);cursor:pointer}.d-dia{display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center}.d-dia label{font-weight:600;color:var(--tinta);display:flex;gap:8px;align-items:center}.d-dia input[type=checkbox],.d-lin input[type=checkbox]{width:20px;height:20px;accent-color:var(--ac-forte)}.d-res{display:flex;justify-content:space-between;gap:8px;align-items:center;border-top:1px solid var(--linha);padding-top:10px}";
   document.head.appendChild(est);
-  var tira = document.createElement("div"); tira.className = "ag-tira";
-  tira.innerHTML = "Modelo de teste · veja em: " + window.AG_LINKS.map(function (l) { return l.rotulo === window.AG_AQUI ? "<b>" + l.rotulo + "</b>" : '<a href="' + l.arq + '">' + l.rotulo + "</a>"; }).join(" ");
+  var tira = el("div", "ag-tira"), linkT = el("div");
+  linkT.appendChild(document.createTextNode("Modelo de teste:"));
+  window.AG_LINKS.forEach(function (l) { var a = l.rotulo === window.AG_AQUI ? el("b", "", l.rotulo) : el("a", "", l.rotulo); if (a.tagName === "A") a.href = l.arq; linkT.appendChild(a); });
+  tira.appendChild(linkT);
+  var modos = el("div", "ag-modos"), bC = el("button", "on", "👤 Tela do cliente"), bD = el("button", "", "🔑 Tela do dono"); bC.type = bD.type = "button"; bC.id = "ver-cliente"; bD.id = "ver-dono"; modos.appendChild(bC); modos.appendChild(bD); tira.appendChild(modos);
   document.body.insertBefore(tira, document.body.firstChild);
-  var s = document.createElement("section"); s.id = "agendar";
-  s.innerHTML = '<div class="ag"><h2>Agende seu horário</h2><p class="nota">Escolha o serviço. Só aparecem os horários em que ele cabe inteiro.</p>' +
-    (cfg.pergunta ? '<div><label></label><div class="chips" data-q="opcao"></div></div>' : "") +
-    '<div><label>Serviço</label><div class="chips" data-q="servico"></div></div><div><label>Dia</label><div class="chips" data-q="dia"></div></div><div><label>Horário</label><div class="chips" data-q="hora"></div></div><div><label for="ag-nome">Seu nome</label><input id="ag-nome" placeholder="Como podemos te chamar?"></div><p class="msg" hidden></p><button type="button" class="ir">Testar reserva</button>' +
-    '<div class="dono"><h3>Tela do dono</h3><p class="nota" style="text-align:left">O dono toca no tempo de cada serviço, sem digitar. Mude aqui e veja os horários mudarem acima.</p><div class="lista-dono"></div></div></div>';
+  var s = el("section"); s.id = "agendar"; var cx = el("div", "ag"); s.appendChild(cx);
   var antes = document.getElementById("avaliacoes") || document.querySelector("footer"); antes.parentNode.insertBefore(s, antes);
-  if (cfg.pergunta) s.querySelector('[data-q="opcao"]').previousElementSibling.textContent = cfg.pergunta;
+  var dn = el("section"); dn.id = "painel-dono"; dn.hidden = true; document.body.insertBefore(dn, tira.nextSibling);
   var enc = document.getElementById("encomendas"); if (enc) enc.hidden = true;
-  var ac = document.querySelector(".acoes"); if (ac) { var cap = document.createElement("a"); cap.className = "bt bt-ac"; cap.href = "#agendar"; cap.textContent = "📅 Agendar horário"; ac.insertBefore(cap, ac.firstChild); }
-  var box = function (q) { return s.querySelector('.chips[data-q="' + q + '"]'); }, msg = s.querySelector(".msg");
-  var aviso = function (t) { msg.textContent = t; msg.hidden = !t; };
-  function chips(c, itens, texto, ao, marcado) {
-    c.innerHTML = "";
-    itens.forEach(function (v) { var x = document.createElement("button"); x.type = "button"; var t = texto(v); x.textContent = t[0]; if (t[1]) { var q = document.createElement("small"); q.textContent = t[1]; x.appendChild(q); } if (marcado && marcado(v)) x.classList.add("on");
-      x.onclick = function () { [].forEach.call(c.children, function (y) { y.classList.remove("on"); }); x.classList.add("on"); ao(v); }; c.appendChild(x); });
+  var ac = document.querySelector(".acoes"); if (ac) { var cap = el("a", "bt bt-ac", "📅 Agendar horário"); cap.href = "#agendar"; ac.insertBefore(cap, ac.firstChild); }
+  function modo(m) {
+    var ehD = m === "dono"; [].forEach.call(document.body.children, function (c) { if (c === tira || c === dn || c.tagName === "SCRIPT" || c.tagName === "STYLE") return; if (ehD) { c.dataset.agEra = c.hidden ? "1" : ""; c.hidden = true; c.style.display = "none"; } else if ("agEra" in c.dataset) { c.hidden = c.dataset.agEra === "1"; c.style.display = ""; delete c.dataset.agEra; } });
+    dn.hidden = !ehD; bD.classList.toggle("on", ehD); bC.classList.toggle("on", !ehD);
+    if (ehD) dono(); else { esc = { servico: null, opcao: "", outro: "", dia: "", hora: null }; feito = null; cliente(); }
+    window.scrollTo(0, 0);
   }
-  function servicos() {
-    if (cfg.pergunta && !esc.opcao) { box("servico").textContent = "Escolha o porte primeiro"; return; }
-    chips(box("servico"), cfg.servicos, function (x) { return [x.nome, dur(tempo(x))]; }, function (v) { esc.servico = v; horas(); }, function (v) { return v === esc.servico; });
+  bC.onclick = function () { modo("cliente"); }; bD.onclick = function () { modo("dono"); };
+  // calendário de verdade: mês inteiro, com setas
+  function calendario(box, o) {
+    var a = iso(0), mes = o.inicio ? o.inicio.slice(0, 7) : a.slice(0, 7), max = iso(LIMITE);
+    function des() {
+      box.innerHTML = ""; box.className = "cal"; var y = +mes.slice(0, 4), m = +mes.slice(5, 7);
+      var top = el("div", "cal-top"), ant = el("button", "", "‹"), nx = el("button", "", "›"), tit = el("span", "", MES[m - 1] + " de " + y); ant.type = nx.type = "button"; ant.setAttribute("aria-label", "Mês anterior"); nx.setAttribute("aria-label", "Próximo mês"); ant.className = "cal-ant"; nx.className = "cal-prox";
+      ant.disabled = mes <= a.slice(0, 7); nx.disabled = mes >= max.slice(0, 7);
+      var muda = function (k) { var d = new Date(Date.UTC(y, m - 1 + k, 1)); mes = d.toISOString().slice(0, 7); des(); };
+      ant.onclick = function () { muda(-1); }; nx.onclick = function () { muda(1); };
+      top.appendChild(ant); top.appendChild(tit); top.appendChild(nx); box.appendChild(top);
+      var g = el("div", "cal-grade"); ["D", "S", "T", "Q", "Q", "S", "S"].forEach(function (x) { g.appendChild(el("div", "cal-sem", x)); });
+      var pri = new Date(Date.UTC(y, m - 1, 1)).getUTCDay(), tot = new Date(Date.UTC(y, m, 0)).getUTCDate();
+      for (var i = 0; i < pri; i++) g.appendChild(el("div"));
+      for (var d = 1; d <= tot; d++) (function (d) {
+        var dt = mes + "-" + ("0" + d).slice(-2), b = el("button", "", String(d)); b.type = "button"; b.dataset.d = dt;
+        b.disabled = dt < a || dt > max || !o.pode(dt); if (dt === a) b.classList.add("hoje"); if (o.marca && o.marca(dt)) b.classList.add(o.classe || "on");
+        b.onclick = function () { o.ao(dt); des(); }; g.appendChild(b);
+      })(d);
+      box.appendChild(g);
+    }
+    des();
   }
-  function horas() {
-    esc.hora = null; var c = box("hora");
-    if (!esc.servico || !esc.dia) { c.textContent = "Escolha o serviço e o dia primeiro"; return; }
-    var l = livres(esc.dia, tempo(esc.servico));
-    if (!l.length) { c.textContent = "Esse serviço não cabe nesse dia. Escolha outro dia."; return; }
-    chips(c, l, function (x) { return [rot(x[0]) + " às " + rot(x[1])]; }, function (v) { esc.hora = v; });
+  function passo(rotulo, id) { var d = el("div"); if (id) d.dataset.passo = id; if (rotulo) d.appendChild(el("span", "rot", rotulo)); cx.appendChild(d); return d; }
+  function chips(pai, q, itens, texto, ao, marcado) {
+    var c = el("div", "chips"); c.dataset.q = q;
+    itens.forEach(function (v) { var x = el("button"); x.type = "button"; var t = texto(v); x.textContent = t[0]; if (t[1]) x.appendChild(el("small", "", t[1])); if (marcado(v)) x.classList.add("on"); x.onclick = function () { ao(v); }; c.appendChild(x); });
+    pai.appendChild(c);
   }
-  var tempos = [15, 30, 45, 60, 90, 120, 180];
+  var prontos = function () { return esc.servico && (!esc.servico.tempos || esc.opcao); };
+  function cliente(foco) {
+    cx.innerHTML = "";
+    if (feito) {
+      cx.appendChild(el("h2", "", "✅ Horário reservado")); cx.appendChild(el("p", "resumo centro", feito)); cx.appendChild(el("p", "nota centro", "Neste modelo, nada é enviado. O horário já saiu da lista."));
+      var nv = el("button", "ir", "Marcar outro horário"); nv.type = "button"; nv.onclick = function () { feito = null; esc = { servico: null, opcao: "", outro: "", dia: "", hora: null }; cliente(); }; cx.appendChild(nv); return;
+    }
+    cx.appendChild(el("h2", "", "Agende seu horário")); cx.appendChild(el("p", "nota centro", "Toque no serviço que você quer."));
+    var lista = cfg.servicos.filter(function (x) { return x.nome.trim(); });
+    if (esc.servico && lista.indexOf(esc.servico) < 0) esc.servico = null;
+    var P = passo("", "servico");
+    chips(P, "servico", lista, function (x) { return [x.nome, x.tempos ? "conforme o porte" : x.outro ? "cerca de " + dur(x.min) : dur(x.min)]; }, function (v) { esc.servico = v; esc.hora = null; esc.dia = ""; cliente("porte"); }, function (v) { return v === esc.servico; });
+    if (!esc.servico) return;
+    if (esc.servico.outro) { var po = passo("O que você precisa?", "outro"), io = el("input"); io.type = "text"; io.id = "ag-outro"; io.placeholder = "Escreva aqui"; io.value = esc.outro; io.oninput = function () { esc.outro = io.value; }; po.appendChild(io); }
+    if (esc.servico.tempos) { var pp = passo(cfg.pergunta, "porte"); chips(pp, "opcao", cfg.opcoes, function (x) { return [x]; }, function (v) { esc.opcao = v; esc.hora = null; esc.dia = ""; cliente("dia"); }, function (v) { return v === esc.opcao; }); if (!esc.opcao) { rola(foco); return; } }
+    var min = tempo(esc.servico), pd = passo("Escolha o dia", "dia"), cal = el("div"); pd.appendChild(cal);
+    calendario(cal, { inicio: esc.dia, pode: function (d) { return livres(d, min).length > 0; }, marca: function (d) { return d === esc.dia; }, ao: function (d) { esc.dia = d; esc.hora = null; cliente("hora"); } });
+    if (esc.dia) {
+      var ph = passo("Escolha o horário", "hora");
+      chips(ph, "hora", livres(esc.dia, min), function (x) { return [rot(x[0]) + " às " + rot(x[1])]; }, function (v) { esc.hora = v; cliente("nome"); }, function (v) { return esc.hora && v[0] === esc.hora[0]; });
+    }
+    if (esc.hora) {
+      var pn = passo("Seu nome", "nome"), n = el("input"); n.type = "text"; n.id = "ag-nome"; n.placeholder = "Como podemos te chamar?"; n.value = esc.nome || ""; n.oninput = function () { esc.nome = n.value; }; pn.appendChild(n);
+      var nomeSv = esc.servico.outro ? "Outro serviço" : esc.servico.nome + (esc.opcao && esc.servico.tempos ? " · " + esc.opcao : "");
+      var txt = nomeSv + " · " + rotDia(esc.dia) + " · " + rot(esc.hora[0]) + " às " + rot(esc.hora[1]);
+      cx.appendChild(el("p", "resumo", txt)); var m = el("p", "msg"); m.hidden = true; cx.appendChild(m);
+      var ir = el("button", "ir", "Confirmar horário"); ir.type = "button";
+      ir.onclick = function () {
+        var f = esc.servico.outro && !(esc.outro || "").trim() ? "Escreva o que você precisa." : !(esc.nome || "").trim() ? "Falta o seu nome." : "";
+        if (f) { m.textContent = f; m.hidden = false; return; }
+        reservas.push({ dia: esc.dia, ini: esc.hora[0], fim: esc.hora[1], nome: esc.nome.trim(), txt: esc.servico.outro ? "Outro: " + esc.outro.trim() : nomeSv });
+        feito = txt; cliente(); s.scrollIntoView({ behavior: "smooth" });
+      };
+      cx.appendChild(ir);
+    }
+    rola(foco);
+  }
+  function rola(foco) { if (!foco) return; var a = cx.querySelector('[data-passo="' + foco + '"]'); if (a) a.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+  function escolha(opts, val, ao, rotulo) { var x = el("select"); if (rotulo) x.setAttribute("aria-label", rotulo); opts.forEach(function (o) { var t = el("option", "", o[1]); t.value = String(o[0]); x.appendChild(t); }); x.value = String(val); x.onchange = function () { ao(x.value); }; return x; }
+  var optT = TEMPOS.map(function (m) { return [m, dur(m)]; }), optH = HORAS.map(function (m) { return [hhmm(m), rot(m)]; });
+  function caixa(pai, t, nota) { var c = el("div", "d-caixa"); c.appendChild(el("h3", "", t)); if (nota) c.appendChild(el("p", "nota", nota)); pai.appendChild(c); return c; }
   function dono() {
-    var L = s.querySelector(".lista-dono"); L.innerHTML = "";
-    cfg.servicos.forEach(function (sv) {
-      (sv.tempos ? cfg.opcoes : [null]).forEach(function (op) {
-        var d = document.createElement("div"), t = document.createElement("div"), c = document.createElement("div"); d.style.marginBottom = "12px"; t.className = "tr"; t.textContent = sv.nome + (op ? " · " + op : ""); c.className = "chips pq";
-        chips(c, tempos, function (m) { return [dur(m)]; }, function (m) { if (op) sv.tempos[op] = m; else sv.min = m; servicos(); horas(); }, function (m) { return m === (op ? sv.tempos[op] : sv.min); });
-        d.appendChild(t); d.appendChild(c); L.appendChild(d);
-      });
+    dn.innerHTML = ""; var a = el("div", "ag"); dn.appendChild(a);
+    a.appendChild(el("h2", "", "Minha agenda")); a.appendChild(el("p", "nota centro", "O dono entra por um link só dele. Tudo é salvo sozinho. Na dúvida, o suporte ajuda."));
+    var cr = caixa(a, "Horários marcados");
+    if (!reservas.length) cr.appendChild(el("p", "nota", "Nenhum ainda. Vá à tela do cliente, marque um e volte aqui."));
+    reservas.slice().sort(function (x, y) { return (x.dia + hhmm(x.ini)).localeCompare(y.dia + hhmm(y.ini)); }).forEach(function (r) {
+      var l = el("div", "d-res"), t = el("div"); t.appendChild(el("strong", "", rotDia(r.dia) + ", " + rot(r.ini) + " às " + rot(r.fim))); t.appendChild(el("div", "nota", r.nome + " · " + r.txt));
+      var x = el("button", "d-x", "✕"); x.type = "button"; x.setAttribute("aria-label", "Desmarcar"); x.onclick = function () { reservas.splice(reservas.indexOf(r), 1); dono(); }; l.appendChild(t); l.appendChild(x); cr.appendChild(l);
     });
+    var cs = caixa(a, "Meus serviços", "Mude o nome e o tempo, tire ou coloque quantos quiser.");
+    cfg.servicos.forEach(function (sv) {
+      var b = el("div", "d-sv"), l = el("div", "d-lin"), n = el("input"); n.type = "text"; n.value = sv.nome; n.className = "d-nome"; n.setAttribute("aria-label", "Nome do serviço"); n.oninput = function () { sv.nome = n.value; };
+      var x = el("button", "d-x", "✕"); x.type = "button"; x.setAttribute("aria-label", "Tirar serviço"); x.onclick = function () { cfg.servicos.splice(cfg.servicos.indexOf(sv), 1); dono(); };
+      l.appendChild(n);
+      if (!sv.tempos) l.appendChild(escolha(optT, sv.min, function (v) { sv.min = +v; }, "Tempo"));
+      l.appendChild(x); b.appendChild(l);
+      if (sv.tempos) cfg.opcoes.forEach(function (op) { var q = el("div", "d-lin"); q.appendChild(el("label", "", op)); q.appendChild(escolha(optT, sv.tempos[op], function (v) { sv.tempos[op] = +v; }, op)); b.appendChild(q); });
+      if (sv.outro) b.appendChild(el("p", "nota", "Para o que não está na lista: o cliente escreve o que precisa."));
+      cs.appendChild(b);
+    });
+    var add = el("button", "sec", "+ Adicionar serviço"); add.type = "button"; add.id = "add-servico";
+    add.onclick = function () { var nv = { nome: "Novo serviço" }; if (cfg.pergunta) { nv.tempos = {}; cfg.opcoes.forEach(function (o) { nv.tempos[o] = 60; }); } else nv.min = 30; var io = cfg.servicos.findIndex(function (x) { return x.outro; }); cfg.servicos.splice(io < 0 ? cfg.servicos.length : io, 0, nv); dono(); var ns = dn.querySelectorAll(".d-nome"), alvo = ns[io < 0 ? ns.length - 1 : io]; alvo.focus(); alvo.select(); };
+    cs.appendChild(add);
+    var ch = caixa(a, "Dias e horários de trabalho", "Marque os dias que abre, inclusive domingo.");
+    [1, 2, 3, 4, 5, 6, 0].forEach(function (d) {
+      var f = cfg.abre[d], l = el("div", "d-dia"), lb = el("label"), k = el("input"); k.type = "checkbox"; k.checked = !!f; k.dataset.dia = d; k.onchange = function () { if (k.checked) cfg.abre[d] = cfg.ultimo ? cfg.ultimo.slice() : ["09:00", "18:00"]; else { cfg.ultimo = cfg.abre[d]; delete cfg.abre[d]; } dono(); };
+      lb.appendChild(k); lb.appendChild(document.createTextNode(SEM[d])); l.appendChild(lb);
+      if (f) { l.appendChild(escolha(optH, f[0], function (v) { f[0] = v; dono(); }, "Abre")); l.appendChild(escolha(optH, f[1], function (v) { f[1] = v; dono(); }, "Fecha")); }
+      ch.appendChild(l);
+      if (f && p(f[1]) <= p(f[0])) { var e = el("p", "msg", "O horário de fechar precisa ser depois do de abrir."); ch.appendChild(e); }
+    });
+    var ca = caixa(a, "Pausa do dia", "Almoço, por exemplo. Nesse tempo, ninguém marca."), la = el("div", "d-dia"), lp = el("label"), kp = el("input"); kp.type = "checkbox"; kp.id = "tem-pausa"; kp.checked = !!cfg.pausa; kp.onchange = function () { cfg.pausa = kp.checked ? ["12:00", "13:00"] : null; dono(); }; lp.appendChild(kp); lp.appendChild(document.createTextNode("Tenho pausa")); la.appendChild(lp);
+    if (cfg.pausa) { la.appendChild(escolha(optH, cfg.pausa[0], function (v) { cfg.pausa[0] = v; }, "Início da pausa")); la.appendChild(escolha(optH, cfg.pausa[1], function (v) { cfg.pausa[1] = v; }, "Fim da pausa")); } ca.appendChild(la);
+    var cn = caixa(a, "Quantos atendem ao mesmo tempo", "Com 2 profissionais, dá para marcar 2 clientes na mesma hora."), lq = el("div", "d-lin"); lq.appendChild(el("label", "", "Atendimentos juntos")); lq.appendChild(escolha([[1, "1"], [2, "2"], [3, "3"], [4, "4"], [5, "5"]], cfg.paralelo || 1, function (v) { cfg.paralelo = +v; }, "Atendimentos juntos")); cn.appendChild(lq);
+    var cf = caixa(a, "Fechar um dia", "Feriado, folga ou viagem: toque no dia para fechar. Toque de novo para abrir."), cal = el("div"); cal.id = "cal-dono"; cf.appendChild(cal);
+    calendario(cal, { pode: function (d) { return !!cfg.abre[diaSem(d)]; }, marca: function (d) { return cfg.fechados.indexOf(d) >= 0; }, classe: "fechado", ao: function (d) { var i = cfg.fechados.indexOf(d); if (i >= 0) cfg.fechados.splice(i, 1); else cfg.fechados.push(d); } });
   }
-  if (cfg.pergunta) chips(box("opcao"), cfg.opcoes, function (x) { return [x]; }, function (v) { esc.opcao = v; servicos(); horas(); });
-  var dias = []; for (var i = 0; i < 21 && dias.length < 8; i++) if (cfg.abre[new Date(iso(i) + "T12:00:00Z").getUTCDay()]) dias.push(iso(i));
-  chips(box("dia"), dias, function (d) { return [rotDia(d)]; }, function (v) { esc.dia = v; horas(); });
-  servicos(); horas(); dono();
-  s.querySelector(".ir").onclick = function () {
-    var n = s.querySelector("#ag-nome").value.trim();
-    var f = (cfg.pergunta && !esc.opcao) ? "Falta escolher o porte." : !esc.servico ? "Falta escolher o serviço." : !esc.dia ? "Falta escolher o dia." : !esc.hora ? "Falta escolher o horário." : !n ? "Falta o seu nome." : "";
-    if (f) return aviso(f);
-    var h = esc.hora; reservas.push({ dia: esc.dia, ini: h[0], fim: h[1] }); horas();
-    aviso("✅ Reservado das " + rot(h[0]) + " às " + rot(h[1]) + ". Veja como os horários mudaram. Neste modelo, nada é enviado.");
-  };
+  cliente();
 })();
 </script>
 </body>
