@@ -198,6 +198,8 @@
 (function () {
   let D = {};
   try { D = JSON.parse(document.getElementById("dados").textContent); } catch (e) {}
+  // 02/11 (Caio: "o horário tá vazio"): a IA às vezes grava o horário como texto ("Terça a sábado: 9h às 19h"); vira {dias, horas}
+  if (Array.isArray(D.horario)) D.horario = D.horario.map((h) => { if (typeof h !== "string") return h; const m = /^(.+?):\s+(.+)$/.exec(h); return m ? { dias: m[1], horas: m[2] } : { dias: h, horas: "" }; });
   // 20/10: fonte dos títulos escolhida pelo dono no editor ("Aa Fonte"); vazio = a do modelo
   if (["Poppins","Montserrat","Playfair Display","Bebas Neue","Oswald","Lora","DM Serif Display","Archivo Black","Raleway","Pacifico"].indexOf(D.fonte_titulo) >= 0) { var fl = document.createElement("link"); fl.rel = "stylesheet";
     fl.href = "https://fonts.googleapis.com/css2?family=" + D.fonte_titulo.replace(/ /g, "+") + (/Bebas|Pacifico|Archivo|DM Serif/.test(D.fonte_titulo) ? "" : ":wght@500;700;800") + "&display=swap"; document.head.appendChild(fl);
@@ -352,6 +354,7 @@ html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:
 .scd-ed-bar.on{transform:translate(-50%,0)}
 .scd-ed-bar span{flex:1;font-size:13px;line-height:1.3;color:var(--gs)}.scd-ed-bar span b{color:var(--gt)}
 .scd-ed-bar button{flex:none;padding:9px 12px;font-size:13.5px}
+@media (max-width:480px){.scd-ed-bar{flex-wrap:wrap;padding:10px}.scd-ed-bar span{flex:1 1 100%;text-align:center}.scd-ed-bar button{flex:1 1 0}}
 .scd-bar{position:fixed;z-index:2147483500;left:0;right:0;bottom:0;padding:16px 12px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom));border-width:1px 0 0;border-top:3px solid var(--a);
  display:flex;gap:10px 14px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:center;transform:translateY(110%);transition:transform .5s;border-radius:0;box-shadow:0 -10px 30px -12px rgba(0,0,0,.35)}
 .scd-bar.on{transform:none}.scd-bar span{color:var(--gt)}.scd-bar .scd-tt{display:block;font-size:16px;line-height:1.25}
@@ -372,6 +375,12 @@ html.scd-ed [data-scd-f]{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:
 .scd-dock>*{pointer-events:auto;flex:0 1 auto;border:0;border-radius:999px;background:rgba(18,20,22,.88);color:#fff;font-size:13.5px;font-weight:600;line-height:1.2;padding:12px 12px;white-space:nowrap;text-decoration:none;cursor:pointer;box-shadow:0 8px 24px -6px rgba(0,0,0,.45)}
 .scd-dock .scd-dp{background:var(--a);color:var(--at)}
 html.scd-ed .scd-dock,.scd-dock.off{display:none}
+html.scd-ed .scd-bar,html.scd-ed .scd-bal{display:none}
+.scd-cores{display:grid;grid-template-columns:repeat(3,56px);justify-content:center;gap:14px 18px;margin:14px 0 8px}
+.scd-cores button{aspect-ratio:1;border-radius:50%;border:3px solid transparent;cursor:pointer;padding:0;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+.scd-cores button.sel{border-color:var(--gt)}
+.scd-cores button.orig{background:var(--gl)!important;color:var(--gt);font-size:11px;font-weight:600}
+.scd-num{width:100%;margin:12px 0 4px;padding:12px 14px;border-radius:12px;border:1px solid var(--gl);background:var(--gl);color:var(--gt);font-size:18px}
 html.scd-ed .marca{outline:2px dashed var(--scd-a,#2fd1b4);outline-offset:4px;border-radius:6px}
 .scd-dock i{font-style:normal}
 @media (max-width:420px){.scd-dock{gap:4px;left:6px;right:78px}.scd-dock>*{font-size:12px;padding:11px 8px}}
@@ -425,6 +434,10 @@ function marcar(){
   document.querySelectorAll("h1,h2,h3,h4,p,li,blockquote,figcaption").forEach(function(e){
     if(ui(e)||e.hasAttribute("data-scd-t")||e.closest("a,button,nav,form,footer")||!e.textContent.trim()||e.querySelector("h1,h2,h3,p,li,img,a,button"))return;
     e.setAttribute("data-scd-t","")});
+  document.querySelectorAll("span,div,small,strong,em,b").forEach(function(e){   // etiquetas soltas: "Barbearia · Itanhaém · SP"
+    var x=e.textContent.trim();
+    if(ui(e)||e.children.length||e.hasAttribute("data-scd-t")||e.closest("a,button,nav,form,footer,#agendar,[data-scd-t]")||x.length<3||x.length>80||!visivel(e))return;
+    e.setAttribute("data-scd-t","")});
   document.querySelectorAll("img,section,header,div,figure").forEach(function(e){
     if(ui(e)||e.hasAttribute("data-scd-f")||e.closest("a,button,nav"))return;
     if(e.tagName==="IMG"?(e.naturalWidth>60||e.width>60):(temFundo(e)&&e.offsetWidth>120))e.setAttribute("data-scd-f","")});
@@ -436,9 +449,9 @@ function toast(t){var x=vidro("div","scd-toast",t);requestAnimationFrame(functio
 var edBar=null;
 function ligarEd(){
   if(ed)return;ed=true;document.documentElement.classList.add("scd-ed");marcar();
-  edBar=vidro("div","scd-ed-bar","<span><b>✏️ Modo teste.</b> Toque num texto, numa foto ou no nome lá em cima pra trocar.</span><button class='scd-no' data-a='fonte'>Aa Fonte</button><button class='scd-ok' data-a='pronto'>Pronto</button>");
+  edBar=vidro("div","scd-ed-bar","<span><b>✏️ Modo teste:</b> toque no que quiser trocar.</span><button class='scd-no' data-a='fonte'>Aa Fonte</button><button class='scd-no' data-a='cores'>🎨 Cores</button><button class='scd-ok' data-a='pronto'>Pronto</button>");
   requestAnimationFrame(function(){edBar.classList.add("on")});
-  edBar.onclick=function(v){var a=v.target.closest("[data-a]");if(!a)return;if(a.dataset.a==="fonte")escolherFonte();else desligarEd()};
+  edBar.onclick=function(v){var a=v.target.closest("[data-a]");if(!a)return;if(a.dataset.a==="fonte")escolherFonte();else if(a.dataset.a==="cores")escolherCor();else desligarEd()};
 }
 function desligarEd(){ed=false;document.documentElement.classList.remove("scd-ed");document.querySelectorAll("[data-scd-t]").forEach(function(e){e.removeAttribute("contenteditable")});
   if(edBar){edBar.classList.remove("on");var b=edBar;edBar=null;setTimeout(function(){b.remove()},400)}
@@ -461,6 +474,51 @@ function trocarLogo(m){
     toast("Sua logo no lugar! 🎉 É só um teste, nada foi salvo")};
   i.click();
 }
+// CORES: cada modelo pinta por variáveis próprias (Premium: --ac…; Normal e Super: --destaque/--media)
+var CORES=[["#d4a62a","#2a2418"],["#e03131","#6b1414"],["#2f7cf6","#173a73"],["#2fb36b","#145c37"],["#8b5cf6","#3b1d7a"],["#f08c00","#6b3600"],["#e64980","#6b1838"],["#12b8a6","#0b5650"]],
+  corOrig=null,corAtual=-1;
+function hx(h){var n=parseInt(h.slice(1),16);return [n>>16,n>>8&255,n&255]}
+function mix(a,b,k){return "rgb("+a.map(function(v,i){return Math.round(v*k+b[i]*(1-k))})+")"}
+function pintarCor(k){
+  var r=document.documentElement,s=r.style;if(corOrig===null)corOrig=s.cssText;
+  if(k<0){s.cssText=corOrig;tema=null;lerTema();return}
+  var d=CORES[k][0],m=CORES[k][1],D=hx(d),M=hx(m),cs=getComputedStyle(r),esc=lum(D)>.6?"#15110d":"#fff";
+  if(cs.getPropertyValue("--ac").trim()){
+    s.setProperty("--ac",d);s.setProperty("--sobre-ac",esc);
+    if(r.classList.contains("escuro")){var f=rgb(cs.getPropertyValue("--fundo"))||[14,14,16];s.setProperty("--ac-forte",d);s.setProperty("--ac-tinta",d);s.setProperty("--ac-suave",mix(D,f,.16))}
+    else{s.setProperty("--ac-forte",m);s.setProperty("--ac-tinta",m);s.setProperty("--ac-suave",mix(M,[255,255,255],.12));s.setProperty("--fundo",mix(M,[255,255,255],.045))}
+  }else{
+    s.setProperty("--destaque",d);s.setProperty("--sobre-destaque",esc);
+    if(!document.body.classList.contains("escuro"))s.setProperty("--media",m);
+  }
+  s.setProperty("--scd-a",d);
+}
+function escolherCor(){
+  var fo=el("div","scd-v scd-fo"),cx=pinta(el("div","scd-vidro scd-cx","<span class='scd-tt'>🎨 Cor do site</span><small>Toque numa e veja no site na hora.</small>")),g=el("div","scd-cores"),bt=el("div","scd-bt"),ok=el("button","scd-ok","Pronto");
+  var o=el("button","orig"+(corAtual<0?" sel":""),"Original");o.onclick=function(){corAtual=-1;pintarCor(-1);marca(o)};g.appendChild(o);
+  CORES.forEach(function(c,k){var b=el("button",k===corAtual?"sel":"");b.style.background=c[0];b.setAttribute("aria-label","Cor "+(k+1));
+    b.onclick=function(){corAtual=k;pintarCor(k);marca(b)};g.appendChild(b)});
+  function marca(b){g.querySelectorAll(".sel").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel")}
+  bt.appendChild(ok);cx.append(g,bt);fo.appendChild(cx);document.body.appendChild(fo);requestAnimationFrame(function(){fo.classList.add("on")});
+  function sai(){fo.classList.remove("on");setTimeout(function(){fo.remove()},250)}ok.onclick=sai;fo.onclick=function(v){if(v.target===fo)sai()};
+}
+// CONTATO: no modo teste, WhatsApp/telefone do site não abre: pede o número novo e troca em todos os botões com o mesmo número
+var TEL=/\(?\d{2}\)?\s?\d{4,5}[-\s]?\d{4}/;
+function soNum(h){var m=/wa\.me\/(\d+)|tel:\+?(\d+)/.exec(h||"");return m?(m[1]||m[2]).replace(/^55(?=\d{10,11}$)/,""):""}
+function fmt(n){return n.length===11?"("+n.slice(0,2)+") "+n.slice(2,7)+"-"+n.slice(7):n.length===10?"("+n.slice(0,2)+") "+n.slice(2,6)+"-"+n.slice(6):n}
+function trocarNumero(a){
+  var velho=soNum(a.href),fo=el("div","scd-v scd-fo"),cx=pinta(el("div","scd-vidro scd-cx","<span class='scd-tt'>📞 Número de contato</span><small>Os botões de WhatsApp e ligar do site passam a usar este.</small>")),
+    inp=el("input","scd-num"),bt=el("div","scd-bt"),ok=el("button","scd-ok","Trocar");
+  inp.type="tel";inp.inputMode="tel";inp.value=fmt(velho);inp.placeholder="(11) 91234-5678";
+  bt.appendChild(ok);cx.append(inp,bt);fo.appendChild(cx);document.body.appendChild(fo);requestAnimationFrame(function(){fo.classList.add("on")});
+  setTimeout(function(){try{inp.focus()}catch(e){}},300);
+  function sai(){fo.classList.remove("on");setTimeout(function(){fo.remove()},250)}fo.onclick=function(v){if(v.target===fo)sai()};
+  ok.onclick=function(){var n=inp.value.replace(/\D/g,"").replace(/^55(?=\d{10,11}$)/,"");if(n.length<10){inp.focus();return}
+    document.querySelectorAll("a[href]").forEach(function(x){if(ui(x)||x.matches(".zap-fixo,#zapfixo")||(velho&&soNum(x.href)!==velho))return;if(!velho&&x!==a)return;
+      x.href=x.href.replace(/wa\.me\/\d+/,"wa.me/55"+n).replace(/tel:\+?\d+/,"tel:+55"+n);
+      var w=document.createTreeWalker(x,4),t;while((t=w.nextNode()))if(TEL.test(t.nodeValue))t.nodeValue=t.nodeValue.replace(TEL,fmt(n))});
+    sai();toast("Número trocado! 📞 É só um teste, nada foi salvo")};
+}
 var fonteAtual="";
 function escolherFonte(){
   if(!document.getElementById("scd-gf")){var l=el("link");l.id="scd-gf";l.rel="stylesheet";
@@ -475,6 +533,8 @@ function escolherFonte(){
 document.addEventListener("click",function(v){
   var mc=ed&&!ui(v.target)&&v.target.closest&&v.target.closest(".marca");
   if(mc){v.preventDefault();v.stopPropagation();trocarLogo(mc);return}
+  var lk=ed&&!ui(v.target)&&v.target.closest&&v.target.closest("a[href*='wa.me/'],a[href^='tel:']");
+  if(lk&&!lk.matches(".zap-fixo,#zapfixo")){v.preventDefault();v.stopPropagation();trocarNumero(lk);return}
   if(ui(v.target)||v.target.closest("a,button"))return;
   var t=v.target.closest&&v.target.closest("[data-scd-t]"),f=v.target.closest&&v.target.closest("[data-scd-f]");
   if(!ed&&t&&fechado.bal){ligarEd();t.focus();return}
@@ -507,7 +567,7 @@ function balao(){
 var bar=null;
 var barFechada=false,rolado=0,yAnt=scrollY,dock=null;
 function barra(){
-  if(bar||barFechada)return;if(dock)dock.classList.add("off");
+  if(bar||barFechada||ed)return;if(dock)dock.classList.add("off");
   bar=vidro("div","scd-bar",C.barra+"<button class='scd-x' aria-label='Fechar'>×</button>");
   requestAnimationFrame(function(){bar.classList.add("on")});
   bar.querySelector(".scd-x").onclick=function(){barFechada=true;rolado=0;if(dock)dock.classList.remove("off");bar.classList.remove("on");var b=bar;bar=null;setTimeout(function(){b.remove()},500)};
