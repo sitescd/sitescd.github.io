@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Marquinhos Caça Vazamento · Itanhaém e Litoral</title>
-<meta name="description" content="Caça vazamento em casa, piscina, comércio e condomínio. Detecção eletrônica sem quebra-quebra, conserto na hora e relatório para a Sabesp. Itanhaém, Mongaguá, Peruíbe, Praia Grande, Santos e região.">
+<meta name="description" content="Caça vazamento em casa, piscina, comércio e condomínio. Detecção eletrônica sem quebra-quebra, conserto na hora e relatório para a Sabesp. Limpeza de caixa d'água. De Pedro de Toledo a São Vicente, desde 2008.">
 <meta property="og:title" content="Marquinhos Caça Vazamento">
 <meta property="og:description" content="Acha o vazamento sem quebrar a casa toda. Nota 4,8 no Google. Atende todos os dias, das 7h30 às 19h.">
 <meta property="og:image" content="img/piscina-mergulho.jpg">
@@ -61,6 +61,10 @@ h2{font-size:clamp(32px,5vw,46px);font-weight:800;color:var(--azul);margin-botto
 .abre .caixa{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-bottom:96px}
 .selo{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;margin-bottom:22px}
 .selo .est{color:#ffc93c;letter-spacing:1px}
+.selos{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}.selos .selo{margin-bottom:0}
+.selo.desde{background:var(--agua);border-color:var(--agua);color:var(--azul);font-weight:800}
+.cobre{display:inline-flex;align-items:center;gap:10px;background:rgba(20,177,214,.14);border:1px solid rgba(20,177,214,.45);border-radius:14px;padding:10px 16px;margin-bottom:24px;font-size:16px;color:#fff;line-height:1.35}
+.cobre svg{width:22px;height:22px;color:var(--agua);flex:none}.cobre small{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#9cc7da;font-weight:700}
 .abre h1{font-size:clamp(44px,7.4vw,78px);font-weight:800;text-transform:uppercase;margin-bottom:18px}
 .gira{display:inline-block;color:var(--agua);position:relative;min-width:4ch}
 .gira span{display:inline-block;animation:entra .5s ease both}
@@ -135,6 +139,17 @@ h2{font-size:clamp(32px,5vw,46px);font-weight:800;color:var(--azul);margin-botto
 .citacao{border-left:4px solid var(--agua);padding:6px 0 6px 18px;margin-bottom:26px;font-style:italic;color:#fff;font-size:17px}
 .citacao small{display:block;font-style:normal;color:#9cc7da;font-size:13px;margin-top:6px}
 @media(max-width:900px){.pis-grade{grid-template-columns:1fr}.mosaico{grid-template-rows:160px 160px}}
+/* limpeza de caixa d'água */
+.limpeza{background:var(--agua-clara)}
+.limpeza .lista li{color:var(--texto)}.limpeza .lista svg{color:#0e8fb0}
+.lim-foto{position:relative}
+.lim-foto img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:22px;box-shadow:var(--sombra)}
+.lim-foto .flutua2{position:absolute;left:-12px;top:20px;background:var(--azul);color:#fff;border-radius:14px;padding:10px 14px;font:800 20px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;box-shadow:var(--sombra);transform:rotate(-3deg)}
+.lim-foto .credito{font-size:11px;color:var(--suave);margin-top:8px;text-align:right}
+.lim-foto .credito a{color:var(--suave)}
+.dica{background:#fff;border-radius:16px;padding:16px 18px;margin-bottom:24px;border:1.5px solid var(--linha);font-size:15px}
+.dica b{color:var(--azul)}
+@media(max-width:900px){.lim-foto{order:-1}.lim-foto .flutua2{left:8px}}
 
 /* como funciona */
 .passos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px;counter-reset:p}
@@ -279,6 +294,7 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
     <nav class="menu">
       <a href="#servicos">Serviços</a>
       <a href="#piscina">Piscina</a>
+      <a href="#limpeza">Caixa d'água</a>
       <a href="#como">Como funciona</a>
       <a href="#avaliacoes">Avaliações</a>
       <a href="#orcamento">Orçamento</a>
@@ -291,9 +307,10 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
 <section class="abre">
   <div class="caixa">
     <div>
-      <div class="selo"><span class="est">★★★★★</span> 4,8 no Google · 101 avaliações</div>
+      <div class="selos"><div class="selo"><span class="est">★★★★★</span> 4,8 no Google · 101 avaliações</div><div class="selo desde">Atendimento desde 2008</div></div>
       <h1>Caça vazamento<br>em <span class="gira" id="gira"><span>casa</span></span></h1>
-      <p class="lead">Achamos o vazamento com aparelho eletrônico, <b>sem quebrar a casa toda</b>, e já consertamos na hora. Mais de 14 anos no litoral e experiência na Sabesp.</p>
+      <p class="lead">Achamos o vazamento com aparelho eletrônico, <b>sem quebrar a casa toda</b>, e já consertamos na hora. Experiência de quem trabalhou na Sabesp.</p>
+      <div class="cobre"><svg><use href="#i-pino"/></svg><div><small>Área de cobertura</small><b>De Pedro de Toledo a São Vicente</b></div></div>
       <div class="acoes">
         <a class="btn btn-zap js-zap" href="#"><svg><use href="#i-zap"/></svg>Chamar no WhatsApp</a>
         <a class="btn btn-linha" href="tel:+5513991146373"><svg><use href="#i-fone"/></svg>(13) 99114-6373</a>
@@ -322,7 +339,7 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
     <a href="#s-comercio"><i><svg><use href="#i-loja"/></svg></i>Comercial</a>
     <a href="#s-condominio"><i><svg><use href="#i-predio"/></svg></i>Condomínio</a>
     <a class="dest" href="#piscina"><i><svg><use href="#i-piscina"/></svg></i>Piscina</a>
-    <a href="#s-caixa"><i><svg><use href="#i-caixa"/></svg></i>Caixa d'água</a>
+    <a href="#limpeza"><i><svg><use href="#i-caixa"/></svg></i>Limpeza de caixa d'água</a>
     <a href="#s-principal"><i><svg><use href="#i-cano"/></svg></i>Ramal principal</a>
     <a href="#s-irrigacao"><i><svg><use href="#i-planta"/></svg></i>Irrigação</a>
     <a href="#s-desentupidora"><i><svg><use href="#i-ralo"/></svg></i>Desentupidora</a>
@@ -360,7 +377,7 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
       <article class="serv aparece" id="s-comercio"><div class="ic"><svg><use href="#i-loja"/></svg></div><h3>Comercial</h3><p>Lojas, restaurantes, escritórios e indústrias. Resolvemos rápido, pra você não parar o seu negócio.</p><a class="pede js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e preciso de caça vazamento no meu comércio.">Pedir orçamento →</a></article>
       <article class="serv aparece" id="s-condominio"><div class="ic"><svg><use href="#i-predio"/></svg></div><h3>Condomínio</h3><p>Prédios e condomínios, inclusive com vários relógios (multilocatário). Descobrimos de qual unidade vem o vazamento.</p><a class="pede js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e preciso de caça vazamento em um condomínio.">Pedir orçamento →</a></article>
       <article class="serv aparece" id="s-piscina"><div class="ic"><svg><use href="#i-piscina"/></svg></div><h3>Piscina</h3><p>Testamos tubulação, dispositivos e o revestimento. Se precisar, entramos com mergulhador para achar o furo.</p><a class="pede" href="#piscina">Ver como fazemos →</a></article>
-      <article class="serv aparece" id="s-caixa"><div class="ic"><svg><use href="#i-caixa"/></svg></div><h3>Caixa d'água</h3><p>Boia, registro, ladrão e encanamento da caixa. Água subindo e sumindo sem explicação tem conserto.</p><a class="pede js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e tenho um problema de vazamento na caixa d'água.">Pedir orçamento →</a></article>
+      <article class="serv aparece" id="s-caixa"><div class="ic"><svg><use href="#i-caixa"/></svg></div><h3>Caixa d'água</h3><p>Limpeza e higienização da caixa, e conserto de vazamento na boia, registro, ladrão e encanamento.</p><a class="pede" href="#limpeza">Ver a limpeza →</a></article>
       <article class="serv aparece" id="s-principal"><div class="ic"><svg><use href="#i-cano"/></svg></div><h3>Ramal principal</h3><p>O cano que vem do relógio até a casa. É onde mais acontece vazamento escondido e conta alta.</p><a class="pede js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e acho que o vazamento é no cano principal, depois do relógio.">Pedir orçamento →</a></article>
       <article class="serv aparece" id="s-irrigacao"><div class="ic"><svg><use href="#i-planta"/></svg></div><h3>Irrigação</h3><p>Vazamento em sistemas de irrigação de jardins e gramados, sem precisar cavar tudo.</p><a class="pede js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e preciso achar um vazamento na irrigação.">Pedir orçamento →</a></article>
       <article class="serv aparece" id="s-desentupidora"><div class="ic"><svg><use href="#i-ralo"/></svg></div><h3>Desentupidora</h3><p>Pia, ralo, vaso, caixa de gordura e esgoto. Desentupimento no Litoral Sul.</p><a class="pede js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e preciso de desentupimento.">Pedir orçamento →</a></article>
@@ -390,6 +407,30 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
   </div>
 </section>
 
+<section class="limpeza" id="limpeza">
+  <div class="caixa pis-grade">
+    <div class="aparece">
+      <span class="tag">Limpeza de caixa d'água</span>
+      <h2>Caixa d'água limpa, água boa pra família</h2>
+      <p class="sub">Com o tempo junta lodo, barro e sujeira no fundo da caixa. Essa água vai pro chuveiro, pra pia e pra cozinha. Limpar de tempos em tempos é cuidar da saúde de quem mora na casa.</p>
+      <ul class="lista">
+        <li><svg><use href="#i-ok"/></svg>Esvaziamos a caixa e tiramos todo o lodo e a sujeira do fundo</li>
+        <li><svg><use href="#i-ok"/></svg>Escovamos paredes e fundo, sem produto que estrague a caixa</li>
+        <li><svg><use href="#i-ok"/></svg>Desinfetamos e enxaguamos antes de encher de novo</li>
+        <li><svg><use href="#i-ok"/></svg>Conferimos tampa, boia, registro e ladrão. Achou vazamento, a gente resolve na hora</li>
+        <li><svg><use href="#i-ok"/></svg>Casa, comércio e condomínio</li>
+      </ul>
+      <div class="dica"><b>A cada 6 meses</b> é o tempo recomendado para limpar a caixa d'água. Não lembra quando foi a última vez? Então já passou da hora.</div>
+      <a class="btn btn-zap js-zap" href="#" data-msg="Olá, Marquinhos! Vi seu site e quero um orçamento de limpeza de caixa d'água."><svg><use href="#i-zap"/></svg>Quero limpar minha caixa</a>
+    </div>
+    <div class="lim-foto aparece">
+      <img src="img/caixa-dagua.jpg" alt="Caixa d'água azul em cima de uma casa" loading="lazy" width="750" height="500">
+      <div class="flutua2">Água limpa<small>a cada 6 meses</small></div>
+      <p class="credito">Foto: <a href="https://commons.wikimedia.org/wiki/File:Caixa-d%E2%80%99%C3%A1gua_Fortlev.jpg" target="_blank" rel="noopener">Albertoleoncio / Wikimedia</a>, CC BY-SA 4.0</p>
+    </div>
+  </div>
+</section>
+
 <section id="como">
   <div class="caixa">
     <div class="centro">
@@ -410,12 +451,12 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
   <div class="caixa pq-grade">
     <div class="pq-foto aparece">
       <img src="img/marquinhos.jpg" alt="Marquinhos, o caça vazamento" loading="lazy">
-      <div class="anos"><b>+14</b><small>anos achando<br>vazamento</small></div>
+      <div class="anos"><small>atendendo desde</small><b>2008</b></div>
     </div>
     <div class="aparece">
       <span class="tag">Por que o Marquinhos</span>
       <h2>Quem já trabalhou na Sabesp sabe onde procurar</h2>
-      <p class="sub">O Marquinhos trabalhou na Sabesp com detecção de vazamentos e há mais de 14 anos atende casas, comércios, condomínios e indústrias no litoral.</p>
+      <p class="sub">O Marquinhos trabalhou na Sabesp com detecção de vazamentos e desde 2008 atende casas, comércios, condomínios e indústrias no litoral.</p>
       <div class="vant">
         <div class="v"><div class="ic"><svg><use href="#i-radar"/></svg></div><div><b>Sem quebra-quebra</b><span>Aparelho eletrônico aponta o lugar exato.</span></div></div>
         <div class="v"><div class="ic"><svg><use href="#i-chave"/></svg></div><div><b>Conserta na hora</b><span>Não precisa chamar outro profissional.</span></div></div>
@@ -471,10 +512,10 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
   <div class="caixa onde-grade">
     <div class="aparece">
       <span class="tag">Onde atendemos</span>
-      <h2>Do Guarujá a Peruíbe</h2>
+      <h2>De Pedro de Toledo a São Vicente</h2>
       <p class="sub">Base em Itanhaém, atendendo todo o litoral. Não achou sua cidade? Pergunta no WhatsApp.</p>
       <div class="cidades">
-        <span>Guarujá</span><span>Santos</span><span>São Vicente</span><span>Praia Grande</span><span>Mongaguá</span><span class="casa">Itanhaém</span><span>Peruíbe</span><span>Itariri</span><span>Pedro de Toledo</span>
+        <span>Pedro de Toledo</span><span>Itariri</span><span>Peruíbe</span><span class="casa">Itanhaém</span><span>Mongaguá</span><span>Praia Grande</span><span>São Vicente</span>
       </div>
       <div class="mapa"><iframe title="Mapa: Marquinhos Caça Vazamento em Itanhaém" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Marquinhos%20Ca%C3%A7a%20Vazamento%2C%20R.%20Otac%C3%ADlio%20Dantas%2C%20550%2C%20Itanha%C3%A9m%20-%20SP&z=14&output=embed"></iframe></div>
     </div>
@@ -490,6 +531,7 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
           <label><input type="radio" name="onde" value="Comércio"><span>Comércio</span></label>
           <label><input type="radio" name="onde" value="Condomínio"><span>Condomínio</span></label>
           <label><input type="radio" name="onde" value="Caixa d'água"><span>Caixa d'água</span></label>
+          <label><input type="radio" name="onde" value="Limpeza de caixa d'água"><span>Limpar caixa</span></label>
           <label><input type="radio" name="onde" value="Desentupimento"><span>Desentupir</span></label>
         </div>
       </div>
@@ -518,7 +560,7 @@ footer{background:var(--azul);color:#cfe3ee;padding:56px 0 28px;font-size:15px}
     <div class="rod">
       <div>
         <a class="marca" href="#inicio"><img src="img/logo.png" alt="" width="52" height="44"><div><b style="color:#fff">Marquinhos</b><small>CAÇA VAZAMENTO</small></div></a>
-        <p>Detecção eletrônica de vazamentos, conserto e desentupimento. Mais de 14 anos no litoral, com experiência na Sabesp.</p>
+        <p>Detecção eletrônica de vazamentos, conserto e desentupimento. Atendimento no litoral desde 2008, com experiência na Sabesp.</p>
       </div>
       <div>
         <h4>Contato</h4>
