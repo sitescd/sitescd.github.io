@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sites CD Parceiros</title>
+<meta name="description" content="Para agências e social media: venda sites com a sua marca. A Sites CD monta por trás em 1 dia. Você paga R$ 24,90 por site e cobra o seu preço. Primeiro site grátis.">
+<link rel="canonical" href="https://sitescd.com.br/parceiros/">
+<meta property="og:title" content="Sites CD Parceiros · Venda sites com a sua marca">
+<meta property="og:description" content="A gente monta por trás em 1 dia. Você paga R$ 24,90 por site e cobra o seu preço.">
+<meta property="og:image" content="https://sitescd.com.br/marca/icone.png">
+<meta property="og:url" content="https://sitescd.com.br/parceiros/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="/marca/icone-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Mesma identidade do sitescd.com.br: papel creme + faixas noturnas, Bricolage + Figtree, verde vivo */
+:root{
+  --fundo:#f4f1ea; --papel:#fffdf9; --cartao:#ffffff; --tinta:#0e1a17; --tinta2:#43524e; --linha:#e2dccf;
+  --verde:#0f7a6c; --verde-vivo:#2fd1b4; --noite:#0a1312; --noite2:#111e1b; --noite3:#1a2a26; --sol:#ffc65c;
+  --zap:#1fa855; --suave:#ddf1ec; --ease:cubic-bezier(.16,1,.3,1); color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --fundo:#0c1513; --papel:#101b18; --cartao:#14211e; --tinta:#eaf2ef; --tinta2:#a3b6b1; --linha:#22332f;
+  --verde:#2fd1b4; --suave:#173029; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --fundo:#0c1513; --papel:#101b18; --cartao:#14211e; --tinta:#eaf2ef; --tinta2:#a3b6b1; --linha:#22332f;
+  --verde:#2fd1b4; --suave:#173029; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fundo);color:var(--tinta);font:400 17px/1.6 Figtree,system-ui,sans-serif;overflow-x:hidden}
+::selection{background:var(--verde-vivo);color:var(--noite)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--verde-vivo);outline-offset:3px;border-radius:8px}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+.box{max-width:1180px;margin:0 auto;padding:0 20px}
+svg.i{width:20px;height:20px;flex:none}
+
+.bt{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;font:700 16px Figtree,sans-serif;text-decoration:none;padding:16px 26px;border:0;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .25s}
+.bt-zap{background:var(--zap);color:#fff;box-shadow:0 10px 28px -10px rgba(31,168,85,.75)}
+.bt-zap:hover{transform:translateY(-3px);box-shadow:0 16px 34px -12px rgba(31,168,85,.85)}
+.bt-zap.pulsa::after{content:"";position:absolute;inset:-4px;border-radius:inherit;border:2px solid var(--zap);opacity:0;animation:pulso 2.8s var(--ease) infinite 1.5s}
+@keyframes pulso{0%{opacity:.7;transform:scale(.96)}100%{opacity:0;transform:scale(1.14)}}
+.bt-claro{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--tinta) 28%,transparent)}
+.bt-claro:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+
+/* topo */
+.topo{position:fixed;inset:0 0 auto;z-index:30;transition:background .3s,box-shadow .3s}
+.topo.rolou{background:color-mix(in srgb,var(--fundo) 86%,transparent);backdrop-filter:saturate(1.5) blur(14px);-webkit-backdrop-filter:saturate(1.5) blur(14px);box-shadow:0 1px 0 var(--linha)}
+.topo .box{display:flex;align-items:center;justify-content:space-between;height:70px;gap:12px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 22px "Bricolage Grotesque",sans-serif;letter-spacing:-.03em;white-space:nowrap}
+.marca .lg{width:34px;height:34px;border-radius:11px;background:var(--noite);display:grid;place-items:center;color:var(--verde-vivo);font:800 14px "Bricolage Grotesque"}
+.marca b{color:var(--verde)}
+.marca small{font:700 11px Figtree;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta2);border-left:1px solid var(--linha);padding-left:10px;margin-left:2px}
+.topo nav{display:flex;align-items:center;gap:26px;font-weight:600;font-size:15px}
+.topo nav a{text-decoration:none;color:var(--tinta2)}
+.topo nav a:hover{color:var(--tinta)}
+.topo .bt{padding:11px 18px;font-size:15px;color:#fff}
+
+/* abertura */
+.abre{position:relative;padding:136px 0 40px;overflow:hidden}
+.abre::before{content:"";position:absolute;width:900px;height:900px;right:-260px;top:-220px;border-radius:50%;background:radial-gradient(circle,rgba(47,209,180,.26),transparent 62%);pointer-events:none}
+.abre .box{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.pilula{display:inline-flex;align-items:center;gap:10px;background:var(--cartao);box-shadow:0 0 0 1px var(--linha);border-radius:999px;padding:7px 14px 7px 8px;font-weight:600;font-size:14px;color:var(--tinta2);margin-bottom:24px}
+.pilula i{font-style:normal;background:var(--noite);color:var(--verde-vivo);border-radius:999px;padding:3px 10px;font-weight:700;font-size:12px;letter-spacing:.04em}
+.abre h1{font-size:clamp(42px,6.2vw,84px)}
+.abre h1 em{font-style:normal;color:var(--verde)}
+.abre .sub{font-size:clamp(18px,1.9vw,21px);color:var(--tinta2);margin:26px 0 34px;max-width:40ch}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.garantias{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;font-weight:600;font-size:15px;color:var(--tinta2)}
+.garantias span{display:inline-flex;align-items:center;gap:8px}
+.garantias svg{width:18px;height:18px;color:var(--verde)}
+.js .entra{opacity:0;transform:translateY(24px);animation:entra 1s var(--ease) forwards}
+@keyframes entra{to{opacity:1;transform:none}}
+
+/* celular com o site do cliente, marca do parceiro */
+.palco{position:relative;height:640px;display:grid;place-items:center}
+.cel{position:relative;width:300px;aspect-ratio:9/19;border-radius:46px;background:#0a0d0c;padding:11px;box-shadow:0 50px 90px -40px rgba(14,26,23,.6),0 0 0 1px rgba(255,255,255,.06) inset;transform:rotate(-4deg);animation:flutua 7s ease-in-out infinite}
+@keyframes flutua{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-12px)}}
+.cel .tela{height:100%;border-radius:36px;overflow:hidden;position:relative;background:#111}
+.cel .ilha{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:86px;height:24px;border-radius:20px;background:#0a0d0c;z-index:5}
+.site{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:scale(1.04);transition:opacity .8s var(--ease),transform 1.2s var(--ease)}
+.site.on{opacity:1;transform:none}
+.site .barra{display:flex;justify-content:space-between;align-items:center;padding:54px 16px 10px}
+.site .logo{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font:800 13px "Bricolage Grotesque"}
+.site .chip{font-size:10.5px;font-weight:700;border-radius:999px;padding:6px 11px}
+.site .cab{padding:6px 16px 12px}
+.site .ramo{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.7;font-weight:600}
+.site h4{margin:8px 0;font-size:23px;line-height:1.05;letter-spacing:-.02em}
+.site .txt{font-size:11.5px;line-height:1.45;opacity:.82}
+.site .bts{display:flex;gap:6px;margin-top:12px}
+.site .bts i{font-style:normal;font-size:10.5px;font-weight:700;border-radius:10px;padding:8px 10px}
+.site .foto{flex:1;margin:2px 10px 0;border-radius:18px 18px 0 0;position:relative;overflow:hidden;display:grid;place-items:center}
+.site .foto svg{width:80px;height:80px;opacity:.9}
+.site .foto .nota{position:absolute;left:10px;bottom:46px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:5px 10px;border-radius:999px}
+.site .assina{position:absolute;left:10px;right:10px;bottom:0;padding:9px 10px 12px;font-size:10px;text-align:center;background:rgba(0,0,0,.6);color:#d9e4e1;letter-spacing:.02em}
+.site .assina b{color:#fff}
+
+.bolha{position:absolute;z-index:6;background:#fff;color:#0e1a17;border-radius:18px;padding:12px 14px;box-shadow:0 18px 40px -18px rgba(14,26,23,.45);display:flex;gap:10px;align-items:center;font-size:13.5px;line-height:1.3;max-width:250px;opacity:0;transform:translateY(14px) scale(.96);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.bolha.on{opacity:1;transform:none}
+.bolha .av{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff}
+.bolha b{display:block;font-size:13px}
+.bolha small{color:#43524e}
+.b-pix{right:-14px;top:120px}.b-pix .av{background:var(--verde)}
+.b-marca{left:-30px;bottom:170px}.b-marca .av{background:var(--noite);color:var(--verde-vivo)}
+.b-pronto{right:6px;bottom:56px}.b-pronto .av{background:var(--zap)}
+
+/* faixa de verdades */
+.faixa{border-block:1px solid var(--linha);background:var(--papel);overflow:hidden;padding:20px 0;margin-top:20px}
+.faixa .trilho{display:flex;gap:44px;width:max-content;animation:corre 40s linear infinite}
+.faixa:hover .trilho{animation-play-state:paused}
+@keyframes corre{to{transform:translateX(-50%)}}
+.faixa span{display:inline-flex;align-items:center;gap:12px;font:700 21px "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;color:var(--tinta2);white-space:nowrap}
+.faixa span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--verde-vivo)}
+
+section{padding:110px 0}
+.titulo{max-width:760px;margin-bottom:56px}
+.titulo .et{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);margin-bottom:16px}
+.titulo h2{font-size:clamp(34px,4.8vw,60px)}
+.titulo p{font-size:19px;color:var(--tinta2);margin-top:18px;max-width:58ch}
+.centro{text-align:center;margin-inline:auto}
+.centro p{margin-inline:auto}
+.js .revela{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .revela.visto{opacity:1;transform:none}
+
+/* dor da agência */
+.dor .box{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.conversa{background:var(--cartao);border-radius:26px;padding:22px;box-shadow:0 40px 80px -40px rgba(14,26,23,.4),0 0 0 1px var(--linha);display:grid;gap:10px}
+.conversa header{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--linha);margin-bottom:6px}
+.conversa header .av{width:40px;height:40px;border-radius:50%;background:#e7d7c3;display:grid;place-items:center;font:800 15px "Bricolage Grotesque";color:#6b4a00}
+.conversa header b{display:block;font-size:15px}
+.conversa header small{color:var(--tinta2);font-size:12.5px}
+.msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4;opacity:0;transform:translateY(8px);transition:all .5s var(--ease)}
+.msg.on{opacity:1;transform:none}
+.msg.ele{background:var(--fundo);border-bottom-left-radius:4px}
+.msg.voce{background:#d9fdd3;color:#0e1a17;justify-self:end;border-bottom-right-radius:4px}
+.msg small{display:block;font-size:11px;opacity:.55;margin-top:2px;text-align:right}
+.lista-dor{display:grid;gap:22px;margin-top:8px}
+.lista-dor>div{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start}
+.lista-dor .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#fbe9e4;color:#b4513f}
+.lista-dor h3{font-size:21px;margin-bottom:4px}
+.lista-dor p{color:var(--tinta2)}
+
+/* como funciona (noite) */
+.como{background:var(--noite);color:#e8f1ee;position:relative;overflow:hidden}
+.como .titulo p{color:#a6b9b4}
+.como .titulo .et{color:var(--verde-vivo)}
+.como h2 em{font-style:normal;color:var(--verde-vivo)}
+.passos{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.passos::before{content:"";position:absolute;top:34px;left:34px;right:34px;height:2px;background:var(--noite3)}
+.passos .linha{position:absolute;top:34px;left:34px;height:2px;width:0;background:linear-gradient(90deg,var(--verde-vivo),#9ef0df);transition:width 2.2s var(--ease)}
+.passos.visto .linha{width:calc(100% - 68px)}
+.passo{position:relative}
+.passo .num{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:var(--noite2);box-shadow:inset 0 0 0 2px var(--noite3);font:800 26px "Bricolage Grotesque";color:#e8f1ee;position:relative;z-index:1;transition:background .5s,box-shadow .5s,color .5s}
+.passos.visto .passo .num{background:var(--verde-vivo);color:var(--noite);box-shadow:0 0 0 8px rgba(47,209,180,.12)}
+.passos.visto .passo:nth-child(3) .num{transition-delay:.6s}.passos.visto .passo:nth-child(4) .num{transition-delay:1.3s}
+.passo h3{font-size:27px;margin:26px 0 10px}
+.passo p{color:#a6b9b4;max-width:32ch}
+.passo .tag{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:var(--verde-vivo);background:rgba(47,209,180,.1);border-radius:999px;padding:5px 12px}
+
+/* sua marca, ao vivo */
+.marca-sec .box{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.campo{display:grid;gap:8px;margin:30px 0 26px;max-width:420px}
+.campo label{font-weight:700;font-size:15px}
+.campo input{font:600 18px Figtree;padding:16px 18px;border-radius:16px;border:0;background:var(--cartao);color:var(--tinta);box-shadow:0 0 0 1.5px var(--linha);transition:box-shadow .3s}
+.campo input:focus{outline:none;box-shadow:0 0 0 2px var(--verde-vivo)}
+.tem-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.tem-list li{display:flex;gap:12px;align-items:flex-start;color:var(--tinta2)}
+.tem-list svg{width:20px;height:20px;color:var(--verde);margin-top:3px;flex:none}
+.marca-sec .palco{height:600px}
+.marca-sec .cel{transform:none;animation:none;width:290px}
+
+/* calculadora */
+.conta-sec{background:var(--papel)}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1080px;margin:0 auto}
+.calc .ctrl,.calc .res{border-radius:30px;padding:34px}
+.calc .ctrl{background:var(--cartao);box-shadow:0 0 0 1px var(--linha);display:grid;gap:34px;align-content:center}
+.slider{display:grid;gap:12px}
+.slider .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.slider label{font-weight:700}
+.slider output{font:800 30px/1 "Bricolage Grotesque";letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--verde)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--verde-vivo) var(--p,50%),var(--linha) var(--p,50%));cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--verde-vivo),0 6px 14px -4px rgba(0,0,0,.35)}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border:0;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--verde-vivo),0 6px 14px -4px rgba(0,0,0,.35)}
+.slider small{color:var(--tinta2);font-size:14px}
+.calc .res{background:var(--noite);color:#e8f1ee;box-shadow:0 30px 70px -30px rgba(15,122,108,.6);display:grid;gap:22px;align-content:center;position:relative;overflow:hidden}
+.calc .res::before{content:"";position:absolute;width:420px;height:420px;right:-160px;top:-180px;border-radius:50%;background:radial-gradient(circle,rgba(47,209,180,.3),transparent 65%)}
+.calc .res>*{position:relative}
+.calc .res .rot{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a6b9b4}
+.calc .grande{font:800 clamp(52px,7vw,80px)/1 "Bricolage Grotesque";letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:#fff}
+.calc .grande small{font:600 18px Figtree;letter-spacing:0;color:#a6b9b4}
+.linhas{display:grid;gap:10px;border-top:1px solid var(--noite3);padding-top:18px}
+.linhas div{display:flex;justify-content:space-between;gap:12px;color:#a6b9b4;font-variant-numeric:tabular-nums}
+.linhas b{color:#fff}
+.linhas .ano b{color:var(--sol);font-size:20px}
+.nota-conta{text-align:center;color:var(--tinta2);margin-top:30px;max-width:62ch;margin-inline:auto}
+
+/* comparação */
+.compara{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1080px;margin:0 auto}
+.lado{border-radius:30px;padding:32px;background:var(--cartao);box-shadow:0 0 0 1px var(--linha)}
+.lado.bom{background:var(--noite);color:#e8f1ee;box-shadow:0 30px 70px -30px rgba(15,122,108,.6);position:relative}
+.lado h3{font-size:26px;margin-bottom:22px}
+.lado ul{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.lado li{display:flex;gap:12px;align-items:flex-start;color:var(--tinta2)}
+.lado.bom li{color:#c9d8d4}
+.lado li svg{width:20px;height:20px;margin-top:3px;flex:none}
+.lado.ruim li svg{color:#b4513f}
+.lado.bom li svg{color:var(--verde-vivo)}
+.selo{position:absolute;top:-14px;right:28px;background:var(--verde-vivo);color:var(--noite);font-weight:800;font-size:13px;border-radius:999px;padding:7px 14px}
+
+/* incluso */
+.inclui{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.item{background:var(--cartao);border-radius:24px;padding:24px;box-shadow:0 0 0 1px var(--linha);display:grid;gap:10px;align-content:start;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.item:hover{transform:translateY(-4px);box-shadow:0 0 0 1px var(--linha),0 24px 40px -24px rgba(14,26,23,.35)}
+.item .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--suave);color:var(--verde)}
+.item .ic svg{width:22px;height:22px}
+.item h3{font-size:19px;letter-spacing:-.02em}
+.item p{color:var(--tinta2);font-size:15px}
+
+/* perguntas */
+.perguntas{max-width:860px;margin:0 auto}
+.perguntas details{border-bottom:1px solid var(--linha)}
+.perguntas summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font:700 21px/1.3 "Bricolage Grotesque",sans-serif;letter-spacing:-.015em}
+.perguntas summary::-webkit-details-marker{display:none}
+.perguntas summary .mais{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--cartao);box-shadow:0 0 0 1px var(--linha);transition:transform .45s var(--ease),background .3s}
+.perguntas summary .mais svg{width:18px;height:18px}
+.perguntas details[open] .mais{transform:rotate(45deg);background:var(--verde-vivo);color:var(--noite);box-shadow:none}
+.perguntas details p{padding:0 0 24px;color:var(--tinta2);max-width:65ch;animation:abre .5s var(--ease)}
+@keyframes abre{from{opacity:0;transform:translateY(-6px)}}
+
+/* final */
+.final{position:relative;overflow:hidden;background:var(--noite);color:#fff;text-align:center;padding:130px 0}
+.final::before,.final::after{content:"";position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(20px);opacity:.5;pointer-events:none}
+.final::before{background:radial-gradient(circle,rgba(47,209,180,.55),transparent 65%);left:-200px;top:-260px;animation:orbita 14s ease-in-out infinite}
+.final::after{background:radial-gradient(circle,rgba(255,198,92,.35),transparent 65%);right:-220px;bottom:-300px;animation:orbita 17s ease-in-out infinite reverse}
+@keyframes orbita{50%{transform:translate(80px,60px)}}
+.final .box{position:relative}
+.final .presente{display:inline-block;background:var(--sol);color:#2b1d00;font-weight:800;font-size:14px;border-radius:999px;padding:7px 16px;margin-bottom:22px}
+.final h2{font-size:clamp(38px,5.6vw,72px);max-width:15ch;margin:0 auto}
+.final h2 em{font-style:normal;color:var(--verde-vivo)}
+.final p{margin:22px auto 34px;font-size:19px;color:#b9cbc6;max-width:46ch}
+.final .acoes{justify-content:center}
+.final .bt-claro{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3)}
+.final .bt-claro:hover{box-shadow:inset 0 0 0 1.5px #fff}
+footer{background:#060d0c;color:#8ea39e;padding:44px 0;font-size:15px}
+footer .box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+footer a{color:#e8f1ee;text-underline-offset:3px}
+.zapfixo{position:fixed;right:18px;bottom:18px;z-index:40;width:60px;height:60px;border-radius:50%;background:var(--zap);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);transform:scale(0);transition:transform .5s var(--ease)}
+.zapfixo.on{transform:none}
+.zapfixo svg{width:30px;height:30px;color:#fff}
+
+@media (max-width:1000px){.inclui{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:920px){
+  .topo nav a:not(.bt){display:none}
+  .marca small{display:none}
+  .abre{padding:104px 0 20px}
+  .abre .box,.dor .box,.marca-sec .box{grid-template-columns:1fr;gap:44px}
+  .palco{height:560px}
+  .cel{width:260px}
+  .b-pix{right:0;top:90px}.b-marca{left:0;bottom:150px}.b-pronto{right:0;bottom:40px}
+  .passos,.calc,.compara{grid-template-columns:1fr}
+  .passos::before,.passos .linha{display:none}
+  section{padding:80px 0}
+  .marca-sec .palco{height:560px}
+}
+@media (max-width:520px){
+  .box{padding:0 16px}
+  .inclui{grid-template-columns:1fr}
+  .calc .ctrl,.calc .res,.lado{padding:26px}
+  .bolha{max-width:200px;font-size:12.5px}
+  .acoes .bt{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .entra,.js .revela{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="zap" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.950 6.45 17.5 2 12.04 2Zm5.8 14.03c-.24.68-1.42 1.31-1.96 1.36-.5.05-.98.24-3.3-.69-2.78-1.1-4.550-3.950-4.690-4.130-.13-.18-1.12-1.49-1.12-2.84 0-1.350.71-2.020.96-2.290.25-.27.55-.34.73-.34l.52.01c.17 0 .39-.06.61.47.24.55.8 1.920.87 2.060.07.14.11.3.02.48-.09.18-.13.3-.27.46-.13.16-.28.36-.4.48-.13.13-.27.28-.12.55.15.27.68 1.12 1.46 1.81 1 .89 1.850 1.170 2.120 1.300.27.14.42.11.58-.07.16-.18.67-.78.85-1.05.18-.27.36-.22.6-.13.25.09 1.580.75 1.850.88.27.14.45.2.52.32.06.11.06.66-.18 1.34Z"/></symbol>
+  <symbol id="ok" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="mais" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="pino" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7.5 7.5 0 0 0-7.5 7.5c0 5.4 6.4 11.6 6.7 11.9a1.2 1.2 0 0 0 1.6 0c.3-.3 6.7-6.5 6.7-11.9A7.5 7.5 0 0 0 12 2Zm0 10.3a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"/></symbol>
+  <symbol id="relogio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="lapis" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/></symbol>
+  <symbol id="cadeado" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></g></symbol>
+  <symbol id="globo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.7 5.7 3.7 9s-1.2 6.3-3.7 9c-2.5-2.7-3.7-5.7-3.7-9S9.5 5.7 12 3Z"/></g></symbol>
+  <symbol id="celular" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M11 18.5h2"/></g></symbol>
+  <symbol id="crachá" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v12H4z"/><circle cx="9.5" cy="12.5" r="2"/><path d="M14 11.5h3.5M14 14.5h3.5M10 7V4h4v3"/></g></symbol>
+  <symbol id="dinheiro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></g></symbol>
+  <symbol id="porta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h5v18h-5M10 17l5-5-5-5M15 12H3"/></g></symbol>
+  <symbol id="estrela" viewBox="0 0 24 24"><path fill="currentColor" d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/></symbol>
+  <symbol id="tesoura" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1 20 20M8.1 15.9 20 4"/></g></symbol>
+  <symbol id="pata" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="6" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6" rx="2" ry="2.6"/><ellipse cx="14" cy="6" rx="2" ry="2.6"/><ellipse cx="18" cy="10" rx="2" ry="2.6"/><path d="M12 11c-3 0-6 4-6 6.5S8 21 12 19.5 18 20 18 17.5 15 11 12 11Z"/></g></symbol>
+  <symbol id="chave" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4 4 0 0 0 5.3 5.3l-9 9a2 2 0 0 1-2.8-2.8l9-9a4 4 0 0 0-2.5-2.5Z"/></symbol>
+</svg>
+
+<header class="topo" id="topo">
+  <div class="box">
+    <a class="marca" href="#"><span class="lg">CD</span>Sites <b>CD</b><small>Parceiros</small></a>
+    <nav>
+      <a href="#como">Como funciona</a><a href="#marca">Sua marca</a><a href="#conta">Quanto ganha</a><a href="#perguntas">Dúvidas</a>
+      <a class="bt bt-zap" href="https://wa.me/5513997225693?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20parceiros%20da%20Sites%20CD%20e%20quero%20saber%20mais." target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="abre" aria-labelledby="t1" style="padding-bottom:0">
+  <div class="box">
+    <div>
+      <span class="pilula entra"><i>PARCEIROS</i>Para agências, social media e freelancers</span>
+      <h1 id="t1" class="entra" style="animation-delay:.06s">Venda sites com <em>a sua marca.</em> A gente faz por trás.</h1>
+      <p class="sub entra" style="animation-delay:.14s">Seu cliente pede site e você não tem tempo? Manda o link dele no Google Maps. Em 1 dia o site está pronto, com o nome da sua agência. Você paga <b style="color:var(--tinta)">R$&nbsp;24,90</b> por mês e cobra o preço que quiser.</p>
+      <div class="acoes entra" style="animation-delay:.24s">
+        <a class="bt bt-zap pulsa" href="https://wa.me/5513997225693?text=Oi!%20Quero%20ser%20parceiro%20da%20Sites%20CD.%20Pode%20montar%20o%20primeiro%20site%20de%20teste%3F" target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero ser parceiro</a>
+        <a class="bt bt-claro" href="#conta">Ver quanto eu ganho</a>
+      </div>
+      <div class="garantias entra" style="animation-delay:.34s">
+        <span><svg><use href="#ok"/></svg>Primeiro site grátis</span>
+        <span><svg><use href="#ok"/></svg>Sem adesão e sem fidelidade</span>
+        <span><svg><use href="#ok"/></svg>A Sites CD não aparece</span>
+      </div>
+    </div>
+    <div class="palco entra" style="animation-delay:.2s" role="img" aria-label="Celular mostrando sites de clientes trocando sozinhos, todos assinados pela agência parceira">
+      <div class="cel"><div class="ilha"></div><div class="tela" id="tela1"></div></div>
+      <div class="bolha b-pix" id="b1"><span class="av"><svg class="i"><use href="#dinheiro"/></svg></span><span><b>Cliente pagou R$ 99</b><small>Seu lucro: R$ 74,10 no mês</small></span></div>
+      <div class="bolha b-marca" id="b2"><span class="av"><svg class="i"><use href="#crachá"/></svg></span><span><b>Assinado por você</b><small>Seu nome no rodapé do site</small></span></div>
+      <div class="bolha b-pronto" id="b3"><span class="av"><svg class="i"><use href="#ok"/></svg></span><span><b>Site pronto</b><small>Pedido ontem, entregue hoje</small></span></div>
+    </div>
+  </div>
+  <div class="faixa" aria-hidden="true"><div class="trilho">
+    <span>Sua marca no rodapé</span><span>Domínio .com.br do cliente</span><span>Pronto em 1 dia</span><span>Hospedagem inclusa</span><span>Ajustes por nossa conta</span><span>Sem fidelidade</span><span>Funciona em qualquer ramo</span>
+    <span>Sua marca no rodapé</span><span>Domínio .com.br do cliente</span><span>Pronto em 1 dia</span><span>Hospedagem inclusa</span><span>Ajustes por nossa conta</span><span>Sem fidelidade</span><span>Funciona em qualquer ramo</span>
+  </div></div>
+</section>
+
+<section class="dor" aria-labelledby="t2">
+  <div class="box">
+    <div class="conversa revela" id="conversa" aria-label="Exemplo de conversa com cliente">
+      <header><span class="av">R</span><span><b>Rodrigo · Oficina</b><small>seu cliente de social media</small></span></header>
+      <div class="msg ele">Fala! Você faz site também? Meu concorrente tem um e tá pegando os clientes 😅<small>09:12</small></div>
+      <div class="msg voce">Faço sim! Me deixa ver e amanhã te mando pronto.<small>09:14</small></div>
+      <div class="msg ele">Sério? Quanto fica?<small>09:14</small></div>
+      <div class="msg voce">R$ 99 por mês, com domínio, hospedagem e ajustes. Sem fidelidade.<small>09:15</small></div>
+      <div class="msg ele">Fechado 👊<small>09:16</small></div>
+    </div>
+    <div>
+      <div class="titulo revela" style="margin-bottom:34px">
+        <span class="et">O problema</span>
+        <h2>Cliente pede site. E você deixa o dinheiro na mesa.</h2>
+      </div>
+      <div class="lista-dor">
+        <div class="revela"><span class="ic"><svg class="i"><use href="#relogio"/></svg></span><div><h3>Fazer site toma a semana</h3><p>Briefing, layout, hospedagem, domínio, correção. Tempo que você não tem.</p></div></div>
+        <div class="revela"><span class="ic"><svg class="i"><use href="#lapis"/></svg></span><div><h3>Ajuste nunca acaba</h3><p>"Muda o preço", "troca a foto". Cada pedido é mais uma hora sua.</p></div></div>
+        <div class="revela"><span class="ic"><svg class="i"><use href="#porta"/></svg></span><div><h3>Se você não faz, outro faz</h3><p>E quem faz o site do cliente acaba pegando o resto do serviço dele também.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="como" id="como" aria-labelledby="t3">
+  <div class="box">
+    <div class="titulo revela">
+      <span class="et">Como funciona</span>
+      <h2 id="t3">Três passos. <em>Você só cuida do cliente.</em></h2>
+      <p>A parte técnica inteira fica com a gente. Pro seu cliente, quem fez o site foi você.</p>
+    </div>
+    <div class="passos revela" id="passos">
+      <i class="linha"></i>
+      <div class="passo"><span class="num">1</span><h3>Manda o link</h3><p>O link da ficha do cliente no Google Maps. Sem formulário e sem briefing.</p><span class="tag">30 segundos</span></div>
+      <div class="passo"><span class="num">2</span><h3>Recebe pronto</h3><p>Fotos, serviços, horário, avaliações, mapa e botão de WhatsApp. Com a sua marca no rodapé.</p><span class="tag">Em 1 dia</span></div>
+      <div class="passo"><span class="num">3</span><h3>Cobra o seu preço</h3><p>Você paga R$ 24,90 por site e cobra o que quiser. Ajuste e hospedagem são com a gente.</p><span class="tag">Lucro todo mês</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="marca-sec" id="marca" aria-labelledby="t4">
+  <div class="box">
+    <div class="revela">
+      <div class="titulo" style="margin-bottom:0">
+        <span class="et">Sua marca</span>
+        <h2 id="t4">Escreve o nome da sua agência. Veja como fica.</h2>
+      </div>
+      <div class="campo">
+        <label for="nomeAg">Nome da sua agência</label>
+        <input id="nomeAg" type="text" maxlength="28" placeholder="Ex.: Studio Maré" autocomplete="organization">
+      </div>
+      <ul class="tem-list">
+        <li><svg><use href="#ok"/></svg>Seu nome no rodapé de todos os sites</li>
+        <li><svg><use href="#ok"/></svg>O site fica no domínio do próprio cliente</li>
+        <li><svg><use href="#ok"/></svg>A Sites CD não aparece em lugar nenhum</li>
+        <li><svg><use href="#ok"/></svg>Você continua sendo o contato do cliente</li>
+      </ul>
+    </div>
+    <div class="palco revela" role="img" aria-label="Site de exemplo com o nome da sua agência no rodapé">
+      <div class="cel"><div class="ilha"></div><div class="tela" id="tela2"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="conta-sec" id="conta" aria-labelledby="t5">
+  <div class="box">
+    <div class="titulo centro revela">
+      <span class="et">A conta</span>
+      <h2 id="t5">Arrasta e veja quanto sobra pra você.</h2>
+      <p>Você paga R$ 24,90 por site, todo mês. O resto é seu.</p>
+    </div>
+    <div class="calc revela">
+      <div class="ctrl">
+        <div class="slider">
+          <div class="top"><label for="qtd">Quantos clientes com site</label><output id="qtdOut">10</output></div>
+          <input id="qtd" type="range" min="1" max="50" value="10">
+          <small>Comece com 1. Dá pra ir crescendo.</small>
+        </div>
+        <div class="slider">
+          <div class="top"><label for="preco">Quanto você cobra por mês</label><output id="precoOut">R$ 99</output></div>
+          <input id="preco" type="range" min="40" max="300" step="5" value="99">
+          <small>Tem dono de negócio pagando R$ 350 por mês em site.</small>
+        </div>
+      </div>
+      <div class="res" aria-live="polite">
+        <span class="rot">Seu lucro por mês</span>
+        <div class="grande" id="lucroMes">R$ 741</div>
+        <div class="linhas">
+          <div><span>Você recebe dos clientes</span><b id="recebe">R$ 990</b></div>
+          <div><span>Você paga pra Sites CD</span><b id="paga">R$ 249</b></div>
+          <div class="ano"><span>Em 1 ano</span><b id="lucroAno">R$ 8.892</b></div>
+        </div>
+      </div>
+    </div>
+    <p class="nota-conta">Sem taxa de adesão. Sem fidelidade. Se um cliente sair, você para de pagar por aquele site no mês seguinte.</p>
+  </div>
+</section>
+
+<section aria-labelledby="t6">
+  <div class="box">
+    <div class="titulo centro revela">
+      <span class="et">Compare</span>
+      <h2 id="t6">Fazer sozinho ou ter a gente por trás?</h2>
+    </div>
+    <div class="compara">
+      <div class="lado ruim revela">
+        <h3>Fazendo sozinho</h3>
+        <ul>
+          <li><svg><use href="#x"/></svg>Dias em cada site</li>
+          <li><svg><use href="#x"/></svg>Você contrata domínio e hospedagem</li>
+          <li><svg><use href="#x"/></svg>Cada ajuste toma o seu tempo</li>
+          <li><svg><use href="#x"/></svg>Site caiu? O cliente liga pra você</li>
+          <li><svg><use href="#x"/></svg>Dá pra atender poucos clientes</li>
+        </ul>
+      </div>
+      <div class="lado bom revela">
+        <span class="selo">Parceiro Sites CD</span>
+        <h3>Com a Sites CD por trás</h3>
+        <ul>
+          <li><svg><use href="#ok"/></svg>Site pronto em 1 dia</li>
+          <li><svg><use href="#ok"/></svg>Domínio, hospedagem e cadeado inclusos</li>
+          <li><svg><use href="#ok"/></svg>Ajustes de texto, foto e preço por nossa conta</li>
+          <li><svg><use href="#ok"/></svg>A gente cuida pra ficar no ar</li>
+          <li><svg><use href="#ok"/></svg>10, 20, 50 clientes, sem trabalho a mais</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--papel);padding-top:100px" aria-labelledby="t7">
+  <div class="box">
+    <div class="titulo revela">
+      <span class="et">Já vem incluso</span>
+      <h2 id="t7">Tudo que o seu cliente espera de um site sério.</h2>
+    </div>
+    <div class="inclui">
+      <div class="item revela"><span class="ic"><svg><use href="#globo"/></svg></span><h3>Domínio .com.br</h3><p>O endereço é do cliente, com o nome do negócio dele.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#cadeado"/></svg></span><h3>Cadeado de segurança</h3><p>Hospedagem e certificado já inclusos.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#zap"/></svg></span><h3>Botão de WhatsApp</h3><p>Visitante vira conversa direto com o cliente.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#celular"/></svg></span><h3>Perfeito no celular</h3><p>Feito primeiro pra tela pequena, onde as pessoas buscam.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#pino"/></svg></span><h3>Ligado ao Google Maps</h3><p>Fotos, horário e mapa puxados da ficha do negócio.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#estrela"/></svg></span><h3>Avaliações reais</h3><p>As estrelas do Google aparecem no site.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#lapis"/></svg></span><h3>Ajustes sem custo</h3><p>Você repassa o pedido, a gente muda.</p></div>
+      <div class="item revela"><span class="ic"><svg><use href="#crachá"/></svg></span><h3>Sua assinatura</h3><p>O nome da sua agência no rodapé de todos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="perguntas" aria-labelledby="t8">
+  <div class="box">
+    <div class="titulo centro revela"><span class="et">Dúvidas</span><h2 id="t8">Perguntas que todo parceiro faz.</h2></div>
+    <div class="perguntas revela">
+      <details><summary>Meu cliente vai saber que não fui eu?<span class="mais"><svg><use href="#mais"/></svg></span></summary><p>Não. O site sai com a sua marca no rodapé e no domínio do próprio cliente. A Sites CD não aparece em lugar nenhum.</p></details>
+      <details><summary>Preciso pagar pra começar?<span class="mais"><svg><use href="#mais"/></svg></span></summary><p>Não. A gente monta o primeiro site de graça pra você ver a qualidade. Só paga quando o seu cliente fechar.</p></details>
+      <details><summary>E se o cliente pedir uma mudança?<span class="mais"><svg><use href="#mais"/></svg></span></summary><p>Você repassa o pedido pra gente e a gente ajusta texto, foto ou preço. Você continua sendo o contato dele.</p></details>
+      <details><summary>E se o cliente cancelar?<span class="mais"><svg><use href="#mais"/></svg></span></summary><p>Você avisa e para de pagar por aquele site no mês seguinte. Sem multa e sem fidelidade.</p></details>
+      <details><summary>Funciona pra qualquer tipo de negócio?<span class="mais"><svg><use href="#mais"/></svg></span></summary><p>Sim. Barbearia, restaurante, oficina, clínica, pet shop, loja. Se o negócio tem ficha no Google Maps, a gente monta.</p></details>
+      <details><summary>Quanto eu devo cobrar do meu cliente?<span class="mais"><svg><use href="#mais"/></svg></span></summary><p>É decisão sua, e o que você cobrar fica com você. Use a calculadora ali em cima pra ver quanto sobra.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final" aria-labelledby="t9">
+  <div class="box revela">
+    <span class="presente">O primeiro site é por nossa conta</span>
+    <h2 id="t9">Manda o link de um cliente. <em>Amanhã ele está pronto.</em></h2>
+    <p>Veja a qualidade antes de pagar qualquer coisa. Gostou, é só oferecer pro seu cliente.</p>
+    <div class="acoes">
+      <a class="bt bt-zap pulsa" href="https://wa.me/5513997225693?text=Oi!%20Quero%20ser%20parceiro%20da%20Sites%20CD.%20Pode%20montar%20o%20primeiro%20site%20de%20teste%3F" target="_blank" rel="noopener"><svg class="i"><use href="#zap"/></svg>Quero ser parceiro</a>
+      <a class="bt bt-claro" href="https://sitescd.com.br" target="_blank" rel="noopener">Conhecer a Sites CD</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="box">
+    <span><b style="color:#e8f1ee">Sites CD</b> · Programa de parceiros para agências</span>
+    <span><a href="https://wa.me/5513997225693" target="_blank" rel="noopener">WhatsApp (13) 99722-5693</a> · <a href="https://sitescd.com.br" target="_blank" rel="noopener">sitescd.com.br</a></span>
+  </div>
+</footer>
+<a class="zapfixo" id="zapfixo" href="https://wa.me/5513997225693?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20parceiros%20da%20Sites%20CD%20e%20quero%20saber%20mais." target="_blank" rel="noopener" aria-label="Chamar no WhatsApp"><svg><use href="#zap"/></svg></a>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var reduz = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var agencia = 'Sua Agência';
+  try{ var s = localStorage.getItem('cd-agencia'); if(s) agencia = s; }catch(e){}
+
+  var SITES = [
+    {ramo:'Barbearia',nome:'Barbearia Navalha',txt:'Corte e barba com hora marcada. Aberto até 20h.',ic:'tesoura',bg:'#141414',fg:'#f3eee6',ac:'#c9a46a',foto:'linear-gradient(160deg,#3a2f22,#1b1611)',nota:'★ 4,9 · 318 avaliações'},
+    {ramo:'Pet shop',nome:'Patas & Cia',txt:'Banho, tosa e veterinário no mesmo lugar.',ic:'pata',bg:'#fff6ec',fg:'#2b1d10',ac:'#f08a3c',foto:'linear-gradient(160deg,#ffcf9e,#f08a3c)',nota:'★ 4,8 · 204 avaliações'},
+    {ramo:'Oficina mecânica',nome:'Auto Center Silva',txt:'Revisão, freio e suspensão. Orçamento na hora.',ic:'chave',bg:'#0f1b2d',fg:'#eef3fa',ac:'#3d8bff',foto:'linear-gradient(160deg,#21406e,#0b1626)',nota:'★ 4,7 · 156 avaliações'}
+  ];
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function monta(tela){
+    tela.innerHTML = SITES.map(function(s,i){
+      return '<div class="site'+(i===0?' on':'')+'" style="background:'+s.bg+';color:'+s.fg+'">'+
+        '<div class="barra"><span class="logo" style="background:'+s.ac+';color:'+s.bg+'">'+s.nome.slice(0,2).toUpperCase()+'</span><span class="chip" style="background:'+s.ac+';color:'+s.bg+'">Agendar</span></div>'+
+        '<div class="cab"><div class="ramo">'+s.ramo+'</div><h4>'+s.nome+'</h4><p class="txt">'+s.txt+'</p>'+
+        '<div class="bts"><i style="background:#1fa855;color:#fff">WhatsApp</i><i style="background:rgba(127,127,127,.18)">Como chegar</i></div></div>'+
+        '<div class="foto" style="background:'+s.foto+'"><svg style="color:'+s.fg+'"><use href="#'+s.ic+'"/></svg><span class="nota">'+s.nota+'</span>'+
+        '<div class="assina">Site feito por <b class="ag">'+esc(agencia)+'</b></div></div></div>';
+    }).join('');
+  }
+  var t1 = document.getElementById('tela1'), t2 = document.getElementById('tela2');
+  monta(t1); monta(t2);
+  function gira(tela, ms){
+    if(reduz) return;
+    var i = 0, ss = tela.querySelectorAll('.site');
+    setInterval(function(){ ss[i].classList.remove('on'); i=(i+1)%ss.length; ss[i].classList.add('on'); }, ms);
+  }
+  gira(t1, 3400); gira(t2, 4200);
+
+  var inp = document.getElementById('nomeAg');
+  if(agencia !== 'Sua Agência') inp.value = agencia;
+  inp.addEventListener('input', function(){
+    var v = inp.value.trim() || 'Sua Agência';
+    document.querySelectorAll('.ag').forEach(function(el){ el.textContent = v; });
+    try{ localStorage.setItem('cd-agencia', inp.value.trim()); }catch(e){}
+  });
+
+  // bolhas do topo
+  ['b1','b2','b3'].forEach(function(id,k){ setTimeout(function(){ document.getElementById(id).classList.add('on'); }, 1100 + k*900); });
+
+  // calculadora
+  var qtd = document.getElementById('qtd'), preco = document.getElementById('preco');
+  var brl = function(n){ return 'R$ ' + n.toLocaleString('pt-BR',{maximumFractionDigits:0}); };
+  function pinta(r){ r.style.setProperty('--p', ((r.value-r.min)/(r.max-r.min)*100)+'%'); }
+  function calcula(){
+    var q = +qtd.value, p = +preco.value, custo = 24.90;
+    document.getElementById('qtdOut').textContent = q;
+    document.getElementById('precoOut').textContent = brl(p);
+    document.getElementById('recebe').textContent = brl(q*p);
+    document.getElementById('paga').textContent = brl(Math.round(q*custo));
+    var l = q*(p-custo);
+    document.getElementById('lucroMes').textContent = brl(Math.round(l));
+    document.getElementById('lucroAno').textContent = brl(Math.round(l*12));
+    pinta(qtd); pinta(preco);
+  }
+  qtd.addEventListener('input', calcula); preco.addEventListener('input', calcula); calcula();
+
+  // topo, botão fixo
+  var topo = document.getElementById('topo'), zf = document.getElementById('zapfixo');
+  function rola(){ var y = scrollY; topo.classList.toggle('rolou', y>20); zf.classList.toggle('on', y>700); }
+  addEventListener('scroll', rola, {passive:true}); rola();
+
+  // aparecer ao rolar + conversa
+  var msgs = document.querySelectorAll('#conversa .msg');
+  function abreConversa(){ msgs.forEach(function(m,k){ setTimeout(function(){ m.classList.add('on'); }, reduz?0:350+k*650); }); }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('visto');
+      if(e.target.id==='conversa') abreConversa();
+      io.unobserve(e.target);
+    }); }, {threshold:.15});
+    document.querySelectorAll('.revela').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.revela').forEach(function(el){ el.classList.add('visto'); }); abreConversa();
+  }
+})();
+</script>
+</body>
+</html>
